@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix MaSt ",
+  "description": "News from Google featuring Travel in Search updates and the introduction of Gemini 3.5 Transcribe.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
