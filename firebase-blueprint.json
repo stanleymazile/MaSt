@@ -1,0 +1,138 @@
+{
+  "entities": {
+    "NewsletterSubscriber": {
+      "title": "NewsletterSubscriber",
+      "description": "Information about a user subscribed to newsletter updates",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Subscriber email address",
+          "maxLength": 100
+        },
+        "subscribedAt": {
+          "type": "string",
+          "description": "ISO timestamp of subscription",
+          "maxLength": 40
+        },
+        "source": {
+          "type": "string",
+          "description": "Origin of the subscription (e.g. footer, modal)",
+          "maxLength": 50
+        }
+      },
+      "required": ["email", "subscribedAt", "source"]
+    },
+    "ContactMessage": {
+      "title": "ContactMessage",
+      "description": "Message sent by a user via the contact modal",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Sender name",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Sender email address",
+          "maxLength": 100
+        },
+        "subject": {
+          "type": "string",
+          "description": "Subject of the message",
+          "maxLength": 150
+        },
+        "message": {
+          "type": "string",
+          "description": "Body of the message",
+          "minLength": 2,
+          "maxLength": 2000
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp when message was created",
+          "maxLength": 40
+        },
+        "userId": {
+          "type": "string",
+          "description": "Optional UID if sender is authenticated",
+          "maxLength": 128
+        }
+      },
+      "required": ["name", "email", "subject", "message", "createdAt"]
+    },
+    "UserBookmark": {
+      "title": "UserBookmark",
+      "description": "Saved article bookmark belonging to an authenticated user",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner user UID",
+          "maxLength": 128
+        },
+        "articleId": {
+          "type": "string",
+          "description": "Unique identifier of the bookmarked article",
+          "maxLength": 64
+        },
+        "articleTitle": {
+          "type": "string",
+          "description": "Title of the bookmarked article",
+          "maxLength": 200
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp when the bookmark was added",
+          "maxLength": 40
+        }
+      },
+      "required": ["userId", "articleId", "articleTitle", "createdAt"]
+    },
+    "ArticleReaction": {
+      "title": "ArticleReaction",
+      "description": "Aggregate interaction claps and reactions on an article",
+      "type": "object",
+      "properties": {
+        "articleId": {
+          "type": "string",
+          "description": "Article identifier",
+          "maxLength": 64
+        },
+        "clapsCount": {
+          "type": "number",
+          "description": "Total count of claps/likes",
+          "minimum": 0
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp of last reaction",
+          "maxLength": 40
+        }
+      },
+      "required": ["articleId", "clapsCount", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/newsletter_subscribers/{subscriberId}": {
+      "schema": "NewsletterSubscriber",
+      "description": "Collection of newsletter subscriber emails"
+    },
+    "/contact_messages/{messageId}": {
+      "schema": "ContactMessage",
+      "description": "Collection of contact inquiries from users"
+    },
+    "/users/{userId}/bookmarks/{bookmarkId}": {
+      "schema": "UserBookmark",
+      "description": "User specific saved article bookmarks"
+    },
+    "/article_reactions/{articleId}": {
+      "schema": "ArticleReaction",
+      "description": "Aggregated reactions and claps for each article"
+    }
+  }
+}

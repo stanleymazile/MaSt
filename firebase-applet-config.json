@@ -1,0 +1,12 @@
+{
+  "projectId": "mazilepost",
+  "appId": "1:24279729745:web:7dc25790887a0ce69a9a70",
+  "apiKey": "AIzaSyCD_pZ83HHFrZAU9KUcdefxDOKkCpFeWdY",
+  "authDomain": "mazilepost.firebaseapp.com",
+  "firestoreDatabaseId": "(default)",
+  "storageBucket": "mazilepost.firebasestorage.app",
+  "messagingSenderId": "24279729745",
+  "measurementId": "G-X4JCH2BW7V",
+  "oAuthClientId": "",
+  "recaptchaSiteKey": ""
+}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronRight } from 'lucide-react';
+import { ChevronDown, ChevronRight, Bookmark, User as UserIcon, LogIn, LogOut } from 'lucide-react';
 import { PreferencesDropdown } from './PreferencesDropdown';
+import { useAuth } from '../context/AuthContext';
 
 interface FullScreenMenuProps {
   isOpen: boolean;
@@ -8,6 +9,7 @@ interface FullScreenMenuProps {
   onNavigate: (view: 'home' | 'article', filter?: string) => void;
   onOpenNewsletter: () => void;
   onOpenContact?: () => void;
+  onOpenBookmarks?: () => void;
   selectedLanguage?: string;
   onSelectLanguage?: (lang: string) => void;
   theme?: 'light' | 'dark';
@@ -20,6 +22,7 @@ export const FullScreenMenu: React.FC<FullScreenMenuProps> = ({
   onNavigate,
   onOpenNewsletter,
   onOpenContact,
+  onOpenBookmarks,
   selectedLanguage = 'Global (English)',
   onSelectLanguage,
   theme = 'light',
@@ -28,6 +31,7 @@ export const FullScreenMenu: React.FC<FullScreenMenuProps> = ({
   const [isPreferencesOpen, setIsPreferencesOpen] = useState(false);
   const [isActualitesOpen, setIsActualitesOpen] = useState(true);
   const [isAffiliationsOpen, setIsAffiliationsOpen] = useState(false);
+  const { user, bookmarks, signInWithGoogle, signOut } = useAuth();
 
   if (!isOpen) return null;
 
@@ -223,6 +227,65 @@ export const FullScreenMenu: React.FC<FullScreenMenuProps> = ({
               <path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z" />
             </svg>
           </button>
+        </div>
+
+        {/* 5. ARTICLES SAUVEGARDÉS (FIREBASE) */}
+        <div>
+          <button
+            onClick={() => {
+              onClose();
+              if (onOpenBookmarks) {
+                onOpenBookmarks();
+              }
+            }}
+            className="w-full flex items-center justify-between text-[#202124] dark:text-[#f1f3f4] hover:text-[#1a73e8] dark:hover:text-[#8ab4f8] text-[22px] font-normal transition-colors text-left group cursor-pointer py-1.5"
+          >
+            <div className="flex items-center gap-2.5">
+              <span>Articles sauvegardés</span>
+              {bookmarks.length > 0 && (
+                <span className="bg-[#1a73e8] text-white text-xs font-semibold px-2 py-0.5 rounded-full">
+                  {bookmarks.length}
+                </span>
+              )}
+            </div>
+            <Bookmark className="w-5 h-5 text-[#5f6368] dark:text-[#9aa0a6] group-hover:text-[#1a73e8] dark:group-hover:text-[#8ab4f8]" />
+          </button>
+        </div>
+
+        {/* Firebase Authentication Status Box */}
+        <div className="pt-2">
+          {user ? (
+            <div className="p-3 bg-[#f8f9fa] dark:bg-[#282a2d] rounded-2xl border border-[#dadce0] dark:border-[#3c4043] flex items-center justify-between">
+              <div className="flex items-center gap-2.5 min-w-0">
+                {user.photoURL ? (
+                  <img src={user.photoURL} alt="Avatar" referrerPolicy="no-referrer" className="w-8 h-8 rounded-full" />
+                ) : (
+                  <div className="w-8 h-8 rounded-full bg-[#1a73e8] text-white flex items-center justify-center text-xs font-bold">
+                    {user.email?.charAt(0).toUpperCase()}
+                  </div>
+                )}
+                <div className="truncate">
+                  <p className="text-xs font-medium truncate">{user.displayName || user.email}</p>
+                  <p className="text-[10px] text-[#137333] dark:text-[#81c995]">Connecté à Firebase</p>
+                </div>
+              </div>
+              <button
+                onClick={() => signOut()}
+                className="p-1.5 text-xs text-[#d93025] hover:bg-[#fce8e6] dark:hover:bg-[#3c1e1e] rounded-lg transition-colors cursor-pointer"
+                title="Déconnexion"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => signInWithGoogle()}
+              className="w-full flex items-center justify-center gap-2 p-2.5 bg-[#f8f9fa] dark:bg-[#282a2d] hover:bg-[#e8f0fe] dark:hover:bg-[#1a3860] text-[#1a73e8] dark:text-[#8ab4f8] rounded-2xl border border-[#dadce0] dark:border-[#3c4043] text-sm font-medium transition-colors cursor-pointer"
+            >
+              <LogIn className="w-4 h-4" />
+              <span>Connexion Google (Firebase)</span>
+            </button>
+          )}
         </div>
       </nav>
 

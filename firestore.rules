@@ -1,0 +1,105 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Safety Net: default deny all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Health / Connection check route
+    match /test/connection {
+      allow read: if true;
+    }
+
+    // Common Helper Functions
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null && request.auth.uid != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // 1. Newsletter Subscribers
+    function isValidNewsletter(data) {
+      return data.keys().hasAll(['email', 'subscribedAt', 'source']) &&
+             data.keys().size() == 3 &&
+             data.email is string && data.email.size() >= 3 && data.email.size() <= 100 &&
+             data.subscribedAt is string && data.subscribedAt.size() <= 40 &&
+             data.source is string && data.source.size() <= 50;
+    }
+
+    match /newsletter_subscribers/{subscriberId} {
+      allow get, list, update, delete: if false;
+      allow create: if isValidId(subscriberId) && isValidNewsletter(incoming());
+    }
+
+    // 2. Contact Messages
+    function isValidContactMessage(data) {
+      return data.keys().hasAll(['name', 'email', 'subject', 'message', 'createdAt']) &&
+             data.keys().size() >= 5 && data.keys().size() <= 6 &&
+             data.name is string && data.name.size() >= 2 && data.name.size() <= 100 &&
+             data.email is string && data.email.size() >= 3 && data.email.size() <= 100 &&
+             data.subject is string && data.subject.size() <= 150 &&
+             data.message is string && data.message.size() >= 2 && data.message.size() <= 2000 &&
+             data.createdAt is string && data.createdAt.size() <= 40 &&
+             (!('userId' in data) || (data.userId is string && data.userId.size() <= 128));
+    }
+
+    match /contact_messages/{messageId} {
+      allow get, list, update, delete: if false;
+      allow create: if isValidId(messageId) && isValidContactMessage(incoming());
+    }
+
+    // 3. User Bookmarks (Private per-user subcollection)
+    function isValidBookmark(data, userId) {
+      return data.keys().hasAll(['userId', 'articleId', 'articleTitle', 'createdAt']) &&
+             data.keys().size() == 4 &&
+             data.userId == userId &&
+             data.articleId is string && data.articleId.size() <= 64 &&
+             data.articleTitle is string && data.articleTitle.size() <= 200 &&
+             data.createdAt is string && data.createdAt.size() <= 40;
+    }
+
+    match /users/{userId}/bookmarks/{bookmarkId} {
+      allow get, list: if isOwner(userId);
+      allow create: if isOwner(userId) && isValidId(bookmarkId) && isValidBookmark(incoming(), userId);
+      allow delete: if isOwner(userId) && isValidId(bookmarkId);
+      allow update: if false;
+    }
+
+    // 4. Article Reactions (Public read, controlled increment)
+    function isValidReaction(data, articleId) {
+      return data.keys().hasAll(['articleId', 'clapsCount', 'updatedAt']) &&
+             data.keys().size() == 3 &&
+             data.articleId == articleId &&
+             data.clapsCount is number && data.clapsCount >= 0 && data.clapsCount <= 1000000 &&
+             data.updatedAt is string && data.updatedAt.size() <= 40;
+    }
+
+    match /article_reactions/{articleId} {
+      allow get: if isValidId(articleId);
+      allow list: if true;
+      allow create: if isValidId(articleId) && isValidReaction(incoming(), articleId);
+      allow update: if isValidId(articleId) && isValidReaction(incoming(), articleId) &&
+                    incoming().diff(existing()).affectedKeys().hasOnly(['clapsCount', 'updatedAt']) &&
+                    incoming().clapsCount >= existing().clapsCount &&
+                    incoming().clapsCount <= existing().clapsCount + 50;
+      allow delete: if false;
+    }
+  }
+}

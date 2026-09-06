@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Search, X } from 'lucide-react';
+import { Search, X, Bookmark, LogIn, User as UserIcon } from 'lucide-react';
 import { PreferencesDropdown } from './PreferencesDropdown';
+import { useAuth } from '../context/AuthContext';
 
 interface HeaderProps {
   onNavigateHome: () => void;
   onOpenNewsletter: () => void;
   onOpenMenu: () => void;
+  onOpenBookmarks?: () => void;
   selectedLanguage?: string;
   onSelectLanguage?: (lang: string) => void;
   theme?: 'light' | 'dark';
@@ -16,6 +18,7 @@ export const Header: React.FC<HeaderProps> = ({
   onNavigateHome,
   onOpenNewsletter,
   onOpenMenu,
+  onOpenBookmarks,
   selectedLanguage = 'Global (English)',
   onSelectLanguage,
   theme = 'light',
@@ -24,6 +27,7 @@ export const Header: React.FC<HeaderProps> = ({
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isPreferencesOpen, setIsPreferencesOpen] = useState(false);
+  const { user, bookmarks, signInWithGoogle } = useAuth();
 
   return (
     <header className="sticky top-0 z-40 bg-white dark:bg-[#202124] border-b border-[#dadce0] dark:border-[#3c4043] transition-colors duration-200">
@@ -83,6 +87,60 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
             )}
           </div>
+
+          {/* Saved Bookmarks Button */}
+          <button
+            id="header-bookmarks-btn"
+            onClick={onOpenBookmarks}
+            className="relative w-10 h-10 rounded-full bg-[#f1f3f4] hover:bg-[#e8eaed] dark:bg-[#303134] dark:hover:bg-[#3c4043] flex items-center justify-center text-[#202124] dark:text-[#e8eaed] transition-colors cursor-pointer"
+            aria-label="Articles sauvegardés"
+            title="Articles sauvegardés (Firestore)"
+          >
+            <Bookmark className="w-4 h-4" />
+            {bookmarks.length > 0 && (
+              <span className="absolute -top-1 -right-1 bg-[#1a73e8] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center border-2 border-white dark:border-[#202124]">
+                {bookmarks.length}
+              </span>
+            )}
+          </button>
+
+          {/* User Account / Google Sign-In with Firebase */}
+          {user ? (
+            <button
+              id="header-user-btn"
+              onClick={onOpenBookmarks}
+              className="relative rounded-full focus:outline-none focus:ring-2 focus:ring-[#1a73e8] cursor-pointer"
+              title={`${user.displayName || user.email} (Connecté à Firebase)`}
+            >
+              {user.photoURL ? (
+                <img
+                  src={user.photoURL}
+                  alt={user.displayName || 'Utilisateur'}
+                  referrerPolicy="no-referrer"
+                  className="w-9 h-9 rounded-full border border-[#dadce0] dark:border-[#5f6368] object-cover"
+                />
+              ) : (
+                <div className="w-9 h-9 rounded-full bg-[#1a73e8] text-white flex items-center justify-center font-google-sans text-xs font-medium">
+                  {user.displayName ? user.displayName.charAt(0).toUpperCase() : user.email?.charAt(0).toUpperCase()}
+                </div>
+              )}
+              {/* Firebase Online Dot */}
+              <span
+                className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-[#1e8e3e] border-2 border-white dark:border-[#202124] rounded-full"
+                title="Firebase Firestore synchronisé"
+              />
+            </button>
+          ) : (
+            <button
+              id="header-login-btn"
+              onClick={() => signInWithGoogle()}
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#dadce0] dark:border-[#5f6368] hover:bg-[#f8f9fa] dark:hover:bg-[#303134] text-[#1a73e8] dark:text-[#8ab4f8] text-xs font-medium transition-colors cursor-pointer"
+              title="Se connecter avec Google pour synchroniser sur Firebase"
+            >
+              <LogIn className="w-3.5 h-3.5" />
+              <span>Connexion</span>
+            </button>
+          )}
 
           {/* More options 3 dots button with Preferences & Links Dropdown */}
           <div className="relative dropdown-container">

@@ -14,8 +14,12 @@ import { ShareModal } from './components/ShareModal';
 import { VideoModal } from './components/VideoModal';
 import { FullScreenMenu } from './components/FullScreenMenu';
 import { ContactModal } from './components/ContactModal';
+import { BookmarksDrawer } from './components/BookmarksDrawer';
+import { ArticleClaps } from './components/ArticleClaps';
 import { ALL_ARTICLES } from './data/articles';
 import { useSEO } from './hooks/useSEO';
+import { useAuth } from './context/AuthContext';
+import { Bookmark } from 'lucide-react';
 
 export default function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -79,6 +83,9 @@ export default function App() {
   });
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isBookmarksOpen, setIsBookmarksOpen] = useState(false);
+
+  const { toggleBookmark, isBookmarked } = useAuth();
 
   // Sync theme with HTML document class and persist
   useEffect(() => {
@@ -154,6 +161,7 @@ export default function App() {
           onNavigateHome={handleNavigateHome}
           onOpenNewsletter={handleOpenNewsletter}
           onOpenMenu={() => setIsMenuOpen(true)}
+          onOpenBookmarks={() => setIsBookmarksOpen(true)}
           selectedLanguage={selectedLanguage}
           onSelectLanguage={setSelectedLanguage}
           theme={theme}
@@ -168,7 +176,7 @@ export default function App() {
         ) : (
           /* ARTICLE VIEW */
           <main className="max-w-[680px] mx-auto px-5 py-6 pb-16">
-            {/* Breadcrumbs Navigation */}
+            {/* Breadcrumbs Navigation & Bookmark Action */}
             {(() => {
               const currentArticle = ALL_ARTICLES.find((a) => a.id === activeArticleId) || ALL_ARTICLES[0];
               const isAstra = activeArticleId === 'astra-sante-mentale';
@@ -187,34 +195,50 @@ export default function App() {
                 : currentArticle.topic;
 
               return (
-                <nav
-                  id="breadcrumbs-nav"
-                  className="flex items-center gap-2 text-sm font-google-sans text-[#1a73e8] dark:text-[#8ab4f8] mb-6 flex-wrap"
-                  aria-label="Breadcrumbs"
-                >
-                  <button
-                    onClick={handleNavigateHome}
-                    className="hover:underline text-[#1a73e8] dark:text-[#8ab4f8] font-medium cursor-pointer"
+                <div className="flex items-center justify-between mb-6 gap-2 flex-wrap">
+                  <nav
+                    id="breadcrumbs-nav"
+                    className="flex items-center gap-2 text-sm font-google-sans text-[#1a73e8] dark:text-[#8ab4f8] flex-wrap"
+                    aria-label="Breadcrumbs"
                   >
-                    Home
-                  </button>
-                  <span className="text-[#5f6368] dark:text-[#9aa0a6] select-none">&rsaquo;</span>
+                    <button
+                      onClick={handleNavigateHome}
+                      className="hover:underline text-[#1a73e8] dark:text-[#8ab4f8] font-medium cursor-pointer"
+                    >
+                      Home
+                    </button>
+                    <span className="text-[#5f6368] dark:text-[#9aa0a6] select-none">&rsaquo;</span>
+                    <button
+                      onClick={handleNavigateHome}
+                      className="hover:underline text-[#1a73e8] dark:text-[#8ab4f8] cursor-pointer"
+                    >
+                      {category}
+                    </button>
+                    <span className="text-[#5f6368] dark:text-[#9aa0a6] select-none">&rsaquo;</span>
+                    <span className="text-[#5f6368] dark:text-[#9aa0a6]">
+                      {subCategory}
+                    </span>
+                  </nav>
+
+                  {/* Bookmark Button linked to Firebase Firestore */}
                   <button
-                    onClick={handleNavigateHome}
-                    className="hover:underline text-[#1a73e8] dark:text-[#8ab4f8] cursor-pointer"
+                    onClick={() => toggleBookmark(activeArticleId, currentArticle.title)}
+                    className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border transition-colors cursor-pointer shrink-0 ${
+                      isBookmarked(activeArticleId)
+                        ? 'bg-[#e8f0fe] dark:bg-[#1a3860] text-[#1a73e8] dark:text-[#8ab4f8] border-[#1a73e8]/40'
+                        : 'bg-white dark:bg-[#202124] text-[#5f6368] dark:text-[#9aa0a6] border-[#dadce0] dark:border-[#3c4043] hover:bg-[#f1f3f4] dark:hover:bg-[#303134]'
+                    }`}
+                    title={isBookmarked(activeArticleId) ? 'Retirer des favoris Firestore' : 'Enregistrer dans Firebase Firestore'}
                   >
-                    {category}
+                    <Bookmark className={`w-3.5 h-3.5 ${isBookmarked(activeArticleId) ? 'fill-current' : ''}`} />
+                    <span>{isBookmarked(activeArticleId) ? 'Enregistré' : 'Enregistrer'}</span>
                   </button>
-                  <span className="text-[#5f6368] dark:text-[#9aa0a6] select-none">&rsaquo;</span>
-                  <span className="text-[#5f6368] dark:text-[#9aa0a6]">
-                    {subCategory}
-                  </span>
-                </nav>
+                </div>
               );
             })()}
 
             {/* SINGLE ARTICLE VIEW - Chaque article est affiché seul dans sa propre page */}
-            <div className="mb-14">
+            <div className="mb-8">
               {activeArticleId === 'vibe-coding-intention' ? (
                 <VibeCodingSection onShare={handleShare} />
               ) : activeArticleId === 'astra-sante-mentale' ? (
@@ -236,6 +260,9 @@ export default function App() {
                 />
               )}
             </div>
+
+            {/* Real-time Firestore Claps / Recommandations */}
+            <ArticleClaps articleId={activeArticleId} />
 
             {/* RECOMMENDED FOR YOU (Dynamically suggests other articles based on the current topic) */}
             <RecommendedForYou
@@ -263,10 +290,18 @@ export default function App() {
         onNavigate={handleNavigate}
         onOpenNewsletter={handleOpenNewsletter}
         onOpenContact={() => setIsContactModalOpen(true)}
+        onOpenBookmarks={() => setIsBookmarksOpen(true)}
         selectedLanguage={selectedLanguage}
         onSelectLanguage={setSelectedLanguage}
         theme={theme}
         onToggleTheme={toggleTheme}
+      />
+
+      {/* Bookmarks Drawer (Firebase Firestore) */}
+      <BookmarksDrawer
+        isOpen={isBookmarksOpen}
+        onClose={() => setIsBookmarksOpen(false)}
+        onNavigateToArticle={handleNavigateToArticle}
       />
 
       {/* Floating Audio Player */}
