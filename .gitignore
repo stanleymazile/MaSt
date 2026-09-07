@@ -1,8 +1,30 @@
+# Dependencies
 node_modules/
+
+# Production builds
 build/
 dist/
 coverage/
-.DS_Store
-*.log
+
+# Environment files & API Keys (DO NOT COMMIT SECRETS)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 .env*
 !.env.example
+
+# Google & Firebase Service Account / Private credentials
+*serviceAccountKey*.json
+*service-account*.json
+.firebase/
+firebase-debug.log*
+firestore-debug.log*
+
+# System & Editor files
+.DS_Store
+*.log
+.vscode/
+.idea/
+
