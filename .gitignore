@@ -16,6 +16,7 @@ coverage/
 !.env.example
 
 # Google & Firebase Service Account / Private credentials
+firebase-applet-config.json
 *serviceAccountKey*.json
 *service-account*.json
 .firebase/
