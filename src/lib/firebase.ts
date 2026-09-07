@@ -1,7 +1,10 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
-import { getFirestore, doc, getDocFromServer } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setLogLevel } from 'firebase/firestore';
 import { getAnalytics, isSupported } from 'firebase/analytics';
+
+// Suppress internal SDK verbose connection retry logs
+setLogLevel('silent');
 // Firebase configuration strictly resolving from environment variables (.env / secrets)
 const activeConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY || '',
@@ -68,8 +71,15 @@ export interface FirestoreErrorInfo {
 }
 
 export function handleFirestoreError(error: unknown, operationType: OperationType, path: string | null): never {
+  const errorMsg = error instanceof Error ? error.message : String(error);
+  const isOfflineOrUnavailable =
+    errorMsg.includes('unavailable') ||
+    errorMsg.includes('could not reach') ||
+    errorMsg.includes('offline') ||
+    errorMsg.includes('client is offline');
+
   const errInfo: FirestoreErrorInfo = {
-    error: error instanceof Error ? error.message : String(error),
+    error: errorMsg,
     authInfo: {
       userId: auth.currentUser?.uid,
       email: auth.currentUser?.email,
@@ -84,25 +94,21 @@ export function handleFirestoreError(error: unknown, operationType: OperationTyp
     operationType,
     path,
   };
-  console.error('Firestore Error: ', JSON.stringify(errInfo));
+
+  if (isOfflineOrUnavailable) {
+    console.warn('Firestore offline/reconnecting:', JSON.stringify(errInfo));
+  } else {
+    console.error('Firestore Error: ', JSON.stringify(errInfo));
+  }
   throw new Error(JSON.stringify(errInfo));
 }
 
-// Validation connection test on initial boot
+// Validation connection test (optional check)
 export async function testConnection(): Promise<boolean> {
   try {
-    await getDocFromServer(doc(db, 'test', 'connection'));
-    console.info('Firebase Firestore connected successfully.');
-    return true;
-  } catch (error) {
-    if (error instanceof Error && error.message.includes('the client is offline')) {
-      console.warn('Firebase Firestore: the client is offline. Please check your Firebase configuration.');
-    } else {
-      console.info('Firebase Firestore connection check completed.');
-    }
+    const snap = await getDoc(doc(db, 'test', 'connection'));
+    return snap.exists();
+  } catch {
     return false;
   }
 }
-
-// Run connection test on load
-testConnection().catch(() => {});

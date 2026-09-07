@@ -6,6 +6,8 @@ import { GeminiTranscribeSection } from './components/GeminiTranscribeSection';
 import { AstraMentalHealthSection } from './components/AstraMentalHealthSection';
 import { VibeCodingSection } from './components/VibeCodingSection';
 import { GenericArticleSection } from './components/GenericArticleSection';
+import { AuthorProfilePage } from './components/AuthorProfilePage';
+import { NewsPage } from './components/NewsPage';
 import { RecommendedForYou } from './components/RecommendedForYou';
 import { NewsletterBox } from './components/NewsletterBox';
 import { Footer } from './components/Footer';
@@ -35,18 +37,28 @@ export default function App() {
     return 'light';
   });
 
-  const [currentView, setCurrentView] = useState<'home' | 'article'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'article' | 'author' | 'news'>('home');
+  const [newsFilter, setNewsFilter] = useState<string>('all');
   const [activeArticleId, setActiveArticleId] = useState<string>('travel-in-search');
   const [currentTopic, setCurrentTopic] = useState<string>('Search & Travel');
 
   // Dynamic Google Discover & Rich SEO Meta Management
-  useSEO({ currentView, activeArticleId });
+  useSEO({ currentView, activeArticleId, newsFilter });
 
-  // Initialize view from URL query param if present (?article=...) and support back/forward buttons
+  // Initialize view from URL query param if present (?article=... or ?author=... or ?view=news) and support back/forward buttons
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
+    const authorParam = params.get('author');
     const articleParam = params.get('article');
-    if (articleParam && ALL_ARTICLES.some((a) => a.id === articleParam)) {
+    const viewParam = params.get('view');
+    const topicParam = params.get('topic');
+
+    if (authorParam === 'stanley-mazile') {
+      setCurrentView('author');
+    } else if (viewParam === 'news' || params.get('news') === 'true') {
+      setCurrentView('news');
+      if (topicParam) setNewsFilter(topicParam);
+    } else if (articleParam && ALL_ARTICLES.some((a) => a.id === articleParam)) {
       setCurrentView('article');
       setActiveArticleId(articleParam);
       const matchingArticle = ALL_ARTICLES.find((a) => a.id === articleParam);
@@ -57,8 +69,17 @@ export default function App() {
 
     const handlePopState = () => {
       const urlParams = new URLSearchParams(window.location.search);
+      const authorP = urlParams.get('author');
       const articleId = urlParams.get('article');
-      if (articleId && ALL_ARTICLES.some((a) => a.id === articleId)) {
+      const viewP = urlParams.get('view');
+      const topicP = urlParams.get('topic');
+
+      if (authorP === 'stanley-mazile') {
+        setCurrentView('author');
+      } else if (viewP === 'news' || urlParams.get('news') === 'true') {
+        setCurrentView('news');
+        if (topicP) setNewsFilter(topicP);
+      } else if (articleId && ALL_ARTICLES.some((a) => a.id === articleId)) {
         setCurrentView('article');
         setActiveArticleId(articleId);
         const matchingArticle = ALL_ARTICLES.find((a) => a.id === articleId);
@@ -110,7 +131,22 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleNavigate = (view: 'home' | 'article', filterOrStoryId?: string) => {
+  const handleNavigateToNews = (filter: string = 'all') => {
+    setCurrentView('news');
+    setNewsFilter(filter);
+    if (typeof window !== 'undefined') {
+      const query = filter && filter !== 'all' ? `?view=news&topic=${encodeURIComponent(filter)}` : '?view=news';
+      window.history.pushState({}, '', query);
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleNavigate = (view: 'home' | 'article' | 'news', filterOrStoryId?: string) => {
+    if (view === 'news') {
+      handleNavigateToNews(filterOrStoryId || 'all');
+      return;
+    }
+
     setCurrentView(view);
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -133,6 +169,14 @@ export default function App() {
 
   const handleNavigateToArticle = (articleId?: string) => {
     handleNavigate('article', articleId);
+  };
+
+  const handleNavigateToAuthor = () => {
+    setCurrentView('author');
+    if (typeof window !== 'undefined') {
+      window.history.pushState({}, '', '?author=stanley-mazile');
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleOpenNewsletter = () => {
@@ -171,7 +215,28 @@ export default function App() {
         {currentView === 'home' ? (
           /* HOME VIEW */
           <main>
-            <HomePage onNavigateToArticle={handleNavigateToArticle} />
+            <HomePage
+              onNavigateToArticle={handleNavigateToArticle}
+              onNavigateToNews={handleNavigateToNews}
+            />
+          </main>
+        ) : currentView === 'author' ? (
+          /* AUTHOR PROFILE VIEW */
+          <main>
+            <AuthorProfilePage
+              onBack={handleNavigateHome}
+              onNavigateToArticle={handleNavigateToArticle}
+            />
+          </main>
+        ) : currentView === 'news' ? (
+          /* NEWS VIEW WITH THEMATIC FILTERS */
+          <main>
+            <NewsPage
+              onBack={handleNavigateHome}
+              onNavigateToArticle={handleNavigateToArticle}
+              onNavigateToAuthor={handleNavigateToAuthor}
+              initialFilter={newsFilter}
+            />
           </main>
         ) : (
           /* ARTICLE VIEW */
@@ -209,7 +274,13 @@ export default function App() {
                     </button>
                     <span className="text-[#5f6368] dark:text-[#9aa0a6] select-none">&rsaquo;</span>
                     <button
-                      onClick={handleNavigateHome}
+                      onClick={() => {
+                        if (category === 'Actualités') {
+                          handleNavigateToNews();
+                        } else {
+                          handleNavigateHome();
+                        }
+                      }}
                       className="hover:underline text-[#1a73e8] dark:text-[#8ab4f8] cursor-pointer"
                     >
                       {category}
@@ -240,9 +311,15 @@ export default function App() {
             {/* SINGLE ARTICLE VIEW - Chaque article est affiché seul dans sa propre page */}
             <div className="mb-8">
               {activeArticleId === 'vibe-coding-intention' ? (
-                <VibeCodingSection onShare={handleShare} />
+                <VibeCodingSection
+                  onShare={handleShare}
+                  onNavigateToAuthor={handleNavigateToAuthor}
+                />
               ) : activeArticleId === 'astra-sante-mentale' ? (
-                <AstraMentalHealthSection onShare={handleShare} />
+                <AstraMentalHealthSection
+                  onShare={handleShare}
+                  onNavigateToAuthor={handleNavigateToAuthor}
+                />
               ) : activeArticleId === 'travel-in-search' ? (
                 <TravelSearchSection onShare={handleShare} />
               ) : activeArticleId === 'gemini-3.5-transcribe' ? (
@@ -257,6 +334,7 @@ export default function App() {
                   }
                   onShare={handleShare}
                   onListenArticle={handleListenArticle}
+                  onNavigateToAuthor={handleNavigateToAuthor}
                 />
               )}
             </div>

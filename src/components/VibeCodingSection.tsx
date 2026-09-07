@@ -1,11 +1,13 @@
 import React from 'react';
 import vibeCodingHeroImage from '../assets/images/vibe_coding_hero_1788638245466.jpg';
+import stanleyAvatar from '../assets/images/stanley_mazile_author_1788742131016.jpg';
 
 interface VibeCodingSectionProps {
   onShare: (title: string) => void;
+  onNavigateToAuthor?: () => void;
 }
 
-export const VibeCodingSection: React.FC<VibeCodingSectionProps> = ({ onShare }) => {
+export const VibeCodingSection: React.FC<VibeCodingSectionProps> = ({ onShare, onNavigateToAuthor }) => {
   const articleTitle = "Le Vibe Coding : L’avenir du développement piloté par l’intention";
 
   const sourcesList = [
@@ -49,11 +51,34 @@ export const VibeCodingSection: React.FC<VibeCodingSectionProps> = ({ onShare })
         Le <a href="#" className="text-[#1a73e8] dark:text-[#8ab4f8] hover:underline font-medium">vibe coding</a> représente un changement de paradigme dans la création de logiciels. Plutôt que d’écrire manuellement un code complexe, cette approche permet aux humains de se concentrer sur la <a href="#" className="text-[#1a73e8] dark:text-[#8ab4f8] hover:underline font-medium">vision et l’architecture</a> tandis que l’IA génère le code et ajuste les détails en continu.
       </p>
 
-      {/* Author block */}
+      {/* Author block with profile photo and link */}
       <div className="border-y border-[#dadce0] dark:border-[#3c4043] py-4 mb-8">
-        <div>
-          <div className="font-google-sans font-medium text-[#202124] dark:text-[#f1f3f4] text-base">Stanley Mazile</div>
-          <div className="text-sm text-[#5f6368] dark:text-[#9aa0a6]">Psychologue et développeur web/mobile</div>
+        <div className="flex items-center gap-3.5">
+          <button
+            type="button"
+            onClick={onNavigateToAuthor}
+            className="shrink-0 group focus:outline-hidden cursor-pointer"
+            aria-label="Voir le profil de l'auteur Stanley Mazile"
+          >
+            <img
+              src={stanleyAvatar}
+              alt="Photo de profil de Stanley Mazile"
+              referrerPolicy="no-referrer"
+              className="w-11 h-11 sm:w-12 sm:h-12 rounded-full object-cover border border-[#dadce0] dark:border-[#5f6368] group-hover:ring-2 group-hover:ring-[#1a73e8] transition-all"
+            />
+          </button>
+          <div>
+            <button
+              type="button"
+              onClick={onNavigateToAuthor}
+              className="font-google-sans font-medium text-[#202124] dark:text-[#f1f3f4] text-base hover:text-[#1a73e8] dark:hover:text-[#8ab4f8] hover:underline transition-colors text-left cursor-pointer"
+            >
+              Stanley Mazile
+            </button>
+            <div className="text-sm text-[#5f6368] dark:text-[#9aa0a6]">
+              Psychologue et développeur web/mobile
+            </div>
+          </div>
         </div>
       </div>
 

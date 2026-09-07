@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 import { ALL_ARTICLES, getAuthorDetails } from '../data/articles';
 
 interface UseSEOProps {
-  currentView: 'home' | 'article';
+  currentView: 'home' | 'article' | 'author' | 'news';
   activeArticleId?: string;
+  newsFilter?: string;
 }
 
 const ARTICLE_IMAGES: Record<string, string> = {
@@ -50,6 +51,51 @@ export function useSEO({ currentView, activeArticleId }: UseSEOProps) {
     updateMetaTag('name', 'robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
     updateMetaTag('name', 'googlebot', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
     updateMetaTag('name', 'googlebot-news', 'index, follow');
+
+    if (currentView === 'author') {
+      const authorTitle = 'Stanley Mazile | Auteur, Psychologue et Développeur - MaSt';
+      const authorDesc =
+        'Profil de Stanley Mazile : Psychologue et développeur web/mobile. Découvrez ses publications sur le Vibe Coding, l’IA, et la protection de la santé mentale.';
+      const authorUrl = `${origin}/?author=stanley-mazile`;
+      const authorImg = `${origin}/images/stanley-mazile.jpg`;
+
+      document.title = authorTitle;
+      updateMetaTag('name', 'description', authorDesc);
+      updateCanonicalLink(authorUrl);
+
+      updateMetaTag('property', 'og:type', 'profile');
+      updateMetaTag('property', 'og:title', authorTitle);
+      updateMetaTag('property', 'og:description', authorDesc);
+      updateMetaTag('property', 'og:url', authorUrl);
+      updateMetaTag('property', 'og:image', authorImg);
+
+      updateMetaTag('name', 'twitter:card', 'summary');
+      updateMetaTag('name', 'twitter:title', authorTitle);
+      updateMetaTag('name', 'twitter:description', authorDesc);
+      updateMetaTag('name', 'twitter:image', authorImg);
+      return;
+    }
+
+    if (currentView === 'news') {
+      const newsTitle = 'Actualités Tech & IA | MaSt';
+      const newsDesc =
+        'Découvrez toutes les actualités sur l’intelligence artificielle, Gemini, le vibe coding, la technologie et les outils de développement.';
+      const newsUrl = `${origin}/?view=news`;
+
+      document.title = newsTitle;
+      updateMetaTag('name', 'description', newsDesc);
+      updateCanonicalLink(newsUrl);
+
+      updateMetaTag('property', 'og:type', 'website');
+      updateMetaTag('property', 'og:title', newsTitle);
+      updateMetaTag('property', 'og:description', newsDesc);
+      updateMetaTag('property', 'og:url', newsUrl);
+
+      updateMetaTag('name', 'twitter:card', 'summary_large_image');
+      updateMetaTag('name', 'twitter:title', newsTitle);
+      updateMetaTag('name', 'twitter:description', newsDesc);
+      return;
+    }
 
     if (currentView === 'home' || !activeArticleId) {
       document.title = BASE_TITLE;

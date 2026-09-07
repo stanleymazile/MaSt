@@ -6,7 +6,7 @@ import { useAuth } from '../context/AuthContext';
 interface FullScreenMenuProps {
   isOpen: boolean;
   onClose: () => void;
-  onNavigate: (view: 'home' | 'article', filter?: string) => void;
+  onNavigate: (view: 'home' | 'article' | 'news', filter?: string) => void;
   onOpenNewsletter: () => void;
   onOpenContact?: () => void;
   onOpenBookmarks?: () => void;
@@ -36,11 +36,13 @@ export const FullScreenMenu: React.FC<FullScreenMenuProps> = ({
   if (!isOpen) return null;
 
   const actualitesSubItems = [
+    { label: 'Toutes les actualités', filter: 'all' },
     { label: 'Innovation', filter: 'Innovation' },
-    { label: 'IA / intelligence artificielle', filter: 'IA' },
+    { label: 'IA / intelligence artificielle', filter: 'IA / intelligence artificielle' },
+    { label: 'Gemini models', filter: 'Gemini models' },
+    { label: 'Developer Tools', filter: 'Developer Tools' },
     { label: 'Technologie', filter: 'Technologie' },
-    { label: 'Science', filter: 'Science' },
-    { label: 'Recherche', filter: 'Recherche' },
+    { label: 'Santé mentale', filter: 'Santé mentale' },
   ];
 
   const affiliationsSubItems = [
@@ -50,7 +52,12 @@ export const FullScreenMenu: React.FC<FullScreenMenuProps> = ({
     { label: 'Produit', filter: 'Produit' },
   ];
 
-  const handleSubItemClick = (filter: string) => {
+  const handleActualitesClick = (filter: string = 'all') => {
+    onNavigate('news', filter);
+    onClose();
+  };
+
+  const handleAffiliationsClick = (filter: string) => {
     onNavigate('home', filter);
     onClose();
   };
@@ -146,7 +153,7 @@ export const FullScreenMenu: React.FC<FullScreenMenuProps> = ({
               {actualitesSubItems.map((item, idx) => (
                 <button
                   key={idx}
-                  onClick={() => handleSubItemClick(item.filter)}
+                  onClick={() => handleActualitesClick(item.filter)}
                   className="flex items-center justify-between text-left py-2 px-3 rounded-[12px] text-[16px] text-[#5f6368] dark:text-[#bdc1c6] hover:text-[#1a73e8] dark:hover:text-[#8ab4f8] hover:bg-[#f8f9fa] dark:hover:bg-[#303134] transition-all cursor-pointer group"
                 >
                   <span>{item.label}</span>
@@ -178,7 +185,7 @@ export const FullScreenMenu: React.FC<FullScreenMenuProps> = ({
               {affiliationsSubItems.map((item, idx) => (
                 <button
                   key={idx}
-                  onClick={() => handleSubItemClick(item.filter)}
+                  onClick={() => handleAffiliationsClick(item.filter)}
                   className="flex items-center justify-between text-left py-2 px-3 rounded-[12px] text-[16px] text-[#5f6368] dark:text-[#bdc1c6] hover:text-[#1a73e8] dark:hover:text-[#8ab4f8] hover:bg-[#f8f9fa] dark:hover:bg-[#303134] transition-all cursor-pointer group"
                 >
                   <span>{item.label}</span>
@@ -209,7 +216,7 @@ export const FullScreenMenu: React.FC<FullScreenMenuProps> = ({
         </div>
 
         {/* 4. CONTACT (remplace Feed) */}
-        <div>
+        <div className="border-b border-[#dadce0]/50 dark:border-[#3c4043]/50 pb-3">
           <button
             onClick={() => {
               onClose();

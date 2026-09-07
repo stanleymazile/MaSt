@@ -1,10 +1,12 @@
 import React from 'react';
 import { ArticleItem } from '../data/articles';
+import stanleyAvatar from '../assets/images/stanley_mazile_author_1788742131016.jpg';
 
 interface GenericArticleSectionProps {
   article: ArticleItem;
   onShare: (title: string) => void;
   onListenArticle?: () => void;
+  onNavigateToAuthor?: () => void;
 }
 
 // Key Google / technology terms to highlight in blue like in 3 new ways to plan and book travel
@@ -109,8 +111,10 @@ export const GenericArticleSection: React.FC<GenericArticleSectionProps> = ({
   article,
   onShare,
   onListenArticle,
+  onNavigateToAuthor,
 }) => {
-  const showAuthor = article.author && article.author !== 'Stanley Mazile';
+  const isStanleyAuthor = article.author === 'Stanley Mazile';
+  const showAuthor = Boolean(article.author);
   const showTopic = article.topic && article.topic !== 'IA / intelligence artificielle';
 
   return (
@@ -158,15 +162,45 @@ export const GenericArticleSection: React.FC<GenericArticleSectionProps> = ({
         {renderTextWithBlueHighlights(article.excerpt, article.tags)}
       </p>
 
-      {/* Author block (only if present and not removed per guidelines) */}
+      {/* Author block with profile photo and link */}
       {(showAuthor || showTopic) && (
         <div className="border-y border-[#dadce0] dark:border-[#3c4043] py-4 mb-8">
           {showAuthor && (
-            <div className="font-google-sans font-medium text-[#202124] dark:text-[#f1f3f4]">
-              {article.author}
-            </div>
+            isStanleyAuthor ? (
+              <div className="flex items-center gap-3.5">
+                <button
+                  type="button"
+                  onClick={onNavigateToAuthor}
+                  className="shrink-0 group focus:outline-hidden cursor-pointer"
+                  aria-label="Voir le profil de l'auteur Stanley Mazile"
+                >
+                  <img
+                    src={stanleyAvatar}
+                    alt="Photo de profil de Stanley Mazile"
+                    referrerPolicy="no-referrer"
+                    className="w-11 h-11 sm:w-12 sm:h-12 rounded-full object-cover border border-[#dadce0] dark:border-[#5f6368] group-hover:ring-2 group-hover:ring-[#1a73e8] transition-all"
+                  />
+                </button>
+                <div>
+                  <button
+                    type="button"
+                    onClick={onNavigateToAuthor}
+                    className="font-google-sans font-medium text-[#202124] dark:text-[#f1f3f4] text-base hover:text-[#1a73e8] dark:hover:text-[#8ab4f8] hover:underline transition-colors text-left cursor-pointer"
+                  >
+                    Stanley Mazile
+                  </button>
+                  <div className="text-sm text-[#5f6368] dark:text-[#9aa0a6]">
+                    Psychologue et développeur web/mobile
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="font-google-sans font-medium text-[#202124] dark:text-[#f1f3f4]">
+                {article.author}
+              </div>
+            )
           )}
-          {showTopic && (
+          {showTopic && !isStanleyAuthor && (
             <div className="text-sm text-[#5f6368] dark:text-[#9aa0a6]">
               {article.topic}
             </div>

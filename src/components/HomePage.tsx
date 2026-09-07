@@ -5,13 +5,14 @@ import travelSearchHero from '../assets/images/travel_search_hero_1788635618448.
 import pixelHardwareHero from '../assets/images/pixel_hardware_hero_1788635630337.jpg';
 import astraHeroImage from '../assets/images/astra_mental_health_1788636271516.jpg';
 import vibeCodingHeroImage from '../assets/images/vibe_coding_hero_1788638245466.jpg';
-
+import geminiOmniFlashImg from '../assets/images/gemini_omni_flash_1788743908500.jpg';
 interface HomePageProps {
   onNavigateToArticle: (articleId?: string) => void;
+  onNavigateToNews?: (filter?: string) => void;
   onOpenNewsletterModal?: () => void;
 }
 
-export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle }) => {
+export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavigateToNews }) => {
   // Carousel state
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
@@ -327,12 +328,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle }) => {
         Dernières actualités
       </h2>
 
-      {/* Actualité 1: Le Vibe Coding */}
+      {/* Actualité 1: Gemini 3.5 Transcribe */}
       <div className="bg-[#f8f9fa] dark:bg-[#2d2e30] border border-[#dadce0]/60 dark:border-[#3c4043] rounded-[20px] overflow-hidden mb-6 p-4 transition-colors">
         <div className="w-full h-[200px] rounded-[12px] overflow-hidden mb-4 relative group">
           <img
-            src={vibeCodingHeroImage}
-            alt="Le Vibe Coding : L’avenir du développement piloté par l’intention"
+            src={geminiTranscribeHero}
+            alt="Introducing Gemini 3.5 Transcribe"
             referrerPolicy="no-referrer"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
           />
@@ -342,33 +343,33 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle }) => {
         </div>
         <div className="flex items-center gap-2 mb-1">
           <span className="text-[13px] font-medium text-[#1a73e8] dark:text-[#8ab4f8] inline-block">
-            IA / intelligence artificielle
+            Gemini models
           </span>
           <span className="text-[#dadce0] dark:text-[#5f6368] text-xs">•</span>
           <span className="text-[12px] text-[#5f6368] dark:text-[#9aa0a6] font-medium">
-            Par Stanley Mazile
+            Par Google DeepMind Team
           </span>
         </div>
         <h3 className="font-google-sans text-[19px] sm:text-[20px] font-medium text-[#202124] dark:text-[#f1f3f4] mb-2 leading-[1.3]">
-          Le Vibe Coding : L’avenir du développement piloté par l’intention
+          Introducing Gemini 3.5 Transcribe
         </h3>
         <p className="text-[14px] text-[#5f6368] dark:text-[#bdc1c6] mb-4 line-clamp-2">
-          Le vibe coding représente un changement de paradigme dans la création de logiciels. Plutôt que d’écrire manuellement un code complexe, une approche permet aux humains de se concentrer sur la vision et l’architecture tandis que l’IA génère le code et ajuste les détails.
+          Notre modèle speech-to-text le plus intelligent, conçu pour convertir l'audio brut en texte structuré, précis et contextuellement enrichi à travers de multiples langues.
         </p>
         <button
-          onClick={() => onNavigateToArticle('vibe-coding-intention')}
+          onClick={() => onNavigateToArticle('gemini-3.5-transcribe')}
           className="inline-flex items-center gap-2 px-5 py-2.5 border border-[#202124] dark:border-[#8ab4f8] rounded-[20px] bg-transparent font-google-sans text-[14px] font-medium text-[#202124] dark:text-[#8ab4f8] hover:bg-[#202124] hover:text-white dark:hover:bg-[#8ab4f8] dark:hover:text-[#202124] transition-colors cursor-pointer"
         >
           Lire l'article <span className="text-base">&rarr;</span>
         </button>
       </div>
 
-      {/* Actualité 2: Astra et la santé mentale */}
+      {/* Actualité 2: Gemini Omni 1.1 Flash */}
       <div className="bg-[#f8f9fa] dark:bg-[#2d2e30] border border-[#dadce0]/60 dark:border-[#3c4043] rounded-[20px] overflow-hidden mb-6 p-4 transition-colors">
         <div className="w-full h-[200px] rounded-[12px] overflow-hidden mb-4 relative group">
           <img
-            src={astraHeroImage}
-            alt="Astra et la santé mentale"
+            src={geminiOmniFlashImg}
+            alt="Gemini Omni 1.1 Flash lets you build with more control"
             referrerPolicy="no-referrer"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
           />
@@ -378,26 +379,28 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle }) => {
         </div>
         <div className="flex items-center gap-2 mb-1">
           <span className="text-[13px] font-medium text-[#1a73e8] dark:text-[#8ab4f8] inline-block">
-            IA / intelligence artificielle
+            Developer Tools
           </span>
           <span className="text-[#dadce0] dark:text-[#5f6368] text-xs">•</span>
           <span className="text-[12px] text-[#5f6368] dark:text-[#9aa0a6] font-medium">
-            Par Stanley Mazile
+            Par Anish Nangia & Elisa Fortis
           </span>
         </div>
         <h3 className="font-google-sans text-[19px] sm:text-[20px] font-medium text-[#202124] dark:text-[#f1f3f4] mb-2 leading-[1.3]">
-          Comment Astra protège-t-il la santé mentale ?
+          Gemini Omni 1.1 Flash lets you build with more control
         </h3>
         <p className="text-[14px] text-[#5f6368] dark:text-[#bdc1c6] mb-4 line-clamp-2">
-          GPT-6 Astra intègre plusieurs mécanismes et protocoles de sécurité pour protéger la santé mentale de ses utilisateurs, avec une attention particulière portée aux mineurs.
+          Modes à latence inférieure à 100 ms, guidage précis des tokens et streaming multimodal natif pour concevoir des applications et agents interactifs d'avant-garde.
         </p>
         <button
-          onClick={() => onNavigateToArticle('astra-sante-mentale')}
+          onClick={() => onNavigateToArticle('gemini-omni-1-1-flash')}
           className="inline-flex items-center gap-2 px-5 py-2.5 border border-[#202124] dark:border-[#8ab4f8] rounded-[20px] bg-transparent font-google-sans text-[14px] font-medium text-[#202124] dark:text-[#8ab4f8] hover:bg-[#202124] hover:text-white dark:hover:bg-[#8ab4f8] dark:hover:text-[#202124] transition-colors cursor-pointer"
         >
           Lire l'article <span className="text-base">&rarr;</span>
         </button>
       </div>
+
+      {/* Actualité 3: National Parks */}
       <div className="bg-[#f8f9fa] dark:bg-[#2d2e30] border border-[#dadce0]/60 dark:border-[#3c4043] rounded-[20px] overflow-hidden mb-6 p-4 transition-colors">
         <div className="w-full h-[180px] rounded-[12px] overflow-hidden mb-4 bg-[#e0e0e0] dark:bg-[#3c4043]">
           <svg className="w-full h-full" viewBox="0 0 400 200" preserveAspectRatio="none">
@@ -414,26 +417,43 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle }) => {
             <circle cx="330" cy="50" r="22" fill="#fff5ea" opacity="0.8" />
           </svg>
         </div>
-        <span className="text-[13px] font-medium text-[#5f6368] dark:text-[#9aa0a6] mb-1 inline-block">
-          Maps
-        </span>
+        <div className="flex items-center gap-2 mb-1">
+          <span className="text-[13px] font-medium text-[#1a73e8] dark:text-[#8ab4f8] inline-block">
+            Search & Travel
+          </span>
+          <span className="text-[#dadce0] dark:text-[#5f6368] text-xs">•</span>
+          <span className="text-[12px] text-[#5f6368] dark:text-[#9aa0a6] font-medium">
+            Par Google Maps & Search Team
+          </span>
+        </div>
         <h3 className="font-google-sans text-[18px] font-medium text-[#202124] dark:text-[#f1f3f4] mb-2 leading-[1.3]">
           Celebrate 110 years of national parks with Maps, Search, and Gemini
         </h3>
-        <p className="text-[14px] text-[#5f6368] dark:text-[#bdc1c6] mb-4">
-          Discover how Ask Maps, AI Mode,...
+        <p className="text-[14px] text-[#5f6368] dark:text-[#bdc1c6] mb-4 line-clamp-2">
+          Découvrez comment Ask Maps, le mode IA dans la recherche et la vue immersive de Gemini vous aident à explorer sentiers, patrimoine et campings.
         </p>
         <button
           onClick={() => onNavigateToArticle('national-parks')}
           className="inline-flex items-center gap-2 px-5 py-2.5 border border-[#202124] dark:border-[#8ab4f8] rounded-[20px] bg-transparent font-google-sans text-[14px] font-medium text-[#202124] dark:text-[#8ab4f8] hover:bg-[#202124] hover:text-white dark:hover:bg-[#8ab4f8] dark:hover:text-[#202124] transition-colors cursor-pointer"
         >
-          Read article <span className="text-base">&rarr;</span>
+          Lire l'article <span className="text-base">&rarr;</span>
         </button>
       </div>
 
-      {/* Section 2: Hardware updates */}
+      {/* Voir plus d'actualités */}
+      <div className="mt-4 mb-2">
+        <button
+          onClick={() => onNavigateToNews && onNavigateToNews()}
+          className="inline-flex items-center gap-2 font-google-sans text-[15px] font-medium text-[#1a73e8] dark:text-[#8ab4f8] hover:underline cursor-pointer group"
+        >
+          <span>Voir plus d'actualités</span>
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </button>
+      </div>
+
+      {/* Section 2: Affiliations */}
       <h2 className="font-google-sans text-[24px] font-medium text-[#202124] dark:text-[#f1f3f4] mt-9 mb-5">
-        Hardware updates
+        Affiliations
       </h2>
 
       {/* Hardware Card 1: Pixel */}
@@ -562,9 +582,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle }) => {
         </p>
       </div>
 
-      {/* Section 3: Tips and tricks */}
+      {/* Section 3: Informations */}
       <h2 className="font-google-sans text-[24px] font-medium text-[#202124] dark:text-[#f1f3f4] mt-9 mb-5">
-        Tips and tricks
+        Informations
       </h2>
 
       {/* Tip 1: Home decor */}
