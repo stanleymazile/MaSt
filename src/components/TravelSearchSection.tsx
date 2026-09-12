@@ -43,12 +43,12 @@ export const TravelSearchSection: React.FC<TravelSearchSectionProps> = ({ onShar
         <div className="text-sm text-[#5f6368] dark:text-[#9aa0a6]">Group Product Manager, Search</div>
       </div>
 
-      {/* Hero Image / Rich SVG Vector Graphics */}
-      <div className="w-full rounded-2xl overflow-hidden mb-8 bg-gradient-to-br from-[#e8f0fe] via-[#f1f5fd] to-white dark:from-[#1a2b47] dark:via-[#202938] dark:to-[#1e2022] p-4 sm:p-6 border border-[#e1eaf9] dark:border-[#3c4043] shadow-xs">
+      {/* Hero Image / Rich SVG Vector Graphics - Google Discover 16:9 format */}
+      <div className="w-full aspect-[16/9] rounded-[16px] sm:rounded-[20px] overflow-hidden mb-8 bg-gradient-to-br from-[#e8f0fe] via-[#f1f5fd] to-white dark:from-[#1a2b47] dark:via-[#202938] dark:to-[#1e2022] p-2 sm:p-4 border border-[#e1eaf9] dark:border-[#3c4043] shadow-xs flex items-center justify-center relative">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 800 450"
-          className="w-full h-auto drop-shadow-sm select-none"
+          className="w-full h-full object-contain drop-shadow-sm select-none"
         >
           {/* Background and Curves */}
           <rect width="100%" height="100%" rx="16" fill="#eef4ff" />
@@ -143,6 +143,9 @@ export const TravelSearchSection: React.FC<TravelSearchSectionProps> = ({ onShar
             </text>
           </g>
         </svg>
+        <div className="absolute bottom-3.5 left-3.5 bg-black/65 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full shadow-xs">
+          Search & Travel
+        </div>
       </div>
 
       {/* Content */}

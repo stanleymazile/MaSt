@@ -70,14 +70,19 @@ export const AstraMentalHealthSection: React.FC<AstraMentalHealthSectionProps> =
         </div>
       </div>
 
-      {/* Hero Image */}
-      <div className="w-full rounded-2xl overflow-hidden mb-8 border border-[#dadce0] dark:border-[#3c4043] shadow-xs">
+      {/* Hero Image - Google Discover 16:9 format */}
+      <div className="w-full aspect-[16/9] rounded-[16px] sm:rounded-[20px] overflow-hidden mb-8 border border-[#dadce0] dark:border-[#3c4043] shadow-xs bg-neutral-100 dark:bg-neutral-800 relative">
         <img
           src={astraHeroImage}
           alt="Comment Astra protège-t-il la santé mentale ?"
           referrerPolicy="no-referrer"
-          className="w-full h-auto max-h-[520px] object-cover"
+          fetchPriority="high"
+          decoding="async"
+          className="w-full h-full object-cover object-center"
         />
+        <div className="absolute bottom-3.5 left-3.5 bg-black/65 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full shadow-xs">
+          Astra & Bien-être
+        </div>
       </div>
 
       {/* Content */}

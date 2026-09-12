@@ -1,6 +1,23 @@
 import React from 'react';
 import { ArticleItem } from '../data/articles';
 import stanleyAvatar from '../assets/images/stanley_mazile_author_1788742131016.jpg';
+import vibeCodingHero from '../assets/images/vibe_coding_hero_1788638245466.jpg';
+import astraHero from '../assets/images/astra_mental_health_1788636271516.jpg';
+import geminiTranscribeHero from '../assets/images/gemini_transcribe_hero_1788635604741.jpg';
+import travelSearchHero from '../assets/images/travel_search_hero_1788635618448.jpg';
+import pixelHardwareHero from '../assets/images/pixel_hardware_hero_1788635630337.jpg';
+import geminiOmniFlashImg from '../assets/images/gemini_omni_flash_1788743908500.jpg';
+
+const ARTICLE_IMAGES: Record<string, string> = {
+  'vibe-coding-intention': vibeCodingHero,
+  'astra-sante-mentale': astraHero,
+  'gemini-3.5-transcribe': geminiTranscribeHero,
+  'travel-in-search': travelSearchHero,
+  'national-parks': travelSearchHero,
+  'pixel-fall-features': pixelHardwareHero,
+  'pixel-11': pixelHardwareHero,
+  'gemini-omni-1-1-flash': geminiOmniFlashImg,
+};
 
 interface GenericArticleSectionProps {
   article: ArticleItem;
@@ -208,6 +225,24 @@ export const GenericArticleSection: React.FC<GenericArticleSectionProps> = ({
         </div>
       )}
 
+      {/* Hero Image - Google Discover 16:9 format if available */}
+      {ARTICLE_IMAGES[article.id] && (
+        <div className="w-full aspect-[16/9] rounded-[16px] sm:rounded-[20px] overflow-hidden mb-8 border border-[#dadce0] dark:border-[#3c4043] shadow-xs bg-neutral-100 dark:bg-neutral-800 relative">
+          <img
+            src={ARTICLE_IMAGES[article.id]}
+            alt={article.title}
+            referrerPolicy="no-referrer"
+            decoding="async"
+            className="w-full h-full object-cover object-center"
+          />
+          {article.topic && (
+            <div className="absolute bottom-3.5 left-3.5 bg-black/65 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full shadow-xs">
+              {article.topic}
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Main Content with Blue Highlights */}
       <div className="text-[17px] leading-[1.65] text-[#3c4043] dark:text-[#bdc1c6] space-y-6 mb-10">
         {article.fullText ? (
@@ -229,7 +264,7 @@ export const GenericArticleSection: React.FC<GenericArticleSectionProps> = ({
                 key={tag}
                 className="text-xs px-3 py-1 rounded-full bg-[#f1f3f4] dark:bg-[#303134] text-[#5f6368] dark:text-[#9aa0a6] font-medium"
               >
-                #{tag}
+                {tag}
               </span>
             ))}
         </div>

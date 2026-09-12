@@ -82,14 +82,19 @@ export const VibeCodingSection: React.FC<VibeCodingSectionProps> = ({ onShare, o
         </div>
       </div>
 
-      {/* Hero Image */}
-      <div className="w-full rounded-2xl overflow-hidden mb-8 border border-[#dadce0] dark:border-[#3c4043] shadow-xs">
+      {/* Hero Image - format sans border-radius, plein écran sur mobile */}
+      <div className="-mx-5 sm:mx-0 w-[calc(100%+2.5rem)] sm:w-full aspect-[4/3] sm:aspect-[16/9] rounded-none overflow-hidden mb-8 shadow-xs bg-neutral-100 dark:bg-neutral-800 relative">
         <img
           src={vibeCodingHeroImage}
           alt="Le Vibe Coding : L’avenir du développement piloté par l’intention"
           referrerPolicy="no-referrer"
-          className="w-full h-auto max-h-[520px] object-cover"
+          fetchPriority="high"
+          decoding="async"
+          className="w-full h-full object-cover object-center"
         />
+        <div className="absolute bottom-3.5 left-3.5 bg-black/65 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full shadow-xs">
+          IA intelligence artificielle
+        </div>
       </div>
 
       {/* Content */}

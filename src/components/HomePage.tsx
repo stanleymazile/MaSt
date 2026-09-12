@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, ArrowRight, ChevronLeft, ChevronRight, Check } from 'lucide-react';
+import { ChevronDown, ArrowRight, Check, Mail } from 'lucide-react';
 import geminiTranscribeHero from '../assets/images/gemini_transcribe_hero_1788635604741.jpg';
 import travelSearchHero from '../assets/images/travel_search_hero_1788635618448.jpg';
 import pixelHardwareHero from '../assets/images/pixel_hardware_hero_1788635630337.jpg';
@@ -13,45 +13,6 @@ interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavigateToNews }) => {
-  // Carousel state
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [touchStartX, setTouchStartX] = useState<number | null>(null);
-  const carouselItems = [
-    {
-      id: 'vibe-coding-intention',
-      image: vibeCodingHeroImage,
-      bannerText: 'IA',
-      bannerGradient: 'from-[#d2e3fc] to-[#aecbfa]',
-      bannerTextColor: 'text-[#185abc]',
-      category: 'IA / intelligence artificielle',
-      author: 'Stanley Mazile',
-      title: 'Le Vibe Coding : L’avenir du développement piloté par l’intention',
-      desc: 'Le vibe coding représente un changement de paradigme dans la création de logiciels. Plutôt que d’écrire manuellement un code complexe, une approche permet aux humains de se concentrer sur la vision et l’architecture tandis que l’IA génère le code et ajuste les détails.',
-    },
-    {
-      id: 'astra-sante-mentale',
-      image: astraHeroImage,
-      bannerText: 'IA',
-      bannerGradient: 'from-[#d2e3fc] to-[#aecbfa]',
-      bannerTextColor: 'text-[#185abc]',
-      category: 'IA / intelligence artificielle',
-      author: 'Stanley Mazile',
-      title: 'Comment Astra protège-t-il la santé mentale ?',
-      desc: 'GPT-6 Astra intègre plusieurs mécanismes et protocoles de sécurité pour protéger la santé mentale de ses utilisateurs, avec une attention particulière portée aux mineurs.',
-    },
-    {
-      id: 'travel-in-search',
-      image: travelSearchHero,
-      bannerText: 'Travel in Search AI Mode',
-      bannerGradient: 'from-[#c2e7ff] to-[#7fcfff]',
-      bannerTextColor: 'text-[#004a77]',
-      category: 'Search & Travel',
-      author: 'Google Search Team',
-      title: '3 new ways to plan and book travel in Search',
-      desc: 'Our latest upgrades for AI Mode in Search can help you track flight prices, view points or miles rates, and book your dream hotel.',
-    }
-  ];
-
   // Topic filter state
   const [activeFilter, setActiveFilter] = useState('All News');
   const filters = [
@@ -158,30 +119,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavig
 
   const displayedArticles = filteredArticles.slice(0, visibleCount);
 
-  const handleNextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % carouselItems.length);
-  };
-
-  const handlePrevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + carouselItems.length) % carouselItems.length);
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStartX(e.touches[0].clientX);
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX === null) return;
-    const touchEndX = e.changedTouches[0].clientX;
-    const diff = touchStartX - touchEndX;
-    if (diff > 45) {
-      handleNextSlide();
-    } else if (diff < -45) {
-      handlePrevSlide();
-    }
-    setTouchStartX(null);
-  };
-
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (newsletterEmail.trim()) {
@@ -193,251 +130,182 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavig
     }
   };
 
-  const activeItem = carouselItems[currentSlide];
-
   return (
     <div id="home-page-container" className="max-w-[680px] mx-auto px-5 py-5 pb-16 font-sans">
-      {/* 1. Hero Featured Carousel Item (Full Screen on Mobile) */}
+      {/* 1. Hero Featured Article: Vibe Coding - Google Discover Style */}
       <div
-        id="featured-carousel-card"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        className="-mx-5 -mt-5 sm:mx-0 sm:mt-0 h-[calc(100svh-65px)] sm:h-auto min-h-[520px] sm:min-h-0 bg-[#eef4ff] dark:bg-[#1a273b] border-y sm:border border-transparent dark:border-[#3c4043] rounded-none sm:rounded-[24px] overflow-hidden mb-6 flex flex-col justify-between transition-all duration-300 shadow-xs"
+        id="featured-hero-article"
+        className="w-full mb-3.5 group"
       >
-        {/* Banner Image Area */}
-        <div className="w-full h-[46%] sm:h-[220px] min-h-[190px] relative overflow-hidden shrink-0 group bg-[#1a273b]">
+        {/* Banner Image: occupe tout l'espace sur mobile (bord à bord, hauteur immersive) */}
+        <div
+          onClick={() => onNavigateToArticle('vibe-coding-intention')}
+          className="-mx-5 sm:mx-0 -mt-5 sm:mt-0 w-[calc(100%+2.5rem)] sm:w-full h-[52vh] min-h-[300px] max-h-[520px] sm:h-auto sm:min-h-0 sm:max-h-none sm:aspect-[16/9] rounded-none relative overflow-hidden bg-neutral-100 dark:bg-neutral-800 cursor-pointer shadow-xs"
+        >
           <img
-            key={activeItem.id}
-            src={activeItem.image}
-            alt={activeItem.title}
+            src={vibeCodingHeroImage}
+            alt="Le Vibe Coding : L’avenir du développement piloté par l’intention"
             referrerPolicy="no-referrer"
-            className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700 ease-out"
+            decoding="async"
+            fetchPriority="high"
+            className="w-full h-full object-cover object-center transform group-hover:scale-102 transition-transform duration-500 ease-out"
           />
-          {/* Subtle gradient overlay to enhance contrast */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
-
-          {/* Floating Pill on image */}
-          <div className="absolute bottom-3 left-4 sm:bottom-4 sm:left-6 z-10">
-            <span className="inline-flex items-center px-3 py-1 rounded-full bg-black/50 backdrop-blur-md text-white text-xs sm:text-sm font-medium border border-white/20 shadow-xs">
-              {activeItem.bannerText}
-            </span>
-          </div>
-
-          {/* Mobile slide badge */}
-          <div className="absolute top-4 right-4 sm:hidden bg-black/50 backdrop-blur-md text-white text-[11px] font-medium px-2.5 py-1 rounded-full border border-white/10 z-10">
-            {currentSlide + 1} / {carouselItems.length}
+          {/* Étiquette à l'intérieur de l'image en bas à gauche */}
+          <div className="absolute bottom-3 left-3 bg-black/65 backdrop-blur-md text-white text-[11px] sm:text-[12px] font-medium px-3 py-1 rounded-full shadow-xs tracking-wide">
+            IA intelligence artificielle
           </div>
         </div>
 
-        {/* Content Area */}
-        <div className="flex-1 flex flex-col justify-between p-6 sm:p-6 bg-[#eef4ff] dark:bg-[#1a273b]">
-          <div>
-            <div className="flex items-center gap-2 mb-1.5 sm:mb-2 flex-wrap">
-              <span className="text-[13px] font-medium text-[#1a73e8] dark:text-[#8ab4f8]">
-                {activeItem.category}
-              </span>
-              {activeItem.author && (
-                <>
-                  <span className="text-[#dadce0] dark:text-[#5f6368] text-xs">•</span>
-                  <span className="text-[12px] text-[#5f6368] dark:text-[#9aa0a6] font-medium">
-                    Par {activeItem.author}
-                  </span>
-                </>
-              )}
-            </div>
-            <h2 className="font-google-sans text-[22px] xs:text-[25px] sm:text-[24px] font-medium text-[#202124] dark:text-[#f1f3f4] leading-[1.25] mb-2 sm:mb-3">
-              {activeItem.title}
-            </h2>
-            <p className="text-[14px] xs:text-[15px] text-[#5f6368] dark:text-[#bdc1c6] mb-4 sm:mb-5 leading-relaxed line-clamp-3 sm:line-clamp-none">
-              {activeItem.desc}
-            </p>
-          </div>
-
-          <div>
-            {/* CTA & Mobile Carousel Navigation */}
-            <div className="flex items-center justify-between gap-3 mb-4">
-              <button
-                onClick={() => onNavigateToArticle(activeItem.id)}
-                className="inline-flex items-center gap-2 px-5 py-2.5 border border-[#202124] dark:border-[#8ab4f8] rounded-[20px] bg-transparent font-google-sans text-[14px] font-medium text-[#202124] dark:text-[#8ab4f8] hover:bg-[#202124] hover:text-white dark:hover:bg-[#8ab4f8] dark:hover:text-[#202124] transition-colors cursor-pointer"
-              >
-                Lire l'article <span className="text-base">&rarr;</span>
-              </button>
-
-              {/* Mobile Quick Carousel Controls */}
-              <div className="flex sm:hidden items-center gap-2">
-                <button
-                  onClick={handlePrevSlide}
-                  className="w-9 h-9 rounded-full bg-white/90 dark:bg-[#303134] text-[#202124] dark:text-[#e8eaed] flex items-center justify-center cursor-pointer shadow-xs active:scale-95 transition-all"
-                  aria-label="Previous slide"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={handleNextSlide}
-                  className="w-9 h-9 rounded-full bg-white/90 dark:bg-[#303134] text-[#202124] dark:text-[#e8eaed] flex items-center justify-center cursor-pointer shadow-xs active:scale-95 transition-all"
-                  aria-label="Next slide"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-
-            {/* Mobile Slide Progress Indicator */}
-            <div className="sm:hidden w-full h-1 bg-[#d2e3fc] dark:bg-[#3c4043] rounded-full overflow-hidden">
-              <div
-                className="h-full bg-[#1a73e8] dark:bg-[#8ab4f8] rounded-full transition-all duration-300"
-                style={{
-                  width: `${100 / carouselItems.length}%`,
-                  marginLeft: `${(currentSlide * 100) / carouselItems.length}%`,
-                }}
-              />
-            </div>
+        {/* Titre et Date séparés de l'image */}
+        <div className="mt-3.5 px-0.5">
+          <h2
+            onClick={() => onNavigateToArticle('vibe-coding-intention')}
+            className="font-google-sans text-[20px] sm:text-[24px] font-medium text-[#202124] dark:text-[#f1f3f4] leading-[1.3] mb-2 cursor-pointer hover:text-[#1a73e8] dark:hover:text-[#8ab4f8] transition-colors"
+          >
+            Le Vibe Coding : L’avenir du développement piloté par l’intention
+          </h2>
+          <div className="flex items-center gap-2 text-[12px] sm:text-[13px] text-[#5f6368] dark:text-[#9aa0a6] font-normal">
+            <span>5 septembre 2026</span>
           </div>
         </div>
       </div>
 
-      {/* Desktop Carousel Controls */}
-      <div className="hidden sm:flex items-center gap-4 mb-10">
-        <button
-          onClick={handlePrevSlide}
-          className="w-9 h-9 rounded-full bg-[#f1f3f4] hover:bg-[#e8eaed] active:bg-[#dadce0] dark:bg-[#303134] dark:hover:bg-[#3c4043] flex items-center justify-center cursor-pointer transition-colors text-[#202124] dark:text-[#e8eaed] focus:outline-none"
-          aria-label="Previous slide"
-        >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
-        <button
-          onClick={handleNextSlide}
-          className="w-9 h-9 rounded-full bg-[#f1f3f4] hover:bg-[#e8eaed] active:bg-[#dadce0] dark:bg-[#303134] dark:hover:bg-[#3c4043] flex items-center justify-center cursor-pointer transition-colors text-[#202124] dark:text-[#e8eaed] focus:outline-none"
-          aria-label="Next slide"
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
-        <div className="flex-1 h-1 bg-[#e0e0e0] dark:bg-[#3c4043] rounded-[2px] overflow-hidden relative">
-          <div
-            className="h-full bg-[#3c4043] dark:bg-[#8ab4f8] rounded-[2px] transition-all duration-300"
-            style={{
-              width: `${100 / carouselItems.length}%`,
-              marginLeft: `${(currentSlide * 100) / carouselItems.length}%`,
-            }}
-          />
-        </div>
+      {/* Bouton / Barre en gris clair compacte, pas trop longue et centrée au milieu */}
+      <div className="flex justify-center mt-2 mb-3.5">
+        {isSubscribed ? (
+          <div className="inline-flex items-center gap-1.5 bg-[#f1f3f4] dark:bg-[#303134] text-[#137333] dark:text-[#81c995] border border-[#dadce0] dark:border-[#3c4043] rounded-full py-1 px-3.5 text-xs font-medium shadow-2xs animate-in fade-in duration-200">
+            <Check className="w-3.5 h-3.5" />
+            <span>Merci pour votre inscription !</span>
+          </div>
+        ) : (
+          <form
+            onSubmit={handleSubscribe}
+            className="w-full max-w-[270px] sm:max-w-[280px] flex items-center bg-[#f1f3f4] dark:bg-[#303134] border border-[#dadce0] dark:border-[#3c4043] rounded-full p-0.5 shadow-2xs transition-colors focus-within:ring-2 focus-within:ring-[#1a73e8]/30 focus-within:border-[#1a73e8]"
+          >
+            <div className="flex items-center flex-1 pl-2.5 pr-1 min-w-0">
+              <Mail className="w-3.5 h-3.5 text-[#5f6368] dark:text-[#9aa0a6] mr-1.5 shrink-0" />
+              <input
+                type="email"
+                required
+                value={newsletterEmail}
+                onChange={(e) => setNewsletterEmail(e.target.value)}
+                placeholder="E-mail"
+                aria-label="Adresse e-mail"
+                className="w-full bg-transparent text-[12px] text-[#202124] dark:text-[#f1f3f4] placeholder-[#5f6368] dark:placeholder-[#9aa0a6] focus:outline-none py-1"
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-[#202124] dark:bg-[#f1f3f4] text-white dark:text-[#202124] hover:bg-[#3c4043] dark:hover:bg-white text-[11px] font-medium px-3 py-1 rounded-full transition-all shrink-0 cursor-pointer shadow-xs whitespace-nowrap"
+            >
+              S'abonner
+            </button>
+          </form>
+        )}
       </div>
 
       {/* Section 1: Dernières actualités */}
-      <h2 className="font-google-sans text-[24px] font-medium text-[#202124] dark:text-[#f1f3f4] mt-9 mb-5">
+      <h2 className="font-google-sans text-[22px] sm:text-[24px] font-medium text-[#202124] dark:text-[#f1f3f4] mt-4 mb-3">
         Dernières actualités
       </h2>
 
       {/* Actualité 1: Gemini 3.5 Transcribe */}
-      <div className="bg-[#f8f9fa] dark:bg-[#2d2e30] border border-[#dadce0]/60 dark:border-[#3c4043] rounded-[20px] overflow-hidden mb-6 p-4 transition-colors">
-        <div className="w-full h-[200px] rounded-[12px] overflow-hidden mb-4 relative group">
+      <div 
+        onClick={() => onNavigateToArticle('gemini-3.5-transcribe')}
+        className="bg-[#faf7f2] dark:bg-[#282521] border border-[#ebe5dc] dark:border-[#3d3730] rounded-[16px] p-3.5 sm:p-4 mb-3.5 flex items-center justify-between gap-3.5 sm:gap-5 group cursor-pointer hover:bg-[#f4eee4] dark:hover:bg-[#302c26] shadow-xs transition-all"
+      >
+        {/* Titre et Date à gauche */}
+        <div className="flex-1 min-w-0 flex flex-col justify-center">
+          <div className="text-[11px] sm:text-[12px] font-medium text-[#1a73e8] dark:text-[#8ab4f8] mb-1">
+            Gemini models
+          </div>
+          <h3 
+            className="font-google-sans text-[16px] sm:text-[18px] font-medium text-[#202124] dark:text-[#f1f3f4] mb-1.5 leading-[1.3] group-hover:text-[#1a73e8] dark:group-hover:text-[#8ab4f8] transition-colors line-clamp-2"
+          >
+            Introducing Gemini 3.5 Transcribe
+          </h3>
+          <div className="text-[12px] sm:text-[13px] text-[#5f6368] dark:text-[#9aa0a6] font-normal">
+            2 septembre 2026
+          </div>
+        </div>
+
+        {/* Image carrée sans border-radius à droite */}
+        <div className="w-24 h-24 sm:w-28 sm:h-28 aspect-square shrink-0 rounded-none overflow-hidden relative shadow-xs bg-neutral-100 dark:bg-neutral-800">
           <img
             src={geminiTranscribeHero}
             alt="Introducing Gemini 3.5 Transcribe"
             referrerPolicy="no-referrer"
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300 ease-out"
           />
-          <div className="absolute top-3 left-3 bg-[#1a73e8] text-white text-xs font-medium px-3 py-1 rounded-full shadow-xs">
-            Nouveau
-          </div>
         </div>
-        <div className="flex items-center gap-2 mb-1">
-          <span className="text-[13px] font-medium text-[#1a73e8] dark:text-[#8ab4f8] inline-block">
-            Gemini models
-          </span>
-          <span className="text-[#dadce0] dark:text-[#5f6368] text-xs">•</span>
-          <span className="text-[12px] text-[#5f6368] dark:text-[#9aa0a6] font-medium">
-            Par Google DeepMind Team
-          </span>
-        </div>
-        <h3 className="font-google-sans text-[19px] sm:text-[20px] font-medium text-[#202124] dark:text-[#f1f3f4] mb-2 leading-[1.3]">
-          Introducing Gemini 3.5 Transcribe
-        </h3>
-        <p className="text-[14px] text-[#5f6368] dark:text-[#bdc1c6] mb-4 line-clamp-2">
-          Notre modèle speech-to-text le plus intelligent, conçu pour convertir l'audio brut en texte structuré, précis et contextuellement enrichi à travers de multiples langues.
-        </p>
-        <button
-          onClick={() => onNavigateToArticle('gemini-3.5-transcribe')}
-          className="inline-flex items-center gap-2 px-5 py-2.5 border border-[#202124] dark:border-[#8ab4f8] rounded-[20px] bg-transparent font-google-sans text-[14px] font-medium text-[#202124] dark:text-[#8ab4f8] hover:bg-[#202124] hover:text-white dark:hover:bg-[#8ab4f8] dark:hover:text-[#202124] transition-colors cursor-pointer"
-        >
-          Lire l'article <span className="text-base">&rarr;</span>
-        </button>
       </div>
 
       {/* Actualité 2: Gemini Omni 1.1 Flash */}
-      <div className="bg-[#f8f9fa] dark:bg-[#2d2e30] border border-[#dadce0]/60 dark:border-[#3c4043] rounded-[20px] overflow-hidden mb-6 p-4 transition-colors">
-        <div className="w-full h-[200px] rounded-[12px] overflow-hidden mb-4 relative group">
+      <div 
+        onClick={() => onNavigateToArticle('gemini-omni-1-1-flash')}
+        className="bg-[#faf7f2] dark:bg-[#282521] border border-[#ebe5dc] dark:border-[#3d3730] rounded-[16px] p-3.5 sm:p-4 mb-3.5 flex items-center justify-between gap-3.5 sm:gap-5 group cursor-pointer hover:bg-[#f4eee4] dark:hover:bg-[#302c26] shadow-xs transition-all"
+      >
+        {/* Titre et Date à gauche */}
+        <div className="flex-1 min-w-0 flex flex-col justify-center">
+          <div className="text-[11px] sm:text-[12px] font-medium text-[#1a73e8] dark:text-[#8ab4f8] mb-1">
+            Developer Tools
+          </div>
+          <h3 
+            className="font-google-sans text-[16px] sm:text-[18px] font-medium text-[#202124] dark:text-[#f1f3f4] mb-1.5 leading-[1.3] group-hover:text-[#1a73e8] dark:group-hover:text-[#8ab4f8] transition-colors line-clamp-2"
+          >
+            Gemini Omni 1.1 Flash lets you build with more control
+          </h3>
+          <div className="text-[12px] sm:text-[13px] text-[#5f6368] dark:text-[#9aa0a6] font-normal">
+            29 août 2026
+          </div>
+        </div>
+
+        {/* Image carrée sans border-radius à droite */}
+        <div className="w-24 h-24 sm:w-28 sm:h-28 aspect-square shrink-0 rounded-none overflow-hidden relative shadow-xs bg-neutral-100 dark:bg-neutral-800">
           <img
             src={geminiOmniFlashImg}
             alt="Gemini Omni 1.1 Flash lets you build with more control"
             referrerPolicy="no-referrer"
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300 ease-out"
           />
-          <div className="absolute top-3 left-3 bg-[#1a73e8] text-white text-xs font-medium px-3 py-1 rounded-full shadow-xs">
-            Nouveau
-          </div>
         </div>
-        <div className="flex items-center gap-2 mb-1">
-          <span className="text-[13px] font-medium text-[#1a73e8] dark:text-[#8ab4f8] inline-block">
-            Developer Tools
-          </span>
-          <span className="text-[#dadce0] dark:text-[#5f6368] text-xs">•</span>
-          <span className="text-[12px] text-[#5f6368] dark:text-[#9aa0a6] font-medium">
-            Par Anish Nangia & Elisa Fortis
-          </span>
-        </div>
-        <h3 className="font-google-sans text-[19px] sm:text-[20px] font-medium text-[#202124] dark:text-[#f1f3f4] mb-2 leading-[1.3]">
-          Gemini Omni 1.1 Flash lets you build with more control
-        </h3>
-        <p className="text-[14px] text-[#5f6368] dark:text-[#bdc1c6] mb-4 line-clamp-2">
-          Modes à latence inférieure à 100 ms, guidage précis des tokens et streaming multimodal natif pour concevoir des applications et agents interactifs d'avant-garde.
-        </p>
-        <button
-          onClick={() => onNavigateToArticle('gemini-omni-1-1-flash')}
-          className="inline-flex items-center gap-2 px-5 py-2.5 border border-[#202124] dark:border-[#8ab4f8] rounded-[20px] bg-transparent font-google-sans text-[14px] font-medium text-[#202124] dark:text-[#8ab4f8] hover:bg-[#202124] hover:text-white dark:hover:bg-[#8ab4f8] dark:hover:text-[#202124] transition-colors cursor-pointer"
-        >
-          Lire l'article <span className="text-base">&rarr;</span>
-        </button>
       </div>
 
       {/* Actualité 3: National Parks */}
-      <div className="bg-[#f8f9fa] dark:bg-[#2d2e30] border border-[#dadce0]/60 dark:border-[#3c4043] rounded-[20px] overflow-hidden mb-6 p-4 transition-colors">
-        <div className="w-full h-[180px] rounded-[12px] overflow-hidden mb-4 bg-[#e0e0e0] dark:bg-[#3c4043]">
-          <svg className="w-full h-full" viewBox="0 0 400 200" preserveAspectRatio="none">
-            <rect width="100%" height="100%" fill="#edb879" />
-            <path
-              d="M100 180 C 120 80, 200 80, 220 180"
-              stroke="#8c4a16"
-              strokeWidth="30"
-              fill="none"
-              strokeLinecap="round"
-            />
-            {/* Mountain silhouette */}
-            <path d="M220 180 L280 110 L340 180 Z" fill="#d99b59" opacity="0.6" />
-            <circle cx="330" cy="50" r="22" fill="#fff5ea" opacity="0.8" />
-          </svg>
-        </div>
-        <div className="flex items-center gap-2 mb-1">
-          <span className="text-[13px] font-medium text-[#1a73e8] dark:text-[#8ab4f8] inline-block">
+      <div 
+        onClick={() => onNavigateToArticle('national-parks')}
+        className="bg-[#faf7f2] dark:bg-[#282521] border border-[#ebe5dc] dark:border-[#3d3730] rounded-[16px] p-3.5 sm:p-4 mb-3.5 flex items-center justify-between gap-3.5 sm:gap-5 group cursor-pointer hover:bg-[#f4eee4] dark:hover:bg-[#302c26] shadow-xs transition-all"
+      >
+        {/* Titre et Date à gauche */}
+        <div className="flex-1 min-w-0 flex flex-col justify-center">
+          <div className="text-[11px] sm:text-[12px] font-medium text-[#1a73e8] dark:text-[#8ab4f8] mb-1">
             Search & Travel
-          </span>
-          <span className="text-[#dadce0] dark:text-[#5f6368] text-xs">•</span>
-          <span className="text-[12px] text-[#5f6368] dark:text-[#9aa0a6] font-medium">
-            Par Google Maps & Search Team
-          </span>
+          </div>
+          <h3 
+            className="font-google-sans text-[16px] sm:text-[18px] font-medium text-[#202124] dark:text-[#f1f3f4] mb-1.5 leading-[1.3] group-hover:text-[#1a73e8] dark:group-hover:text-[#8ab4f8] transition-colors line-clamp-2"
+          >
+            Celebrate 110 years of national parks with Maps, Search, and Gemini
+          </h3>
+          <div className="text-[12px] sm:text-[13px] text-[#5f6368] dark:text-[#9aa0a6] font-normal">
+            1 septembre 2026
+          </div>
         </div>
-        <h3 className="font-google-sans text-[18px] font-medium text-[#202124] dark:text-[#f1f3f4] mb-2 leading-[1.3]">
-          Celebrate 110 years of national parks with Maps, Search, and Gemini
-        </h3>
-        <p className="text-[14px] text-[#5f6368] dark:text-[#bdc1c6] mb-4 line-clamp-2">
-          Découvrez comment Ask Maps, le mode IA dans la recherche et la vue immersive de Gemini vous aident à explorer sentiers, patrimoine et campings.
-        </p>
-        <button
-          onClick={() => onNavigateToArticle('national-parks')}
-          className="inline-flex items-center gap-2 px-5 py-2.5 border border-[#202124] dark:border-[#8ab4f8] rounded-[20px] bg-transparent font-google-sans text-[14px] font-medium text-[#202124] dark:text-[#8ab4f8] hover:bg-[#202124] hover:text-white dark:hover:bg-[#8ab4f8] dark:hover:text-[#202124] transition-colors cursor-pointer"
-        >
-          Lire l'article <span className="text-base">&rarr;</span>
-        </button>
+
+        {/* Image carrée sans border-radius à droite */}
+        <div className="w-24 h-24 sm:w-28 sm:h-28 aspect-square shrink-0 rounded-none overflow-hidden relative shadow-xs bg-neutral-100 dark:bg-neutral-800">
+          <img
+            src={travelSearchHero}
+            alt="Celebrate 110 years of national parks with Maps, Search, and Gemini"
+            referrerPolicy="no-referrer"
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300 ease-out"
+          />
+        </div>
       </div>
 
       {/* Voir plus d'actualités */}
@@ -458,7 +326,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavig
 
       {/* Hardware Card 1: Pixel */}
       <div className="bg-[#f8f9fa] dark:bg-[#2d2e30] border border-[#dadce0]/60 dark:border-[#3c4043] rounded-[20px] overflow-hidden mb-6 p-4 transition-colors">
-        <div className="w-full h-[180px] rounded-[12px] overflow-hidden mb-4 bg-[#f4b4a6] flex items-center justify-center">
+        <div className="w-full aspect-[16/9] sm:aspect-[2/1] rounded-[14px] sm:rounded-[16px] overflow-hidden mb-4 bg-[#f4b4a6] flex items-center justify-center relative shadow-xs">
           <svg className="w-full h-full" viewBox="0 0 400 200">
             <rect width="100%" height="100%" fill="#f4b4a6" />
             {/* Phone & Watch vector silhouette */}
@@ -484,10 +352,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavig
               Google Pixel
             </text>
           </svg>
+          {/* Étiquette à l'intérieur de l'image en bas à gauche */}
+          <div className="absolute bottom-2.5 left-2.5 bg-black/65 backdrop-blur-md text-white text-[11px] sm:text-[12px] font-medium px-2.5 py-1 rounded-full shadow-xs">
+            Pixel
+          </div>
         </div>
-        <span className="text-[13px] font-medium text-[#5f6368] dark:text-[#9aa0a6] mb-1 inline-block">
-          Pixel
-        </span>
         <h3 className="font-google-sans text-[18px] font-medium text-[#202124] dark:text-[#f1f3f4] mb-2 leading-[1.3]">
           Pixel 11 phones and Pixel Watch 5 are now on shelves
         </h3>
@@ -504,7 +373,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavig
 
       {/* Hardware Card 2: Fitbit Pokémon Sleep */}
       <div className="bg-[#f8f9fa] dark:bg-[#2d2e30] border border-[#dadce0]/60 dark:border-[#3c4043] rounded-[20px] overflow-hidden mb-6 p-4 transition-colors">
-        <div className="w-full h-[180px] rounded-[12px] overflow-hidden mb-4 bg-[#1b2e63] flex items-center justify-center relative">
+        <div className="w-full aspect-[16/9] sm:aspect-[2/1] rounded-[14px] sm:rounded-[16px] overflow-hidden mb-4 bg-[#1b2e63] flex items-center justify-center relative shadow-xs">
           <svg className="w-full h-full" viewBox="0 0 400 200">
             <rect width="100%" height="100%" fill="#1b2e63" />
             <circle cx="300" cy="50" r="24" fill="#f4b400" />
@@ -522,10 +391,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavig
               <text x="50" y="75" textAnchor="middle" fill="#f4b400" fontSize="13" fontWeight="bold" fontFamily="'Google Sans', sans-serif">Zzz... 92%</text>
             </g>
           </svg>
+          {/* Étiquette à l'intérieur de l'image en bas à gauche */}
+          <div className="absolute bottom-2.5 left-2.5 bg-black/65 backdrop-blur-md text-white text-[11px] sm:text-[12px] font-medium px-2.5 py-1 rounded-full shadow-xs">
+            Fitbit
+          </div>
         </div>
-        <span className="text-[13px] font-medium text-[#5f6368] dark:text-[#9aa0a6] mb-1 inline-block">
-          Fitbit
-        </span>
         <h3 className="font-google-sans text-[18px] font-medium text-[#202124] dark:text-[#f1f3f4] mb-2 leading-[1.3]">
           Introducing the Fitbit Air Special Edition Pokémon Sleep
         </h3>
@@ -589,7 +459,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavig
 
       {/* Tip 1: Home decor */}
       <div className="bg-[#f8f9fa] dark:bg-[#2d2e30] border border-[#dadce0]/60 dark:border-[#3c4043] rounded-[20px] overflow-hidden mb-6 p-4 transition-colors">
-        <div className="w-full h-[180px] rounded-[12px] overflow-hidden mb-4 bg-[#d7aefb] flex items-center justify-center">
+        <div className="w-full aspect-[16/9] sm:aspect-[2/1] rounded-[14px] sm:rounded-[16px] overflow-hidden mb-4 bg-[#d7aefb] flex items-center justify-center relative shadow-xs">
           <svg className="w-full h-full" viewBox="0 0 400 200">
             <rect width="100%" height="100%" fill="#d7aefb" />
             {/* Living room lamp + plant minimalist decor */}
@@ -603,10 +473,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavig
               Google Lens & Search
             </text>
           </svg>
+          {/* Étiquette à l'intérieur de l'image en bas à gauche */}
+          <div className="absolute bottom-2.5 left-2.5 bg-black/65 backdrop-blur-md text-white text-[11px] sm:text-[12px] font-medium px-2.5 py-1 rounded-full shadow-xs">
+            Search
+          </div>
         </div>
-        <span className="text-[13px] font-medium text-[#5f6368] dark:text-[#9aa0a6] mb-1 inline-block">
-          Search
-        </span>
         <h3 className="font-google-sans text-[18px] font-medium text-[#202124] dark:text-[#f1f3f4] mb-2 leading-[1.3]">
           5 ways to upgrade your home decor with Google Search
         </h3>
@@ -620,7 +491,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavig
 
       {/* Tip 2: Gemini for macOS */}
       <div className="bg-[#f8f9fa] dark:bg-[#2d2e30] border border-[#dadce0]/60 dark:border-[#3c4043] rounded-[20px] overflow-hidden mb-6 p-4 transition-colors">
-        <div className="w-full h-[180px] rounded-[12px] overflow-hidden mb-4 bg-[#34a853] flex items-center justify-center">
+        <div className="w-full aspect-[16/9] sm:aspect-[2/1] rounded-[14px] sm:rounded-[16px] overflow-hidden mb-4 bg-[#34a853] flex items-center justify-center relative shadow-xs">
           <svg className="w-full h-full" viewBox="0 0 400 200">
             <rect width="100%" height="100%" fill="#34a853" />
             {/* Voice waveform icon */}
@@ -633,10 +504,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavig
               <rect x="90" y="30" width="8" height="20" rx="4" fill="#ffffff" opacity="0.8" />
             </g>
           </svg>
+          {/* Étiquette à l'intérieur de l'image en bas à gauche */}
+          <div className="absolute bottom-2.5 left-2.5 bg-black/65 backdrop-blur-md text-white text-[11px] sm:text-[12px] font-medium px-2.5 py-1 rounded-full shadow-xs">
+            Gemini App
+          </div>
         </div>
-        <span className="text-[13px] font-medium text-[#5f6368] dark:text-[#9aa0a6] mb-1 inline-block">
-          Gemini App
-        </span>
         <h3 className="font-google-sans text-[18px] font-medium text-[#202124] dark:text-[#f1f3f4] mb-2 leading-[1.3]">
           How to use intelligent dictation in Gemini for macOS
         </h3>
@@ -650,7 +522,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavig
 
       {/* Tip 3: SAT prep test */}
       <div className="bg-[#f8f9fa] dark:bg-[#2d2e30] border border-[#dadce0]/60 dark:border-[#3c4043] rounded-[20px] overflow-hidden mb-6 p-4 transition-colors">
-        <div className="w-full h-[180px] rounded-[12px] overflow-hidden mb-4 bg-[#fbbc04] flex items-center justify-center">
+        <div className="w-full aspect-[16/9] sm:aspect-[2/1] rounded-[14px] sm:rounded-[16px] overflow-hidden mb-4 bg-[#fbbc04] flex items-center justify-center relative shadow-xs">
           <svg className="w-full h-full" viewBox="0 0 400 200">
             <rect width="100%" height="100%" fill="#fbbc04" />
             {/* Exam paper & check marks */}
@@ -664,10 +536,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavig
               <rect x="36" y="78" width="40" height="8" rx="4" fill="#dadce0" />
             </g>
           </svg>
+          {/* Étiquette à l'intérieur de l'image en bas à gauche */}
+          <div className="absolute bottom-2.5 left-2.5 bg-black/65 backdrop-blur-md text-white text-[11px] sm:text-[12px] font-medium px-2.5 py-1 rounded-full shadow-xs">
+            Gemini App
+          </div>
         </div>
-        <span className="text-[13px] font-medium text-[#5f6368] dark:text-[#9aa0a6] mb-1 inline-block">
-          Gemini App
-        </span>
         <h3 className="font-google-sans text-[18px] font-medium text-[#202124] dark:text-[#f1f3f4] mb-2 leading-[1.3]">
           Keep your SAT prep on track with practice tests in Gemini
         </h3>

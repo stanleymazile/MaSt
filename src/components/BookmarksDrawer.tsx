@@ -27,22 +27,22 @@ export const BookmarksDrawer: React.FC<BookmarksDrawerProps> = ({
     >
       <div
         id="bookmarks-drawer-panel"
-        className="w-full max-w-md bg-white dark:bg-[#202124] text-[#202124] dark:text-[#f1f3f4] h-full shadow-2xl flex flex-col justify-between border-l border-[#dadce0] dark:border-[#3c4043] animate-in slide-in-from-right duration-200"
+        className="w-full max-w-md bg-[#185abc] text-white h-full shadow-2xl flex flex-col justify-between border-l border-white/20 animate-in slide-in-from-right duration-200"
       >
         {/* Header */}
-        <div className="p-5 sm:p-6 border-b border-[#dadce0] dark:border-[#3c4043] flex items-center justify-between">
+        <div className="p-5 sm:p-6 border-b border-white/20 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-full bg-[#e8f0fe] dark:bg-[#1a3860] flex items-center justify-center text-[#1a73e8] dark:text-[#8ab4f8]">
+            <div className="w-9 h-9 rounded-full bg-[#134896] flex items-center justify-center text-white">
               <Bookmark className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="font-google-sans text-lg font-medium">Articles sauvegardés</h2>
-              <p className="text-xs text-[#5f6368] dark:text-[#9aa0a6]">Synchronisé avec Firebase Firestore</p>
+              <h2 className="font-google-sans text-lg font-medium text-white">Articles sauvegardés</h2>
+              <p className="text-xs text-blue-100/90">Synchronisé avec Firebase Firestore</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full hover:bg-[#f1f3f4] dark:hover:bg-[#303134] text-[#5f6368] dark:text-[#9aa0a6] cursor-pointer transition-colors"
+            className="p-1.5 rounded-full hover:bg-white/15 text-blue-100 hover:text-white cursor-pointer transition-colors"
             aria-label="Fermer"
           >
             <X className="w-5 h-5" />
@@ -53,41 +53,41 @@ export const BookmarksDrawer: React.FC<BookmarksDrawerProps> = ({
         <div className="p-5 sm:p-6 overflow-y-auto flex-1 space-y-6">
           {/* User Profile Card */}
           {user ? (
-            <div className="bg-[#f8f9fa] dark:bg-[#282a2d] rounded-2xl p-4 border border-[#dadce0] dark:border-[#3c4043] flex items-center gap-3">
+            <div className="bg-[#134896] rounded-2xl p-4 border border-white/20 flex items-center gap-3">
               {user.photoURL ? (
                 <img
                   src={user.photoURL}
                   alt={user.displayName || 'Utilisateur'}
                   referrerPolicy="no-referrer"
-                  className="w-12 h-12 rounded-full border border-[#dadce0] dark:border-[#5f6368]"
+                  className="w-12 h-12 rounded-full border border-white/30"
                 />
               ) : (
-                <div className="w-12 h-12 rounded-full bg-[#1a73e8] text-white flex items-center justify-center font-google-sans text-lg font-medium">
+                <div className="w-12 h-12 rounded-full bg-white/20 text-white flex items-center justify-center font-google-sans text-lg font-medium">
                   {user.displayName ? user.displayName.charAt(0).toUpperCase() : user.email?.charAt(0).toUpperCase()}
                 </div>
               )}
               <div className="flex-1 min-w-0">
-                <p className="font-google-sans text-sm font-medium truncate">{user.displayName || 'Utilisateur Google'}</p>
-                <p className="text-xs text-[#5f6368] dark:text-[#9aa0a6] truncate">{user.email}</p>
-                <div className="flex items-center gap-1 mt-1 text-[11px] text-[#137333] dark:text-[#81c995]">
+                <p className="font-google-sans text-sm font-medium text-white truncate">{user.displayName || 'Utilisateur Google'}</p>
+                <p className="text-xs text-blue-100/80 truncate">{user.email}</p>
+                <div className="flex items-center gap-1 mt-1 text-[11px] text-emerald-300">
                   <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
                   <span>Connecté à Firebase</span>
                 </div>
               </div>
             </div>
           ) : (
-            <div className="bg-[#f8f9fa] dark:bg-[#282a2d] rounded-2xl p-5 border border-[#dadce0] dark:border-[#3c4043] text-center">
-              <div className="w-12 h-12 mx-auto rounded-full bg-[#e8f0fe] dark:bg-[#1a3860] flex items-center justify-center text-[#1a73e8] dark:text-[#8ab4f8] mb-3">
+            <div className="bg-[#134896] rounded-2xl p-5 border border-white/20 text-center">
+              <div className="w-12 h-12 mx-auto rounded-full bg-white/10 flex items-center justify-center text-white mb-3">
                 <ShieldCheck className="w-6 h-6" />
               </div>
-              <h3 className="font-google-sans text-base font-medium mb-1">Connexion Firebase</h3>
-              <p className="text-xs text-[#5f6368] dark:text-[#9aa0a6] mb-4">
+              <h3 className="font-google-sans text-base font-medium text-white mb-1">Connexion Firebase</h3>
+              <p className="text-xs text-blue-100/85 mb-4">
                 Connectez-vous avec votre compte Google pour synchroniser vos articles favoris sur Firestore en temps réel.
               </p>
               <button
                 onClick={() => signInWithGoogle()}
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2 bg-[#1a73e8] hover:bg-[#1557b0] text-white px-4 py-2.5 rounded-full font-google-sans text-sm font-medium transition-colors shadow-xs cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 bg-white hover:bg-gray-100 text-[#185abc] px-4 py-2.5 rounded-full font-google-sans text-sm font-semibold transition-colors shadow-xs cursor-pointer"
               >
                 <LogIn className="w-4 h-4" />
                 Se connecter avec Google
@@ -96,7 +96,7 @@ export const BookmarksDrawer: React.FC<BookmarksDrawerProps> = ({
           )}
 
           {authError && (
-            <div className="bg-[#fce8e6] dark:bg-[#3c1e1e] text-[#c5221f] dark:text-[#f28b82] text-xs p-3 rounded-xl flex items-center justify-between">
+            <div className="bg-[#3c1e1e] text-[#f28b82] text-xs p-3 rounded-xl flex items-center justify-between border border-red-500/30">
               <span>{authError}</span>
               <button onClick={clearAuthError} className="underline text-xs ml-2 cursor-pointer">OK</button>
             </div>
@@ -105,13 +105,13 @@ export const BookmarksDrawer: React.FC<BookmarksDrawerProps> = ({
           {/* Bookmarks list */}
           <div>
             <div className="flex items-center justify-between mb-3">
-              <h3 className="font-google-sans text-sm font-medium uppercase tracking-wider text-[#5f6368] dark:text-[#9aa0a6]">
+              <h3 className="font-google-sans text-sm font-medium uppercase tracking-wider text-blue-100/90">
                 Vos favoris ({bookmarks.length})
               </h3>
             </div>
 
             {bookmarks.length === 0 ? (
-              <div className="py-10 text-center text-[#5f6368] dark:text-[#9aa0a6]">
+              <div className="py-10 text-center text-blue-100/80">
                 <Bookmark className="w-8 h-8 mx-auto stroke-1 mb-2 opacity-60" />
                 <p className="text-sm">Aucun article sauvegardé pour le moment.</p>
                 <p className="text-xs mt-1">Cliquez sur l'icône de favori sur n'importe quel article pour l'ajouter ici.</p>
@@ -121,7 +121,7 @@ export const BookmarksDrawer: React.FC<BookmarksDrawerProps> = ({
                 {bookmarks.map((bm) => (
                   <div
                     key={bm.id}
-                    className="p-3.5 rounded-xl border border-[#dadce0] dark:border-[#3c4043] bg-white dark:bg-[#202124] hover:border-[#1a73e8] dark:hover:border-[#8ab4f8] transition-colors flex items-center justify-between gap-3 group"
+                    className="p-3.5 rounded-xl border border-white/20 bg-[#134896] hover:border-white/50 transition-colors flex items-center justify-between gap-3 group"
                   >
                     <button
                       onClick={() => {
@@ -130,10 +130,10 @@ export const BookmarksDrawer: React.FC<BookmarksDrawerProps> = ({
                       }}
                       className="text-left flex-1 min-w-0 cursor-pointer"
                     >
-                      <h4 className="font-google-sans text-sm font-medium text-[#202124] dark:text-[#f1f3f4] group-hover:text-[#1a73e8] dark:group-hover:text-[#8ab4f8] transition-colors truncate">
+                      <h4 className="font-google-sans text-sm font-medium text-white group-hover:text-blue-100 transition-colors truncate">
                         {bm.articleTitle}
                       </h4>
-                      <p className="text-[11px] text-[#5f6368] dark:text-[#9aa0a6] mt-0.5">
+                      <p className="text-[11px] text-blue-100/80 mt-0.5">
                         Ajouté le {new Date(bm.createdAt).toLocaleDateString('fr-FR')}
                       </p>
                     </button>
@@ -143,14 +143,14 @@ export const BookmarksDrawer: React.FC<BookmarksDrawerProps> = ({
                           onNavigateToArticle(bm.articleId);
                           onClose();
                         }}
-                        className="p-1.5 rounded-full hover:bg-[#f1f3f4] dark:hover:bg-[#303134] text-[#1a73e8] dark:text-[#8ab4f8] cursor-pointer"
+                        className="p-1.5 rounded-full hover:bg-white/15 text-blue-100 hover:text-white cursor-pointer"
                         title="Lire l'article"
                       >
                         <ExternalLink className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => toggleBookmark(bm.articleId, bm.articleTitle)}
-                        className="p-1.5 rounded-full hover:bg-[#fce8e6] dark:hover:bg-[#3c1e1e] text-[#5f6368] hover:text-[#d93025] dark:hover:text-[#f28b82] cursor-pointer transition-colors"
+                        className="p-1.5 rounded-full hover:bg-red-500/20 text-blue-200 hover:text-[#f28b82] cursor-pointer transition-colors"
                         title="Retirer des favoris"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -165,12 +165,12 @@ export const BookmarksDrawer: React.FC<BookmarksDrawerProps> = ({
 
         {/* Footer */}
         {user && (
-          <div className="p-4 sm:p-5 border-t border-[#dadce0] dark:border-[#3c4043] bg-[#f8f9fa] dark:bg-[#1e1f21]">
+          <div className="p-4 sm:p-5 border-t border-white/20 bg-[#134896]">
             <button
               onClick={() => {
                 signOut();
               }}
-              className="w-full flex items-center justify-center gap-2 py-2 text-sm text-[#d93025] dark:text-[#f28b82] hover:bg-[#fce8e6] dark:hover:bg-[#3c1e1e] rounded-full transition-colors cursor-pointer font-medium"
+              className="w-full flex items-center justify-center gap-2 py-2 text-sm text-red-200 hover:bg-white/10 rounded-full transition-colors cursor-pointer font-medium"
             >
               <LogOut className="w-4 h-4" />
               Se déconnecter

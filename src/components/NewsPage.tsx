@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import {
   ArrowLeft,
   Search,
@@ -43,14 +43,18 @@ const ARTICLE_IMAGES: Record<string, string> = {
 const THEMATIC_FILTERS = [
   { id: 'all', label: 'Toutes les actualités' },
   { id: 'IA / intelligence artificielle', label: 'IA & Intelligence Artificielle' },
+  { id: 'Innovation', label: 'Innovation' },
+  { id: 'Technologie', label: 'Technologie' },
+  { id: 'Science', label: 'Science' },
+  { id: 'Recherche', label: 'Recherche' },
+  { id: 'Santé mentale', label: 'Santé mentale' },
+  { id: 'Vibe Coding', label: 'Vibe Coding' },
   { id: 'Gemini models', label: 'Gemini models' },
   { id: 'Developer Tools', label: 'Developer Tools' },
   { id: 'Search & Travel', label: 'Search & Travel' },
   { id: 'Android & Mobile', label: 'Android & Mobile' },
   { id: 'Chrome & Web', label: 'Chrome & Web' },
   { id: 'Pixel Hardware', label: 'Pixel Hardware' },
-  { id: 'Innovation', label: 'Innovation' },
-  { id: 'Santé mentale', label: 'Santé mentale' },
 ];
 
 export const NewsPage: React.FC<NewsPageProps> = ({
@@ -63,6 +67,12 @@ export const NewsPage: React.FC<NewsPageProps> = ({
   const [searchQuery, setSearchQuery] = useState<string>('');
   const { toggleBookmark, isBookmarked } = useAuth();
   const filtersContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (initialFilter) {
+      setSelectedTheme(initialFilter);
+    }
+  }, [initialFilter]);
 
   const scrollFilters = (direction: 'left' | 'right') => {
     if (filtersContainerRef.current) {
@@ -98,6 +108,45 @@ export const NewsPage: React.FC<NewsPageProps> = ({
     // Special match for Innovation
     if (lowerTheme === 'innovation') {
       return article.tags?.some((t) => t.toLowerCase().includes('innovation')) || false;
+    }
+
+    // Special match for Technologie
+    if (lowerTheme === 'technologie' || lowerTheme === 'tech') {
+      return (
+        article.tags?.some((t) => t.toLowerCase().includes('technologie')) ||
+        article.topic.toLowerCase().includes('tech') ||
+        false
+      );
+    }
+
+    // Special match for Vibe Coding
+    if (lowerTheme.includes('vibe')) {
+      return (
+        article.id.includes('vibe') ||
+        article.title.toLowerCase().includes('vibe') ||
+        (article.tags && article.tags.some((t) => t.toLowerCase().includes('vibe'))) ||
+        false
+      );
+    }
+
+    // Special match for Science
+    if (lowerTheme.includes('science')) {
+      return (
+        article.title.toLowerCase().includes('science') ||
+        article.excerpt.toLowerCase().includes('scientific') ||
+        (article.tags && article.tags.some((t) => t.toLowerCase().includes('science'))) ||
+        article.id === 'story-gemini-3-7'
+      );
+    }
+
+    // Special match for Recherche
+    if (lowerTheme.includes('recherche') || lowerTheme.includes('research')) {
+      return (
+        article.tags?.some((t) => t.toLowerCase().includes('recherche') || t.toLowerCase().includes('research')) ||
+        article.authorRole?.toLowerCase().includes('recherche') ||
+        article.authorRole?.toLowerCase().includes('research') ||
+        false
+      );
     }
 
     // Special match for Santé mentale
@@ -294,21 +343,23 @@ export const NewsPage: React.FC<NewsPageProps> = ({
             return (
               <article
                 key={article.id}
-                className="bg-[#f8f9fa] dark:bg-[#2d2e30] border border-[#dadce0]/60 dark:border-[#3c4043] rounded-[20px] overflow-hidden p-5 transition-all hover:border-[#1a73e8]/50 dark:hover:border-[#8ab4f8]/50 shadow-xs group"
+                className="bg-[#faf7f2] dark:bg-[#282521] border border-[#ebe5dc] dark:border-[#3d3730] rounded-[20px] overflow-hidden p-5 transition-all hover:border-[#1a73e8]/50 dark:hover:border-[#8ab4f8]/50 shadow-xs group"
               >
-                {/* Visual Banner if available */}
+                {/* Visual Banner if available - Google Discover 16:9 format */}
                 {articleImage && (
                   <div
                     onClick={() => onNavigateToArticle(article.id)}
-                    className="w-full h-[180px] sm:h-[210px] rounded-[14px] overflow-hidden mb-4 relative cursor-pointer"
+                    className="w-full aspect-[16/9] rounded-[16px] overflow-hidden mb-4 relative cursor-pointer shadow-xs bg-neutral-100 dark:bg-neutral-800"
                   >
                     <img
                       src={articleImage}
                       alt={article.title}
                       referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300 ease-out"
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover object-center group-hover:scale-103 transition-transform duration-500 ease-out"
                     />
-                    <div className="absolute top-3 left-3 bg-[#1a73e8] text-white text-xs font-medium px-3 py-1 rounded-full shadow-xs">
+                    <div className="absolute bottom-3 left-3 bg-black/65 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full shadow-xs">
                       {article.topic}
                     </div>
                   </div>
@@ -360,27 +411,14 @@ export const NewsPage: React.FC<NewsPageProps> = ({
                   {article.excerpt}
                 </p>
 
-                {/* Tags */}
-                {article.tags && article.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {article.tags.slice(0, 4).map((tag, idx) => (
-                      <span
-                        key={idx}
-                        className="text-[11px] bg-white dark:bg-[#202124] text-[#5f6368] dark:text-[#9aa0a6] border border-[#dadce0]/60 dark:border-[#3c4043] px-2 py-0.5 rounded-full"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
-
                 {/* Action Buttons: Read article & Bookmark */}
                 <div className="flex items-center justify-between pt-2 border-t border-[#dadce0]/40 dark:border-[#3c4043]/40">
                   <button
                     onClick={() => onNavigateToArticle(article.id)}
-                    className="inline-flex items-center gap-2 px-4 py-2 border border-[#202124] dark:border-[#8ab4f8] rounded-[20px] bg-transparent font-google-sans text-[13px] font-medium text-[#202124] dark:text-[#8ab4f8] hover:bg-[#202124] hover:text-white dark:hover:bg-[#8ab4f8] dark:hover:text-[#202124] transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1.5 font-google-sans text-[13px] font-medium text-[#1a73e8] dark:text-[#8ab4f8] hover:underline bg-transparent cursor-pointer group"
                   >
-                    Lire l'article <ArrowRight className="w-3.5 h-3.5" />
+                    <span>Lire l'article</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </button>
 
                   <button

@@ -210,6 +210,9 @@ export default function App() {
           onSelectLanguage={setSelectedLanguage}
           theme={theme}
           onToggleTheme={toggleTheme}
+          activeTheme={currentView === 'news' ? newsFilter : undefined}
+          onSelectTheme={(themeId) => handleNavigateToNews(themeId)}
+          isHome={currentView === 'home'}
         />
 
         {currentView === 'home' ? (

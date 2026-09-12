@@ -120,19 +120,22 @@ export const AuthorProfilePage: React.FC<AuthorProfilePageProps> = ({
               className="group bg-[#f8f9fa] dark:bg-[#2d2e30] border border-[#dadce0]/80 dark:border-[#3c4043] hover:border-[#1a73e8] dark:hover:border-[#8ab4f8] rounded-2xl p-5 transition-all cursor-pointer shadow-xs hover:shadow-md"
             >
               <div className="flex flex-col sm:flex-row gap-4 items-start">
-                <div className="w-full sm:w-44 h-32 rounded-xl overflow-hidden shrink-0">
+                <div className="w-full aspect-[16/9] sm:w-44 sm:h-32 sm:aspect-auto rounded-xl overflow-hidden shrink-0 bg-neutral-100 dark:bg-neutral-800 shadow-xs relative">
                   <img
                     src={article.image}
                     alt={article.title}
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
                   />
+                  <div className="absolute bottom-2 left-2 bg-black/65 backdrop-blur-md text-white text-[10px] sm:text-[11px] font-medium px-2.5 py-0.5 rounded-full shadow-xs">
+                    {article.tag}
+                  </div>
                 </div>
                 <div className="flex-1">
-                  <div className="flex items-center gap-2 text-xs text-[#1a73e8] dark:text-[#8ab4f8] font-medium mb-1.5">
-                    <span>{article.tag}</span>
-                    <span className="text-[#dadce0] dark:text-[#5f6368]">•</span>
-                    <span className="text-[#5f6368] dark:text-[#9aa0a6]">{article.readTime}</span>
+                  <div className="flex items-center gap-2 text-xs text-[#5f6368] dark:text-[#9aa0a6] font-medium mb-1.5">
+                    <span>{article.readTime}</span>
                   </div>
 
                   <h3 className="font-google-sans text-lg font-medium text-[#202124] dark:text-[#f1f3f4] group-hover:text-[#1a73e8] dark:group-hover:text-[#8ab4f8] transition-colors leading-snug mb-2">

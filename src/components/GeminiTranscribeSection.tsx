@@ -1,6 +1,7 @@
 import React from 'react';
 import { Play } from 'lucide-react';
 import { FleursChart } from './FleursChart';
+import geminiTranscribeHero from '../assets/images/gemini_transcribe_hero_1788635604741.jpg';
 
 interface GeminiTranscribeSectionProps {
   onListenArticle: () => void;
@@ -30,6 +31,21 @@ export const GeminiTranscribeSection: React.FC<GeminiTranscribeSectionProps> = (
       <h1 className="font-google-sans text-[32px] sm:text-[38px] leading-[1.2] font-normal text-[#202124] dark:text-[#f1f3f4] mb-6 tracking-tight">
         Introducing Gemini 3.5 Transcribe
       </h1>
+
+      {/* Hero Image - Google Discover 16:9 format */}
+      <div className="w-full aspect-[16/9] rounded-[16px] sm:rounded-[20px] overflow-hidden mb-8 border border-[#dadce0] dark:border-[#3c4043] shadow-xs bg-neutral-100 dark:bg-neutral-800 relative">
+        <img
+          src={geminiTranscribeHero}
+          alt="Introducing Gemini 3.5 Transcribe"
+          referrerPolicy="no-referrer"
+          fetchPriority="high"
+          decoding="async"
+          className="w-full h-full object-cover object-center"
+        />
+        <div className="absolute bottom-3.5 left-3.5 bg-black/65 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full shadow-xs">
+          Gemini models
+        </div>
+      </div>
 
       <div className="text-[17px] leading-[1.65] text-[#3c4043] dark:text-[#bdc1c6] space-y-6">
         <p>
@@ -106,16 +122,16 @@ export const GeminiTranscribeSection: React.FC<GeminiTranscribeSectionProps> = (
           </li>
         </ul>
 
-        {/* Video / Media Card */}
+        {/* Video / Media Card - 16:9 Google Discover format */}
         <div
           id="transcribe-video-demo-card"
           onClick={onOpenVideoDemo}
-          className="w-full rounded-2xl overflow-hidden my-8 bg-[#202124] relative cursor-pointer group shadow-md"
+          className="w-full aspect-[16/9] rounded-[16px] sm:rounded-[20px] overflow-hidden my-8 bg-[#202124] relative cursor-pointer group shadow-md flex items-center justify-center"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 700 380"
-            className="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity"
+            className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
           >
             <rect width="100%" height="100%" fill="#1a1c1e" />
             <circle cx="350" cy="150" r="54" fill="#9a7b66" opacity="0.8" />
