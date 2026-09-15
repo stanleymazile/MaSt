@@ -11,6 +11,7 @@ export interface NewsThemeItem {
 export const NEWS_THEMES: NewsThemeItem[] = [
   { id: 'all', label: 'Toutes les actualités', shortLabel: 'Tout' },
   { id: 'IA / intelligence artificielle', label: 'IA & Intelligence Artificielle', shortLabel: 'IA' },
+  { id: 'Éducation', label: 'Éducation' },
   { id: 'Innovation', label: 'Innovation' },
   { id: 'Technologie', label: 'Technologie' },
   { id: 'Science', label: 'Science' },

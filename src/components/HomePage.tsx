@@ -12,7 +12,11 @@ interface HomePageProps {
   onOpenNewsletterModal?: () => void;
 }
 
-export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavigateToNews }) => {
+export const HomePage: React.FC<HomePageProps> = ({ 
+  onNavigateToArticle, 
+  onNavigateToNews,
+  onOpenNewsletterModal 
+}) => {
   // Topic filter state
   const [activeFilter, setActiveFilter] = useState('All News');
   const filters = [
@@ -131,7 +135,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavig
   };
 
   return (
-    <div id="home-page-container" className="max-w-[680px] mx-auto px-5 py-5 pb-16 font-sans">
+    <div id="home-page-container" className="max-w-[680px] mx-auto px-4 sm:px-5 py-4 sm:py-5 pb-16 font-sans overflow-x-hidden">
       {/* 1. Hero Featured Article: Vibe Coding - Google Discover Style */}
       <div
         id="featured-hero-article"
@@ -140,7 +144,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavig
         {/* Banner Image: occupe tout l'espace sur mobile (bord à bord, hauteur immersive) */}
         <div
           onClick={() => onNavigateToArticle('vibe-coding-intention')}
-          className="-mx-5 sm:mx-0 -mt-5 sm:mt-0 w-[calc(100%+2.5rem)] sm:w-full h-[52vh] min-h-[300px] max-h-[520px] sm:h-auto sm:min-h-0 sm:max-h-none sm:aspect-[16/9] rounded-none relative overflow-hidden bg-neutral-100 dark:bg-neutral-800 cursor-pointer shadow-xs"
+          className="-mx-4 sm:mx-0 -mt-4 sm:mt-0 w-[calc(100%+2rem)] sm:w-full h-[46vh] min-h-[260px] max-h-[500px] sm:h-auto sm:min-h-0 sm:max-h-none sm:aspect-[16/9] rounded-none relative overflow-hidden bg-neutral-100 dark:bg-neutral-800 cursor-pointer shadow-xs active:opacity-95"
         >
           <img
             src={vibeCodingHeroImage}
@@ -170,38 +174,19 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavig
         </div>
       </div>
 
-      {/* Bouton / Barre en gris clair compacte, pas trop longue et centrée au milieu */}
-      <div className="flex justify-center mt-2 mb-3.5">
-        {isSubscribed ? (
-          <div className="inline-flex items-center gap-1.5 bg-[#f1f3f4] dark:bg-[#303134] text-[#137333] dark:text-[#81c995] border border-[#dadce0] dark:border-[#3c4043] rounded-full py-1 px-3.5 text-xs font-medium shadow-2xs animate-in fade-in duration-200">
-            <Check className="w-3.5 h-3.5" />
-            <span>Merci pour votre inscription !</span>
-          </div>
-        ) : (
-          <form
-            onSubmit={handleSubscribe}
-            className="w-full max-w-[270px] sm:max-w-[280px] flex items-center bg-[#f1f3f4] dark:bg-[#303134] border border-[#dadce0] dark:border-[#3c4043] rounded-full p-0.5 shadow-2xs transition-colors focus-within:ring-2 focus-within:ring-[#1a73e8]/30 focus-within:border-[#1a73e8]"
-          >
-            <div className="flex items-center flex-1 pl-2.5 pr-1 min-w-0">
-              <Mail className="w-3.5 h-3.5 text-[#5f6368] dark:text-[#9aa0a6] mr-1.5 shrink-0" />
-              <input
-                type="email"
-                required
-                value={newsletterEmail}
-                onChange={(e) => setNewsletterEmail(e.target.value)}
-                placeholder="E-mail"
-                aria-label="Adresse e-mail"
-                className="w-full bg-transparent text-[12px] text-[#202124] dark:text-[#f1f3f4] placeholder-[#5f6368] dark:placeholder-[#9aa0a6] focus:outline-none py-1"
-              />
-            </div>
-            <button
-              type="submit"
-              className="bg-[#202124] dark:bg-[#f1f3f4] text-white dark:text-[#202124] hover:bg-[#3c4043] dark:hover:bg-white text-[11px] font-medium px-3 py-1 rounded-full transition-all shrink-0 cursor-pointer shadow-xs whitespace-nowrap"
-            >
-              S'abonner
-            </button>
-          </form>
-        )}
+      {/* Lien vers la fenêtre modale d'inscription à la newsletter (aligné à gauche) */}
+      <div className="mt-1 mb-3.5 text-left">
+        <button
+          onClick={() => onOpenNewsletterModal && onOpenNewsletterModal()}
+          className="group inline-flex items-center gap-2 min-h-[44px] py-1.5 text-[13px] sm:text-[14px] font-medium text-[#1a73e8] dark:text-[#8ab4f8] hover:text-[#1557b0] dark:hover:text-[#aecbfa] transition-colors cursor-pointer active:opacity-70 focus:outline-none"
+          aria-label="Inscrivez-vous à notre newsletter"
+        >
+          <Mail className="w-4 h-4 text-[#1a73e8] dark:text-[#8ab4f8] shrink-0 group-hover:scale-110 transition-transform" />
+          <span className="hover:underline underline-offset-2">
+            Inscrivez-vous à notre newsletter
+          </span>
+          <ArrowRight className="w-3.5 h-3.5 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+        </button>
       </div>
 
       {/* Section 1: Dernières actualités */}
@@ -229,8 +214,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavig
           </div>
         </div>
 
-        {/* Image carrée sans border-radius à droite */}
-        <div className="w-24 h-24 sm:w-28 sm:h-28 aspect-square shrink-0 rounded-none overflow-hidden relative shadow-xs bg-neutral-100 dark:bg-neutral-800">
+        {/* Image carrée sans border-radius à droite (adaptée à tout écran mobile) */}
+        <div className="w-20 h-20 min-[380px]:w-24 min-[380px]:h-24 sm:w-28 sm:h-28 aspect-square shrink-0 rounded-none overflow-hidden relative shadow-xs bg-neutral-100 dark:bg-neutral-800">
           <img
             src={geminiTranscribeHero}
             alt="Introducing Gemini 3.5 Transcribe"
@@ -262,8 +247,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavig
           </div>
         </div>
 
-        {/* Image carrée sans border-radius à droite */}
-        <div className="w-24 h-24 sm:w-28 sm:h-28 aspect-square shrink-0 rounded-none overflow-hidden relative shadow-xs bg-neutral-100 dark:bg-neutral-800">
+        {/* Image carrée sans border-radius à droite (adaptée à tout écran mobile) */}
+        <div className="w-20 h-20 min-[380px]:w-24 min-[380px]:h-24 sm:w-28 sm:h-28 aspect-square shrink-0 rounded-none overflow-hidden relative shadow-xs bg-neutral-100 dark:bg-neutral-800">
           <img
             src={geminiOmniFlashImg}
             alt="Gemini Omni 1.1 Flash lets you build with more control"
@@ -295,8 +280,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavig
           </div>
         </div>
 
-        {/* Image carrée sans border-radius à droite */}
-        <div className="w-24 h-24 sm:w-28 sm:h-28 aspect-square shrink-0 rounded-none overflow-hidden relative shadow-xs bg-neutral-100 dark:bg-neutral-800">
+        {/* Image carrée sans border-radius à droite (adaptée à tout écran mobile) */}
+        <div className="w-20 h-20 min-[380px]:w-24 min-[380px]:h-24 sm:w-28 sm:h-28 aspect-square shrink-0 rounded-none overflow-hidden relative shadow-xs bg-neutral-100 dark:bg-neutral-800">
           <img
             src={travelSearchHero}
             alt="Celebrate 110 years of national parks with Maps, Search, and Gemini"
@@ -312,7 +297,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigateToArticle, onNavig
       <div className="mt-4 mb-2">
         <button
           onClick={() => onNavigateToNews && onNavigateToNews()}
-          className="inline-flex items-center gap-2 font-google-sans text-[15px] font-medium text-[#1a73e8] dark:text-[#8ab4f8] hover:underline cursor-pointer group"
+          className="inline-flex items-center gap-2 min-h-[44px] py-2 font-google-sans text-[15px] font-medium text-[#1a73e8] dark:text-[#8ab4f8] hover:underline cursor-pointer group active:opacity-75"
         >
           <span>Voir plus d'actualités</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

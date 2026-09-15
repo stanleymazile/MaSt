@@ -1,13 +1,21 @@
 import React from 'react';
+import { Bookmark } from 'lucide-react';
 import vibeCodingHeroImage from '../assets/images/vibe_coding_hero_1788638245466.jpg';
 import stanleyAvatar from '../assets/images/stanley_mazile_author_1788742131016.jpg';
 
 interface VibeCodingSectionProps {
   onShare: (title: string) => void;
   onNavigateToAuthor?: () => void;
+  isBookmarked?: boolean;
+  onToggleBookmark?: () => void;
 }
 
-export const VibeCodingSection: React.FC<VibeCodingSectionProps> = ({ onShare, onNavigateToAuthor }) => {
+export const VibeCodingSection: React.FC<VibeCodingSectionProps> = ({
+  onShare,
+  onNavigateToAuthor,
+  isBookmarked,
+  onToggleBookmark,
+}) => {
   const articleTitle = "Le Vibe Coding : L’avenir du développement piloté par l’intention";
 
   const sourcesList = [
@@ -33,6 +41,24 @@ export const VibeCodingSection: React.FC<VibeCodingSectionProps> = ({ onShare, o
           <span>Sep 5, 2026</span>
           <span className="text-[#dadce0] dark:text-[#5f6368]">|</span>
           <span>4 min de lecture</span>
+          {onToggleBookmark && (
+            <>
+              <span className="text-[#dadce0] dark:text-[#5f6368]">|</span>
+              <button
+                id="bookmark-article-vibe-coding-btn"
+                onClick={onToggleBookmark}
+                className={`p-1 rounded-full transition-colors cursor-pointer inline-flex items-center justify-center ${
+                  isBookmarked
+                    ? 'text-[#1a73e8] dark:text-[#8ab4f8] bg-[#e8f0fe] dark:bg-[#1a3860]'
+                    : 'text-[#5f6368] dark:text-[#9aa0a6] hover:text-[#202124] dark:hover:text-[#f1f3f4] hover:bg-[#f1f3f4] dark:hover:bg-[#303134]'
+                }`}
+                title={isBookmarked ? 'Retirer des favoris' : 'Enregistrer'}
+                aria-label={isBookmarked ? 'Retirer des favoris' : 'Enregistrer'}
+              >
+                <Bookmark className={`w-4 h-4 ${isBookmarked ? 'fill-current' : ''}`} />
+              </button>
+            </>
+          )}
         </div>
         <button
           id="share-article-vibe-coding-btn"

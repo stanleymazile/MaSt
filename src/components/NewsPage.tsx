@@ -43,6 +43,7 @@ const ARTICLE_IMAGES: Record<string, string> = {
 const THEMATIC_FILTERS = [
   { id: 'all', label: 'Toutes les actualités' },
   { id: 'IA / intelligence artificielle', label: 'IA & Intelligence Artificielle' },
+  { id: 'Éducation', label: 'Éducation' },
   { id: 'Innovation', label: 'Innovation' },
   { id: 'Technologie', label: 'Technologie' },
   { id: 'Science', label: 'Science' },
@@ -188,7 +189,7 @@ export const NewsPage: React.FC<NewsPageProps> = ({
   }, []);
 
   return (
-    <div className="max-w-[680px] mx-auto px-5 py-6 pb-20">
+    <div className="max-w-[680px] mx-auto px-4 sm:px-5 py-5 sm:py-6 pb-20 overflow-x-hidden">
       {/* Breadcrumbs */}
       <nav
         id="news-breadcrumbs"
@@ -343,7 +344,7 @@ export const NewsPage: React.FC<NewsPageProps> = ({
             return (
               <article
                 key={article.id}
-                className="bg-[#faf7f2] dark:bg-[#282521] border border-[#ebe5dc] dark:border-[#3d3730] rounded-[20px] overflow-hidden p-5 transition-all hover:border-[#1a73e8]/50 dark:hover:border-[#8ab4f8]/50 shadow-xs group"
+                className="bg-[#faf7f2] dark:bg-[#282521] border border-[#ebe5dc] dark:border-[#3d3730] rounded-[18px] sm:rounded-[20px] overflow-hidden p-4 sm:p-5 transition-all hover:border-[#1a73e8]/50 dark:hover:border-[#8ab4f8]/50 shadow-xs group"
               >
                 {/* Visual Banner if available - Google Discover 16:9 format */}
                 {articleImage && (

@@ -16,6 +16,7 @@ export interface ArticleItem {
 export const TOPIC_CATEGORIES = [
   'All Topics',
   'IA / intelligence artificielle',
+  'Éducation',
   'Gemini models',
   'Search & Travel',
   'Developer Tools',
@@ -235,11 +236,28 @@ export const ALL_ARTICLES: ArticleItem[] = [
     ]
   },
   {
+    id: 'ia-education-apprentissage',
+    title: 'L’intelligence artificielle au service de l’éducation et de la pédagogie personnalisée',
+    excerpt: 'Comment les agents conversationnels et les tuteurs intelligents révolutionnent la transmission des savoirs, l’accompagnement des élèves et le travail des enseignants.',
+    topic: 'Éducation',
+    tags: ['Éducation', 'IA / intelligence artificielle', 'Innovation', 'Pédagogie', 'Psychologie'],
+    author: 'Stanley Mazile',
+    authorRole: 'Psychologue et développeur web/mobile',
+    date: 'Sep 6, 2026',
+    readTime: '4 min de lecture',
+    fullText: [
+      "L’intégration de l’intelligence artificielle dans le monde éducatif marque un tournant historique dans les méthodes d’apprentissage. Loin de remplacer l’enseignant ou le formateur, l’IA agit comme un catalyseur cognitif capable de s’adapter au rythme singulier de chaque apprenant.",
+      "1. La personnalisation de l’apprentissage à grande échelle : Chaque élève possède sa propre vitesse d’assimilation et ses points de blocage spécifiques. Grâce aux modèles d'IA générative et de raisonnement pas-à-pas, un tuteur virtuel peut réexpliquer un concept mathématique sous forme d'analogie concrète, proposer des exercices gradués et encourager l'effort continu sans jugement.",
+      "2. Un soutien précieux pour le corps enseignant : La préparation de parcours différenciés, la création de banques d’exercices adaptatifs et l'analyse des difficultés récurrentes d'une classe représentent une charge mentale considérable. Les nouveaux outils d'IA permettent aux professeurs d'automatiser les tâches répétitives pour consacrer davantage de temps à l'écoute, au mentorat et aux interactions humaines.",
+      "3. Éthique, esprit critique et inclusion : Le véritable défi de l'éducation à l'ère de l'IA ne consiste pas seulement à utiliser la technologie, mais à apprendre aux jeunes générations à développer leur pensée critique, à vérifier les sources et à comprendre le fonctionnement des algorithmes pour en devenir les maîtres éclairés."
+    ]
+  },
+  {
     id: 'khan-academy-partnership',
     title: 'Partnering with Khan Academy on building AI tools for classrooms',
     excerpt: 'Empowering educators with personalized tutoring assistants that adapt to each student\'s learning pace and conceptual hurdles.',
-    topic: 'Search & Travel',
-    tags: ['Search & Travel', 'Education', 'AI Mode', 'Productivity'],
+    topic: 'Éducation',
+    tags: ['Éducation', 'Search & Travel', 'Education', 'AI Mode', 'Productivity'],
     author: 'Jam Carter',
     authorRole: 'Head of Technology at Google.org',
     date: 'Aug 18, 2026',

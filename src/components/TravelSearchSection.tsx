@@ -1,11 +1,17 @@
 import React from 'react';
-import { Share2 } from 'lucide-react';
+import { Share2, Bookmark } from 'lucide-react';
 
 interface TravelSearchSectionProps {
   onShare: (title: string) => void;
+  isBookmarked?: boolean;
+  onToggleBookmark?: () => void;
 }
 
-export const TravelSearchSection: React.FC<TravelSearchSectionProps> = ({ onShare }) => {
+export const TravelSearchSection: React.FC<TravelSearchSectionProps> = ({
+  onShare,
+  isBookmarked,
+  onToggleBookmark,
+}) => {
   const articleTitle = "3 new ways to plan and book travel in Search";
 
   return (
@@ -19,6 +25,24 @@ export const TravelSearchSection: React.FC<TravelSearchSectionProps> = ({ onShar
           <span>Aug 27, 2026</span>
           <span className="text-[#dadce0] dark:text-[#5f6368]">|</span>
           <span>4 min read</span>
+          {onToggleBookmark && (
+            <>
+              <span className="text-[#dadce0] dark:text-[#5f6368]">|</span>
+              <button
+                id="bookmark-article-travel-btn"
+                onClick={onToggleBookmark}
+                className={`p-1 rounded-full transition-colors cursor-pointer inline-flex items-center justify-center ${
+                  isBookmarked
+                    ? 'text-[#1a73e8] dark:text-[#8ab4f8] bg-[#e8f0fe] dark:bg-[#1a3860]'
+                    : 'text-[#5f6368] dark:text-[#9aa0a6] hover:text-[#202124] dark:hover:text-[#f1f3f4] hover:bg-[#f1f3f4] dark:hover:bg-[#303134]'
+                }`}
+                title={isBookmarked ? 'Retirer des favoris' : 'Enregistrer'}
+                aria-label={isBookmarked ? 'Retirer des favoris' : 'Enregistrer'}
+              >
+                <Bookmark className={`w-4 h-4 ${isBookmarked ? 'fill-current' : ''}`} />
+              </button>
+            </>
+          )}
         </div>
         <button
           id="share-article-1-btn"

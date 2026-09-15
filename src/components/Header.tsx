@@ -16,6 +16,7 @@ const LANGUAGES = [
 interface HeaderProps {
   onNavigateHome: () => void;
   onOpenNewsletter: () => void;
+  onOpenContact?: () => void;
   onOpenMenu: () => void;
   onOpenBookmarks?: () => void;
   selectedLanguage?: string;
@@ -30,6 +31,7 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({
   onNavigateHome,
   onOpenNewsletter,
+  onOpenContact,
   onOpenMenu,
   onOpenBookmarks,
   selectedLanguage = 'Global (English)',
@@ -266,11 +268,11 @@ export const Header: React.FC<HeaderProps> = ({
               onSelectLanguage={onSelectLanguage}
               theme={theme}
               onToggleTheme={onToggleTheme}
-              onOpenImages={() => {
-                window.open('https://images.google.com', '_blank');
-              }}
-              onOpenRSS={() => {
+              onOpenNewsletter={() => {
                 onOpenNewsletter();
+              }}
+              onOpenContact={() => {
+                onOpenContact?.();
               }}
             />
           </div>

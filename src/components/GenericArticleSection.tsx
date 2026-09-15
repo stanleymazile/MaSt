@@ -1,4 +1,5 @@
 import React from 'react';
+import { Bookmark } from 'lucide-react';
 import { ArticleItem } from '../data/articles';
 import stanleyAvatar from '../assets/images/stanley_mazile_author_1788742131016.jpg';
 import vibeCodingHero from '../assets/images/vibe_coding_hero_1788638245466.jpg';
@@ -24,6 +25,8 @@ interface GenericArticleSectionProps {
   onShare: (title: string) => void;
   onListenArticle?: () => void;
   onNavigateToAuthor?: () => void;
+  isBookmarked?: boolean;
+  onToggleBookmark?: () => void;
 }
 
 // Key Google / technology terms to highlight in blue like in 3 new ways to plan and book travel
@@ -129,6 +132,8 @@ export const GenericArticleSection: React.FC<GenericArticleSectionProps> = ({
   onShare,
   onListenArticle,
   onNavigateToAuthor,
+  isBookmarked,
+  onToggleBookmark,
 }) => {
   const isStanleyAuthor = article.author === 'Stanley Mazile';
   const showAuthor = Boolean(article.author);
@@ -142,11 +147,29 @@ export const GenericArticleSection: React.FC<GenericArticleSectionProps> = ({
       </h1>
 
       {/* Metadata & Share */}
-      <div className="flex justify-between items-center text-sm text-[#5f6368] dark:text-[#9aa0a6] mb-5">
-        <div className="flex items-center gap-2">
+      <div className="flex justify-between items-center text-sm text-[#5f6368] dark:text-[#9aa0a6] mb-5 flex-wrap gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <span>{article.date}</span>
           <span className="text-[#dadce0] dark:text-[#5f6368]">|</span>
           <span>{article.readTime}</span>
+          {onToggleBookmark && (
+            <>
+              <span className="text-[#dadce0] dark:text-[#5f6368]">|</span>
+              <button
+                id={`bookmark-article-${article.id}-btn`}
+                onClick={onToggleBookmark}
+                className={`p-1 rounded-full transition-colors cursor-pointer inline-flex items-center justify-center ${
+                  isBookmarked
+                    ? 'text-[#1a73e8] dark:text-[#8ab4f8] bg-[#e8f0fe] dark:bg-[#1a3860]'
+                    : 'text-[#5f6368] dark:text-[#9aa0a6] hover:text-[#202124] dark:hover:text-[#f1f3f4] hover:bg-[#f1f3f4] dark:hover:bg-[#303134]'
+                }`}
+                title={isBookmarked ? 'Retirer des favoris' : 'Enregistrer'}
+                aria-label={isBookmarked ? 'Retirer des favoris' : 'Enregistrer'}
+              >
+                <Bookmark className={`w-4 h-4 ${isBookmarked ? 'fill-current' : ''}`} />
+              </button>
+            </>
+          )}
           {onListenArticle && (
             <>
               <span className="text-[#dadce0] dark:text-[#5f6368]">|</span>

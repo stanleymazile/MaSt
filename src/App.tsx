@@ -8,6 +8,7 @@ import { VibeCodingSection } from './components/VibeCodingSection';
 import { GenericArticleSection } from './components/GenericArticleSection';
 import { AuthorProfilePage } from './components/AuthorProfilePage';
 import { NewsPage } from './components/NewsPage';
+import { NewsletterModal } from './components/NewsletterModal';
 import { RecommendedForYou } from './components/RecommendedForYou';
 import { NewsletterBox } from './components/NewsletterBox';
 import { Footer } from './components/Footer';
@@ -21,7 +22,6 @@ import { ArticleClaps } from './components/ArticleClaps';
 import { ALL_ARTICLES } from './data/articles';
 import { useSEO } from './hooks/useSEO';
 import { useAuth } from './context/AuthContext';
-import { Bookmark } from 'lucide-react';
 
 export default function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -55,6 +55,10 @@ export default function App() {
 
     if (authorParam === 'stanley-mazile') {
       setCurrentView('author');
+    } else if (viewParam === 'newsletter') {
+      // Si l'utilisateur arrive avec ?view=newsletter, on ouvre directement la modale
+      setIsNewsletterModalOpen(true);
+      setCurrentView('home');
     } else if (viewParam === 'news' || params.get('news') === 'true') {
       setCurrentView('news');
       if (topicParam) setNewsFilter(topicParam);
@@ -76,6 +80,9 @@ export default function App() {
 
       if (authorP === 'stanley-mazile') {
         setCurrentView('author');
+      } else if (viewP === 'newsletter') {
+        setIsNewsletterModalOpen(true);
+        setCurrentView('home');
       } else if (viewP === 'news' || urlParams.get('news') === 'true') {
         setCurrentView('news');
         if (topicP) setNewsFilter(topicP);
@@ -105,6 +112,7 @@ export default function App() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isBookmarksOpen, setIsBookmarksOpen] = useState(false);
+  const [isNewsletterModalOpen, setIsNewsletterModalOpen] = useState(false);
 
   const { toggleBookmark, isBookmarked } = useAuth();
 
@@ -180,12 +188,7 @@ export default function App() {
   };
 
   const handleOpenNewsletter = () => {
-    const el = document.getElementById('newsletter-section');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-      const input = el.querySelector('input');
-      if (input) input.focus();
-    }
+    setIsNewsletterModalOpen(true);
   };
 
   const handleListenArticle = () => {
@@ -204,6 +207,7 @@ export default function App() {
         <Header
           onNavigateHome={handleNavigateHome}
           onOpenNewsletter={handleOpenNewsletter}
+          onOpenContact={() => setIsContactModalOpen(true)}
           onOpenMenu={() => setIsMenuOpen(true)}
           onOpenBookmarks={() => setIsBookmarksOpen(true)}
           selectedLanguage={selectedLanguage}
@@ -221,6 +225,7 @@ export default function App() {
             <HomePage
               onNavigateToArticle={handleNavigateToArticle}
               onNavigateToNews={handleNavigateToNews}
+              onOpenNewsletterModal={handleOpenNewsletter}
             />
           </main>
         ) : currentView === 'author' ? (
@@ -244,7 +249,6 @@ export default function App() {
         ) : (
           /* ARTICLE VIEW */
           <main className="max-w-[680px] mx-auto px-5 py-6 pb-16">
-            {/* Breadcrumbs Navigation & Bookmark Action */}
             {(() => {
               const currentArticle = ALL_ARTICLES.find((a) => a.id === activeArticleId) || ALL_ARTICLES[0];
               const isAstra = activeArticleId === 'astra-sante-mentale';
@@ -263,84 +267,83 @@ export default function App() {
                 : currentArticle.topic;
 
               return (
-                <div className="flex items-center justify-between mb-6 gap-2 flex-wrap">
-                  <nav
-                    id="breadcrumbs-nav"
-                    className="flex items-center gap-2 text-sm font-google-sans text-[#1a73e8] dark:text-[#8ab4f8] flex-wrap"
-                    aria-label="Breadcrumbs"
-                  >
-                    <button
-                      onClick={handleNavigateHome}
-                      className="hover:underline text-[#1a73e8] dark:text-[#8ab4f8] font-medium cursor-pointer"
+                <>
+                  {/* Breadcrumbs Navigation */}
+                  <div className="flex items-center justify-between mb-6 gap-2 flex-wrap">
+                    <nav
+                      id="breadcrumbs-nav"
+                      className="flex items-center gap-2 text-sm font-google-sans text-[#1a73e8] dark:text-[#8ab4f8] flex-wrap"
+                      aria-label="Breadcrumbs"
                     >
-                      Home
-                    </button>
-                    <span className="text-[#5f6368] dark:text-[#9aa0a6] select-none">&rsaquo;</span>
-                    <button
-                      onClick={() => {
-                        if (category === 'Actualités') {
-                          handleNavigateToNews();
-                        } else {
-                          handleNavigateHome();
-                        }
-                      }}
-                      className="hover:underline text-[#1a73e8] dark:text-[#8ab4f8] cursor-pointer"
-                    >
-                      {category}
-                    </button>
-                    <span className="text-[#5f6368] dark:text-[#9aa0a6] select-none">&rsaquo;</span>
-                    <span className="text-[#5f6368] dark:text-[#9aa0a6]">
-                      {subCategory}
-                    </span>
-                  </nav>
+                      <button
+                        onClick={handleNavigateHome}
+                        className="hover:underline text-[#1a73e8] dark:text-[#8ab4f8] font-medium cursor-pointer"
+                      >
+                        Home
+                      </button>
+                      <span className="text-[#5f6368] dark:text-[#9aa0a6] select-none">&rsaquo;</span>
+                      <button
+                        onClick={() => {
+                          if (category === 'Actualités') {
+                            handleNavigateToNews();
+                          } else {
+                            handleNavigateHome();
+                          }
+                        }}
+                        className="hover:underline text-[#1a73e8] dark:text-[#8ab4f8] cursor-pointer"
+                      >
+                        {category}
+                      </button>
+                      <span className="text-[#5f6368] dark:text-[#9aa0a6] select-none">&rsaquo;</span>
+                      <span className="text-[#5f6368] dark:text-[#9aa0a6]">
+                        {subCategory}
+                      </span>
+                    </nav>
+                  </div>
 
-                  {/* Bookmark Button linked to Firebase Firestore */}
-                  <button
-                    onClick={() => toggleBookmark(activeArticleId, currentArticle.title)}
-                    className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border transition-colors cursor-pointer shrink-0 ${
-                      isBookmarked(activeArticleId)
-                        ? 'bg-[#e8f0fe] dark:bg-[#1a3860] text-[#1a73e8] dark:text-[#8ab4f8] border-[#1a73e8]/40'
-                        : 'bg-white dark:bg-[#202124] text-[#5f6368] dark:text-[#9aa0a6] border-[#dadce0] dark:border-[#3c4043] hover:bg-[#f1f3f4] dark:hover:bg-[#303134]'
-                    }`}
-                    title={isBookmarked(activeArticleId) ? 'Retirer des favoris Firestore' : 'Enregistrer dans Firebase Firestore'}
-                  >
-                    <Bookmark className={`w-3.5 h-3.5 ${isBookmarked(activeArticleId) ? 'fill-current' : ''}`} />
-                    <span>{isBookmarked(activeArticleId) ? 'Enregistré' : 'Enregistrer'}</span>
-                  </button>
-                </div>
+                  {/* SINGLE ARTICLE VIEW - Chaque article est affiché seul dans sa propre page */}
+                  <div className="mb-8">
+                    {activeArticleId === 'vibe-coding-intention' ? (
+                      <VibeCodingSection
+                        onShare={handleShare}
+                        onNavigateToAuthor={handleNavigateToAuthor}
+                        isBookmarked={isBookmarked(activeArticleId)}
+                        onToggleBookmark={() => toggleBookmark(activeArticleId, currentArticle.title)}
+                      />
+                    ) : activeArticleId === 'astra-sante-mentale' ? (
+                      <AstraMentalHealthSection
+                        onShare={handleShare}
+                        onNavigateToAuthor={handleNavigateToAuthor}
+                        isBookmarked={isBookmarked(activeArticleId)}
+                        onToggleBookmark={() => toggleBookmark(activeArticleId, currentArticle.title)}
+                      />
+                    ) : activeArticleId === 'travel-in-search' ? (
+                      <TravelSearchSection
+                        onShare={handleShare}
+                        isBookmarked={isBookmarked(activeArticleId)}
+                        onToggleBookmark={() => toggleBookmark(activeArticleId, currentArticle.title)}
+                      />
+                    ) : activeArticleId === 'gemini-3.5-transcribe' ? (
+                      <GeminiTranscribeSection
+                        onListenArticle={handleListenArticle}
+                        onOpenVideoDemo={() => setIsVideoModalOpen(true)}
+                        isBookmarked={isBookmarked(activeArticleId)}
+                        onToggleBookmark={() => toggleBookmark(activeArticleId, currentArticle.title)}
+                      />
+                    ) : (
+                      <GenericArticleSection
+                        article={currentArticle}
+                        onShare={handleShare}
+                        onListenArticle={handleListenArticle}
+                        onNavigateToAuthor={handleNavigateToAuthor}
+                        isBookmarked={isBookmarked(activeArticleId)}
+                        onToggleBookmark={() => toggleBookmark(activeArticleId, currentArticle.title)}
+                      />
+                    )}
+                  </div>
+                </>
               );
             })()}
-
-            {/* SINGLE ARTICLE VIEW - Chaque article est affiché seul dans sa propre page */}
-            <div className="mb-8">
-              {activeArticleId === 'vibe-coding-intention' ? (
-                <VibeCodingSection
-                  onShare={handleShare}
-                  onNavigateToAuthor={handleNavigateToAuthor}
-                />
-              ) : activeArticleId === 'astra-sante-mentale' ? (
-                <AstraMentalHealthSection
-                  onShare={handleShare}
-                  onNavigateToAuthor={handleNavigateToAuthor}
-                />
-              ) : activeArticleId === 'travel-in-search' ? (
-                <TravelSearchSection onShare={handleShare} />
-              ) : activeArticleId === 'gemini-3.5-transcribe' ? (
-                <GeminiTranscribeSection
-                  onListenArticle={handleListenArticle}
-                  onOpenVideoDemo={() => setIsVideoModalOpen(true)}
-                />
-              ) : (
-                <GenericArticleSection
-                  article={
-                    ALL_ARTICLES.find((a) => a.id === activeArticleId) || ALL_ARTICLES[0]
-                  }
-                  onShare={handleShare}
-                  onListenArticle={handleListenArticle}
-                  onNavigateToAuthor={handleNavigateToAuthor}
-                />
-              )}
-            </div>
 
             {/* Real-time Firestore Claps / Recommandations */}
             <ArticleClaps articleId={activeArticleId} />
@@ -415,6 +418,12 @@ export default function App() {
       <ContactModal
         isOpen={isContactModalOpen}
         onClose={() => setIsContactModalOpen(false)}
+      />
+
+      {/* Newsletter Modal Popup */}
+      <NewsletterModal
+        isOpen={isNewsletterModalOpen}
+        onClose={() => setIsNewsletterModalOpen(false)}
       />
     </div>
   );

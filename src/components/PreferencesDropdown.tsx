@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Sun, Moon } from 'lucide-react';
+import { Sun, Moon, Mail, MessageSquare } from 'lucide-react';
 
 interface PreferencesDropdownProps {
   isOpen: boolean;
@@ -8,8 +8,8 @@ interface PreferencesDropdownProps {
   currentLanguage?: string;
   theme?: 'light' | 'dark';
   onToggleTheme?: () => void;
-  onOpenImages?: () => void;
-  onOpenRSS?: () => void;
+  onOpenNewsletter?: () => void;
+  onOpenContact?: () => void;
 }
 
 export const PreferencesDropdown: React.FC<PreferencesDropdownProps> = ({
@@ -19,8 +19,8 @@ export const PreferencesDropdown: React.FC<PreferencesDropdownProps> = ({
   currentLanguage = 'Global (English)',
   theme = 'light',
   onToggleTheme,
-  onOpenImages,
-  onOpenRSS,
+  onOpenNewsletter,
+  onOpenContact,
 }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isLanguageSubmenuOpen, setIsLanguageSubmenuOpen] = useState(false);
@@ -132,40 +132,36 @@ export const PreferencesDropdown: React.FC<PreferencesDropdownProps> = ({
       {/* Section Links */}
       <div className="flex flex-col gap-2">
         <span className="text-[13px] font-medium text-[#3c4043] dark:text-[#9aa0a6]">
-          Links
+          Services & Contact
         </span>
 
-        {/* Images Link */}
+        {/* Newsletter Link */}
         <button
+          id="dropdown-newsletter-btn"
           onClick={() => {
-            onOpenImages?.();
+            onOpenNewsletter?.();
             onClose();
           }}
           className="flex items-center justify-between w-full p-3.5 bg-[#f8f9fa] hover:bg-[#f1f3f4] active:bg-[#e8eaed] dark:bg-[#202124] dark:hover:bg-[#35363a] border-0 rounded-[16px] text-[15px] font-medium text-[#202124] dark:text-[#e8eaed] transition-colors cursor-pointer text-left"
         >
           <div className="flex items-center gap-3">
-            {/* Images Icon */}
-            <svg className="w-5 h-5 fill-current text-[#3c4043] dark:text-[#9aa0a6] shrink-0" viewBox="0 0 24 24">
-              <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
-            </svg>
-            <span>Images</span>
+            <Mail className="w-5 h-5 text-[#1a73e8] dark:text-[#8ab4f8] shrink-0" />
+            <span>Newsletter</span>
           </div>
         </button>
 
-        {/* RSS Feed Link */}
+        {/* Contact Link */}
         <button
+          id="dropdown-contact-btn"
           onClick={() => {
-            onOpenRSS?.();
+            onOpenContact?.();
             onClose();
           }}
           className="flex items-center justify-between w-full p-3.5 bg-[#f8f9fa] hover:bg-[#f1f3f4] active:bg-[#e8eaed] dark:bg-[#202124] dark:hover:bg-[#35363a] border-0 rounded-[16px] text-[15px] font-medium text-[#202124] dark:text-[#e8eaed] transition-colors cursor-pointer text-left"
         >
           <div className="flex items-center gap-3">
-            {/* RSS Feed Icon */}
-            <svg className="w-5 h-5 fill-current text-[#3c4043] dark:text-[#9aa0a6] shrink-0" viewBox="0 0 24 24">
-              <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20 5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18zM4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z" />
-            </svg>
-            <span>RSS feed</span>
+            <MessageSquare className="w-5 h-5 text-[#34a853] dark:text-[#81c995] shrink-0" />
+            <span>Contact</span>
           </div>
         </button>
       </div>

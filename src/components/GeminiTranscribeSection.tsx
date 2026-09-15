@@ -1,31 +1,53 @@
 import React from 'react';
-import { Play } from 'lucide-react';
+import { Play, Bookmark } from 'lucide-react';
 import { FleursChart } from './FleursChart';
 import geminiTranscribeHero from '../assets/images/gemini_transcribe_hero_1788635604741.jpg';
 
 interface GeminiTranscribeSectionProps {
   onListenArticle: () => void;
   onOpenVideoDemo: () => void;
+  isBookmarked?: boolean;
+  onToggleBookmark?: () => void;
 }
 
 export const GeminiTranscribeSection: React.FC<GeminiTranscribeSectionProps> = ({
   onListenArticle,
   onOpenVideoDemo,
+  isBookmarked,
+  onToggleBookmark,
 }) => {
   return (
     <article id="gemini-transcribe-article">
-      {/* Audio Badge */}
-      <button
-        id="listen-to-article-badge"
-        onClick={onListenArticle}
-        className="inline-flex items-center gap-2 bg-[#f1f3f4] dark:bg-[#303134] hover:bg-[#e8eaed] dark:hover:bg-[#3c4043] active:bg-[#dadce0] px-4 py-2 rounded-full text-sm text-[#202124] dark:text-[#f1f3f4] mb-6 cursor-pointer transition-colors group focus:outline-none"
-      >
-        <svg className="w-4 h-4 fill-[#1a73e8] dark:fill-[#8ab4f8] group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
-          <path d="M8 5v14l11-7z" />
-        </svg>
-        <span className="font-medium">Listen to article</span>
-        <span className="text-[#5f6368] dark:text-[#9aa0a6]">• 3:30 minutes</span>
-      </button>
+      {/* Audio Badge & Bookmark */}
+      <div className="flex items-center gap-2 mb-6 flex-wrap">
+        <button
+          id="listen-to-article-badge"
+          onClick={onListenArticle}
+          className="inline-flex items-center gap-2 bg-[#f1f3f4] dark:bg-[#303134] hover:bg-[#e8eaed] dark:hover:bg-[#3c4043] active:bg-[#dadce0] px-4 py-2 rounded-full text-sm text-[#202124] dark:text-[#f1f3f4] cursor-pointer transition-colors group focus:outline-none"
+        >
+          <svg className="w-4 h-4 fill-[#1a73e8] dark:fill-[#8ab4f8] group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+          <span className="font-medium">Listen to article</span>
+          <span className="text-[#5f6368] dark:text-[#9aa0a6]">• 3:30 minutes</span>
+        </button>
+
+        {onToggleBookmark && (
+          <button
+            id="bookmark-article-gemini-btn"
+            onClick={onToggleBookmark}
+            className={`p-2 rounded-full transition-colors cursor-pointer inline-flex items-center justify-center ${
+              isBookmarked
+                ? 'text-[#1a73e8] dark:text-[#8ab4f8] bg-[#e8f0fe] dark:bg-[#1a3860]'
+                : 'text-[#5f6368] dark:text-[#9aa0a6] hover:text-[#202124] dark:hover:text-[#f1f3f4] hover:bg-[#f1f3f4] dark:hover:bg-[#303134]'
+            }`}
+            title={isBookmarked ? 'Retirer des favoris' : 'Enregistrer'}
+            aria-label={isBookmarked ? 'Retirer des favoris' : 'Enregistrer'}
+          >
+            <Bookmark className={`w-4 h-4 ${isBookmarked ? 'fill-current' : ''}`} />
+          </button>
+        )}
+      </div>
 
       {/* Main Title */}
       <h1 className="font-google-sans text-[32px] sm:text-[38px] leading-[1.2] font-normal text-[#202124] dark:text-[#f1f3f4] mb-6 tracking-tight">
