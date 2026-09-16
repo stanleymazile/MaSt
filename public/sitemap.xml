@@ -4,9 +4,17 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://mazilepost.web.app/</loc>
-    <lastmod>2026-09-16T10:00:00+00:00</lastmod>
+    <lastmod>2026-09-16T11:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://mazilepost.web.app/images/MazilePost-og.png</image:loc>
+      <image:title>MazilePost - Google Product &amp; AI Updates</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://mazilepost.web.app/MazilePost-logo-1.svg</image:loc>
+      <image:title>Logo officiel MazilePost</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mazilepost.web.app/?article=gemini-3-8-live</loc>
