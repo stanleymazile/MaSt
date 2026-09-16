@@ -1,5 +1,6 @@
 import React from 'react';
 import { Share2, Bookmark } from 'lucide-react';
+import travelSearchHero from '../assets/images/travel_search_hero_1788635618448.jpg';
 
 interface TravelSearchSectionProps {
   onShare: (title: string) => void;
@@ -57,6 +58,24 @@ export const TravelSearchSection: React.FC<TravelSearchSectionProps> = ({
         </button>
       </div>
 
+      {/* Hero Image - Placé juste avant le résumé (format Google Discover 16:9) */}
+      <div className="mb-6">
+        <div className="w-full aspect-[16/9] rounded-[16px] sm:rounded-[20px] overflow-hidden border border-[#dadce0] dark:border-[#3c4043] shadow-xs bg-neutral-100 dark:bg-neutral-800 relative">
+          <img
+            src={travelSearchHero}
+            alt="3 new ways to plan and book travel in Search"
+            referrerPolicy="no-referrer"
+            fetchPriority="high"
+            decoding="async"
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute bottom-3.5 left-3.5 bg-black/65 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full shadow-xs">
+            Search & Travel
+          </div>
+        </div>
+      </div>
+
+      {/* Excerpt (Résumé de l'article) */}
       <p className="text-[19px] sm:text-[20px] leading-[1.5] text-[#202124] dark:text-[#e8eaed] mb-7 font-normal">
         Our latest upgrades for AI Mode in Search can help you track flight prices, view points or miles rates, and book your dream hotel.
       </p>
@@ -65,111 +84,6 @@ export const TravelSearchSection: React.FC<TravelSearchSectionProps> = ({
       <div className="border-y border-[#dadce0] dark:border-[#3c4043] py-4 mb-8">
         <div className="font-google-sans font-medium text-[#202124] dark:text-[#f1f3f4]">James Byers</div>
         <div className="text-sm text-[#5f6368] dark:text-[#9aa0a6]">Group Product Manager, Search</div>
-      </div>
-
-      {/* Hero Image / Rich SVG Vector Graphics - Google Discover 16:9 format */}
-      <div className="w-full aspect-[16/9] rounded-[16px] sm:rounded-[20px] overflow-hidden mb-8 bg-gradient-to-br from-[#e8f0fe] via-[#f1f5fd] to-white dark:from-[#1a2b47] dark:via-[#202938] dark:to-[#1e2022] p-2 sm:p-4 border border-[#e1eaf9] dark:border-[#3c4043] shadow-xs flex items-center justify-center relative">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 800 450"
-          className="w-full h-full object-contain drop-shadow-sm select-none"
-        >
-          {/* Background and Curves */}
-          <rect width="100%" height="100%" rx="16" fill="#eef4ff" />
-          <path
-            d="M-50,200 Q200,100 400,250 T850,200"
-            stroke="#d0e1fd"
-            strokeWidth="4"
-            strokeDasharray="6 6"
-            fill="none"
-          />
-
-          {/* Plane icon locator */}
-          <g transform="translate(450, 180)">
-            <circle cx="0" cy="0" r="20" fill="#1a73e8" filter="drop-shadow(0 4px 6px rgba(26,115,232,0.3))" />
-            <path d="M-6,-3 L6,-3 L0,8 Z" fill="white" />
-          </g>
-
-          {/* Search Query Bar */}
-          <g filter="drop-shadow(0 4px 12px rgba(0,0,0,0.06))">
-            <rect x="120" y="70" width="560" height="48" rx="24" fill="white" stroke="#e8eaed" />
-            <circle cx="150" cy="94" r="12" fill="#e8f0fe" />
-            <path d="M146 94 L154 94 M150 90 L150 98" stroke="#1a73e8" strokeWidth="2" strokeLinecap="round" />
-            <text x="175" y="99" fontFamily="'Google Sans', 'Roboto', sans-serif" fontSize="14" fill="#3c4043">
-              + help me find some nonstop flights from | <tspan fill="#1a73e8" fontWeight="500">Q AI Mode</tspan>
-            </text>
-            <rect x="535" y="78" width="130" height="32" rx="16" fill="#1a73e8" />
-            <text x="600" y="98" fontFamily="'Google Sans', sans-serif" fontSize="11" fill="white" textAnchor="middle" fontWeight="500">
-              Track flight prices
-            </text>
-          </g>
-
-          {/* Flight Card Result */}
-          <g filter="drop-shadow(0 6px 14px rgba(0,0,0,0.08))">
-            <rect x="140" y="150" width="310" height="150" rx="12" fill="white" stroke="#dadce0" />
-            <rect x="156" y="170" width="278" height="52" rx="8" fill="#f8f9fa" />
-            <text x="170" y="192" fontFamily="'Google Sans', sans-serif" fontSize="12" fontWeight="700" fill="#202124">
-              9:15 AM – 11:17 AM
-            </text>
-            <text x="325" y="192" fontFamily="'Roboto', sans-serif" fontSize="11" fill="#188038" fontWeight="500">
-              Nonstop (2h 02m)
-            </text>
-            <text x="170" y="210" fontFamily="'Google Sans', sans-serif" fontSize="12" fontWeight="700" fill="#1a73e8">
-              22.5K pts + $12
-            </text>
-            <text x="325" y="210" fontFamily="'Roboto', sans-serif" fontSize="11" fill="#5f6368">
-              or $284 cash
-            </text>
-
-            <rect x="156" y="232" width="278" height="52" rx="8" fill="#ffffff" stroke="#f1f3f4" />
-            <text x="170" y="254" fontFamily="'Google Sans', sans-serif" fontSize="12" fontWeight="700" fill="#202124">
-              7:40 AM – 9:39 AM
-            </text>
-            <text x="325" y="254" fontFamily="'Roboto', sans-serif" fontSize="11" fill="#188038" fontWeight="500">
-              Nonstop
-            </text>
-            <text x="170" y="272" fontFamily="'Google Sans', sans-serif" fontSize="12" fontWeight="700" fill="#1a73e8">
-              23K pts + $12
-            </text>
-          </g>
-
-          {/* Price Tracking Graph Box */}
-          <g filter="drop-shadow(0 6px 14px rgba(0,0,0,0.08))">
-            <rect x="480" y="150" width="200" height="110" rx="12" fill="white" stroke="#dadce0" />
-            <text x="496" y="174" fontFamily="'Google Sans', sans-serif" fontSize="11" fontWeight="700" fill="#202124">
-              Price History
-            </text>
-            <text x="615" y="174" fontFamily="'Roboto', sans-serif" fontSize="10" fill="#188038" fontWeight="500">
-              $45 lower
-            </text>
-            <path
-              d="M 496 230 L 530 215 L 560 225 L 610 195 L 660 185"
-              fill="none"
-              stroke="#1a73e8"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-            />
-            <circle cx="660" cy="185" r="4" fill="#1a73e8" />
-          </g>
-
-          {/* Hotel Result Card */}
-          <g filter="drop-shadow(0 6px 14px rgba(0,0,0,0.08))">
-            <rect x="480" y="275" width="200" height="120" rx="12" fill="white" stroke="#dadce0" />
-            <text x="496" y="300" fontFamily="'Google Sans', sans-serif" fontSize="12" fontWeight="700" fill="#202124">
-              4.8 ★★★★★
-            </text>
-            <text x="496" y="320" fontFamily="'Roboto', sans-serif" fontSize="11" fill="#5f6368">
-              4-star boutique hotel
-            </text>
-            <rect x="496" y="340" width="100" height="28" rx="14" fill="#1a73e8" />
-            <text x="546" y="358" fontFamily="'Google Sans', sans-serif" fontSize="11" fill="white" textAnchor="middle" fontWeight="500">
-              Book hotel
-            </text>
-          </g>
-        </svg>
-        <div className="absolute bottom-3.5 left-3.5 bg-black/65 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full shadow-xs">
-          Search & Travel
-        </div>
       </div>
 
       {/* Content */}

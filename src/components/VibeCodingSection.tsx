@@ -1,7 +1,7 @@
 import React from 'react';
 import { Bookmark } from 'lucide-react';
 import vibeCodingHeroImage from '../assets/images/vibe_coding_hero_1788638245466.jpg';
-import stanleyAvatar from '../assets/images/stanley_mazile_author_1788742131016.jpg';
+import stanleyAvatar from '../assets/images/stanley_mazile_author.webp';
 
 interface VibeCodingSectionProps {
   onShare: (title: string) => void;
@@ -73,6 +73,24 @@ export const VibeCodingSection: React.FC<VibeCodingSectionProps> = ({
         </button>
       </div>
 
+      {/* Hero Image - Placé juste avant le résumé (format Google Discover 16:9) */}
+      <div className="mb-6">
+        <div className="w-full aspect-[16/9] rounded-[16px] sm:rounded-[20px] overflow-hidden border border-[#dadce0] dark:border-[#3c4043] shadow-xs bg-neutral-100 dark:bg-neutral-800 relative">
+          <img
+            src={vibeCodingHeroImage}
+            alt="Le Vibe Coding : L’avenir du développement piloté par l’intention"
+            referrerPolicy="no-referrer"
+            fetchPriority="high"
+            decoding="async"
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute bottom-3.5 left-3.5 bg-black/65 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full shadow-xs">
+            IA
+          </div>
+        </div>
+      </div>
+
+      {/* Excerpt (Résumé de l'article) */}
       <p className="text-[19px] sm:text-[20px] leading-[1.5] text-[#202124] dark:text-[#e8eaed] mb-7 font-normal">
         Le <a href="#" className="text-[#1a73e8] dark:text-[#8ab4f8] hover:underline font-medium">vibe coding</a> représente un changement de paradigme dans la création de logiciels. Plutôt que d’écrire manuellement un code complexe, cette approche permet aux humains de se concentrer sur la <a href="#" className="text-[#1a73e8] dark:text-[#8ab4f8] hover:underline font-medium">vision et l’architecture</a> tandis que l’IA génère le code et ajuste les détails en continu.
       </p>
@@ -105,21 +123,6 @@ export const VibeCodingSection: React.FC<VibeCodingSectionProps> = ({
               Psychologue et développeur web/mobile
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Hero Image - format sans border-radius, plein écran sur mobile */}
-      <div className="-mx-5 sm:mx-0 w-[calc(100%+2.5rem)] sm:w-full aspect-[4/3] sm:aspect-[16/9] rounded-none overflow-hidden mb-8 shadow-xs bg-neutral-100 dark:bg-neutral-800 relative">
-        <img
-          src={vibeCodingHeroImage}
-          alt="Le Vibe Coding : L’avenir du développement piloté par l’intention"
-          referrerPolicy="no-referrer"
-          fetchPriority="high"
-          decoding="async"
-          className="w-full h-full object-cover object-center"
-        />
-        <div className="absolute bottom-3.5 left-3.5 bg-black/65 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full shadow-xs">
-          IA intelligence artificielle
         </div>
       </div>
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Bookmark } from 'lucide-react';
 import astraHeroImage from '../assets/images/astra_mental_health_1788636271516.jpg';
-import stanleyAvatar from '../assets/images/stanley_mazile_author_1788742131016.jpg';
+import stanleyAvatar from '../assets/images/stanley_mazile_author.webp';
 
 interface AstraMentalHealthSectionProps {
   onShare: (title: string) => void;
@@ -61,6 +61,24 @@ export const AstraMentalHealthSection: React.FC<AstraMentalHealthSectionProps> =
         </button>
       </div>
 
+      {/* Hero Image - Placé juste avant le résumé (format Google Discover 16:9) */}
+      <div className="mb-6">
+        <div className="w-full aspect-[16/9] rounded-[16px] sm:rounded-[20px] overflow-hidden border border-[#dadce0] dark:border-[#3c4043] shadow-xs bg-neutral-100 dark:bg-neutral-800 relative">
+          <img
+            src={astraHeroImage}
+            alt="Comment Astra protège-t-il la santé mentale ?"
+            referrerPolicy="no-referrer"
+            fetchPriority="high"
+            decoding="async"
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute bottom-3.5 left-3.5 bg-black/65 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full shadow-xs">
+            IA
+          </div>
+        </div>
+      </div>
+
+      {/* Excerpt (Résumé de l'article) */}
       <p className="text-[19px] sm:text-[20px] leading-[1.5] text-[#202124] dark:text-[#e8eaed] mb-7 font-normal">
         Le modèle <a href="#" className="text-[#1a73e8] dark:text-[#8ab4f8] hover:underline font-medium">GPT-6 Astra</a> intègre plusieurs mécanismes et protocoles de sécurité pour protéger la <a href="#" className="text-[#1a73e8] dark:text-[#8ab4f8] hover:underline font-medium">santé mentale</a> de ses utilisateurs, avec une attention particulière portée à la <a href="#" className="text-[#1a73e8] dark:text-[#8ab4f8] hover:underline font-medium">protection des mineurs</a>. Voici les principaux axes identifiés dans les sources :
       </p>
@@ -93,21 +111,6 @@ export const AstraMentalHealthSection: React.FC<AstraMentalHealthSectionProps> =
               Psychologue et développeur web/mobile
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Hero Image - Google Discover 16:9 format */}
-      <div className="w-full aspect-[16/9] rounded-[16px] sm:rounded-[20px] overflow-hidden mb-8 border border-[#dadce0] dark:border-[#3c4043] shadow-xs bg-neutral-100 dark:bg-neutral-800 relative">
-        <img
-          src={astraHeroImage}
-          alt="Comment Astra protège-t-il la santé mentale ?"
-          referrerPolicy="no-referrer"
-          fetchPriority="high"
-          decoding="async"
-          className="w-full h-full object-cover object-center"
-        />
-        <div className="absolute bottom-3.5 left-3.5 bg-black/65 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full shadow-xs">
-          Astra & Bien-être
         </div>
       </div>
 

@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { ChevronDown, ArrowRight, Check, Mail } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, Check, Mail } from 'lucide-react';
 import geminiTranscribeHero from '../assets/images/gemini_transcribe_hero_1788635604741.jpg';
 import travelSearchHero from '../assets/images/travel_search_hero_1788635618448.jpg';
 import pixelHardwareHero from '../assets/images/pixel_hardware_hero_1788635630337.jpg';
 import astraHeroImage from '../assets/images/astra_mental_health_1788636271516.jpg';
 import vibeCodingHeroImage from '../assets/images/vibe_coding_hero_1788638245466.jpg';
 import geminiOmniFlashImg from '../assets/images/gemini_omni_flash_1788743908500.jpg';
+import gemini38LiveOfficialBlog from '../assets/images/gemini_38_live_official_blog.webp';
 interface HomePageProps {
   onNavigateToArticle: (articleId?: string) => void;
   onNavigateToNews?: (filter?: string) => void;
@@ -78,11 +79,11 @@ export const HomePage: React.FC<HomePageProps> = ({
       author: '',
     },
     {
-      id: 'travel-search-update',
-      tags: ['Search', 'Travel', 'AI'],
-      topicCategory: 'Search',
-      title: '3 new ways to plan and book travel in Search',
-      author: 'By James Byers\nGroup Product Manager, Search',
+      id: 'gemini-3-8-live',
+      tags: ['Gemini models', 'IA / intelligence artificielle'],
+      topicCategory: 'All News',
+      title: "Google lance Gemini 3.8 Live : l'intelligence vocale passe à la vitesse supérieure",
+      author: 'Par Stanley Mazile\nPsychologue et développeur web/mobile',
     },
     {
       id: 'khan-academy-partnership',
@@ -115,6 +116,17 @@ export const HomePage: React.FC<HomePageProps> = ({
   ];
 
   const [visibleCount, setVisibleCount] = useState(8);
+  const affiliationsCarouselRef = useRef<HTMLDivElement>(null);
+
+  const scrollAffiliations = (direction: 'left' | 'right') => {
+    if (affiliationsCarouselRef.current) {
+      const scrollAmount = affiliationsCarouselRef.current.clientWidth * 0.85;
+      affiliationsCarouselRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth',
+      });
+    }
+  };
 
   const filteredArticles = allLatestArticles.filter((item) => {
     if (activeFilter === 'All News') return true;
@@ -156,7 +168,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           />
           {/* Étiquette à l'intérieur de l'image en bas à gauche */}
           <div className="absolute bottom-3 left-3 bg-black/65 backdrop-blur-md text-white text-[11px] sm:text-[12px] font-medium px-3 py-1 rounded-full shadow-xs tracking-wide">
-            IA intelligence artificielle
+            IA
           </div>
         </div>
 
@@ -194,31 +206,31 @@ export const HomePage: React.FC<HomePageProps> = ({
         Dernières actualités
       </h2>
 
-      {/* Actualité 1: Gemini 3.5 Transcribe */}
+      {/* Actualité 1: Gemini 3.8 Live */}
       <div 
-        onClick={() => onNavigateToArticle('gemini-3.5-transcribe')}
+        onClick={() => onNavigateToArticle('gemini-3-8-live')}
         className="bg-[#faf7f2] dark:bg-[#282521] border border-[#ebe5dc] dark:border-[#3d3730] rounded-[16px] p-3.5 sm:p-4 mb-3.5 flex items-center justify-between gap-3.5 sm:gap-5 group cursor-pointer hover:bg-[#f4eee4] dark:hover:bg-[#302c26] shadow-xs transition-all"
       >
         {/* Titre et Date à gauche */}
         <div className="flex-1 min-w-0 flex flex-col justify-center">
           <div className="text-[11px] sm:text-[12px] font-medium text-[#1a73e8] dark:text-[#8ab4f8] mb-1">
-            Gemini models
+            IA / Intelligence Artificielle
           </div>
           <h3 
             className="font-google-sans text-[16px] sm:text-[18px] font-medium text-[#202124] dark:text-[#f1f3f4] mb-1.5 leading-[1.3] group-hover:text-[#1a73e8] dark:group-hover:text-[#8ab4f8] transition-colors line-clamp-2"
           >
-            Introducing Gemini 3.5 Transcribe
+            Google lance Gemini 3.8 Live : l'intelligence vocale passe à la vitesse supérieure
           </h3>
           <div className="text-[12px] sm:text-[13px] text-[#5f6368] dark:text-[#9aa0a6] font-normal">
-            2 septembre 2026
+            16 septembre 2026
           </div>
         </div>
 
         {/* Image carrée sans border-radius à droite (adaptée à tout écran mobile) */}
         <div className="w-20 h-20 min-[380px]:w-24 min-[380px]:h-24 sm:w-28 sm:h-28 aspect-square shrink-0 rounded-none overflow-hidden relative shadow-xs bg-neutral-100 dark:bg-neutral-800">
           <img
-            src={geminiTranscribeHero}
-            alt="Introducing Gemini 3.5 Transcribe"
+            src={gemini38LiveOfficialBlog}
+            alt="Google lance Gemini 3.8 Live : l'intelligence vocale passe à la vitesse supérieure"
             referrerPolicy="no-referrer"
             loading="lazy"
             decoding="async"
@@ -304,95 +316,187 @@ export const HomePage: React.FC<HomePageProps> = ({
         </button>
       </div>
 
-      {/* Section 2: Affiliations */}
-      <h2 className="font-google-sans text-[24px] font-medium text-[#202124] dark:text-[#f1f3f4] mt-9 mb-5">
-        Affiliations
-      </h2>
+      {/* Section 2: Affiliations - Carrousel interactif */}
+      <div className="mt-9 mb-7">
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <h2 className="font-google-sans text-[22px] sm:text-[24px] font-medium text-[#202124] dark:text-[#f1f3f4]">
+              Affiliations
+            </h2>
+            <p className="text-[13px] text-[#5f6368] dark:text-[#9aa0a6] mt-0.5">
+              Découvrez nos produits, partenaires et solutions matérielles
+            </p>
+          </div>
 
-      {/* Hardware Card 1: Pixel */}
-      <div className="bg-[#f8f9fa] dark:bg-[#2d2e30] border border-[#dadce0]/60 dark:border-[#3c4043] rounded-[20px] overflow-hidden mb-6 p-4 transition-colors">
-        <div className="w-full aspect-[16/9] sm:aspect-[2/1] rounded-[14px] sm:rounded-[16px] overflow-hidden mb-4 bg-[#f4b4a6] flex items-center justify-center relative shadow-xs">
-          <svg className="w-full h-full" viewBox="0 0 400 200">
-            <rect width="100%" height="100%" fill="#f4b4a6" />
-            {/* Phone & Watch vector silhouette */}
-            <g transform="translate(140, 30)">
-              <rect x="0" y="0" width="70" height="135" rx="14" fill="#ffffff" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.1))" />
-              <rect x="6" y="8" width="58" height="119" rx="8" fill="#202124" />
-              <circle cx="35" cy="18" r="3" fill="#ffffff" />
-            </g>
-            <g transform="translate(230, 60)">
-              <rect x="0" y="-20" width="40" height="115" rx="6" fill="#3c4043" />
-              <circle cx="20" cy="38" r="32" fill="#202124" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.15))" />
-              <circle cx="20" cy="38" r="28" fill="#1a73e8" opacity="0.4" />
-              <text x="20" y="42" textAnchor="middle" fill="#ffffff" fontSize="10" fontFamily="'Google Sans', sans-serif" fontWeight="bold">10:08</text>
-            </g>
-            <text
-              x="50"
-              y="105"
-              fontFamily="'Google Sans', 'Roboto', sans-serif"
-              fontSize="20"
-              fontWeight="bold"
-              fill="#b3402e"
+          {/* Boutons de navigation du carrousel */}
+          <div className="flex items-center gap-1.5 shrink-0">
+            <button
+              onClick={() => scrollAffiliations('left')}
+              className="p-2 rounded-full border border-[#dadce0] dark:border-[#5f6368] text-[#3c4043] dark:text-[#e8eaed] hover:bg-[#f1f3f4] dark:hover:bg-[#303134] transition-colors cursor-pointer active:scale-95"
+              aria-label="Faire défiler vers la gauche"
+              title="Précédent"
             >
-              Google Pixel
-            </text>
-          </svg>
-          {/* Étiquette à l'intérieur de l'image en bas à gauche */}
-          <div className="absolute bottom-2.5 left-2.5 bg-black/65 backdrop-blur-md text-white text-[11px] sm:text-[12px] font-medium px-2.5 py-1 rounded-full shadow-xs">
-            Pixel
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => scrollAffiliations('right')}
+              className="p-2 rounded-full border border-[#dadce0] dark:border-[#5f6368] text-[#3c4043] dark:text-[#e8eaed] hover:bg-[#f1f3f4] dark:hover:bg-[#303134] transition-colors cursor-pointer active:scale-95"
+              aria-label="Faire défiler vers la droite"
+              title="Suivant"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
-        <h3 className="font-google-sans text-[18px] font-medium text-[#202124] dark:text-[#f1f3f4] mb-2 leading-[1.3]">
-          Pixel 11 phones and Pixel Watch 5 are now on shelves
-        </h3>
-        <p className="text-[14px] text-[#5f6368] dark:text-[#bdc1c6] mb-4">
-          Find them at the Google Store and...
-        </p>
-        <button
-          onClick={() => onNavigateToArticle('pixel-11')}
-          className="inline-flex items-center gap-2 px-5 py-2.5 border border-[#202124] dark:border-[#8ab4f8] rounded-[20px] bg-transparent font-google-sans text-[14px] font-medium text-[#202124] dark:text-[#8ab4f8] hover:bg-[#202124] hover:text-white dark:hover:bg-[#8ab4f8] dark:hover:text-[#202124] transition-colors cursor-pointer"
-        >
-          Read article <span className="text-base">&rarr;</span>
-        </button>
-      </div>
 
-      {/* Hardware Card 2: Fitbit Pokémon Sleep */}
-      <div className="bg-[#f8f9fa] dark:bg-[#2d2e30] border border-[#dadce0]/60 dark:border-[#3c4043] rounded-[20px] overflow-hidden mb-6 p-4 transition-colors">
-        <div className="w-full aspect-[16/9] sm:aspect-[2/1] rounded-[14px] sm:rounded-[16px] overflow-hidden mb-4 bg-[#1b2e63] flex items-center justify-center relative shadow-xs">
-          <svg className="w-full h-full" viewBox="0 0 400 200">
-            <rect width="100%" height="100%" fill="#1b2e63" />
-            <circle cx="300" cy="50" r="24" fill="#f4b400" />
-            <circle cx="292" cy="45" r="22" fill="#1b2e63" />
-            {/* Stars */}
-            <circle cx="80" cy="40" r="2" fill="#ffffff" opacity="0.8" />
-            <circle cx="150" cy="80" r="2.5" fill="#ffffff" opacity="0.9" />
-            <circle cx="220" cy="30" r="1.5" fill="#ffffff" opacity="0.7" />
-            <circle cx="350" cy="120" r="2" fill="#ffffff" opacity="0.8" />
-            {/* Fitbit Band Illustration */}
-            <g transform="translate(150, 45)">
-              <rect x="0" y="0" width="100" height="110" rx="20" fill="#29396e" stroke="#3d529a" strokeWidth="2" />
-              <rect x="15" y="15" width="70" height="80" rx="12" fill="#0d1b3e" />
-              <text x="50" y="55" textAnchor="middle" fill="#8ab4f8" fontSize="11" fontFamily="'Google Sans', sans-serif">Fitbit Sleep</text>
-              <text x="50" y="75" textAnchor="middle" fill="#f4b400" fontSize="13" fontWeight="bold" fontFamily="'Google Sans', sans-serif">Zzz... 92%</text>
-            </g>
-          </svg>
-          {/* Étiquette à l'intérieur de l'image en bas à gauche */}
-          <div className="absolute bottom-2.5 left-2.5 bg-black/65 backdrop-blur-md text-white text-[11px] sm:text-[12px] font-medium px-2.5 py-1 rounded-full shadow-xs">
-            Fitbit
+        {/* Conteneur défilable du carrousel */}
+        <div
+          ref={affiliationsCarouselRef}
+          className="flex gap-4 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory scrollbar-none no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 scroll-smooth"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {/* Carte 1 : Google Pixel 11 */}
+          <div className="w-[85%] sm:w-[320px] md:w-[340px] shrink-0 snap-start bg-[#f8f9fa] dark:bg-[#2d2e30] border border-[#dadce0]/60 dark:border-[#3c4043] rounded-[20px] p-4 flex flex-col justify-between transition-all hover:shadow-md">
+            <div>
+              <div className="w-full aspect-[16/9] rounded-[14px] overflow-hidden mb-3.5 bg-[#f4b4a6] flex items-center justify-center relative shadow-xs">
+                <svg className="w-full h-full" viewBox="0 0 400 200">
+                  <rect width="100%" height="100%" fill="#f4b4a6" />
+                  <g transform="translate(140, 30)">
+                    <rect x="0" y="0" width="70" height="135" rx="14" fill="#ffffff" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.1))" />
+                    <rect x="6" y="8" width="58" height="119" rx="8" fill="#202124" />
+                    <circle cx="35" cy="18" r="3" fill="#ffffff" />
+                  </g>
+                  <g transform="translate(230, 60)">
+                    <rect x="0" y="-20" width="40" height="115" rx="6" fill="#3c4043" />
+                    <circle cx="20" cy="38" r="32" fill="#202124" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.15))" />
+                    <circle cx="20" cy="38" r="28" fill="#1a73e8" opacity="0.4" />
+                    <text x="20" y="42" textAnchor="middle" fill="#ffffff" fontSize="10" fontFamily="'Google Sans', sans-serif" fontWeight="bold">10:08</text>
+                  </g>
+                  <text x="50" y="105" fontFamily="'Google Sans', 'Roboto', sans-serif" fontSize="20" fontWeight="bold" fill="#b3402e">
+                    Google Pixel
+                  </text>
+                </svg>
+                <div className="absolute bottom-2.5 left-2.5 bg-black/65 backdrop-blur-md text-white text-[11px] font-medium px-2.5 py-1 rounded-full shadow-xs">
+                  Pixel Hardware
+                </div>
+              </div>
+              <h3 className="font-google-sans text-[17px] font-medium text-[#202124] dark:text-[#f1f3f4] mb-2 leading-[1.3] line-clamp-2">
+                Pixel 11 phones and Pixel Watch 5 are now on shelves
+              </h3>
+              <p className="text-[13px] text-[#5f6368] dark:text-[#bdc1c6] mb-4 line-clamp-2">
+                Find them at the Google Store and explore new AI camera features.
+              </p>
+            </div>
+            <button
+              onClick={() => onNavigateToArticle('pixel-fall-features')}
+              className="inline-flex items-center justify-between w-full px-4 py-2.5 border border-[#202124] dark:border-[#8ab4f8] rounded-[20px] bg-transparent font-google-sans text-[13px] font-medium text-[#202124] dark:text-[#8ab4f8] hover:bg-[#202124] hover:text-white dark:hover:bg-[#8ab4f8] dark:hover:text-[#202124] transition-colors cursor-pointer mt-auto"
+            >
+              <span>Lire l'article</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Carte 2 : Fitbit Pokémon Sleep */}
+          <div className="w-[85%] sm:w-[320px] md:w-[340px] shrink-0 snap-start bg-[#f8f9fa] dark:bg-[#2d2e30] border border-[#dadce0]/60 dark:border-[#3c4043] rounded-[20px] p-4 flex flex-col justify-between transition-all hover:shadow-md">
+            <div>
+              <div className="w-full aspect-[16/9] rounded-[14px] overflow-hidden mb-3.5 bg-[#1b2e63] flex items-center justify-center relative shadow-xs">
+                <svg className="w-full h-full" viewBox="0 0 400 200">
+                  <rect width="100%" height="100%" fill="#1b2e63" />
+                  <circle cx="300" cy="50" r="24" fill="#f4b400" />
+                  <circle cx="292" cy="45" r="22" fill="#1b2e63" />
+                  <circle cx="80" cy="40" r="2" fill="#ffffff" opacity="0.8" />
+                  <circle cx="150" cy="80" r="2.5" fill="#ffffff" opacity="0.9" />
+                  <circle cx="220" cy="30" r="1.5" fill="#ffffff" opacity="0.7" />
+                  <circle cx="350" cy="120" r="2" fill="#ffffff" opacity="0.8" />
+                  <g transform="translate(150, 45)">
+                    <rect x="0" y="0" width="100" height="110" rx="20" fill="#29396e" stroke="#3d529a" strokeWidth="2" />
+                    <rect x="15" y="15" width="70" height="80" rx="12" fill="#0d1b3e" />
+                    <text x="50" y="55" textAnchor="middle" fill="#8ab4f8" fontSize="11" fontFamily="'Google Sans', sans-serif">Fitbit Sleep</text>
+                    <text x="50" y="75" textAnchor="middle" fill="#f4b400" fontSize="13" fontWeight="bold" fontFamily="'Google Sans', sans-serif">Zzz... 92%</text>
+                  </g>
+                </svg>
+                <div className="absolute bottom-2.5 left-2.5 bg-black/65 backdrop-blur-md text-white text-[11px] font-medium px-2.5 py-1 rounded-full shadow-xs">
+                  Fitbit & Santé
+                </div>
+              </div>
+              <h3 className="font-google-sans text-[17px] font-medium text-[#202124] dark:text-[#f1f3f4] mb-2 leading-[1.3] line-clamp-2">
+                Introducing Fitbit Air Special Edition Pokémon Sleep
+              </h3>
+              <p className="text-[13px] text-[#5f6368] dark:text-[#bdc1c6] mb-4 line-clamp-2">
+                Level up your sleep routine with personalized tracking and night insights.
+              </p>
+            </div>
+            <button
+              onClick={() => onNavigateToArticle('astra-sante-mentale')}
+              className="inline-flex items-center justify-between w-full px-4 py-2.5 border border-[#202124] dark:border-[#8ab4f8] rounded-[20px] bg-transparent font-google-sans text-[13px] font-medium text-[#202124] dark:text-[#8ab4f8] hover:bg-[#202124] hover:text-white dark:hover:bg-[#8ab4f8] dark:hover:text-[#202124] transition-colors cursor-pointer mt-auto"
+            >
+              <span>Lire l'article</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Carte 3 : Educa-Psy & Partenariat Éducatif */}
+          <div className="w-[85%] sm:w-[320px] md:w-[340px] shrink-0 snap-start bg-[#f8f9fa] dark:bg-[#2d2e30] border border-[#dadce0]/60 dark:border-[#3c4043] rounded-[20px] p-4 flex flex-col justify-between transition-all hover:shadow-md">
+            <div>
+              <div className="w-full aspect-[16/9] rounded-[14px] overflow-hidden mb-3.5 bg-gradient-to-br from-[#1a73e8] to-[#174ea6] flex items-center justify-center relative shadow-xs p-4">
+                <div className="text-center text-white">
+                  <div className="w-10 h-10 mx-auto rounded-full bg-white/20 flex items-center justify-center mb-2">
+                    <span className="text-xl font-bold font-google-sans">EP</span>
+                  </div>
+                  <div className="font-google-sans font-bold text-[16px] tracking-wide">Educa-Psy & IA</div>
+                  <div className="text-[11px] opacity-85 mt-0.5">Psychologie & Pédagogie</div>
+                </div>
+                <div className="absolute bottom-2.5 left-2.5 bg-black/65 backdrop-blur-md text-white text-[11px] font-medium px-2.5 py-1 rounded-full shadow-xs">
+                  Educa-Psy
+                </div>
+              </div>
+              <h3 className="font-google-sans text-[17px] font-medium text-[#202124] dark:text-[#f1f3f4] mb-2 leading-[1.3] line-clamp-2">
+                Partenariat Educa-Psy : L'IA au service de l'éducation
+              </h3>
+              <p className="text-[13px] text-[#5f6368] dark:text-[#bdc1c6] mb-4 line-clamp-2">
+                Méthodes pédagogiques personnalisées et bien-être cognitif des apprenants.
+              </p>
+            </div>
+            <button
+              onClick={() => onNavigateToArticle('ia-education-apprentissage')}
+              className="inline-flex items-center justify-between w-full px-4 py-2.5 border border-[#202124] dark:border-[#8ab4f8] rounded-[20px] bg-transparent font-google-sans text-[13px] font-medium text-[#202124] dark:text-[#8ab4f8] hover:bg-[#202124] hover:text-white dark:hover:bg-[#8ab4f8] dark:hover:text-[#202124] transition-colors cursor-pointer mt-auto"
+            >
+              <span>Lire l'article</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Carte 4 : NHYSA Solutions & Entreprise */}
+          <div className="w-[85%] sm:w-[320px] md:w-[340px] shrink-0 snap-start bg-[#f8f9fa] dark:bg-[#2d2e30] border border-[#dadce0]/60 dark:border-[#3c4043] rounded-[20px] p-4 flex flex-col justify-between transition-all hover:shadow-md">
+            <div>
+              <div className="w-full aspect-[16/9] rounded-[14px] overflow-hidden mb-3.5 bg-gradient-to-br from-[#137333] to-[#0d5224] flex items-center justify-center relative shadow-xs p-4">
+                <div className="text-center text-white">
+                  <div className="w-10 h-10 mx-auto rounded-full bg-white/20 flex items-center justify-center mb-2">
+                    <span className="text-xl font-bold font-google-sans">NY</span>
+                  </div>
+                  <div className="font-google-sans font-bold text-[16px] tracking-wide">NHYSA Solutions</div>
+                  <div className="text-[11px] opacity-85 mt-0.5">Ingénierie & Transformation</div>
+                </div>
+                <div className="absolute bottom-2.5 left-2.5 bg-black/65 backdrop-blur-md text-white text-[11px] font-medium px-2.5 py-1 rounded-full shadow-xs">
+                  NHYSA
+                </div>
+              </div>
+              <h3 className="font-google-sans text-[17px] font-medium text-[#202124] dark:text-[#f1f3f4] mb-2 leading-[1.3] line-clamp-2">
+                NHYSA : Solutions technologiques et ingénierie logicielle
+              </h3>
+              <p className="text-[13px] text-[#5f6368] dark:text-[#bdc1c6] mb-4 line-clamp-2">
+                Conception d'outils cloud et d'architectures sur-mesure pour les entreprises.
+              </p>
+            </div>
+            <button
+              onClick={() => onNavigateToArticle('vibe-coding-intention')}
+              className="inline-flex items-center justify-between w-full px-4 py-2.5 border border-[#202124] dark:border-[#8ab4f8] rounded-[20px] bg-transparent font-google-sans text-[13px] font-medium text-[#202124] dark:text-[#8ab4f8] hover:bg-[#202124] hover:text-white dark:hover:bg-[#8ab4f8] dark:hover:text-[#202124] transition-colors cursor-pointer mt-auto"
+            >
+              <span>Lire l'article</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
-        <h3 className="font-google-sans text-[18px] font-medium text-[#202124] dark:text-[#f1f3f4] mb-2 leading-[1.3]">
-          Introducing the Fitbit Air Special Edition Pokémon Sleep
-        </h3>
-        <p className="text-[14px] text-[#5f6368] dark:text-[#bdc1c6] mb-4">
-          Level up your sleep routine with...
-        </p>
-        <button
-          onClick={() => onNavigateToArticle('fitbit-pokemon')}
-          className="inline-flex items-center gap-2 px-5 py-2.5 border border-[#202124] dark:border-[#8ab4f8] rounded-[20px] bg-transparent font-google-sans text-[14px] font-medium text-[#202124] dark:text-[#8ab4f8] hover:bg-[#202124] hover:text-white dark:hover:bg-[#8ab4f8] dark:hover:text-[#202124] transition-colors cursor-pointer"
-        >
-          Read article <span className="text-base">&rarr;</span>
-        </button>
       </div>
 
       {/* Newsletter Banner Card */}

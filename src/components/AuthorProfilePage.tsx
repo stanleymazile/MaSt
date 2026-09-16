@@ -1,8 +1,9 @@
 import React from 'react';
 import { ArrowLeft, BookOpen, ExternalLink, Mail, Award, CheckCircle2 } from 'lucide-react';
-import stanleyAvatar from '../assets/images/stanley_mazile_author_1788742131016.jpg';
+import stanleyAvatar from '../assets/images/stanley_mazile_author.webp';
 import vibeCodingHero from '../assets/images/vibe_coding_hero_1788638245466.jpg';
 import astraHero from '../assets/images/astra_mental_health_1788636271516.jpg';
+import gemini38LiveOfficialBlog from '../assets/images/gemini_38_live_official_blog.webp';
 
 interface AuthorProfilePageProps {
   onBack: () => void;
@@ -14,6 +15,16 @@ export const AuthorProfilePage: React.FC<AuthorProfilePageProps> = ({
   onNavigateToArticle,
 }) => {
   const authorArticles = [
+    {
+      id: 'gemini-3-8-live',
+      title: "Google lance Gemini 3.8 Live : l'intelligence vocale passe à la vitesse supérieure",
+      excerpt:
+        "Google vient de dévoiler Gemini 3.8 Live et Gemini 3.8 Live Extended Thinking, ses modèles vocaux les plus avancés à ce jour pour des discussions fluides et la gestion de tâches complexes.",
+      date: '2026',
+      readTime: '3 min de lecture',
+      tag: 'Gemini models',
+      image: gemini38LiveOfficialBlog,
+    },
     {
       id: 'vibe-coding-intention',
       title: 'Le Vibe Coding : L’avenir du développement piloté par l’intention',

@@ -20,6 +20,7 @@ import geminiTranscribeHero from '../assets/images/gemini_transcribe_hero_178863
 import travelSearchHero from '../assets/images/travel_search_hero_1788635618448.jpg';
 import pixelHardwareHero from '../assets/images/pixel_hardware_hero_1788635630337.jpg';
 import geminiOmniFlashImg from '../assets/images/gemini_omni_flash_1788743908500.jpg';
+import gemini38LiveOfficialBlog from '../assets/images/gemini_38_live_official_blog.webp';
 
 interface NewsPageProps {
   onBack: () => void;
@@ -32,12 +33,33 @@ interface NewsPageProps {
 const ARTICLE_IMAGES: Record<string, string> = {
   'vibe-coding-intention': vibeCodingHero,
   'astra-sante-mentale': astraHero,
-  'gemini-3.5-transcribe': geminiTranscribeHero,
+  'gemini-3-8-live': gemini38LiveOfficialBlog,
   'travel-in-search': travelSearchHero,
+  'national-parks': travelSearchHero,
   'pixel-fall-features': pixelHardwareHero,
   'pixel-11': pixelHardwareHero,
+  'pixel-hardware-ai': pixelHardwareHero,
   'gemini-omni-1-1-flash': geminiOmniFlashImg,
+  'limits-gemini-notebook': geminiOmniFlashImg,
+  'android-rambler': geminiTranscribeHero,
+  'chrome-voice-update': geminiTranscribeHero,
+  'gemini-3.5-transcribe': geminiTranscribeHero,
+  'expert-intelligence': gemini38LiveOfficialBlog,
 };
+
+function formatPhotoBadge(topic?: string): string {
+  if (!topic) return '';
+  const lower = topic.toLowerCase().trim();
+  if (
+    lower === 'ia' ||
+    lower === 'ai' ||
+    lower.includes('intelligence artificielle') ||
+    lower.includes('gemini models')
+  ) {
+    return 'IA';
+  }
+  return topic;
+}
 
 // Available thematic filters
 const THEMATIC_FILTERS = [
@@ -361,7 +383,7 @@ export const NewsPage: React.FC<NewsPageProps> = ({
                       className="w-full h-full object-cover object-center group-hover:scale-103 transition-transform duration-500 ease-out"
                     />
                     <div className="absolute bottom-3 left-3 bg-black/65 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full shadow-xs">
-                      {article.topic}
+                      {formatPhotoBadge(article.topic)}
                     </div>
                   </div>
                 )}

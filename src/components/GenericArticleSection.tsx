@@ -1,24 +1,43 @@
 import React from 'react';
 import { Bookmark } from 'lucide-react';
 import { ArticleItem } from '../data/articles';
-import stanleyAvatar from '../assets/images/stanley_mazile_author_1788742131016.jpg';
+import stanleyAvatar from '../assets/images/stanley_mazile_author.webp';
 import vibeCodingHero from '../assets/images/vibe_coding_hero_1788638245466.jpg';
 import astraHero from '../assets/images/astra_mental_health_1788636271516.jpg';
 import geminiTranscribeHero from '../assets/images/gemini_transcribe_hero_1788635604741.jpg';
 import travelSearchHero from '../assets/images/travel_search_hero_1788635618448.jpg';
 import pixelHardwareHero from '../assets/images/pixel_hardware_hero_1788635630337.jpg';
 import geminiOmniFlashImg from '../assets/images/gemini_omni_flash_1788743908500.jpg';
+import gemini38LiveOfficialBlog from '../assets/images/gemini_38_live_official_blog.webp';
 
 const ARTICLE_IMAGES: Record<string, string> = {
   'vibe-coding-intention': vibeCodingHero,
   'astra-sante-mentale': astraHero,
-  'gemini-3.5-transcribe': geminiTranscribeHero,
+  'gemini-3-8-live': gemini38LiveOfficialBlog,
   'travel-in-search': travelSearchHero,
   'national-parks': travelSearchHero,
   'pixel-fall-features': pixelHardwareHero,
   'pixel-11': pixelHardwareHero,
+  'pixel-hardware-ai': pixelHardwareHero,
   'gemini-omni-1-1-flash': geminiOmniFlashImg,
+  'limits-gemini-notebook': geminiOmniFlashImg,
+  'android-rambler': geminiTranscribeHero,
+  'chrome-voice-update': geminiTranscribeHero,
+  'gemini-3.5-transcribe': geminiTranscribeHero,
+  'expert-intelligence': gemini38LiveOfficialBlog,
 };
+
+function getHeroImageForArticle(article: ArticleItem): string {
+  if (ARTICLE_IMAGES[article.id]) {
+    return ARTICLE_IMAGES[article.id];
+  }
+  const t = (article.topic || '').toLowerCase();
+  if (t.includes('travel') || t.includes('search') || t.includes('parks')) return travelSearchHero;
+  if (t.includes('pixel') || t.includes('hardware')) return pixelHardwareHero;
+  if (t.includes('mobile') || t.includes('chrome') || t.includes('android')) return geminiTranscribeHero;
+  if (t.includes('developer') || t.includes('flash')) return geminiOmniFlashImg;
+  return gemini38LiveOfficialBlog;
+}
 
 interface GenericArticleSectionProps {
   article: ArticleItem;
@@ -38,6 +57,8 @@ const DEFAULT_KEY_TERMS = [
   'Google Flights',
   'Google AI Studio',
   'Google Antigravity',
+  'Gemini 3.8 Live Extended Thinking',
+  'Gemini 3.8 Live',
   'Gemini 3.5 Transcribe',
   'Gemini 3.7',
   'Gemini Omni 1.1 Flash',
@@ -65,38 +86,109 @@ const DEFAULT_KEY_TERMS = [
   'multimodal reasoning'
 ];
 
+function parseMarkdownFormatting(text: string, tags: string[] = [], allowLinks: boolean = true): React.ReactNode {
+  // Support markdown bold **...**
+  const boldRegex = /\*\*([^*]+)\*\*/g;
+  if (boldRegex.test(text)) {
+    const parts: React.ReactNode[] = [];
+    let lastIdx = 0;
+    text.replace(boldRegex, (match, boldText, offset) => {
+      if (offset > lastIdx) {
+        parts.push(highlightPlainTerms(text.substring(lastIdx, offset), tags, allowLinks));
+      }
+      parts.push(
+        <strong key={offset} className="font-bold text-[#202124] dark:text-[#f1f3f4]">
+          {highlightPlainTerms(boldText, tags, allowLinks)}
+        </strong>
+      );
+      lastIdx = offset + match.length;
+      return match;
+    });
+    if (lastIdx < text.length) {
+      parts.push(highlightPlainTerms(text.substring(lastIdx), tags, allowLinks));
+    }
+    return parts;
+  }
+  return highlightPlainTerms(text, tags, allowLinks);
+}
+
 function renderTextWithBlueHighlights(text: string, tags: string[] = []): React.ReactNode {
   // Check for markdown links [label](url)
-  const markdownLinkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const markdownLinkRegex = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
   if (markdownLinkRegex.test(text)) {
     const parts: React.ReactNode[] = [];
     let lastIndex = 0;
     text.replace(markdownLinkRegex, (match, label, url, offset) => {
       if (offset > lastIndex) {
-        parts.push(highlightPlainTerms(text.substring(lastIndex, offset), tags));
+        parts.push(parseMarkdownFormatting(text.substring(lastIndex, offset), tags));
       }
       parts.push(
         <a
           key={offset}
-          href={url || '#'}
-          className="text-[#1a73e8] dark:text-[#8ab4f8] hover:underline font-medium"
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[#1a73e8] dark:text-[#8ab4f8] hover:underline font-medium inline-flex items-center gap-1 break-words"
         >
-          {label}
+          <span>{parseMarkdownFormatting(label, tags, false)}</span>
+          <svg className="w-3.5 h-3.5 inline-block opacity-75 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            <polyline points="15 3 21 3 21 9" />
+            <line x1="10" y1="14" x2="21" y2="3" />
+          </svg>
         </a>
       );
       lastIndex = offset + match.length;
       return match;
     });
     if (lastIndex < text.length) {
-      parts.push(highlightPlainTerms(text.substring(lastIndex), tags));
+      parts.push(parseMarkdownFormatting(text.substring(lastIndex), tags));
     }
     return parts;
   }
 
-  return highlightPlainTerms(text, tags);
+  // Also support bare URLs https://...
+  const rawUrlRegex = /(https?:\/\/[^\s]+)/g;
+  if (rawUrlRegex.test(text)) {
+    const parts: React.ReactNode[] = [];
+    let lastIndex = 0;
+    text.replace(rawUrlRegex, (url, offset) => {
+      if (offset > lastIndex) {
+        parts.push(parseMarkdownFormatting(text.substring(lastIndex, offset), tags));
+      }
+      parts.push(
+        <a
+          key={offset}
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[#1a73e8] dark:text-[#8ab4f8] hover:underline font-medium inline-flex items-center gap-1 break-all"
+        >
+          <span>{url}</span>
+          <svg className="w-3.5 h-3.5 inline-block opacity-75 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            <polyline points="15 3 21 3 21 9" />
+            <line x1="10" y1="14" x2="21" y2="3" />
+          </svg>
+        </a>
+      );
+      lastIndex = offset + url.length;
+      return url;
+    });
+    if (lastIndex < text.length) {
+      parts.push(parseMarkdownFormatting(text.substring(lastIndex), tags));
+    }
+    return parts;
+  }
+
+  return parseMarkdownFormatting(text, tags);
 }
 
-function highlightPlainTerms(text: string, tags: string[] = []): React.ReactNode {
+function highlightPlainTerms(text: string, tags: string[] = [], allowLinks: boolean = true): React.ReactNode {
+  if (!allowLinks) {
+    return text;
+  }
+
   const candidateTerms = Array.from(
     new Set([
       ...DEFAULT_KEY_TERMS,
@@ -117,6 +209,7 @@ function highlightPlainTerms(text: string, tags: string[] = []): React.ReactNode
         <a
           key={i}
           href="#"
+          onClick={(e) => e.preventDefault()}
           className="text-[#1a73e8] dark:text-[#8ab4f8] hover:underline font-medium"
         >
           {part}
@@ -125,6 +218,20 @@ function highlightPlainTerms(text: string, tags: string[] = []): React.ReactNode
     }
     return part;
   });
+}
+
+function formatPhotoBadge(topic?: string): string {
+  if (!topic) return '';
+  const lower = topic.toLowerCase().trim();
+  if (
+    lower === 'ia' ||
+    lower === 'ai' ||
+    lower.includes('intelligence artificielle') ||
+    lower.includes('gemini models')
+  ) {
+    return 'IA';
+  }
+  return topic;
 }
 
 export const GenericArticleSection: React.FC<GenericArticleSectionProps> = ({
@@ -137,7 +244,12 @@ export const GenericArticleSection: React.FC<GenericArticleSectionProps> = ({
 }) => {
   const isStanleyAuthor = article.author === 'Stanley Mazile';
   const showAuthor = Boolean(article.author);
-  const showTopic = article.topic && article.topic !== 'IA / intelligence artificielle';
+  const showTopic =
+    article.topic && !article.topic.toLowerCase().includes('intelligence artificielle');
+
+  const bodyParagraphs = article.fullText
+    ? article.fullText.filter((p, idx) => idx !== 0 || p.trim() !== article.excerpt.trim())
+    : null;
 
   return (
     <article id={`article-${article.id}`}>
@@ -170,7 +282,7 @@ export const GenericArticleSection: React.FC<GenericArticleSectionProps> = ({
               </button>
             </>
           )}
-          {onListenArticle && (
+          {onListenArticle && article.id !== 'gemini-3-8-live' && (
             <>
               <span className="text-[#dadce0] dark:text-[#5f6368]">|</span>
               <button
@@ -197,7 +309,54 @@ export const GenericArticleSection: React.FC<GenericArticleSectionProps> = ({
         </button>
       </div>
 
-      {/* Excerpt */}
+      {/* Hero Image - Placé juste avant le résumé (format Google Discover 16:9) */}
+      {(() => {
+        const heroImg = getHeroImageForArticle(article);
+        if (!heroImg) return null;
+        return (
+          <div className="mb-6">
+            <div className="w-full aspect-[16/9] rounded-[16px] sm:rounded-[20px] overflow-hidden border border-[#dadce0] dark:border-[#3c4043] shadow-xs bg-neutral-100 dark:bg-neutral-800 relative">
+              <img
+                src={heroImg}
+                alt={article.title}
+                referrerPolicy="no-referrer"
+                decoding="async"
+                className="w-full h-full object-cover object-center"
+              />
+              {article.topic && (
+                <div className="absolute bottom-3.5 left-3.5 bg-black/65 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full shadow-xs">
+                  {formatPhotoBadge(article.topic)}
+                </div>
+              )}
+            </div>
+            {article.id === 'gemini-3-8-live' ? (
+              <div className="mt-2 text-xs text-[#5f6368] dark:text-[#9aa0a6] text-left flex items-center justify-between flex-wrap gap-1.5">
+                <span>
+                  Crédit photo et illustration : © Google LLC via{' '}
+                  <a
+                    href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-live-gemini-3-8-live-extended-thinking/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#1a73e8] dark:text-[#8ab4f8] hover:underline font-medium inline-flex items-center gap-1"
+                  >
+                    The Keyword (Blog officiel de Google)
+                    <svg className="w-3 h-3 inline-block opacity-75" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                  </a>
+                </span>
+                <span className="text-[11px] text-[#5f6368] dark:text-[#9aa0a6] bg-[#f1f3f4] dark:bg-[#303134] px-2 py-0.5 rounded-sm">
+                  Tous droits réservés © Google
+                </span>
+              </div>
+            ) : null}
+          </div>
+        );
+      })()}
+
+      {/* Excerpt (Résumé de l'article) */}
       <p className="text-[19px] sm:text-[20px] leading-[1.5] text-[#202124] dark:text-[#e8eaed] mb-7 font-normal">
         {renderTextWithBlueHighlights(article.excerpt, article.tags)}
       </p>
@@ -248,32 +407,29 @@ export const GenericArticleSection: React.FC<GenericArticleSectionProps> = ({
         </div>
       )}
 
-      {/* Hero Image - Google Discover 16:9 format if available */}
-      {ARTICLE_IMAGES[article.id] && (
-        <div className="w-full aspect-[16/9] rounded-[16px] sm:rounded-[20px] overflow-hidden mb-8 border border-[#dadce0] dark:border-[#3c4043] shadow-xs bg-neutral-100 dark:bg-neutral-800 relative">
-          <img
-            src={ARTICLE_IMAGES[article.id]}
-            alt={article.title}
-            referrerPolicy="no-referrer"
-            decoding="async"
-            className="w-full h-full object-cover object-center"
-          />
-          {article.topic && (
-            <div className="absolute bottom-3.5 left-3.5 bg-black/65 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full shadow-xs">
-              {article.topic}
-            </div>
-          )}
-        </div>
-      )}
-
       {/* Main Content with Blue Highlights */}
       <div className="text-[17px] leading-[1.65] text-[#3c4043] dark:text-[#bdc1c6] space-y-6 mb-10">
-        {article.fullText ? (
-          article.fullText.map((paragraph, idx) => (
-            <p key={idx}>{renderTextWithBlueHighlights(paragraph, article.tags)}</p>
-          ))
+        {bodyParagraphs && bodyParagraphs.length > 0 ? (
+          bodyParagraphs.map((paragraph, idx) => {
+            const isSubheading =
+              paragraph.startsWith('**') && paragraph.endsWith('**') && !paragraph.includes('\n');
+            if (isSubheading) {
+              const cleanHeading = paragraph.replace(/^\*\*|\*\*$/g, '');
+              return (
+                <h3
+                  key={idx}
+                  className="font-google-sans text-[20px] sm:text-[22px] font-bold text-[#202124] dark:text-[#f1f3f4] mt-7 mb-2 pt-1 tracking-tight"
+                >
+                  {renderTextWithBlueHighlights(cleanHeading, article.tags)}
+                </h3>
+              );
+            }
+            return (
+              <p key={idx}>{renderTextWithBlueHighlights(paragraph, article.tags)}</p>
+            );
+          })
         ) : (
-          <p>{renderTextWithBlueHighlights(article.excerpt, article.tags)}</p>
+          null
         )}
       </div>
 
@@ -281,7 +437,7 @@ export const GenericArticleSection: React.FC<GenericArticleSectionProps> = ({
       {article.tags && article.tags.length > 0 && (
         <div className="flex flex-wrap gap-2 pt-6 border-t border-[#dadce0] dark:border-[#3c4043]">
           {article.tags
-            .filter(tag => tag !== 'IA / intelligence artificielle')
+            .filter(tag => !tag.toLowerCase().includes('intelligence artificielle') && tag.toLowerCase() !== 'ia')
             .map((tag) => (
               <span
                 key={tag}

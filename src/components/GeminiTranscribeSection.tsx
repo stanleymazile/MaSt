@@ -54,25 +54,29 @@ export const GeminiTranscribeSection: React.FC<GeminiTranscribeSectionProps> = (
         Introducing Gemini 3.5 Transcribe
       </h1>
 
-      {/* Hero Image - Google Discover 16:9 format */}
-      <div className="w-full aspect-[16/9] rounded-[16px] sm:rounded-[20px] overflow-hidden mb-8 border border-[#dadce0] dark:border-[#3c4043] shadow-xs bg-neutral-100 dark:bg-neutral-800 relative">
-        <img
-          src={geminiTranscribeHero}
-          alt="Introducing Gemini 3.5 Transcribe"
-          referrerPolicy="no-referrer"
-          fetchPriority="high"
-          decoding="async"
-          className="w-full h-full object-cover object-center"
-        />
-        <div className="absolute bottom-3.5 left-3.5 bg-black/65 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full shadow-xs">
-          Gemini models
+      {/* Hero Image - Placé juste avant le résumé (format Google Discover 16:9) */}
+      <div className="mb-6">
+        <div className="w-full aspect-[16/9] rounded-[16px] sm:rounded-[20px] overflow-hidden border border-[#dadce0] dark:border-[#3c4043] shadow-xs bg-neutral-100 dark:bg-neutral-800 relative">
+          <img
+            src={geminiTranscribeHero}
+            alt="Introducing Gemini 3.5 Transcribe"
+            referrerPolicy="no-referrer"
+            fetchPriority="high"
+            decoding="async"
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute bottom-3.5 left-3.5 bg-black/65 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full shadow-xs">
+            IA
+          </div>
         </div>
       </div>
 
+      {/* Excerpt (Résumé de l'article) */}
+      <p className="text-[19px] sm:text-[20px] leading-[1.5] text-[#202124] dark:text-[#e8eaed] mb-7 font-normal">
+        Today, we're introducing <b className="font-medium text-[#202124] dark:text-[#f1f3f4]">Gemini 3.5 Transcribe</b>, our most precise speech-to-text model yet, designed for <a href="#" className="text-[#1a73e8] dark:text-[#8ab4f8] hover:underline font-medium">intelligent voice interactions</a>. Unlike conventional speech recognition models that struggle with background noise, complex jargon, and disfluency cleanup, Gemini 3.5 Transcribe converts raw audio directly into accurate, polished, formatted text.
+      </p>
+
       <div className="text-[17px] leading-[1.65] text-[#3c4043] dark:text-[#bdc1c6] space-y-6">
-        <p>
-          Today, we're introducing <b className="font-medium text-[#202124] dark:text-[#f1f3f4]">Gemini 3.5 Transcribe</b>, our most precise speech-to-text model yet, designed for <a href="#" className="text-[#1a73e8] dark:text-[#8ab4f8] hover:underline font-medium">intelligent voice interactions</a>. Unlike conventional <a href="#" className="text-[#1a73e8] dark:text-[#8ab4f8] hover:underline font-medium">speech recognition models</a> that struggle with background noise, complex jargon, and disfluency cleanup, Gemini 3.5 Transcribe converts raw audio directly into accurate, polished, formatted text.
-        </p>
 
         <p>
           Across our products like the Gemini app and on Android, we've seen consumers already benefiting from this transcription model with new voice capabilities like{' '}
