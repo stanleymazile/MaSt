@@ -27,6 +27,8 @@ import TelephoneView, { TelephonesListe } from "./components/Telephones";
 import ProduitsVitrine from "./components/Produits";
 import Footer from "./components/Footer";
 import Partager from "./components/Partager";
+import { useLang } from "./i18n/lang";
+import { texteArticle, texteTelephone } from "./i18n/contenu";
 
 const RUBRIQUES_CARTES: { id: string; nom: string; desc: string }[] = [
   { id: "cine", nom: "Cinéma", desc: "Sorties, critiques et notes presse & spectateurs" },
@@ -148,22 +150,30 @@ export default function App() {
     return () => window.removeEventListener("popstate", onPop);
   }, [defilerHaut]);
 
-  /* Titre, description et URL canonique propres à chaque vue */
+  const { lang, t } = useLang();
+
+  /* Titre, description et URL canonique propres à chaque vue, dans la langue choisie */
   useEffect(() => {
     if (telephoneOuvert) {
+      const telT = texteTelephone(telephoneOuvert, lang);
       retirerDonneesArticle();
       appliquerSeo({
-        titre: `${telephoneOuvert.marque} ${telephoneOuvert.modele} — fiche caractéristiques, prix, points forts et points faibles | MaSt`,
-        description: `${telephoneOuvert.resume}. Caractéristiques complètes du ${telephoneOuvert.marque} ${telephoneOuvert.modele} : écran, processeur, caméras, batterie, prix et notre avis.`,
+        titre: t("seo_telephone", { marque: telephoneOuvert.marque, modele: telephoneOuvert.modele }),
+        description: t("seo_telephone_desc", {
+          resume: telT.resume,
+          marque: telephoneOuvert.marque,
+          modele: telephoneOuvert.modele,
+        }),
         chemin: cheminTelephone(telephoneOuvert.id),
         image: telephoneOuvert.imageUrl,
       });
       appliquerDonneesTelephone(telephoneOuvert);
     } else if (articleOuvert) {
+      const txt = texteArticle(articleOuvert, lang);
       retirerDonneesTelephone();
       appliquerSeo({
-        titre: `${articleOuvert.titre} — MaSt`,
-        description: articleOuvert.chapo,
+        titre: `${txt.titre} — MaSt`,
+        description: txt.chapo,
         chemin: cheminArticle(articleOuvert.id),
         type: "article",
         image: articleOuvert.imageUrl,
@@ -173,8 +183,8 @@ export default function App() {
       retirerDonneesTelephone();
       retirerDonneesArticle();
       appliquerSeo({
-        titre: `${SOUS_RUBRIQUES[sousRubrique]} — actualité et décryptages | MaSt`,
-        description: `Toute l'actualité ${SOUS_RUBRIQUES[sousRubrique]} sur MaSt : news, décryptages et analyses, sélectionnés et vérifiés chaque jour.`,
+        titre: t("seo_rubrique", { nom: t(`sous_${sousRubrique}`) }),
+        description: t("seo_rubrique_desc", { nom: t(`sous_${sousRubrique}`) }),
         chemin: cheminSousRubrique(rubrique, sousRubrique),
       });
     } else if (rubrique !== "toutes") {
@@ -183,23 +193,22 @@ export default function App() {
       appliquerSeo(
         rubrique === "telephones"
           ? {
-              titre: "Téléphones — fiches caractéristiques des modèles récents | MaSt",
-              description:
-                "Les fiches caractéristiques MaSt des téléphones récents : écran, processeur, caméras, batterie, prix, points forts et points faibles, vérifiés modèle par modèle.",
+              titre: t("seo_telephones_titre"),
+              description: t("seo_telephones_desc"),
               chemin: cheminRubrique(rubrique),
             }
           : {
-              titre: `${RUBRIQUES[rubrique]} — actualité et décryptages | MaSt`,
-              description: `Toute l'actualité ${RUBRIQUES[rubrique]} sur MaSt : news, décryptages et analyses, sélectionnés et vérifiés chaque jour.`,
+              titre: t("seo_rubrique", { nom: t(`rub_${rubrique}`) }),
+              description: t("seo_rubrique_desc", { nom: t(`rub_${rubrique}`) }),
               chemin: cheminRubrique(rubrique),
             },
       );
     } else {
       retirerDonneesArticle();
       retirerDonneesTelephone();
-      appliquerSeo({ titre: "MaSt — Ciné, Tech, IA & Sport", description: DESC_DEFAUT, chemin: "/" });
+      appliquerSeo({ titre: t("seo_accueil_titre"), description: t("seo_accueil_desc"), chemin: "/" });
     }
-  }, [articleOuvert, telephoneOuvert, rubrique, sousRubrique]);
+  }, [articleOuvert, telephoneOuvert, rubrique, sousRubrique, lang, t]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -229,14 +238,18 @@ export default function App() {
       (rubrique === "toutes" || a.rubrique === rubrique) && (!sousRubrique || a.branche === sousRubrique),
   );
   const titreGrille = sousRubrique
-    ? SOUS_RUBRIQUES[sousRubrique]
+    ? t(`sous_${sousRubrique}`)
     : rubrique === "toutes"
-      ? "Dernières news"
-      : RUBRIQUES[rubrique];
+      ? t("dernieres_news")
+      : t(`rub_${rubrique}`);
   const estVitrineProduits = rubrique === "business" && sousRubrique === "nouveaux-produits";
   const partageUrl = SITE_URL + (rubrique === "toutes" ? "/" : cheminVue(rubrique, sousRubrique));
   const partageTitre =
-    rubrique === "toutes" ? "MaSt — Ciné, Tech, IA & Sport" : `${titreGrille} — actualité et décryptages | MaSt`;
+    rubrique === "toutes"
+      ? t("seo_accueil_titre")
+      : rubrique === "telephones" && !sousRubrique
+        ? t("seo_telephones_titre")
+        : t("seo_rubrique", { nom: titreGrille });
   const puceClasse = (actif: boolean) =>
     `inline-flex min-h-9 items-center rounded-full px-3.5 font-display text-[13px] font-bold uppercase tracking-[0.4px] no-underline transition-colors ${
       actif ? "bg-accent text-white" : "bg-fond-alt text-texte hover:text-accent"
@@ -297,7 +310,7 @@ export default function App() {
                       }}
                       className={puceClasse(!sousRubrique)}
                     >
-                      Tous
+                      {t("tous")}
                     </a>
                     {SOUS_PAR_RUBRIQUE[rubrique].map((s) => (
                       <a
@@ -309,7 +322,7 @@ export default function App() {
                         }}
                         className={puceClasse(sousRubrique === s.id)}
                       >
-                        {s.label}
+                        {t(`sous_${s.id}`)}
                       </a>
                     ))}
                   </div>
@@ -325,7 +338,7 @@ export default function App() {
                           onClick={() => allerRubrique("toutes")}
                           className="inline-flex min-h-9 items-center font-display text-[13.5px] font-bold normal-case tracking-normal underline decoration-accent decoration-[3px]"
                         >
-                          Tout voir
+                          {t("tout_voir")}
                         </button>
                       }
                     >
@@ -340,7 +353,7 @@ export default function App() {
                         ))}
                       </div>
                     ) : (
-                      <p className="py-[26px] text-texte-doux">Aucun article dans cette rubrique pour le moment.</p>
+                      <p className="py-[26px] text-texte-doux">{t("aucun_article")}</p>
                     )}
                   </>
                 )}
@@ -350,16 +363,16 @@ export default function App() {
               </aside>
             </div>
 
-            {rubrique === "toutes" && une.fiche && (
+            {rubrique === "toutes" && texteArticle(une, lang).fiche && (
               <>
-                <TitreSection>Le verdict MaSt</TitreSection>
-                <FicheCard fiche={une.fiche} />
+                <TitreSection>{t("verdict_section")}</TitreSection>
+                <FicheCard fiche={texteArticle(une, lang).fiche!} />
               </>
             )}
 
             {rubrique === "toutes" && (
               <>
-                <TitreSection>Explorer MaSt</TitreSection>
+                <TitreSection>{t("explorer")}</TitreSection>
                 <div className="grid grid-cols-2 gap-4 min-[860px]:grid-cols-4">
               {RUBRIQUES_CARTES.map((r) => (
                 <a
@@ -371,8 +384,8 @@ export default function App() {
                   }}
                   className="flex min-h-[118px] flex-col gap-1.5 rounded-lg bg-noir p-[20px_18px] text-white no-underline transition-colors hover:bg-anthracite"
                 >
-                  <span className="font-display text-[23px] font-black uppercase text-accent-clair">{r.nom}</span>
-                  <span className="text-[13.5px] text-[#d8d8d8]">{r.desc}</span>
+                  <span className="font-display text-[23px] font-black uppercase text-accent-clair">{t(`rub_${r.id}`)}</span>
+                  <span className="text-[13.5px] text-[#d8d8d8]">{t(`carte_${r.id}`)}</span>
                 </a>
               ))}
                 </div>

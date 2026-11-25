@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Check, Link2, Share2 } from "lucide-react";
+import { useLang } from "../i18n/lang";
 
 interface PartagerProps {
   titre: string;
@@ -32,6 +33,7 @@ function IconeReseau({ d }: { d: string }) {
  * l'URL canonique de la page (article, fiche téléphone, rubrique ou accueil).
  */
 export default function Partager({ titre, url, className = "" }: PartagerProps) {
+  const { t } = useLang();
   const [copie, setCopie] = useState(false);
   const [natifDispo, setNatifDispo] = useState(false);
 
@@ -70,16 +72,16 @@ export default function Partager({ titre, url, className = "" }: PartagerProps) 
     "inline-flex h-10 w-10 items-center justify-center rounded-full border border-bordure text-texte transition-colors hover:border-accent hover:text-accent";
 
   return (
-    <div className={`flex flex-wrap items-center gap-2 ${className}`} aria-label="Partager cette page">
+    <div className={`flex flex-wrap items-center gap-2 ${className}`} aria-label={t("partager")}>
       <span className="mr-1 font-display text-[13px] font-extrabold uppercase tracking-[1px] text-texte-doux">
-        Partager
+        {t("partager")}
       </span>
       {natifDispo && (
         <button
           type="button"
           onClick={partagerNatif}
           className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent text-white transition-opacity hover:opacity-85"
-          aria-label="Partager via l'appareil"
+          aria-label={t("partager_appareil")}
         >
           <Share2 size={18} />
         </button>
@@ -91,7 +93,7 @@ export default function Partager({ titre, url, className = "" }: PartagerProps) 
           target="_blank"
           rel="noopener noreferrer"
           className={boutonRond}
-          aria-label={`Partager sur ${r.nom}`}
+          aria-label={`${t("partager_sur")} ${r.nom}`}
         >
           <IconeReseau d={r.d} />
         </a>
@@ -100,10 +102,10 @@ export default function Partager({ titre, url, className = "" }: PartagerProps) 
         type="button"
         onClick={copier}
         className="inline-flex h-10 items-center gap-1.5 rounded-full border border-bordure px-3.5 text-[13.5px] font-bold text-texte transition-colors hover:border-accent hover:text-accent"
-        aria-label="Copier le lien de cette page"
+        aria-label={t("copier_lien")}
       >
         {copie ? <Check size={16} /> : <Link2 size={16} />}
-        {copie ? "Lien copié !" : "Copier le lien"}
+        {copie ? t("lien_copie") : t("copier_lien")}
       </button>
     </div>
   );

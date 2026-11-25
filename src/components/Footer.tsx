@@ -1,4 +1,5 @@
 import { cheminRubrique } from "../seo";
+import { useLang } from "../i18n/lang";
 import { LogoBadge } from "./Logo";
 
 interface FooterProps {
@@ -9,16 +10,8 @@ interface FooterProps {
 const lienClasse = "inline-flex min-h-9 items-center py-[7px] text-left text-[15px] text-[#e8e8e8] no-underline transition-colors hover:text-accent-clair";
 
 export default function Footer({ onRubrique, onNewsletter }: FooterProps) {
-  const rubriques: { id: string; label: string }[] = [
-    { id: "cine", label: "Cinéma" },
-    { id: "series", label: "Séries" },
-    { id: "tech", label: "Tech" },
-    { id: "telephones", label: "Téléphones" },
-    { id: "ia", label: "IA" },
-    { id: "sport", label: "Sport" },
-    { id: "jeux", label: "Jeux" },
-    { id: "business", label: "Business" },
-  ];
+  const { t } = useLang();
+  const rubriques = ["cine", "series", "tech", "telephones", "ia", "sport", "jeux", "business"];
 
   return (
     <footer className="mt-[60px] bg-noir text-[#e8e8e8]">
@@ -31,34 +24,30 @@ export default function Footer({ onRubrique, onNewsletter }: FooterProps) {
         </span>
         <div className="mt-[18px] grid grid-cols-1 gap-6 min-[760px]:grid-cols-[1.4fr_1fr_1fr]">
           <div>
-            <h3 className="m-0 mb-2.5 text-sm uppercase tracking-[1px] text-accent-clair">À propos</h3>
-            <p className="m-0 max-w-[44ch] text-[15px]">
-              MaSt est un site d'information indépendant consacré au cinéma, aux séries, à la tech, à
-              l'intelligence artificielle et au sport : des news vérifiées, des décryptages et les notes de la
-              rédaction comme des lecteurs.
-            </p>
+            <h3 className="m-0 mb-2.5 text-sm uppercase tracking-[1px] text-accent-clair">{t("pied_a_propos")}</h3>
+            <p className="m-0 max-w-[44ch] text-[15px]">{t("pied_a_propos_texte")}</p>
           </div>
           <div>
-            <h3 className="m-0 mb-2.5 text-sm uppercase tracking-[1px] text-accent-clair">Rubriques</h3>
+            <h3 className="m-0 mb-2.5 text-sm uppercase tracking-[1px] text-accent-clair">{t("pied_rubriques")}</h3>
             <ul className="m-0 list-none p-0">
-              {rubriques.map((r) => (
-                <li key={r.id}>
+              {rubriques.map((id) => (
+                <li key={id}>
                   <a
-                    href={cheminRubrique(r.id)}
+                    href={cheminRubrique(id)}
                     className={lienClasse}
                     onClick={(e) => {
                       e.preventDefault();
-                      onRubrique(r.id);
+                      onRubrique(id);
                     }}
                   >
-                    {r.label}
+                    {t(`rub_${id}`)}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <h3 className="m-0 mb-2.5 text-sm uppercase tracking-[1px] text-accent-clair">MaSt au quotidien</h3>
+            <h3 className="m-0 mb-2.5 text-sm uppercase tracking-[1px] text-accent-clair">{t("pied_quotidien")}</h3>
             <ul className="m-0 list-none p-0">
               <li>
                 <a
@@ -69,7 +58,7 @@ export default function Footer({ onRubrique, onNewsletter }: FooterProps) {
                     onRubrique("toutes");
                   }}
                 >
-                  Toutes les news
+                  {t("pied_toutes_news")}
                 </a>
               </li>
               <li>
@@ -81,7 +70,7 @@ export default function Footer({ onRubrique, onNewsletter }: FooterProps) {
                     onRubrique("streaming");
                   }}
                 >
-                  Streaming
+                  {t("rub_streaming")}
                 </a>
               </li>
               <li>
@@ -93,16 +82,13 @@ export default function Footer({ onRubrique, onNewsletter }: FooterProps) {
                     onNewsletter();
                   }}
                 >
-                  La newsletter
+                  {t("pied_newsletter")}
                 </a>
               </li>
             </ul>
           </div>
         </div>
-        <p className="mt-[26px] border-t border-[#333] pt-4 text-[13.5px] text-[#a9a9a9]">
-          © 2026 MaSt — Tous droits réservés. Les notes « Presse » et « Public » du Verdict MaSt sont celles relevées
-          auprès des sources citées sur la fiche de l'œuvre concernée.
-        </p>
+        <p className="mt-[26px] border-t border-[#333] pt-4 text-[13.5px] text-[#a9a9a9]">{t("pied_droits")}</p>
       </div>
     </footer>
   );

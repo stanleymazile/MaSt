@@ -1,7 +1,11 @@
 import { Lightbulb, Package, Tag as TagIcon } from "lucide-react";
 import { PRODUITS, type Produit } from "../data/produits";
+import { useLang } from "../i18n/lang";
+import { texteProduit } from "../i18n/contenu";
 
-function CarteProduit({ p }: { p: Produit }) {
+function CarteProduit({ p: produit }: { p: Produit }) {
+  const { lang, t } = useLang();
+  const p = texteProduit(produit, lang);
   return (
     <article className="flex flex-col overflow-hidden rounded-lg border border-bordure bg-carte shadow-carte">
       {p.image ? (
@@ -21,7 +25,7 @@ function CarteProduit({ p }: { p: Produit }) {
         <div className="flex items-center gap-2">
           <span className="inline-flex items-center gap-1 rounded-full bg-accent px-2.5 py-1 font-display text-[11px] font-extrabold uppercase tracking-[0.6px] text-white">
             <TagIcon size={11} strokeWidth={2.6} />
-            Nouveau
+            {t("prod_nouveau")}
           </span>
           <span className="font-display text-[12px] font-extrabold uppercase tracking-[0.8px] text-accent-fonce dark:text-accent-clair">
             {p.categorie}
@@ -37,13 +41,13 @@ function CarteProduit({ p }: { p: Produit }) {
         <p className="m-0 flex items-start gap-1.5 text-[13.5px] leading-snug">
           <Lightbulb size={15} strokeWidth={2.4} className="mt-0.5 flex-none text-accent-fonce dark:text-accent-clair" />
           <span>
-            <strong>L’innovation :</strong> {p.innovation}
+            <strong>{t("prod_innovation")}</strong> {p.innovation}
           </span>
         </p>
         <div className="mt-auto flex items-baseline justify-between gap-2 border-t border-bordure pt-3">
           <span className="font-display text-[17px] font-black">{p.prix}</span>
           <span className="text-right text-[12.5px] text-texte-doux">
-            Lancement : {p.lancement}
+            {t("prod_lancement")} {p.lancement}
             <br />
             {p.disponibilite}
           </span>
@@ -55,15 +59,13 @@ function CarteProduit({ p }: { p: Produit }) {
 }
 
 export default function ProduitsVitrine() {
+  const { t } = useLang();
   if (PRODUITS.length === 0) {
-    return <p className="py-[26px] text-texte-doux">Les premières annonces arrivent très bientôt.</p>;
+    return <p className="py-[26px] text-texte-doux">{t("prod_bientot")}</p>;
   }
   return (
     <div>
-      <p className="mb-6 max-w-[720px] text-[15.5px] leading-relaxed text-texte-doux">
-        Les nouveautés qui comptent, toutes catégories confondues : des produits récents et innovants, présentés en
-        petites annonces — ce qu’ils font, ce qu’ils changent, et combien ils coûtent.
-      </p>
+      <p className="mb-6 max-w-[720px] text-[15.5px] leading-relaxed text-texte-doux">{t("prod_intro")}</p>
       <div className="grid grid-cols-1 gap-5 min-[640px]:grid-cols-2 min-[980px]:grid-cols-3">
         {PRODUITS.map((p) => (
           <CarteProduit key={p.id} p={p} />

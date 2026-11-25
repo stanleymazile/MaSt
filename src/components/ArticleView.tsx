@@ -1,6 +1,8 @@
 import { ArrowLeft } from "lucide-react";
-import { ARTICLES, RUBRIQUES, type Article } from "../data/articles";
+import { ARTICLES, type Article } from "../data/articles";
 import { cheminArticle, SITE_URL } from "../seo";
+import { useLang } from "../i18n/lang";
+import { dateLisible, dureeLecture, texteArticle } from "../i18n/contenu";
 import ArticleCard, { Tag } from "./ArticleCard";
 import FicheCard from "./FicheCard";
 import Partager from "./Partager";
@@ -25,8 +27,10 @@ export function TitreSection({ children, action }: { children: React.ReactNode; 
 }
 
 export default function ArticleView({ article, note, onNoter, onRetour, onAccueil, onOuvrir }: ArticleViewProps) {
+  const { lang, t } = useLang();
+  const txt = texteArticle(article, lang);
   const aussi = ARTICLES.filter((x) => x.id !== article.id).slice(0, 3);
-  const titreCourt = article.titre.length > 42 ? `${article.titre.slice(0, 42)}…` : article.titre;
+  const titreCourt = txt.titre.length > 42 ? `${txt.titre.slice(0, 42)}…` : txt.titre;
 
   return (
     <article>
@@ -36,37 +40,37 @@ export default function ArticleView({ article, note, onNoter, onRetour, onAccuei
           onClick={onAccueil}
           className="min-h-9 px-0.5 py-1.5 text-texte-doux underline"
         >
-          Accueil
+          {t("accueil")}
         </button>{" "}
-        &gt; {RUBRIQUES[article.rubrique]} &gt; {titreCourt}
+        &gt; {t(`rub_${article.rubrique}`)} &gt; {titreCourt}
       </p>
 
       <div>
-        <Tag>{article.tag}</Tag>
-        <h1 className="mb-2.5 mt-2 text-[clamp(27px,4.6vw,40px)] font-black leading-[1.15]">{article.titre}</h1>
-        <p className="m-0 mb-3.5 text-[19px] text-texte-doux">{article.chapo}</p>
+        <Tag>{txt.tag}</Tag>
+        <h1 className="mb-2.5 mt-2 text-[clamp(27px,4.6vw,40px)] font-black leading-[1.15]">{txt.titre}</h1>
+        <p className="m-0 mb-3.5 text-[19px] text-texte-doux">{txt.chapo}</p>
         <div className="mb-5 flex flex-wrap items-center gap-2.5 border-y border-bordure py-2.5 text-sm text-texte-doux">
           <span className="inline-flex h-[38px] w-[38px] items-center justify-center rounded-full bg-accent font-display text-[15px] font-black text-white">
             M
           </span>
           <span>
-            Par <strong>{article.auteur}</strong>
+            {t("par")} <strong>{article.auteur}</strong>
           </span>
           <span aria-hidden="true">·</span>
-          <span>{article.date}</span>
+          <span>{dateLisible(article.dateIso, lang)}</span>
           <span aria-hidden="true">·</span>
-          <span>{article.lecture}</span>
+          <span>{dureeLecture(article.lecture, t)}</span>
         </div>
       </div>
 
-      <img src={article.image} alt={article.legende} className="mb-2 aspect-[3/2] w-full rounded-lg object-cover" />
-      <p className="m-0 mb-3.5 text-[13px] text-texte-doux">{article.legende}</p>
+      <img src={article.image} alt={txt.legende} className="mb-2 aspect-[3/2] w-full rounded-lg object-cover" />
+      <p className="m-0 mb-3.5 text-[13px] text-texte-doux">{txt.legende}</p>
 
-      <Partager titre={article.titre} url={`${SITE_URL}${cheminArticle(article.id)}`} className="mb-[22px]" />
+      <Partager titre={txt.titre} url={`${SITE_URL}${cheminArticle(article.id)}`} className="mb-[22px]" />
 
-      {article.fiche && (
+      {txt.fiche && (
         <div className="my-[26px] max-w-[720px]">
-          <FicheCard fiche={article.fiche} />
+          <FicheCard fiche={txt.fiche} />
         </div>
       )}
 
@@ -75,24 +79,22 @@ export default function ArticleView({ article, note, onNoter, onRetour, onAccuei
         onClick={(e) => {
           if ((e.target as HTMLElement).closest("a")) e.preventDefault();
         }}
-        dangerouslySetInnerHTML={{ __html: article.corps.join("") }}
+        dangerouslySetInnerHTML={{ __html: txt.corps.join("") }}
       />
 
-      <Partager titre={article.titre} url={`${SITE_URL}${cheminArticle(article.id)}`} className="mt-[26px]" />
+      <Partager titre={txt.titre} url={`${SITE_URL}${cheminArticle(article.id)}`} className="mt-[26px]" />
 
       <div className="my-[26px] max-w-[720px] rounded-lg border border-bordure bg-fond-alt px-5 py-[18px]">
-        <h2 className="m-0 mb-1.5 font-display text-[19px] font-black">Votre avis compte</h2>
-        <p className="m-0 mb-2.5 text-[14.5px] text-texte-doux">
-          Attribuez votre note à ce sujet, comme les spectateurs sur les fiches MaSt.
-        </p>
-        <div className="flex gap-1" role="radiogroup" aria-label="Votre note sur 5">
+        <h2 className="m-0 mb-1.5 font-display text-[19px] font-black">{t("votre_avis")}</h2>
+        <p className="m-0 mb-2.5 text-[14.5px] text-texte-doux">{t("avis_texte")}</p>
+        <div className="flex gap-1" role="radiogroup" aria-label={t("votre_note")}>
           {[1, 2, 3, 4, 5].map((n) => (
             <button
               key={n}
               type="button"
               role="radio"
               aria-checked={n === note}
-              aria-label={`Noter ${n} sur 5`}
+              aria-label={`${n} / 5`}
               onClick={() => onNoter(article.id, n)}
               className={`min-h-11 min-w-11 rounded-md p-1.5 text-[30px] leading-none ${
                 n <= note ? "text-accent-fonce dark:text-accent-clair" : "text-[#c9c9c4] dark:text-[#55554f]"
@@ -102,11 +104,7 @@ export default function ArticleView({ article, note, onNoter, onRetour, onAccuei
             </button>
           ))}
         </div>
-        <p className="m-0 mt-1.5 min-h-[22px] text-[15px] font-bold">
-          {note
-            ? `Merci ! Votre note : ${note} / 5 — elle rejoint les notes des lecteurs MaSt.`
-            : ""}
-        </p>
+        <p className="m-0 mt-1.5 min-h-[22px] text-[15px] font-bold">{note ? t("merci_note", { n: note }) : ""}</p>
       </div>
 
       <button
@@ -115,10 +113,10 @@ export default function ArticleView({ article, note, onNoter, onRetour, onAccuei
         className="mt-2 inline-flex min-h-[46px] items-center gap-2 rounded-md bg-noir px-5 py-3 font-display text-sm font-extrabold uppercase text-accent-clair"
       >
         <ArrowLeft size={18} strokeWidth={2.4} />
-        Retour aux news
+        {t("retour_news")}
       </button>
 
-      <TitreSection>À lire aussi</TitreSection>
+      <TitreSection>{t("a_lire_aussi")}</TitreSection>
       <div className="grid grid-cols-1 gap-5 min-[640px]:grid-cols-2 min-[980px]:grid-cols-3">
         {aussi.map((a) => (
           <ArticleCard key={a.id} article={a} onOuvrir={onOuvrir} />
