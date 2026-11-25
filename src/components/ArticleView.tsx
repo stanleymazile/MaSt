@@ -57,7 +57,7 @@ export default function ArticleView({ article, note, onNoter, onRetour, onAccuei
         </div>
       </div>
 
-      <img src={article.image} alt={article.legende} className="mb-2 max-h-[480px] w-full rounded-lg object-cover" />
+      <img src={article.image} alt={article.legende} className="mb-2 aspect-[3/2] w-full rounded-lg object-cover" />
       <p className="m-0 mb-[22px] text-[13px] text-texte-doux">{article.legende}</p>
 
       {article.fiche && (

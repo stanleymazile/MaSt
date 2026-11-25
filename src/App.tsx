@@ -154,6 +154,7 @@ export default function App() {
         titre: `${telephoneOuvert.marque} ${telephoneOuvert.modele} — fiche caractéristiques, prix, points forts et points faibles | MaSt`,
         description: `${telephoneOuvert.resume}. Caractéristiques complètes du ${telephoneOuvert.marque} ${telephoneOuvert.modele} : écran, processeur, caméras, batterie, prix et notre avis.`,
         chemin: cheminTelephone(telephoneOuvert.id),
+        image: telephoneOuvert.imageUrl,
       });
       appliquerDonneesTelephone(telephoneOuvert);
     } else if (articleOuvert) {
@@ -163,6 +164,7 @@ export default function App() {
         description: articleOuvert.chapo,
         chemin: cheminArticle(articleOuvert.id),
         type: "article",
+        image: articleOuvert.imageUrl,
       });
       appliquerDonneesArticle(articleOuvert);
     } else if (sousRubrique) {
@@ -272,7 +274,7 @@ export default function App() {
           />
         ) : (
           <>
-            <Hero article={une} onOuvrir={ouvrirArticle} />
+            {rubrique === "toutes" && <Hero article={une} onOuvrir={ouvrirArticle} />}
 
             <div className="mt-2 grid grid-cols-1 gap-7 min-[980px]:grid-cols-[1fr_330px]">
               <div>
@@ -339,15 +341,17 @@ export default function App() {
               </aside>
             </div>
 
-            {une.fiche && (
+            {rubrique === "toutes" && une.fiche && (
               <>
                 <TitreSection>Le verdict MaSt</TitreSection>
                 <FicheCard fiche={une.fiche} />
               </>
             )}
 
-            <TitreSection>Explorer MaSt</TitreSection>
-            <div className="grid grid-cols-2 gap-4 min-[860px]:grid-cols-4">
+            {rubrique === "toutes" && (
+              <>
+                <TitreSection>Explorer MaSt</TitreSection>
+                <div className="grid grid-cols-2 gap-4 min-[860px]:grid-cols-4">
               {RUBRIQUES_CARTES.map((r) => (
                 <a
                   key={r.id}
@@ -362,7 +366,9 @@ export default function App() {
                   <span className="text-[13.5px] text-[#d8d8d8]">{r.desc}</span>
                 </a>
               ))}
-            </div>
+                </div>
+              </>
+            )}
 
             <Newsletter />
           </>

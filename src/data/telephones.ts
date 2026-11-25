@@ -1,4 +1,4 @@
-import { articleCrackgate, telIphone17, telIphone17ProMax, telS25Ultra } from "./images";
+import { articleCrackgate, telA56, telIphone17, telIphone17ProMax, telPixel10Pro, telRedmiNote15, telS25, telS25Ultra, telXiaomi17, telZFold7 } from "./images";
 
 /**
  * Fiches caractéristiques « Téléphones » de MaSt — données vérifiées sur les fiches
@@ -29,12 +29,16 @@ export interface Telephone {
   pointsFaibles: string[];
   image?: string;
   legendeImage?: string;
+  imageUrl?: string;
   sources: string[];
 }
 
 export const TELEPHONES: Telephone[] = [
   {
     id: "xiaomi-redmi-note-15",
+    image: telRedmiNote15,
+    legendeImage: "Le dos des Redmi Note 15 et Redmi Note 15 5G. (Photo : Maksdroider, CC BY-SA 4.0, via Wikimedia Commons)",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/REDMI_Note_15_and_REDMI_Note_15_5G_back.jpg/1280px-REDMI_Note_15_and_REDMI_Note_15_5G_back.jpg",
     marque: "Xiaomi",
     modele: "Redmi Note 15 5G",
     resume: "Écran AMOLED 120 Hz, 108 MP stabilisé et IP66 à moins de 300 €",
@@ -69,6 +73,7 @@ export const TELEPHONES: Telephone[] = [
   },
   {
     id: "samsung-galaxy-s25-ultra",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Samsung_Galaxy_S25_Ultra.jpg/1280px-Samsung_Galaxy_S25_Ultra.jpg",
     marque: "Samsung",
     modele: "Galaxy S25 Ultra",
     resume: "Le zoom le plus polyvalent du marché, le S Pen et 7 ans de mises à jour",
@@ -101,11 +106,14 @@ export const TELEPHONES: Telephone[] = [
       "Évolutions jugées incrémentales face au S24 Ultra",
     ],
     image: telS25Ultra,
-    legendeImage: "Le Samsung Galaxy S25 Ultra. (Photo : Jakub CA, CC BY-SA 4.0, via Wikimedia Commons)",
+    legendeImage: "Le Samsung Galaxy S25 Ultra. (Photo : Jakub CA, CC BY 4.0, via Wikimedia Commons)",
     sources: ["GSMArena", "PhoneArena"],
   },
   {
     id: "samsung-galaxy-s25",
+    image: telS25,
+    legendeImage: "Le Samsung Galaxy S25+, au design identique au Galaxy S25. (Photo : Jakub CA, CC BY 4.0, via Wikimedia Commons)",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Samsung_Galaxy_S25%2B.jpg/1280px-Samsung_Galaxy_S25%2B.jpg",
     marque: "Samsung",
     modele: "Galaxy S25",
     resume: "Le flagship compact et léger (162 g) avec une vraie puce haut de gamme",
@@ -141,6 +149,7 @@ export const TELEPHONES: Telephone[] = [
   },
   {
     id: "apple-iphone-17-pro-max",
+    imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/IPhone_17_Pro_Max_(1).jpg?width=1280",
     marque: "Apple",
     modele: "iPhone 17 Pro Max",
     resume: "A19 Pro, triple 48 MP et l'écran le plus lumineux d'Apple (3 000 nits)",
@@ -178,6 +187,7 @@ export const TELEPHONES: Telephone[] = [
   },
   {
     id: "apple-iphone-17",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Black_iPhone_17.jpg/1280px-Black_iPhone_17.jpg",
     marque: "Apple",
     modele: "iPhone 17",
     resume: "Le ProMotion 120 Hz et les 3 000 nits arrivent enfin sur le modèle standard",
@@ -215,6 +225,9 @@ export const TELEPHONES: Telephone[] = [
   },
   {
     id: "google-pixel-10-pro",
+    image: telPixel10Pro,
+    legendeImage: "La face avant du Google Pixel 10 Pro, coloris pierre de lune. (Photo : Fabe56, CC BY-SA 4.0, via Wikimedia Commons)",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fd/Avant_du_Google_Pixel_10_Pro_pierre_de_lune_de_256_Go.jpg/1280px-Avant_du_Google_Pixel_10_Pro_pierre_de_lune_de_256_Go.jpg",
     marque: "Google",
     modele: "Pixel 10 Pro",
     resume: "Trio photo 50/48/48 MP, écran 3 300 nits et charge magnétique Qi2 intégrée",
@@ -250,6 +263,9 @@ export const TELEPHONES: Telephone[] = [
   },
   {
     id: "samsung-galaxy-z-fold-7",
+    image: telZFold7,
+    legendeImage: "Le Samsung Galaxy Z Fold 7 entièrement déplié. (Photo : Matabalt, CC0, via Wikimedia Commons)",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/Samsung_Galaxy_Z_Fold_7_Unfolded.jpg/1280px-Samsung_Galaxy_Z_Fold_7_Unfolded.jpg",
     marque: "Samsung",
     modele: "Galaxy Z Fold 7",
     resume: "Le pliable le plus fin et léger du marché : 4,2 mm déplié, 215 g, écran 8\"",
@@ -285,6 +301,9 @@ export const TELEPHONES: Telephone[] = [
   },
   {
     id: "xiaomi-17",
+    image: telXiaomi17,
+    legendeImage: "Le Xiaomi 17. (Photo : 茅野ふたば, CC BY-SA 4.0, via Wikimedia Commons)",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/Xiaomi_17.jpg/1280px-Xiaomi_17.jpg",
     marque: "Xiaomi",
     modele: "Xiaomi 17",
     resume: "6 330 mAh et charge 100 W dans un format compact de 6,3 pouces, optiques Leica",
@@ -320,6 +339,9 @@ export const TELEPHONES: Telephone[] = [
   },
   {
     id: "samsung-galaxy-a56",
+    image: telA56,
+    legendeImage: "Le Samsung Galaxy A56 5G. (Photo : Captainmorlypogi1959, CC BY-SA 4.0, via Wikimedia Commons)",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Samsung_Galaxy_A56_5G_2025.jpg/1280px-Samsung_Galaxy_A56_5G_2025.jpg",
     marque: "Samsung",
     modele: "Galaxy A56 5G",
     resume: "Finition premium, IP67 et 6 ans de mises à jour à prix milieu de gamme",
@@ -355,6 +377,7 @@ export const TELEPHONES: Telephone[] = [
   },
   {
     id: "apple-iphone-duo",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/IPhone_Duo_07.jpg/1280px-IPhone_Duo_07.jpg",
     marque: "Apple",
     modele: "iPhone Duo",
     resume: "Le premier iPhone pliable : A20 Pro, IP68… et le « Crackgate » des écrans fissurés",

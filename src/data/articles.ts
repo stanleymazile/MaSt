@@ -22,6 +22,7 @@ export interface Article {
   titre: string;
   chapo: string;
   image: string;
+  imageUrl?: string;
   legende: string;
   auteur: string;
   date: string;
@@ -95,6 +96,7 @@ export const NAV_RUBRIQUES: { id: string; label: string }[] = [
 export const ARTICLES: Article[] = [
   {
     id: "hunger-games-sunrise-on-the-reaping-225-millions-box-office",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Elle_Fanning_at_the_2025_Cannes_Film_Festival.jpg/1280px-Elle_Fanning_at_the_2025_Cannes_Film_Festival.jpg",
     rubrique: "cine",
     branche: "box-office",
     tag: "Cinéma",
@@ -132,6 +134,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "hypothese-riemann-resolue-ia-claude",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/C.F_Bernhard_Riemann.jpg/1280px-C.F_Bernhard_Riemann.jpg",
     rubrique: "ia",
     branche: "recherche-ia",
     tag: "IA",
@@ -158,6 +161,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "motorola-signature-27-smartphone-exces",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Motorola_Edge_70_back.jpg/1280px-Motorola_Edge_70_back.jpg",
     rubrique: "tech",
     branche: "smartphones",
     tag: "Tech",
@@ -200,6 +204,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "lupin-partie-4-quatre-saisons-top-10-netflix",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Omar_Sy-3775.jpg/1280px-Omar_Sy-3775.jpg",
     rubrique: "series",
     branche: "netflix",
     tag: "Séries",
@@ -225,6 +230,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "route-du-rhum-2026-tom-laperche-record",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Tom_Laperche_Ark%C3%A9a_Ultim_Challenge.jpg/1280px-Tom_Laperche_Ark%C3%A9a_Ultim_Challenge.jpg",
     rubrique: "sport",
     branche: "voile",
     tag: "Sport",
@@ -249,6 +255,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "echecs-roman-shogdzhiev-11-ans-record-grand-maitre",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Roman_Shogdzhiev_WTRBCC2026_R9.jpg/1280px-Roman_Shogdzhiev_WTRBCC2026_R9.jpg",
     rubrique: "jeux",
     branche: "jeu-societe",
     tag: "Jeux",
@@ -273,6 +280,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "nvidia-retour-jensen-huang-record-wall-street",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Jensen_huang_stanford_2026-04-30_005.jpg/1280px-Jensen_huang_stanford_2026-04-30_005.jpg",
     rubrique: "business",
     branche: "eco-bourse",
     tag: "Business",
@@ -298,6 +306,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "fed-choc-or-bitcoin-devissent",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/89/Eccles_Building_%2826088200676%29.jpg/1280px-Eccles_Building_%2826088200676%29.jpg",
     rubrique: "business",
     branche: "eco-bourse",
     tag: "Business",
@@ -323,6 +332,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "jensen-huang-retour-nvidia",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Jensen_huang_stanford_2026-04-30_005.jpg/1280px-Jensen_huang_stanford_2026-04-30_005.jpg",
     rubrique: "ia",
     branche: "entreprises-ia",
     tag: "IA",
@@ -349,6 +359,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "robert-pattinson-nouveau-james-bond",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Robert_Pattinson_Venice_Film_Festival_%283x4_cropped%29.jpg/1280px-Robert_Pattinson_Venice_Film_Festival_%283x4_cropped%29.jpg",
     rubrique: "cine",
     branche: "coulisses",
     tag: "Cinéma",
@@ -376,6 +387,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "iphone-duo-crackgate-ecran-fissure",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/IPhone_Duo_07.jpg/1280px-IPhone_Duo_07.jpg",
     rubrique: "tech",
     branche: "smartphones",
     tag: "Tech",
@@ -420,6 +432,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: "gta-vi-record-ventes-premier-jour",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Dan_Houser_at_Rockstar_Games.png",
     rubrique: "jeux",
     branche: "jeu-video",
     tag: "Jeux",

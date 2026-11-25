@@ -25,7 +25,13 @@ export function cheminTelephone(id: string): string {
 const ID_LD_PRODUIT = "ld-produit";
 
 /** Injecte les données structurées Product d'une fiche téléphone ouverte. */
-export function appliquerDonneesTelephone(tel: { marque: string; modele: string; resume: string; id: string }) {
+export function appliquerDonneesTelephone(tel: {
+  marque: string;
+  modele: string;
+  resume: string;
+  id: string;
+  imageUrl?: string;
+}) {
   let script = document.getElementById(ID_LD_PRODUIT) as HTMLScriptElement | null;
   if (!script) {
     script = document.createElement("script");
@@ -40,6 +46,7 @@ export function appliquerDonneesTelephone(tel: { marque: string; modele: string;
     description: tel.resume,
     brand: { "@type": "Brand", name: tel.marque },
     url: SITE_URL + cheminTelephone(tel.id),
+    ...(tel.imageUrl ? { image: tel.imageUrl } : {}),
   });
 }
 
@@ -77,6 +84,7 @@ export function appliquerDonneesArticle(article: {
   dateIso: string;
   tag: string;
   id: string;
+  imageUrl?: string;
 }) {
   let script = document.getElementById(ID_LD_ARTICLE) as HTMLScriptElement | null;
   if (!script) {
@@ -96,7 +104,7 @@ export function appliquerDonneesArticle(article: {
     inLanguage: "fr-FR",
     articleSection: article.tag,
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
-    image: [IMAGE_PARTAGE],
+    image: [article.imageUrl ?? IMAGE_PARTAGE],
     author: { "@type": "Organization", name: "Rédaction MaSt", url: SITE_URL + "/" },
     publisher: {
       "@type": "Organization",
@@ -112,16 +120,19 @@ export function retirerDonneesArticle() {
 }
 
 /** Met à jour le titre, la description, l'URL canonique et les balises de partage pour la vue courante. */
-export function appliquerSeo(opts: { titre: string; description: string; chemin: string; type?: string }) {
+export function appliquerSeo(opts: { titre: string; description: string; chemin: string; type?: string; image?: string }) {
   const url = SITE_URL + opts.chemin;
+  const image = opts.image ?? IMAGE_PARTAGE;
   document.title = opts.titre;
   fixerMetaParNom("description", opts.description);
   fixerMetaParPropriete("og:title", opts.titre);
   fixerMetaParPropriete("og:description", opts.description);
   fixerMetaParPropriete("og:url", url);
   fixerMetaParPropriete("og:type", opts.type ?? "website");
+  fixerMetaParPropriete("og:image", image);
   fixerMetaParNom("twitter:title", opts.titre);
   fixerMetaParNom("twitter:description", opts.description);
+  fixerMetaParNom("twitter:image", image);
   let canonique = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
   if (!canonique) {
     canonique = document.createElement("link");
