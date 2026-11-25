@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Menu, Search, User } from "lucide-react";
 import { FIL_INFO, NAV_RUBRIQUES } from "../data/articles";
+import { cheminRubrique } from "../seo";
 import { LogoTexte } from "./Logo";
 
 interface HeaderProps {
@@ -31,7 +32,7 @@ export default function Header({ rubrique, onRubrique, onMenu, onRecherche, onAc
             <Menu size={26} strokeWidth={2.4} />
           </button>
           <a
-            href="#"
+            href="/"
             onClick={(e) => {
               e.preventDefault();
               onAccueil();
@@ -55,18 +56,21 @@ export default function Header({ rubrique, onRubrique, onMenu, onRecherche, onAc
       <nav className="bg-noir max-[719px]:hidden" aria-label="Rubriques">
         <div className="mx-auto flex max-w-[1180px] gap-1 overflow-x-auto px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {NAV_RUBRIQUES.map((r) => (
-            <button
+            <a
               key={r.id}
-              type="button"
-              onClick={() => onRubrique(r.id)}
-              className={`min-h-11 whitespace-nowrap border-b-4 px-3.5 py-3 font-display text-[14.5px] font-extrabold uppercase tracking-[0.4px] transition-colors ${
+              href={cheminRubrique(r.id)}
+              onClick={(e) => {
+                e.preventDefault();
+                onRubrique(r.id);
+              }}
+              className={`flex min-h-11 items-center whitespace-nowrap border-b-4 px-3.5 py-3 font-display text-[14.5px] font-extrabold uppercase tracking-[0.4px] no-underline transition-colors ${
                 rubrique === r.id
                   ? "border-accent-clair text-accent-clair"
                   : "border-transparent text-white hover:text-accent-clair"
               }`}
             >
               {r.label}
-            </button>
+            </a>
           ))}
         </div>
       </nav>

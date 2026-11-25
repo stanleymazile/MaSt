@@ -1,3 +1,4 @@
+import { cheminRubrique } from "../seo";
 import { LogoBadge } from "./Logo";
 
 interface FooterProps {
@@ -39,9 +40,16 @@ export default function Footer({ onRubrique, onNewsletter }: FooterProps) {
             <ul className="m-0 list-none p-0">
               {rubriques.map((r) => (
                 <li key={r.id}>
-                  <button type="button" className={lienClasse} onClick={() => onRubrique(r.id)}>
+                  <a
+                    href={cheminRubrique(r.id)}
+                    className={lienClasse}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onRubrique(r.id);
+                    }}
+                  >
                     {r.label}
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -50,14 +58,28 @@ export default function Footer({ onRubrique, onNewsletter }: FooterProps) {
             <h3 className="m-0 mb-2.5 text-sm uppercase tracking-[1px] text-accent-clair">MaSt au quotidien</h3>
             <ul className="m-0 list-none p-0">
               <li>
-                <button type="button" className={lienClasse} onClick={() => onRubrique("toutes")}>
+                <a
+                  href="/"
+                  className={lienClasse}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onRubrique("toutes");
+                  }}
+                >
                   Toutes les news
-                </button>
+                </a>
               </li>
               <li>
-                <button type="button" className={lienClasse} onClick={() => onRubrique("streaming")}>
+                <a
+                  href={cheminRubrique("streaming")}
+                  className={lienClasse}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onRubrique("streaming");
+                  }}
+                >
                   Streaming
-                </button>
+                </a>
               </li>
               <li>
                 <a

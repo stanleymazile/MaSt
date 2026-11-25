@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { ARTICLES, RUBRIQUES, TOP_IDS } from "./data/articles";
+import { appliquerSeo, cheminArticle, cheminRubrique, DESC_DEFAUT } from "./seo";
 import Header from "./components/Header";
 import SideMenu from "./components/SideMenu";
 import SearchOverlay from "./components/SearchOverlay";
@@ -18,9 +19,23 @@ const RUBRIQUES_CARTES: { id: string; nom: string; desc: string }[] = [
   { id: "sport", nom: "Sport", desc: "Foot, F1 et grands rendez-vous décryptés" },
 ];
 
+/** Lit la route courante (/ , /rubrique/:id , /article/:id) pour ouvrir directement la bonne vue. */
+function lireRoute(): { rubrique: string; articleId: string | null } {
+  const p = window.location.pathname;
+  const mArt = p.match(/^\/article\/([\w-]+)\/?$/);
+  if (mArt && ARTICLES.some((a) => a.id === mArt[1])) {
+    const art = ARTICLES.find((a) => a.id === mArt[1])!;
+    return { rubrique: art.rubrique, articleId: art.id };
+  }
+  const mRub = p.match(/^\/rubrique\/([\w-]+)\/?$/);
+  if (mRub && mRub[1] in RUBRIQUES) return { rubrique: mRub[1], articleId: null };
+  return { rubrique: "toutes", articleId: null };
+}
+
 export default function App() {
-  const [rubrique, setRubrique] = useState("toutes");
-  const [articleId, setArticleId] = useState<string | null>(null);
+  const [routeInitiale] = useState(lireRoute);
+  const [rubrique, setRubrique] = useState(routeInitiale.rubrique);
+  const [articleId, setArticleId] = useState<string | null>(routeInitiale.articleId);
   const [menuOuvert, setMenuOuvert] = useState(false);
   const [rechercheOuverte, setRechercheOuverte] = useState(false);
   const [notes, setNotes] = useState<Record<string, number>>({});
@@ -37,6 +52,7 @@ export default function App() {
       setRubrique(r);
       setArticleId(null);
       setMenuOuvert(false);
+      window.history.pushState(null, "", cheminRubrique(r));
       defilerHaut(true);
     },
     [defilerHaut],
@@ -46,10 +62,49 @@ export default function App() {
     (id: string) => {
       setRechercheOuverte(false);
       setArticleId(id);
+      window.history.pushState(null, "", cheminArticle(id));
       defilerHaut(false);
     },
     [defilerHaut],
   );
+
+  const retourGrille = useCallback(() => {
+    setArticleId(null);
+    window.history.pushState(null, "", cheminRubrique(rubrique));
+    defilerHaut(true);
+  }, [defilerHaut, rubrique]);
+
+  /* Boutons précédent / suivant du navigateur */
+  useEffect(() => {
+    const onPop = () => {
+      const r = lireRoute();
+      setRubrique(r.rubrique);
+      setArticleId(r.articleId);
+      defilerHaut(false);
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, [defilerHaut]);
+
+  /* Titre, description et URL canonique propres à chaque vue */
+  useEffect(() => {
+    if (articleOuvert) {
+      appliquerSeo({
+        titre: `${articleOuvert.titre} — MaSt`,
+        description: articleOuvert.chapo,
+        chemin: cheminArticle(articleOuvert.id),
+        type: "article",
+      });
+    } else if (rubrique !== "toutes") {
+      appliquerSeo({
+        titre: `${RUBRIQUES[rubrique]} — actualité et décryptages | MaSt`,
+        description: `Toute l'actualité ${RUBRIQUES[rubrique]} sur MaSt : news, décryptages et analyses, sélectionnés et vérifiés chaque jour.`,
+        chemin: cheminRubrique(rubrique),
+      });
+    } else {
+      appliquerSeo({ titre: "MaSt — Ciné, Tech, IA & Sport", description: DESC_DEFAUT, chemin: "/" });
+    }
+  }, [articleOuvert, rubrique]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -64,11 +119,12 @@ export default function App() {
 
   const allerNewsletter = useCallback(() => {
     setArticleId(null);
+    window.history.pushState(null, "", cheminRubrique(rubrique));
     setTimeout(() => {
       document.getElementById("champ-email")?.focus({ preventScroll: false });
       document.getElementById("newsletter")?.scrollIntoView({ behavior: "smooth", block: "center" });
     }, 60);
-  }, []);
+  }, [rubrique]);
 
   const une = ARTICLES[0];
   const topArticles = TOP_IDS.map((id) => ARTICLES.find((a) => a.id === id)!).filter(Boolean);
@@ -98,10 +154,7 @@ export default function App() {
             article={articleOuvert}
             note={notes[articleOuvert.id] ?? 0}
             onNoter={(id, n) => setNotes((prev) => ({ ...prev, [id]: n }))}
-            onRetour={() => {
-              setArticleId(null);
-              defilerHaut(true);
-            }}
+            onRetour={retourGrille}
             onAccueil={() => allerRubrique("toutes")}
             onOuvrir={ouvrirArticle}
           />
@@ -151,7 +204,7 @@ export default function App() {
               {RUBRIQUES_CARTES.map((r) => (
                 <a
                   key={r.id}
-                  href="#"
+                  href={cheminRubrique(r.id)}
                   onClick={(e) => {
                     e.preventDefault();
                     allerRubrique(r.id);
