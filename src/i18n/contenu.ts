@@ -1,7 +1,6 @@
 import { FIL_INFO, type Article, type Fiche } from "../data/articles";
 import type { Telephone } from "../data/telephones";
 import type { Produit } from "../data/produits";
-import { CONTENU_I18N } from "./contenu-data";
 import { LOCALES, type Lang } from "./lang";
 
 /* Formes des traductions de contenu (générées depuis les JSON des traducteurs). */
@@ -51,8 +50,36 @@ export interface ContenuLang {
   produits: Record<string, ProduitTrad>;
 }
 
+/* Traductions chargées à la demande : chaque langue vit dans son propre module
+   (src/i18n/donnees/<lang>.ts, généré par generer.py), importé dynamiquement la
+   première fois qu'un visiteur la choisit. Le français, langue source des
+   données, n'a pas de module. Tant qu'une langue n'est pas chargée, les
+   fonctions ci-dessous retombent sur le français, champ par champ. */
+const registre = new Map<Lang, ContenuLang>();
+const enCours = new Map<Lang, Promise<void>>();
+
+/** Charge les traductions d'une langue (une seule fois). Ne rejette jamais : en cas d'échec, le français reste affiché. */
+export function chargerLangue(lang: Lang): Promise<void> {
+  if (lang === "fr" || registre.has(lang)) return Promise.resolve();
+  let p = enCours.get(lang);
+  if (!p) {
+    p = import(`./donnees/${lang}.ts`)
+      .then((m) => {
+        registre.set(lang, m.default as ContenuLang);
+      })
+      .catch(() => {
+        /* réseau ou module absent : le français reste affiché */
+      })
+      .finally(() => {
+        enCours.delete(lang);
+      });
+    enCours.set(lang, p);
+  }
+  return p;
+}
+
 function trad(lang: Lang): ContenuLang | undefined {
-  return lang === "fr" ? undefined : CONTENU_I18N[lang];
+  return lang === "fr" ? undefined : registre.get(lang);
 }
 
 /** Les lignes du fil d'actualité dans la langue choisie (français si pas de traduction). */

@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { chargerLangue } from "./contenu";
 import { UI } from "./ui";
 
 export type Lang = "fr" | "en" | "es" | "pt" | "de" | "it" | "ht";
@@ -27,6 +28,8 @@ interface ContexteLang {
   lang: Lang;
   setLang: (l: Lang) => void;
   t: (cle: string, vars?: Record<string, string | number>) => string;
+  /** Incrémenté quand les traductions de contenu de la langue active finissent de se charger (déclenche le réaffichage traduit). */
+  version: number;
 }
 
 const Ctx = createContext<ContexteLang | null>(null);
@@ -43,6 +46,20 @@ function langueInitiale(): Lang {
 
 export function LangProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>(langueInitiale);
+  const [version, setVersion] = useState(0);
+
+  // Charge les traductions de contenu de la langue choisie (morceau séparé),
+  // puis force un réaffichage : en attendant, le français est affiché.
+  useEffect(() => {
+    if (lang === "fr") return;
+    let vivant = true;
+    chargerLangue(lang).then(() => {
+      if (vivant) setVersion((v) => v + 1);
+    });
+    return () => {
+      vivant = false;
+    };
+  }, [lang]);
 
   useEffect(() => {
     try {
@@ -63,7 +80,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
     return s;
   };
 
-  return <Ctx.Provider value={{ lang, setLang: setLangState, t }}>{children}</Ctx.Provider>;
+  return <Ctx.Provider value={{ lang, setLang: setLangState, t, version }}>{children}</Ctx.Provider>;
 }
 
 export function useLang(): ContexteLang {
