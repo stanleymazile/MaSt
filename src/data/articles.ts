@@ -20,6 +20,7 @@ export interface Article {
   legende: string;
   auteur: string;
   date: string;
+  dateIso: string;
   lecture: string;
   fiche?: Fiche;
   corps: string[];
@@ -55,6 +56,7 @@ export const ARTICLES: Article[] = [
     legende: "The Day of the Jackal — le thriller d'espionnage qui a relancé le mythe du Chacal.",
     auteur: "Rédaction MaSt",
     date: "21 novembre 2026",
+    dateIso: "2026-11-21",
     lecture: "4 min de lecture",
     fiche: {
       affiche: afficheFilm,
@@ -84,6 +86,7 @@ export const ARTICLES: Article[] = [
     legende: "L'IA conversationnelle passe du chatbot à l'agent capable d'agir.",
     auteur: "Rédaction MaSt",
     date: "21 novembre 2026",
+    dateIso: "2026-11-21",
     lecture: "5 min de lecture",
     corps: [
       "<p>Il y a encore peu, un assistant IA servait surtout à répondre à des questions et à rédiger des textes. La nouvelle génération fait un pas de plus : elle enchaîne des actions — chercher une information, préparer un document, organiser un planning — avec une autonomie croissante, tout en demandant validation aux moments sensibles.</p>",
@@ -105,6 +108,7 @@ export const ARTICLES: Article[] = [
     legende: "Le pliant « livre » s'impose comme le format de référence du segment.",
     auteur: "Rédaction MaSt",
     date: "20 novembre 2026",
+    dateIso: "2026-11-20",
     lecture: "4 min de lecture",
     corps: [
       "<p>À leur arrivée, les smartphones pliants cumulaient les handicaps : pli visible au milieu de l'écran, épaisseur record, fragilité et tarifs stratosphériques. Plusieurs générations plus tard, le tableau a changé : charnières affinées, écrans bien mieux protégés et formats qui tiennent enfin dans une poche comme un téléphone classique une fois refermés.</p>",
@@ -125,6 +129,7 @@ export const ARTICLES: Article[] = [
     legende: "L'intensité du pressing européen ne laisse aucun répit au porteur du ballon.",
     auteur: "Rédaction MaSt",
     date: "20 novembre 2026",
+    dateIso: "2026-11-20",
     lecture: "5 min de lecture",
     corps: [
       "<p>On retient les buteurs, on célèbre les gardiens héroïques. Mais les entraîneurs le répètent à chaque conférence de presse : une grande soirée européenne se construit au milieu. C'est là que se règlent le rythme, la hauteur du bloc et la capacité à ressortir proprement sous pression.</p>",
@@ -146,6 +151,7 @@ export const ARTICLES: Article[] = [
     legende: "Chaque surface d'une F1 est sculptée pour dompter l'air.",
     auteur: "Rédaction MaSt",
     date: "19 novembre 2026",
+    dateIso: "2026-11-19",
     lecture: "4 min de lecture",
     corps: [
       "<p>À plus de 300 km/h, une Formule 1 génère assez d'appui aérodynamique pour — en théorie — rouler au plafond. Cet appui est le nerf de la guerre : il permet de passer les virages rapides à des vitesses défiant l'instinct, mais chaque gramme de traînée coûte de la vitesse de pointe en ligne droite.</p>",
@@ -166,6 +172,7 @@ export const ARTICLES: Article[] = [
     legende: "Le salon est devenu la première salle des thrillers d'espionnage.",
     auteur: "Rédaction MaSt",
     date: "19 novembre 2026",
+    dateIso: "2026-11-19",
     lecture: "4 min de lecture",
     corps: [
       "<p>Il fut un temps où l'espionnage appartenait au grand écran. Les plateformes ont changé la donne : le format série permet de déployer ce que le cinéma devait compresser — la patience d'une filature, la psychologie d'un agent double, les ramifications d'une opération clandestine.</p>",
@@ -185,6 +192,7 @@ export const ARTICLES: Article[] = [
     legende: "Les grandes franchises restent les locomotives des salles obscures.",
     auteur: "Rédaction MaSt",
     date: "18 novembre 2026",
+    dateIso: "2026-11-18",
     lecture: "5 min de lecture",
     corps: [
       "<p>Regardez le calendrier des sorties : la majorité des grosses affiches portent un numéro, un sous-titre ou un nom d'univers connu. Pour les studios, la logique est implacable — une marque installée réduit le risque dans un marché où chaque blockbuster engage des budgets colossaux.</p>",
@@ -206,6 +214,7 @@ export const ARTICLES: Article[] = [
     legende: "La prévisualisation assistée par IA accélère déjà le travail des équipes de tournage.",
     auteur: "Rédaction MaSt",
     date: "18 novembre 2026",
+    dateIso: "2026-11-18",
     lecture: "5 min de lecture",
     corps: [
       "<p>Générer une rue de nuit sous la pluie, tester un décor avant de le construire, visualiser un plan impossible à tourner : la vidéo générative est entrée dans les studios par la porte de la prévisualisation, là où elle fait gagner des semaines de travail sans apparaître à l'écran.</p>",
@@ -226,6 +235,7 @@ export const ARTICLES: Article[] = [
     legende: "L'interopérabilité devient l'argument numéro un de la maison connectée.",
     auteur: "Rédaction MaSt",
     date: "17 novembre 2026",
+    dateIso: "2026-11-17",
     lecture: "4 min de lecture",
     corps: [
       "<p>Le scénario était connu de tous les early adopters : une application pour les ampoules, une autre pour la serrure, une troisième pour le thermostat — et des objets qui s'ignoraient superbement. Les standards d'interopérabilité récents changent la donne : les objets récents se reconnaissent et coopèrent, quel que soit leur fabricant.</p>",

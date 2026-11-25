@@ -4,7 +4,7 @@ export const SITE_URL = "https://mazilepost.web.app";
 export const NOM_SITE = "MaSt";
 export const DESC_DEFAUT =
   "MaSt — l'actualité cinéma, séries, tech, intelligence artificielle et sport, sélectionnée et décryptée chaque jour.";
-export const IMAGE_PARTAGE = `${SITE_URL}/og-image.png`;
+export const IMAGE_PARTAGE = "https://raw.githubusercontent.com/stanleymazile/MaSt/main/og-image.png";
 
 export function cheminRubrique(id: string): string {
   return id === "toutes" ? "/" : `/rubrique/${id}`;
@@ -32,6 +32,49 @@ function fixerMetaParPropriete(propriete: string, contenu: string) {
     document.head.appendChild(m);
   }
   m.setAttribute("content", contenu);
+}
+
+const ID_LD_ARTICLE = "ld-article";
+
+/** Injecte (ou met à jour) les données structurées NewsArticle de l'article ouvert — pensé pour Google Actualités. */
+export function appliquerDonneesArticle(article: {
+  titre: string;
+  chapo: string;
+  dateIso: string;
+  tag: string;
+  id: string;
+}) {
+  let script = document.getElementById(ID_LD_ARTICLE) as HTMLScriptElement | null;
+  if (!script) {
+    script = document.createElement("script");
+    script.id = ID_LD_ARTICLE;
+    script.type = "application/ld+json";
+    document.head.appendChild(script);
+  }
+  const url = SITE_URL + cheminArticle(article.id);
+  script.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: article.titre,
+    description: article.chapo,
+    datePublished: article.dateIso,
+    dateModified: article.dateIso,
+    inLanguage: "fr-FR",
+    articleSection: article.tag,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    image: [IMAGE_PARTAGE],
+    author: { "@type": "Organization", name: "Rédaction MaSt", url: SITE_URL + "/" },
+    publisher: {
+      "@type": "Organization",
+      name: NOM_SITE,
+      logo: { "@type": "ImageObject", url: IMAGE_PARTAGE },
+    },
+  });
+}
+
+/** Retire les données structurées NewsArticle quand on quitte la vue article. */
+export function retirerDonneesArticle() {
+  document.getElementById(ID_LD_ARTICLE)?.remove();
 }
 
 /** Met à jour le titre, la description, l'URL canonique et les balises de partage pour la vue courante. */

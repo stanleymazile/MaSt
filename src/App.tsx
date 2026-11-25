@@ -1,6 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { ARTICLES, RUBRIQUES, TOP_IDS } from "./data/articles";
-import { appliquerSeo, cheminArticle, cheminRubrique, DESC_DEFAUT } from "./seo";
+import {
+  appliquerDonneesArticle,
+  appliquerSeo,
+  cheminArticle,
+  cheminRubrique,
+  DESC_DEFAUT,
+  retirerDonneesArticle,
+} from "./seo";
 import Header from "./components/Header";
 import SideMenu from "./components/SideMenu";
 import SearchOverlay from "./components/SearchOverlay";
@@ -95,13 +102,16 @@ export default function App() {
         chemin: cheminArticle(articleOuvert.id),
         type: "article",
       });
+      appliquerDonneesArticle(articleOuvert);
     } else if (rubrique !== "toutes") {
+      retirerDonneesArticle();
       appliquerSeo({
         titre: `${RUBRIQUES[rubrique]} — actualité et décryptages | MaSt`,
         description: `Toute l'actualité ${RUBRIQUES[rubrique]} sur MaSt : news, décryptages et analyses, sélectionnés et vérifiés chaque jour.`,
         chemin: cheminRubrique(rubrique),
       });
     } else {
+      retirerDonneesArticle();
       appliquerSeo({ titre: "MaSt — Ciné, Tech, IA & Sport", description: DESC_DEFAUT, chemin: "/" });
     }
   }, [articleOuvert, rubrique]);
