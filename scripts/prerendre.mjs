@@ -172,7 +172,7 @@ function main() {
       articleSection: tag,
       mainEntityOfPage: { "@type": "WebPage", "@id": url },
       image: [imageUrl],
-      author: { "@type": "Organization", name: "Rédaction MaSt", url: `${SITE}/a-propos` },
+      author: { "@type": "Person", name: "Stanley Mazile", jobTitle: "Fondateur et rédacteur en chef", url: `${SITE}/a-propos` },
       publisher: { "@type": "Organization", name: "MaSt", logo: { "@type": "ImageObject", url: IMAGE_PARTAGE } },
     };
     ecrire(
