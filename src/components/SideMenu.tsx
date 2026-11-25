@@ -50,17 +50,20 @@ export default function SideMenu({ ouvert, onFermer, onRubrique }: SideMenuProps
                 {r.label}
                 <ChevronRight size={20} strokeWidth={2.4} className="opacity-85" />
               </button>
-              {SOUS_PAR_RUBRIQUE[r.id]?.map((s) => (
-                <button
-                  key={s.id}
-                  type="button"
-                  onClick={() => onRubrique(r.id, s.id)}
-                  className="flex min-h-[44px] w-full items-center justify-between py-2.5 pl-[42px] pr-[22px] text-left text-[16px] font-semibold text-[#d8d8d8] transition-colors hover:bg-white/[0.06]"
-                >
-                  {s.label}
-                  <ChevronRight size={16} strokeWidth={2.4} className="opacity-70" />
-                </button>
-              ))}
+              {SOUS_PAR_RUBRIQUE[r.id] && (
+                <div className="mb-1.5 ml-[22px] border-l-2 border-accent/60">
+                  {SOUS_PAR_RUBRIQUE[r.id].map((s) => (
+                    <button
+                      key={s.id}
+                      type="button"
+                      onClick={() => onRubrique(r.id, s.id)}
+                      className="flex min-h-[42px] w-full items-center py-2 pl-4 pr-[22px] text-left text-[15.5px] font-semibold text-[#d8d8d8] transition-colors hover:bg-white/[0.06] hover:text-white"
+                    >
+                      {s.label}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </nav>

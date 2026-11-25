@@ -44,6 +44,13 @@ export const RUBRIQUES: Record<string, string> = {
 };
 
 export const SOUS_RUBRIQUES: Record<string, string> = {
+  "box-office": "Box-office",
+  "coulisses": "Coulisses",
+  "netflix": "Netflix",
+  "smartphones": "Smartphones",
+  "recherche-ia": "Recherche",
+  "entreprises-ia": "Entreprises",
+  "voile": "Voile",
   "jeu-video": "Jeu vidéo",
   "jeu-societe": "Jeu de société",
   "eco-bourse": "Économie & Bourse",
@@ -51,6 +58,17 @@ export const SOUS_RUBRIQUES: Record<string, string> = {
 };
 
 export const SOUS_PAR_RUBRIQUE: Record<string, { id: string; label: string }[]> = {
+  cine: [
+    { id: "box-office", label: "Box-office" },
+    { id: "coulisses", label: "Coulisses" },
+  ],
+  series: [{ id: "netflix", label: "Netflix" }],
+  tech: [{ id: "smartphones", label: "Smartphones" }],
+  ia: [
+    { id: "recherche-ia", label: "Recherche" },
+    { id: "entreprises-ia", label: "Entreprises" },
+  ],
+  sport: [{ id: "voile", label: "Voile" }],
   jeux: [
     { id: "jeu-video", label: "Jeu vidéo" },
     { id: "jeu-societe", label: "Jeu de société" },
@@ -78,6 +96,7 @@ export const ARTICLES: Article[] = [
   {
     id: "hunger-games-sunrise-on-the-reaping-225-millions-box-office",
     rubrique: "cine",
+    branche: "box-office",
     tag: "Cinéma",
     titre: "Hunger Games : le préquel que personne n'attendait explose le box-office avec 225 millions de dollars en trois jours",
     chapo: "Sorti le 20 novembre, « The Hunger Games: Sunrise on the Reaping » a récolté 120 millions de dollars en Amérique du Nord et 225 millions dans le monde dès son premier week-end, près du triple de son prédécesseur. Un démarrage que les pronostics n'avaient pas vu venir, et qui replace la saga de Suzanne Collins au sommet d'Hollywood.",
@@ -114,6 +133,7 @@ export const ARTICLES: Article[] = [
   {
     id: "hypothese-riemann-resolue-ia-claude",
     rubrique: "ia",
+    branche: "recherche-ia",
     tag: "IA",
     titre: "L'hypothèse de Riemann, le problème à 1 million de dollars vieux de 167 ans, serait résolue avec l'aide de l'IA Claude",
     chapo: "Le 20 novembre, un chercheur d'Anthropic a publié une démonstration formelle complète de l'hypothèse de Riemann, vérifiée automatiquement par l'assistant de preuves Lean. Si la communauté mathématique la valide, c'est la chute du plus célèbre des problèmes ouverts — et un basculement pour l'IA elle-même.",
@@ -139,6 +159,7 @@ export const ARTICLES: Article[] = [
   {
     id: "motorola-signature-27-smartphone-exces",
     rubrique: "tech",
+    branche: "smartphones",
     tag: "Tech",
     titre: "Motorola Signature 27 : le smartphone de l'excès à 1 899 € qui veut humilier les iPhone et les Galaxy",
     chapo: "Écran 6,9 pouces, batterie silicium-carbone de 7 000 mAh, triple module 50 Mpx signé Sony et deuxième place mondiale au classement photo de DxOMark : avec le Signature 27, Motorola sort l'artillerie lourde contre Apple et Samsung. Mais à 1 899 €, le constructeur joue sa crédibilité.",
@@ -180,6 +201,7 @@ export const ARTICLES: Article[] = [
   {
     id: "lupin-partie-4-quatre-saisons-top-10-netflix",
     rubrique: "series",
+    branche: "netflix",
     tag: "Séries",
     titre: "Lupin : les quatre saisons de la série d'Omar Sy occupent en même temps le Top 10 mondial de Netflix",
     chapo: "Avec 10,8 millions de visionnages en une semaine, la partie 4 de « Lupin » s'est installée à la première place mondiale des séries non anglophones de Netflix. Fait rarissime : les trois saisons précédentes l'ont rejointe dans le même classement, portant la franchise à 22,2 millions de visionnages en sept jours.",
@@ -204,6 +226,7 @@ export const ARTICLES: Article[] = [
   {
     id: "route-du-rhum-2026-tom-laperche-record",
     rubrique: "sport",
+    branche: "voile",
     tag: "Sport",
     titre: "Route du Rhum : à 29 ans, Tom Laperche pulvérise le record pour sa toute première traversée",
     chapo: "Pour sa première participation à la Route du Rhum, Tom Laperche a remporté la classe Ultim en 6 jours, 13 heures, 27 minutes et 40 secondes, effaçant de plus de six heures le record de Charles Caudrelier. Une traversée maîtrisée de bout en bout, entre duel au sommet, abandon du tenant du titre et chavirage de son grand rival.",
@@ -301,6 +324,7 @@ export const ARTICLES: Article[] = [
   {
     id: "jensen-huang-retour-nvidia",
     rubrique: "ia",
+    branche: "entreprises-ia",
     tag: "IA",
     titre: "Onze jours après sa chute, Jensen Huang reprend déjà les rênes de Nvidia",
     chapo: "Démissionnaire le 12 novembre sur fond de scandale, le fondateur de Nvidia a été réinstallé à l'unanimité par son conseil d'administration, lundi 23 novembre, avec l'appui appuyé de la Maison-Blanche. En onze jours d'absence, plus de 1 000 milliards de dollars de capitalisation s'étaient envolés — et Wall Street a salué son retour par une envolée historique.",
@@ -326,6 +350,7 @@ export const ARTICLES: Article[] = [
   {
     id: "robert-pattinson-nouveau-james-bond",
     rubrique: "cine",
+    branche: "coulisses",
     tag: "Cinéma",
     titre: "Son nom est Pattinson… Robert Pattinson : l'ancien vampire de « Twilight » devient le nouveau James Bond",
     chapo: "C'est officiel : Amazon MGM Studios a annoncé, lundi 16 novembre, que Robert Pattinson incarnera James Bond dans le 26e film de la saga, réalisé par Denis Villeneuve. À 40 ans, l'acteur de « Twilight » et de « The Batman » succède à Daniel Craig et devient le septième 007 de la série officielle — le premier de l'ère Amazon.",
@@ -352,6 +377,7 @@ export const ARTICLES: Article[] = [
   {
     id: "iphone-duo-crackgate-ecran-fissure",
     rubrique: "tech",
+    branche: "smartphones",
     tag: "Tech",
     titre: "« Crackgate » : à 1 999 dollars, l'iPhone pliable d'Apple se fissure dès les premières heures",
     chapo: "Lancé le 23 octobre, l'iPhone Duo, premier smartphone pliable d'Apple, devait être le produit de l'année. Mais pour un « petit nombre » d'acheteurs — selon les mots mêmes d'Apple —, l'écran interne s'est fissuré dès les premières heures d'utilisation, toujours au même endroit, le long de la charnière.",

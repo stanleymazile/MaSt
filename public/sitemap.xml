@@ -85,6 +85,48 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://mazilepost.web.app/rubrique/cine/box-office</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/rubrique/cine/coulisses</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/rubrique/series/netflix</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/rubrique/tech/smartphones</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/rubrique/ia/recherche-ia</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/rubrique/ia/entreprises-ia</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/rubrique/sport/voile</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://mazilepost.web.app/telephone/xiaomi-redmi-note-15-5g</loc>
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
