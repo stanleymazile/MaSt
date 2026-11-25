@@ -79,12 +79,6 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://mazilepost.web.app/article/cine-franchises</loc>
-    <lastmod>2026-11-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
     <loc>https://mazilepost.web.app/article/jensen-huang-retour-nvidia</loc>
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
@@ -98,6 +92,30 @@
   </url>
   <url>
     <loc>https://mazilepost.web.app/article/iphone-duo-crackgate-ecran-fissure</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/rubrique/jeux</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/rubrique/jeux/jeu-video</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/rubrique/jeux/jeu-societe</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/article/gta-vi-record-ventes-premier-jour</loc>
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>

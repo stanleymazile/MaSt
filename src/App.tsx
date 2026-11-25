@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
-import { ARTICLES, RUBRIQUES, TOP_IDS } from "./data/articles";
+import { ARTICLES, RUBRIQUES, SOUS_PAR_RUBRIQUE, SOUS_RUBRIQUES, TOP_IDS } from "./data/articles";
 import {
   appliquerDonneesArticle,
   appliquerSeo,
   cheminArticle,
   cheminRubrique,
+  cheminSousRubrique,
   DESC_DEFAUT,
   retirerDonneesArticle,
 } from "./seo";
@@ -24,24 +25,33 @@ const RUBRIQUES_CARTES: { id: string; nom: string; desc: string }[] = [
   { id: "tech", nom: "Tech", desc: "Smartphones, objets connectés et innovations" },
   { id: "ia", nom: "IA", desc: "Modèles, agents et usages qui changent la donne" },
   { id: "sport", nom: "Sport", desc: "Foot, F1 et grands rendez-vous décryptés" },
+  { id: "jeux", nom: "Jeux", desc: "GTA, consoles et les sorties qui comptent" },
 ];
 
-/** Lit la route courante (/ , /rubrique/:id , /article/:id) pour ouvrir directement la bonne vue. */
-function lireRoute(): { rubrique: string; articleId: string | null } {
+/** Lit la route courante (/ , /rubrique/:id , /rubrique/:id/:sous , /article/:id) pour ouvrir directement la bonne vue. */
+function lireRoute(): { rubrique: string; sousRubrique: string | null; articleId: string | null } {
   const p = window.location.pathname;
   const mArt = p.match(/^\/article\/([\w-]+)\/?$/);
   if (mArt && ARTICLES.some((a) => a.id === mArt[1])) {
     const art = ARTICLES.find((a) => a.id === mArt[1])!;
-    return { rubrique: art.rubrique, articleId: art.id };
+    return { rubrique: art.rubrique, sousRubrique: art.branche ?? null, articleId: art.id };
   }
-  const mRub = p.match(/^\/rubrique\/([\w-]+)\/?$/);
-  if (mRub && mRub[1] in RUBRIQUES) return { rubrique: mRub[1], articleId: null };
-  return { rubrique: "toutes", articleId: null };
+  const mRub = p.match(/^\/rubrique\/([\w-]+)(?:\/([\w-]+))?\/?$/);
+  if (mRub && mRub[1] in RUBRIQUES) {
+    const sous = mRub[2] && mRub[2] in SOUS_RUBRIQUES ? mRub[2] : null;
+    return { rubrique: mRub[1], sousRubrique: sous, articleId: null };
+  }
+  return { rubrique: "toutes", sousRubrique: null, articleId: null };
+}
+
+function cheminVue(rubrique: string, sousRubrique: string | null): string {
+  return sousRubrique ? cheminSousRubrique(rubrique, sousRubrique) : cheminRubrique(rubrique);
 }
 
 export default function App() {
   const [routeInitiale] = useState(lireRoute);
   const [rubrique, setRubrique] = useState(routeInitiale.rubrique);
+  const [sousRubrique, setSousRubrique] = useState<string | null>(routeInitiale.sousRubrique);
   const [articleId, setArticleId] = useState<string | null>(routeInitiale.articleId);
   const [menuOuvert, setMenuOuvert] = useState(false);
   const [rechercheOuverte, setRechercheOuverte] = useState(false);
@@ -55,11 +65,12 @@ export default function App() {
   }, []);
 
   const allerRubrique = useCallback(
-    (r: string) => {
+    (r: string, sous: string | null = null) => {
       setRubrique(r);
+      setSousRubrique(sous);
       setArticleId(null);
       setMenuOuvert(false);
-      window.history.pushState(null, "", cheminRubrique(r));
+      window.history.pushState(null, "", cheminVue(r, sous));
       defilerHaut(true);
     },
     [defilerHaut],
@@ -77,15 +88,16 @@ export default function App() {
 
   const retourGrille = useCallback(() => {
     setArticleId(null);
-    window.history.pushState(null, "", cheminRubrique(rubrique));
+    window.history.pushState(null, "", cheminVue(rubrique, sousRubrique));
     defilerHaut(true);
-  }, [defilerHaut, rubrique]);
+  }, [defilerHaut, rubrique, sousRubrique]);
 
   /* Boutons précédent / suivant du navigateur */
   useEffect(() => {
     const onPop = () => {
       const r = lireRoute();
       setRubrique(r.rubrique);
+      setSousRubrique(r.sousRubrique);
       setArticleId(r.articleId);
       defilerHaut(false);
     };
@@ -103,6 +115,13 @@ export default function App() {
         type: "article",
       });
       appliquerDonneesArticle(articleOuvert);
+    } else if (sousRubrique) {
+      retirerDonneesArticle();
+      appliquerSeo({
+        titre: `${SOUS_RUBRIQUES[sousRubrique]} — actualité et décryptages | MaSt`,
+        description: `Toute l'actualité ${SOUS_RUBRIQUES[sousRubrique]} sur MaSt : news, décryptages et analyses, sélectionnés et vérifiés chaque jour.`,
+        chemin: cheminSousRubrique(rubrique, sousRubrique),
+      });
     } else if (rubrique !== "toutes") {
       retirerDonneesArticle();
       appliquerSeo({
@@ -114,7 +133,7 @@ export default function App() {
       retirerDonneesArticle();
       appliquerSeo({ titre: "MaSt — Ciné, Tech, IA & Sport", description: DESC_DEFAUT, chemin: "/" });
     }
-  }, [articleOuvert, rubrique]);
+  }, [articleOuvert, rubrique, sousRubrique]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -129,17 +148,28 @@ export default function App() {
 
   const allerNewsletter = useCallback(() => {
     setArticleId(null);
-    window.history.pushState(null, "", cheminRubrique(rubrique));
+    window.history.pushState(null, "", cheminVue(rubrique, sousRubrique));
     setTimeout(() => {
       document.getElementById("champ-email")?.focus({ preventScroll: false });
       document.getElementById("newsletter")?.scrollIntoView({ behavior: "smooth", block: "center" });
     }, 60);
-  }, [rubrique]);
+  }, [rubrique, sousRubrique]);
 
   const une = ARTICLES[0];
   const topArticles = TOP_IDS.map((id) => ARTICLES.find((a) => a.id === id)!).filter(Boolean);
-  const grille = ARTICLES.filter((a) => rubrique === "toutes" || a.rubrique === rubrique);
-  const titreGrille = rubrique === "toutes" ? "Dernières news" : RUBRIQUES[rubrique];
+  const grille = ARTICLES.filter(
+    (a) =>
+      (rubrique === "toutes" || a.rubrique === rubrique) && (!sousRubrique || a.branche === sousRubrique),
+  );
+  const titreGrille = sousRubrique
+    ? SOUS_RUBRIQUES[sousRubrique]
+    : rubrique === "toutes"
+      ? "Dernières news"
+      : RUBRIQUES[rubrique];
+  const puceClasse = (actif: boolean) =>
+    `inline-flex min-h-9 items-center rounded-full px-3.5 font-display text-[13px] font-bold uppercase tracking-[0.4px] no-underline transition-colors ${
+      actif ? "bg-accent text-white" : "bg-fond-alt text-texte hover:text-accent"
+    }`;
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -174,6 +204,33 @@ export default function App() {
 
             <div className="mt-2 grid grid-cols-1 gap-7 min-[980px]:grid-cols-[1fr_330px]">
               <div>
+                {SOUS_PAR_RUBRIQUE[rubrique] && (
+                  <div className="flex flex-wrap gap-2 pt-5">
+                    <a
+                      href={cheminRubrique(rubrique)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        allerRubrique(rubrique);
+                      }}
+                      className={puceClasse(!sousRubrique)}
+                    >
+                      Tous
+                    </a>
+                    {SOUS_PAR_RUBRIQUE[rubrique].map((s) => (
+                      <a
+                        key={s.id}
+                        href={cheminSousRubrique(rubrique, s.id)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          allerRubrique(rubrique, s.id);
+                        }}
+                        className={puceClasse(sousRubrique === s.id)}
+                      >
+                        {s.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
                 <TitreSection
                   action={
                     <button
@@ -210,7 +267,7 @@ export default function App() {
             )}
 
             <TitreSection>Explorer MaSt</TitreSection>
-            <div className="grid grid-cols-2 gap-4 min-[860px]:grid-cols-4">
+            <div className="grid grid-cols-2 gap-4 min-[860px]:grid-cols-5">
               {RUBRIQUES_CARTES.map((r) => (
                 <a
                   key={r.id}

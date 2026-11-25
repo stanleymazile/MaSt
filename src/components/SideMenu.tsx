@@ -1,11 +1,11 @@
 import { ChevronRight, X } from "lucide-react";
-import { NAV_RUBRIQUES } from "../data/articles";
+import { NAV_RUBRIQUES, SOUS_PAR_RUBRIQUE } from "../data/articles";
 import { LogoTexte } from "./Logo";
 
 interface SideMenuProps {
   ouvert: boolean;
   onFermer: () => void;
-  onRubrique: (r: string) => void;
+  onRubrique: (r: string, sous?: string | null) => void;
 }
 
 export default function SideMenu({ ouvert, onFermer, onRubrique }: SideMenuProps) {
@@ -39,17 +39,29 @@ export default function SideMenu({ ouvert, onFermer, onRubrique }: SideMenuProps
         </div>
         <nav className="py-2.5 pb-6">
           {NAV_RUBRIQUES.map((r) => (
-            <button
-              key={r.id}
-              type="button"
-              onClick={() => onRubrique(r.id)}
-              className={`flex min-h-[52px] w-full items-center justify-between px-[22px] py-[15px] text-left font-display text-[19px] font-extrabold uppercase tracking-[0.3px] transition-colors hover:bg-white/[0.06] ${
-                r.id === "toutes" ? "text-accent-clair" : "text-white"
-              }`}
-            >
-              {r.label}
-              <ChevronRight size={20} strokeWidth={2.4} className="opacity-85" />
-            </button>
+            <div key={r.id}>
+              <button
+                type="button"
+                onClick={() => onRubrique(r.id)}
+                className={`flex min-h-[52px] w-full items-center justify-between px-[22px] py-[15px] text-left font-display text-[19px] font-extrabold uppercase tracking-[0.3px] transition-colors hover:bg-white/[0.06] ${
+                  r.id === "toutes" ? "text-accent-clair" : "text-white"
+                }`}
+              >
+                {r.label}
+                <ChevronRight size={20} strokeWidth={2.4} className="opacity-85" />
+              </button>
+              {SOUS_PAR_RUBRIQUE[r.id]?.map((s) => (
+                <button
+                  key={s.id}
+                  type="button"
+                  onClick={() => onRubrique(r.id, s.id)}
+                  className="flex min-h-[44px] w-full items-center justify-between py-2.5 pl-[42px] pr-[22px] text-left text-[16px] font-semibold text-[#d8d8d8] transition-colors hover:bg-white/[0.06]"
+                >
+                  {s.label}
+                  <ChevronRight size={16} strokeWidth={2.4} className="opacity-70" />
+                </button>
+              ))}
+            </div>
           ))}
         </nav>
         <div className="mt-auto border-t border-[#3d3d3d] px-[22px] py-[18px] text-[13.5px] text-[#bdbdbd]">

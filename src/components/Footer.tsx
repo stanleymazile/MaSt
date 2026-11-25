@@ -15,6 +15,7 @@ export default function Footer({ onRubrique, onNewsletter }: FooterProps) {
     { id: "tech", label: "Tech" },
     { id: "ia", label: "IA" },
     { id: "sport", label: "Sport" },
+    { id: "jeux", label: "Jeux" },
   ];
 
   return (

@@ -1,4 +1,4 @@
-import { afficheFilm, articleBond, articleCrackgate, articleF1, articleIa, articleJensen, articleSeries, articleSport, articleTech, heroCine } from "./images";
+import { afficheFilm, articleBond, articleCrackgate, articleF1, articleIa, articleGta, articleJensen, articleSeries, articleSport, articleTech, heroCine } from "./images";
 
 export interface Fiche {
   affiche: string;
@@ -13,6 +13,7 @@ export interface Fiche {
 export interface Article {
   id: string;
   rubrique: string;
+  branche?: string;
   tag: string;
   titre: string;
   chapo: string;
@@ -33,6 +34,19 @@ export const RUBRIQUES: Record<string, string> = {
   ia: "IA",
   sport: "Sport",
   streaming: "Streaming",
+  jeux: "Jeux",
+};
+
+export const SOUS_RUBRIQUES: Record<string, string> = {
+  "jeu-video": "Jeu vidéo",
+  "jeu-societe": "Jeu de société",
+};
+
+export const SOUS_PAR_RUBRIQUE: Record<string, { id: string; label: string }[]> = {
+  jeux: [
+    { id: "jeu-video", label: "Jeu vidéo" },
+    { id: "jeu-societe", label: "Jeu de société" },
+  ],
 };
 
 export const NAV_RUBRIQUES: { id: string; label: string }[] = [
@@ -42,6 +56,7 @@ export const NAV_RUBRIQUES: { id: string; label: string }[] = [
   { id: "tech", label: "Tech" },
   { id: "ia", label: "IA" },
   { id: "sport", label: "Sport" },
+  { id: "jeux", label: "Jeux" },
   { id: "streaming", label: "Streaming" },
 ];
 
@@ -154,6 +169,32 @@ export const ARTICLES: Article[] = [
     ],
   },
   {
+    id: "gta-vi-record-ventes-premier-jour",
+    rubrique: "jeux",
+    branche: "jeu-video",
+    tag: "Jeux",
+    titre: "3,79 milliards de dollars en un jour : GTA VI signe le plus gros lancement de l'histoire du divertissement",
+    chapo: "Treize ans après GTA V, Grand Theft Auto VI a généré 3,79 milliards de dollars de ventes dès son premier jour, le 19 novembre — plus que le box-office mondial total d'« Avengers: Endgame ». Avec 32,5 millions de précommandes et une note de 99 sur Metacritic, Rockstar signe un lancement qui écrase tous les records, cinéma et musique compris.",
+    image: articleGta,
+    legende: "Les frères Sam et Dan Houser, cofondateurs de Rockstar Games, photographiés dans les locaux du studio. Sam Houser, président du studio, a salué « la réponse des joueurs du monde entier » lors du lancement de GTA VI. (Photo : Anthony Parello, CC BY-SA 4.0, via Wikimedia Commons)",
+    auteur: "Rédaction MaSt",
+    date: "24 novembre 2026",
+    dateIso: "2026-11-24",
+    lecture: "5 min de lecture",
+    corps: [
+      "<p>Il aura fallu treize ans d'attente, deux reports et un budget de production estimé à plus d'un milliard de dollars. Mais le verdict du premier jour est tombé comme un coup de tonnerre : sorti le jeudi 19 novembre sur PlayStation 5 et Xbox Series X/S, <em>Grand Theft Auto VI</em> a atteint 3,79 milliards de dollars de ventes au détail dès ses vingt-quatre premières heures, a annoncé Take-Two Interactive, la maison mère de Rockstar Games. C'est, tout simplement, le plus gros lancement de l'histoire du divertissement — tous médias confondus.</p>",
+      "<p>Pour mesurer l'exploit, CNN avance deux comparaisons qui donnent le vertige : le film <em>Avengers: Endgame</em> avait rapporté 2,9 milliards de dollars au box-office… sur l'ensemble de sa carrière en salles. La tournée Eras Tour de Taylor Swift, phénomène planétaire, avait généré environ 2 milliards de dollars. GTA VI a dépassé les deux en une seule journée. Avant même sa sortie, le jeu avait déjà engrangé 2,36 milliards de dollars de revenus, selon le cabinet Sensor Tower, et Take-Two revendique 32,5 millions d'exemplaires précommandés — un record absolu, pour un jeu proposé à 79,99 dollars en édition standard et 99,99 dollars en édition Ultimate.</p>",
+      "<blockquote>« C'est avec une immense gratitude que nous ouvrons un nouveau chapitre de Rockstar Games avec la sortie de Grand Theft Auto VI. Nous sommes incroyablement touchés par la réponse des joueurs du monde entier et nous ne pourrions pas être plus enthousiastes à l'idée de partager ce moment avec vous. » — Sam Houser, président et fondateur de Rockstar Games, dans le communiqué officiel de Take-Two</blockquote>",
+      "<h2>Un raz-de-marée mondial, de Wellington à Times Square</h2>",
+      "<p>Le jeu est devenu jouable à minuit, heure locale, dans chaque pays — et la Nouvelle-Zélande, parmi les premiers territoires servis, a vu ses fournisseurs d'accès se préparer à une déferlante de téléchargements : avec un fichier de 212 gigaoctets, du jamais-vu, GTA VI pèse plus lourd que bien des bibliothèques entières de jeux. À New York, un panneau géant annonçait la sortie près de Times Square ; à Las Vegas, un manoir a été repeint aux couleurs du jeu. Les plateformes de streaming ont elles aussi craqué sous l'affluence : selon Stream Charts, les spectateurs ont passé plus de 132 millions d'heures à regarder GTA VI sur Twitch, YouTube et Kick le jour du lancement, un record là encore. À Wall Street, l'action Take-Two a bondi de plus de 8 % pendant le déploiement mondial.</p>",
+      "<h2>Vice City, Lucia et Jason : le retour aux sources</h2>",
+      "<p>Le jeu ramène les joueurs à Vice City, version fictive et déjantée de Miami, au cœur de l'État de Leonida, inspiré de la Floride — présenté par Rockstar comme son monde ouvert le plus vaste et le plus détaillé. Au centre du récit, un duo façon Bonnie and Clyde : Lucia Caminos, fraîchement sortie de prison, et Jason Duval, ancien soldat lié aux trafiquants des Keys de Leonida, dont les ambitions les entraînent toujours plus loin dans la pègre locale. La critique, elle, est conquise : le jeu affiche une note quasi parfaite de 99 sur Metacritic, et les premiers tests saluent un bond technologique spectaculaire par rapport à GTA V.</p>",
+      "<h2>« Au niveau de James Bond et de Star Wars »</h2>",
+      "<p>Au-delà des chiffres, c'est le statut de la saga qui a changé d'échelle. Dans une note publiée vendredi, Omar Dessouky, analyste chez Bank of America, estime que ce lancement a hissé GTA au rang de « franchise multigénérationnelle » comparable à James Bond, Star Wars ou Mickey Mouse. L'analyste juge aussi que le jeu peut ramener vers les consoles des joueurs qui les avaient délaissées depuis plus de dix ans. De quoi faire de GTA VI le moteur des dépenses de jeux vidéo pour toute la saison des fêtes, alors que la saga dépassait déjà les 470 millions d'exemplaires vendus dans le monde avant cette sortie. Treize ans après GTA V, Rockstar n'a pas seulement sorti un jeu : le studio a déplacé le centre de gravité de l'industrie du divertissement.</p>",
+      "<p><strong>Sources :</strong> <a href='https://ir.take2games.com/node/32701/pdf'>Take-Two Interactive (communiqué officiel)</a> ; <a href='https://www.cnn.com/2026/11/20/media/gta-vi-launch-sales-numbers'>CNN</a> ; <a href='https://techxplore.com/news/2026-11-year-grand-theft-auto-vi.pdf'>Associated Press via TechXplore</a> ; <a href='https://elwatan.dz/gta-vi-jour-j-1-apres-treize-ans-dattente-rockstar-joue-la-partie-de-sa-vie/'>El Watan</a>. Photo : Anthony Parello, <a href='https://commons.wikimedia.org/wiki/File:Sam_Houser_and_Dan_Houser.png'>Wikimedia Commons</a>, licence CC BY-SA 4.0.</p>",
+    ],
+  },
+  {
     id: "ia-agents",
     rubrique: "ia",
     tag: "IA",
@@ -259,34 +300,13 @@ export const ARTICLES: Article[] = [
       "<p>Tournages dans plusieurs capitales européennes, cascades pratiques, casting de cinéma : les plateformes alignent des moyens comparables à ceux d'un blockbuster. La frontière entre « série » et « film en dix heures » n'a jamais été aussi floue — pour le plus grand plaisir des amateurs du genre.</p>",
     ],
   },
-  {
-    id: "cine-franchises",
-    rubrique: "cine",
-    tag: "Cinéma",
-    titre: "Box-office : les franchises tiennent-elles toujours le haut de l'affiche ?",
-    chapo: "Suites, reboots et univers partagés dominent les sorties… mais le public montre des signes de fatigue. État des lieux d'un modèle qui cherche son second souffle.",
-    image: afficheFilm,
-    legende: "Les grandes franchises restent les locomotives des salles obscures.",
-    auteur: "Rédaction MaSt",
-    date: "18 novembre 2026",
-    dateIso: "2026-11-18",
-    lecture: "5 min de lecture",
-    corps: [
-      "<p>Regardez le calendrier des sorties : la majorité des grosses affiches portent un numéro, un sous-titre ou un nom d'univers connu. Pour les studios, la logique est implacable — une marque installée réduit le risque dans un marché où chaque blockbuster engage des budgets colossaux.</p>",
-      "<h2>La fatigue des suites</h2>",
-      "<p>Mais les signes de lassitude se multiplient : des épisodes accueillis tièdement, des spectateurs qui attendent la sortie en streaming, et des succès surprises venus de films originaux portés par le bouche-à-oreille. La rareté redevient un argument : quand chaque semaine apporte « l'épisode de trop », l'événement se dilue.</p>",
-      "<h2>Ce qui marche encore</h2>",
-      "<p>Les franchises qui s'en sortent sont celles qui traitent chaque film comme une œuvre à part entière : un point de vue d'auteur, une vraie prise de risque formelle, et le respect du temps du spectateur. La marque attire dans la salle ; seule la qualité fait revenir pour l'épisode suivant.</p>",
-      "<blockquote>Une franchise n'est pas une garantie : c'est une promesse. Et une promesse se tient à chaque film.</blockquote>",
-      "<p>MaSt suivra la question dans ses critiques et ses fiches notées, où les notes des spectateurs racontent souvent une autre histoire que celle des campagnes marketing.</p>",
-    ],
-  },
 ];
 
 export const FIL_INFO: string[] = [
   "Nvidia : onze jours après sa démission, Jensen Huang est réintégré à la tête du groupe",
   "James Bond : Robert Pattinson devient le nouveau 007 de Denis Villeneuve",
   "« Crackgate » : l'iPhone pliable d'Apple à 1 999 $ se fissure dès les premières heures",
+  "GTA VI : 3,79 milliards de dollars en un jour, le plus gros lancement de l'histoire du divertissement",
   "The Day of the Jackal : la saison 2 se précise, Eddie Redmayne prêt à rempiler",
   "IA : les agents autonomes s'installent dans les assistants du quotidien",
   "Tech : les smartphones pliants passent la barre des formats grand public",

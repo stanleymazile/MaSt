@@ -14,6 +14,10 @@ export function cheminArticle(id: string): string {
   return `/article/${id}`;
 }
 
+export function cheminSousRubrique(rubrique: string, sous: string): string {
+  return `/rubrique/${rubrique}/${sous}`;
+}
+
 function fixerMetaParNom(nom: string, contenu: string) {
   let m = document.querySelector<HTMLMetaElement>(`meta[name="${nom}"]`);
   if (!m) {
