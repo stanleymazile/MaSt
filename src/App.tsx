@@ -1,13 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
 import { ARTICLES, RUBRIQUES, SOUS_PAR_RUBRIQUE, SOUS_RUBRIQUES, TOP_IDS } from "./data/articles";
+import { TELEPHONES } from "./data/telephones";
 import {
   appliquerDonneesArticle,
+  appliquerDonneesTelephone,
   appliquerSeo,
   cheminArticle,
   cheminRubrique,
   cheminSousRubrique,
+  cheminTelephone,
   DESC_DEFAUT,
   retirerDonneesArticle,
+  retirerDonneesTelephone,
 } from "./seo";
 import Header from "./components/Header";
 import SideMenu from "./components/SideMenu";
@@ -18,6 +22,8 @@ import FicheCard from "./components/FicheCard";
 import TopLectures from "./components/TopLectures";
 import Newsletter from "./components/Newsletter";
 import ArticleView, { TitreSection } from "./components/ArticleView";
+import TelephoneView, { TelephonesListe } from "./components/Telephones";
+import ProduitsVitrine from "./components/Produits";
 import Footer from "./components/Footer";
 
 const RUBRIQUES_CARTES: { id: string; nom: string; desc: string }[] = [
@@ -26,22 +32,33 @@ const RUBRIQUES_CARTES: { id: string; nom: string; desc: string }[] = [
   { id: "ia", nom: "IA", desc: "Modèles, agents et usages qui changent la donne" },
   { id: "sport", nom: "Sport", desc: "Foot, F1 et grands rendez-vous décryptés" },
   { id: "jeux", nom: "Jeux", desc: "GTA, consoles et les sorties qui comptent" },
+  { id: "telephones", nom: "Téléphones", desc: "Les fiches caractéristiques des modèles récents, points forts et points faibles" },
+  { id: "business", nom: "Business", desc: "Économie, bourse et les nouveaux produits qui innovent" },
 ];
 
-/** Lit la route courante (/ , /rubrique/:id , /rubrique/:id/:sous , /article/:id) pour ouvrir directement la bonne vue. */
-function lireRoute(): { rubrique: string; sousRubrique: string | null; articleId: string | null } {
+/** Lit la route courante (/ , /rubrique/:id , /rubrique/:id/:sous , /article/:id , /telephone/:id) pour ouvrir directement la bonne vue. */
+function lireRoute(): {
+  rubrique: string;
+  sousRubrique: string | null;
+  articleId: string | null;
+  telephoneId: string | null;
+} {
   const p = window.location.pathname;
+  const mTel = p.match(/^\/telephone\/([\w-]+)\/?$/);
+  if (mTel && TELEPHONES.some((t) => t.id === mTel[1])) {
+    return { rubrique: "telephones", sousRubrique: null, articleId: null, telephoneId: mTel[1] };
+  }
   const mArt = p.match(/^\/article\/([\w-]+)\/?$/);
   if (mArt && ARTICLES.some((a) => a.id === mArt[1])) {
     const art = ARTICLES.find((a) => a.id === mArt[1])!;
-    return { rubrique: art.rubrique, sousRubrique: art.branche ?? null, articleId: art.id };
+    return { rubrique: art.rubrique, sousRubrique: art.branche ?? null, articleId: art.id, telephoneId: null };
   }
   const mRub = p.match(/^\/rubrique\/([\w-]+)(?:\/([\w-]+))?\/?$/);
   if (mRub && mRub[1] in RUBRIQUES) {
     const sous = mRub[2] && mRub[2] in SOUS_RUBRIQUES ? mRub[2] : null;
-    return { rubrique: mRub[1], sousRubrique: sous, articleId: null };
+    return { rubrique: mRub[1], sousRubrique: sous, articleId: null, telephoneId: null };
   }
-  return { rubrique: "toutes", sousRubrique: null, articleId: null };
+  return { rubrique: "toutes", sousRubrique: null, articleId: null, telephoneId: null };
 }
 
 function cheminVue(rubrique: string, sousRubrique: string | null): string {
@@ -53,11 +70,13 @@ export default function App() {
   const [rubrique, setRubrique] = useState(routeInitiale.rubrique);
   const [sousRubrique, setSousRubrique] = useState<string | null>(routeInitiale.sousRubrique);
   const [articleId, setArticleId] = useState<string | null>(routeInitiale.articleId);
+  const [telephoneId, setTelephoneId] = useState<string | null>(routeInitiale.telephoneId);
   const [menuOuvert, setMenuOuvert] = useState(false);
   const [rechercheOuverte, setRechercheOuverte] = useState(false);
   const [notes, setNotes] = useState<Record<string, number>>({});
 
   const articleOuvert = articleId ? (ARTICLES.find((a) => a.id === articleId) ?? null) : null;
+  const telephoneOuvert = telephoneId ? (TELEPHONES.find((t) => t.id === telephoneId) ?? null) : null;
 
   const defilerHaut = useCallback((fluide: boolean) => {
     const reduit = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -69,6 +88,7 @@ export default function App() {
       setRubrique(r);
       setSousRubrique(sous);
       setArticleId(null);
+      setTelephoneId(null);
       setMenuOuvert(false);
       window.history.pushState(null, "", cheminVue(r, sous));
       defilerHaut(true);
@@ -79,8 +99,22 @@ export default function App() {
   const ouvrirArticle = useCallback(
     (id: string) => {
       setRechercheOuverte(false);
+      setTelephoneId(null);
       setArticleId(id);
       window.history.pushState(null, "", cheminArticle(id));
+      defilerHaut(false);
+    },
+    [defilerHaut],
+  );
+
+  const ouvrirTelephone = useCallback(
+    (id: string) => {
+      setRechercheOuverte(false);
+      setArticleId(null);
+      setRubrique("telephones");
+      setSousRubrique(null);
+      setTelephoneId(id);
+      window.history.pushState(null, "", cheminTelephone(id));
       defilerHaut(false);
     },
     [defilerHaut],
@@ -92,6 +126,12 @@ export default function App() {
     defilerHaut(true);
   }, [defilerHaut, rubrique, sousRubrique]);
 
+  const retourTelephones = useCallback(() => {
+    setTelephoneId(null);
+    window.history.pushState(null, "", cheminRubrique("telephones"));
+    defilerHaut(true);
+  }, [defilerHaut]);
+
   /* Boutons précédent / suivant du navigateur */
   useEffect(() => {
     const onPop = () => {
@@ -99,6 +139,7 @@ export default function App() {
       setRubrique(r.rubrique);
       setSousRubrique(r.sousRubrique);
       setArticleId(r.articleId);
+      setTelephoneId(r.telephoneId);
       defilerHaut(false);
     };
     window.addEventListener("popstate", onPop);
@@ -107,7 +148,16 @@ export default function App() {
 
   /* Titre, description et URL canonique propres à chaque vue */
   useEffect(() => {
-    if (articleOuvert) {
+    if (telephoneOuvert) {
+      retirerDonneesArticle();
+      appliquerSeo({
+        titre: `${telephoneOuvert.marque} ${telephoneOuvert.modele} — fiche caractéristiques, prix, points forts et points faibles | MaSt`,
+        description: `${telephoneOuvert.resume}. Caractéristiques complètes du ${telephoneOuvert.marque} ${telephoneOuvert.modele} : écran, processeur, caméras, batterie, prix et notre avis.`,
+        chemin: cheminTelephone(telephoneOuvert.id),
+      });
+      appliquerDonneesTelephone(telephoneOuvert);
+    } else if (articleOuvert) {
+      retirerDonneesTelephone();
       appliquerSeo({
         titre: `${articleOuvert.titre} — MaSt`,
         description: articleOuvert.chapo,
@@ -116,6 +166,7 @@ export default function App() {
       });
       appliquerDonneesArticle(articleOuvert);
     } else if (sousRubrique) {
+      retirerDonneesTelephone();
       retirerDonneesArticle();
       appliquerSeo({
         titre: `${SOUS_RUBRIQUES[sousRubrique]} — actualité et décryptages | MaSt`,
@@ -124,16 +175,27 @@ export default function App() {
       });
     } else if (rubrique !== "toutes") {
       retirerDonneesArticle();
-      appliquerSeo({
-        titre: `${RUBRIQUES[rubrique]} — actualité et décryptages | MaSt`,
-        description: `Toute l'actualité ${RUBRIQUES[rubrique]} sur MaSt : news, décryptages et analyses, sélectionnés et vérifiés chaque jour.`,
-        chemin: cheminRubrique(rubrique),
-      });
+      retirerDonneesTelephone();
+      appliquerSeo(
+        rubrique === "telephones"
+          ? {
+              titre: "Téléphones — fiches caractéristiques des modèles récents | MaSt",
+              description:
+                "Les fiches caractéristiques MaSt des téléphones récents : écran, processeur, caméras, batterie, prix, points forts et points faibles, vérifiés modèle par modèle.",
+              chemin: cheminRubrique(rubrique),
+            }
+          : {
+              titre: `${RUBRIQUES[rubrique]} — actualité et décryptages | MaSt`,
+              description: `Toute l'actualité ${RUBRIQUES[rubrique]} sur MaSt : news, décryptages et analyses, sélectionnés et vérifiés chaque jour.`,
+              chemin: cheminRubrique(rubrique),
+            },
+      );
     } else {
       retirerDonneesArticle();
+      retirerDonneesTelephone();
       appliquerSeo({ titre: "MaSt — Ciné, Tech, IA & Sport", description: DESC_DEFAUT, chemin: "/" });
     }
-  }, [articleOuvert, rubrique, sousRubrique]);
+  }, [articleOuvert, telephoneOuvert, rubrique, sousRubrique]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -148,6 +210,7 @@ export default function App() {
 
   const allerNewsletter = useCallback(() => {
     setArticleId(null);
+    setTelephoneId(null);
     window.history.pushState(null, "", cheminVue(rubrique, sousRubrique));
     setTimeout(() => {
       document.getElementById("champ-email")?.focus({ preventScroll: false });
@@ -166,6 +229,7 @@ export default function App() {
     : rubrique === "toutes"
       ? "Dernières news"
       : RUBRIQUES[rubrique];
+  const estVitrineProduits = rubrique === "business" && sousRubrique === "nouveaux-produits";
   const puceClasse = (actif: boolean) =>
     `inline-flex min-h-9 items-center rounded-full px-3.5 font-display text-[13px] font-bold uppercase tracking-[0.4px] no-underline transition-colors ${
       actif ? "bg-accent text-white" : "bg-fond-alt text-texte hover:text-accent"
@@ -188,7 +252,15 @@ export default function App() {
       />
 
       <main className="mx-auto w-full max-w-[1180px] flex-1 px-4 pb-14">
-        {articleOuvert ? (
+        {telephoneOuvert ? (
+          <TelephoneView
+            key={telephoneOuvert.id}
+            tel={telephoneOuvert}
+            onRetour={retourTelephones}
+            onAccueil={() => allerRubrique("toutes")}
+            onOuvrir={ouvrirTelephone}
+          />
+        ) : articleOuvert ? (
           <ArticleView
             key={articleOuvert.id}
             article={articleOuvert}
@@ -231,27 +303,35 @@ export default function App() {
                     ))}
                   </div>
                 )}
-                <TitreSection
-                  action={
-                    <button
-                      type="button"
-                      onClick={() => allerRubrique("toutes")}
-                      className="inline-flex min-h-9 items-center font-display text-[13.5px] font-bold normal-case tracking-normal underline decoration-accent decoration-[3px]"
-                    >
-                      Tout voir
-                    </button>
-                  }
-                >
-                  {titreGrille}
-                </TitreSection>
-                {grille.length > 0 ? (
-                  <div className="grid grid-cols-1 gap-5 min-[640px]:grid-cols-2 min-[980px]:grid-cols-3">
-                    {grille.map((a) => (
-                      <ArticleCard key={a.id} article={a} onOuvrir={ouvrirArticle} />
-                    ))}
-                  </div>
+                {rubrique === "telephones" ? (
+                  <TelephonesListe onOuvrir={ouvrirTelephone} />
                 ) : (
-                  <p className="py-[26px] text-texte-doux">Aucun article dans cette rubrique pour le moment.</p>
+                  <>
+                    <TitreSection
+                      action={
+                        <button
+                          type="button"
+                          onClick={() => allerRubrique("toutes")}
+                          className="inline-flex min-h-9 items-center font-display text-[13.5px] font-bold normal-case tracking-normal underline decoration-accent decoration-[3px]"
+                        >
+                          Tout voir
+                        </button>
+                      }
+                    >
+                      {titreGrille}
+                    </TitreSection>
+                    {estVitrineProduits ? (
+                      <ProduitsVitrine />
+                    ) : grille.length > 0 ? (
+                      <div className="grid grid-cols-1 gap-5 min-[640px]:grid-cols-2 min-[980px]:grid-cols-3">
+                        {grille.map((a) => (
+                          <ArticleCard key={a.id} article={a} onOuvrir={ouvrirArticle} />
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="py-[26px] text-texte-doux">Aucun article dans cette rubrique pour le moment.</p>
+                    )}
+                  </>
                 )}
               </div>
               <aside className="pt-0 min-[980px]:pt-[92px]">
@@ -261,13 +341,13 @@ export default function App() {
 
             {une.fiche && (
               <>
-                <TitreSection>La fiche du moment</TitreSection>
+                <TitreSection>Le verdict MaSt</TitreSection>
                 <FicheCard fiche={une.fiche} />
               </>
             )}
 
             <TitreSection>Explorer MaSt</TitreSection>
-            <div className="grid grid-cols-2 gap-4 min-[860px]:grid-cols-5">
+            <div className="grid grid-cols-2 gap-4 min-[860px]:grid-cols-4">
               {RUBRIQUES_CARTES.map((r) => (
                 <a
                   key={r.id}

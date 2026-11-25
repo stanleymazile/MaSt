@@ -3,7 +3,7 @@
 export const SITE_URL = "https://mazilepost.web.app";
 export const NOM_SITE = "MaSt";
 export const DESC_DEFAUT =
-  "MaSt — l'actualité cinéma, séries, tech, intelligence artificielle et sport, sélectionnée et décryptée chaque jour.";
+  "MaSt — l'actualité cinéma, séries, tech, IA, sport, jeux et business, plus les fiches caractéristiques des téléphones récents, sélectionnée et décryptée chaque jour.";
 export const IMAGE_PARTAGE = "https://raw.githubusercontent.com/stanleymazile/MaSt/main/og-image.png";
 
 export function cheminRubrique(id: string): string {
@@ -16,6 +16,36 @@ export function cheminArticle(id: string): string {
 
 export function cheminSousRubrique(rubrique: string, sous: string): string {
   return `/rubrique/${rubrique}/${sous}`;
+}
+
+export function cheminTelephone(id: string): string {
+  return `/telephone/${id}`;
+}
+
+const ID_LD_PRODUIT = "ld-produit";
+
+/** Injecte les données structurées Product d'une fiche téléphone ouverte. */
+export function appliquerDonneesTelephone(tel: { marque: string; modele: string; resume: string; id: string }) {
+  let script = document.getElementById(ID_LD_PRODUIT) as HTMLScriptElement | null;
+  if (!script) {
+    script = document.createElement("script");
+    script.id = ID_LD_PRODUIT;
+    script.type = "application/ld+json";
+    document.head.appendChild(script);
+  }
+  script.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: `${tel.marque} ${tel.modele}`,
+    description: tel.resume,
+    brand: { "@type": "Brand", name: tel.marque },
+    url: SITE_URL + cheminTelephone(tel.id),
+  });
+}
+
+/** Retire les données structurées Product quand on quitte une fiche téléphone. */
+export function retirerDonneesTelephone() {
+  document.getElementById(ID_LD_PRODUIT)?.remove();
 }
 
 function fixerMetaParNom(nom: string, contenu: string) {

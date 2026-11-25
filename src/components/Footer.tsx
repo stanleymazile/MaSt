@@ -13,9 +13,11 @@ export default function Footer({ onRubrique, onNewsletter }: FooterProps) {
     { id: "cine", label: "Cinéma" },
     { id: "series", label: "Séries" },
     { id: "tech", label: "Tech" },
+    { id: "telephones", label: "Téléphones" },
     { id: "ia", label: "IA" },
     { id: "sport", label: "Sport" },
     { id: "jeux", label: "Jeux" },
+    { id: "business", label: "Business" },
   ];
 
   return (
@@ -98,8 +100,8 @@ export default function Footer({ onRubrique, onNewsletter }: FooterProps) {
           </div>
         </div>
         <p className="mt-[26px] border-t border-[#333] pt-4 text-[13.5px] text-[#a9a9a9]">
-          © 2026 MaSt — Tous droits réservés. Les notes « Presse » et « Spectateurs » affichées sur les fiches sont
-          celles relevées sur la fiche de l'œuvre concernée.
+          © 2026 MaSt — Tous droits réservés. Les notes « Presse » et « Public » du Verdict MaSt sont celles relevées
+          auprès des sources citées sur la fiche de l'œuvre concernée.
         </p>
       </div>
     </footer>
