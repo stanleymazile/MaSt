@@ -129,7 +129,7 @@ export const ARTICLES: Article[] = [
       "<p>Les critiques, elles, sont partagées : le film affiche environ 68 % d'avis positifs sur Rotten Tomatoes et 56 sur 100 sur Metacritic. Le public, en revanche, a tranché : 94 % d'avis favorables sur Rotten Tomatoes et un CinemaScore de A-, supérieur au B+ du précédent préquel. Avec un budget de production estimé à 200 millions de dollars selon Collider, le film est déjà bien engagé sur la voie de la rentabilité. Prochain test dès cette semaine : le week-end de Thanksgiving, où il affrontera le nouveau film d'animation Disney, « Hexed ».</p>",
       "<p><strong>Sources :</strong> <a href='https://www.boxofficepro.com/weekend-box-office-hunger-games-sunrise-on-the-reaping-sweeps-the-competition-with-120m-debut/'>Boxoffice Pro</a> ; <a href='https://www.thewrap.com/creative-content/movies/hunger-games-sunrise-on-the-reaping-deadlifts-box-office-225-million-opening/'>TheWrap</a> ; <a href='https://ew.com/the-hunger-games-declares-victory-225-million-global-box-office-12273412'>Entertainment Weekly</a> ; <a href='https://collider.com/hunger-games-sunrise-on-the-reaping-box-office-250-million/'>Collider</a>. Photo : Gabriel Hutchinson / WikiPortraits, licence CC BY-SA 4.0, via Wikimedia Commons.</p>",
     ],
-  },,
+  },
   {
     id: "hypothese-riemann-resolue-ia-claude",
     rubrique: "ia",
@@ -155,7 +155,7 @@ export const ARTICLES: Article[] = [
       "<p>Si la validation suit, la portée dépasse largement les mathématiques : ce serait la première conjecture majeure démontrée par une IA travaillant avec un humain, après le premier article de recherche en mathématiques rédigé de manière autonome par un modèle d'OpenAI en septembre dernier. La chasse aux autres problèmes du millénaire — P contre NP, Navier-Stokes, Yang-Mills — est, de fait, ouverte.</p>",
       "<p><strong>Sources :</strong> <a href='https://www.lemonde.fr/sciences/article/2026/11/21/l-hypothese-de-riemann-enfin-demontree_6809012_1650684.html'>Le Monde</a> ; <a href='https://www.cnn.com/2026/11/22/science/riemann-hypothesis-claude-ai-proof-intl/index.html'>CNN</a> ; <a href='https://www.wsj.com/tech/ai/ai-riemann-hypothesis-proof-anthropic-7b3e91a2'>The Wall Street Journal</a>. Photo : portrait de Bernhard Riemann, domaine public, via Wikimedia Commons.</p>",
     ],
-  },,
+  },
   {
     id: "motorola-signature-27-smartphone-exces",
     rubrique: "tech",
@@ -197,7 +197,7 @@ export const ARTICLES: Article[] = [
       "<p>Reste la question qui décidera du sort du Signature 27 : les acheteurs prêts à mettre près de 2 000 € dans un smartphone penseront-ils à Motorola ? La marque parie que la fiche technique et le label DxOMark suffiront à faire oublier des années d'absence du très haut de gamme. Réponse dans les chiffres de vente du premier trimestre 2027.</p>",
       "<p><strong>Sources :</strong> <a href='https://www.gsmarena.com/motorola_signature_27-14402.php'>GSMArena</a> ; <a href='https://www.notebookcheck.net/Motorola-Signature-27-goes-official-with-record-breaking-battery.1130458.0.html'>Notebookcheck</a> ; <a href='https://www.dxomark.com/motorola-signature-27-camera-test/'>DxOMark</a> ; <a href='https://www.frandroid.com/marques/motorola/2845123_motorola-signature-27-prix-fiche-technique'>Frandroid</a>. Photo d'illustration (Motorola Edge 70) : Maksdroider, licence CC BY 4.0, via Wikimedia Commons.</p>",
     ],
-  },,
+  },
   {
     id: "lupin-partie-4-quatre-saisons-top-10-netflix",
     rubrique: "series",
@@ -222,7 +222,7 @@ export const ARTICLES: Article[] = [
       "<p>Reste une question que tous les fans se posent déjà : y aura-t-il une partie 5 ? Netflix n'a pour l'instant rien confirmé, alors que la partie 4 se termine sur un cliffhanger. Une chose est sûre : avec quatre saisons simultanément dans le Top 10 mondial, le gentleman cambrioleur a prouvé qu'il restait l'un des plus beaux succès français de l'ère du streaming.</p>",
       "<p><strong>Sources :</strong> <a href='https://actuanews.fr/2026/11/05/lupin-saison-4-omar-sy-cartonne-sur-netflix-mais-les-nouveaux-chiffres-revelent-une-surprise-face-a-la-saison-3/'>ActuaNews</a> ; <a href='https://divertissements.orange.fr/tv/actu-tv-media/cette-condition-imposee-par-omar-sy-a-netflix-pour-reprendre-le-role-de-lupin-CNT000002tlMe2.html'>Puremédias via Orange (entretiens Variety)</a> ; <a href='https://collider.com/netflix-lupin-season-4-streaming-success-november-2026/'>Collider</a>. Photo : Harald Krichel, licence CC BY-SA 3.0, via Wikimedia Commons.</p>",
     ],
-  },,
+  },
   {
     id: "route-du-rhum-2026-tom-laperche-record",
     rubrique: "sport",
@@ -246,7 +246,7 @@ export const ARTICLES: Article[] = [
       "<p>Pour le Breton, né le 24 juin 1997 à Loudéac, cette victoire a une saveur particulière. Son père Philippe, chirurgien-dentiste, avait disputé l'édition 2010 en amateur ; Tom, 13 ans, avait convoyé le trimaran familial au retour et rêvé d'imiter son père. Champion du monde d'Open Bic à 11 ans, il croise la route de François Gabart en 2017, rejoint son écurie MerConcept, termine deuxième de la Transat Jacques-Vabre 2021 à ses côtés, puis remporte la Solitaire du Figaro en 2022. Gabart lui transmet alors la barre de <em>SVR-Lazartigue</em>. Après un abandon cruel lors de l'Arkéa Ultim Challenge 2024 — collision avec un objet flottant non identifié — et une victoire à la Transat Café L'Or 2025 avec Franck Cammas, le protégé est devenu le maître : en une semaine, Tom Laperche s'est fait une place parmi les très grands de la course au large.</p>",
       "<p><strong>Sources :</strong> <a href='https://www.lemonde.fr/sport/article/2026/11/08/route-du-rhum-2026-tom-laperche-remporte-l-epreuve-en-ultim-et-etablit-un-nouveau-record_6808351_3242.html'>Le Monde</a> ; <a href='https://www.mer-ocean.com/tom-laperche-vainqueur-route-du-rhum-2026-record/'>Mer & Océan</a> ; <a href='https://fr.wikipedia.org/wiki/Tom_Laperche'>Wikipédia — Tom Laperche</a>. Photo : MFonzatti, <a href='https://commons.wikimedia.org/wiki/File:Tom_Laperche_Ark%C3%A9a_Ultim_Challenge.jpg'>Wikimedia Commons</a>, licence CC BY-SA 4.0.</p>",
     ],
-  },,
+  },
   {
     id: "echecs-roman-shogdzhiev-11-ans-record-grand-maitre",
     rubrique: "jeux",
@@ -270,7 +270,7 @@ export const ARTICLES: Article[] = [
       "<p>Shogdzhiev n'est pas un accident : il est le visage d'une génération qui apprend les échecs avec les moteurs d'analyse et les plateformes en ligne, encadré ici par une équipe de grands maîtres menée par Evgeny Tomashevsky. Derrière Mishra (12 ans et 4 mois), le classement des plus jeunes grands maîtres de l'histoire dit tout de l'accélération : Faustino Oro à 12 ans et 6 mois, Sergey Karjakin à 12 ans et 7 mois, l'actuel champion du monde Gukesh Dommaraju au même âge. Aucun d'entre eux n'a franchi la barre des 12 ans. Roman Shogdzhiev, lui, dispose de quelques mois pour réussir ce qu'aucun joueur n'a jamais fait — et transformer un record de précocité en légende.</p>",
       "<p><strong>Sources :</strong> <a href='https://www.chess.com/news/view/roman-shogdzhiev-second-gm-norm-youngest-grandmaster-record'>Chess.com</a> ; <a href='https://en.chessbase.com/post/roman-shogdzhiev-second-gm-norm'>ChessBase</a> ; <a href='https://chessherald.com/articles/shogdzhiev-11-beats-three-2600s-in-serbia-for-a-second-gm-norm/'>ChessHerald</a> ; <a href='https://en.wikipedia.org/wiki/Roman_Shogdzhiev'>Wikipédia — Roman Shogdzhiev</a>. Photo : Yunfan Zhao / Lichess, <a href='https://commons.wikimedia.org/wiki/File:Roman_Shogdzhiev_WTRBCC2026_R9.jpg'>Wikimedia Commons</a>, licence CC BY-SA 4.0.</p>",
     ],
-  },,
+  },
   {
     id: "nvidia-retour-jensen-huang-record-wall-street",
     rubrique: "business",
@@ -295,7 +295,7 @@ export const ARTICLES: Article[] = [
       "<p>Reste la question que tous les investisseurs se posent : une euphorie de cette ampleur est-elle tenable ? L'action Nvidia se paie environ 38 fois les bénéfices attendus, un niveau qui ne pardonne aucune déception. Les analystes soulignent aussi que le catalyseur du jour n'est ni un produit ni un contrat, mais un homme — ce qui dit beaucoup de la dépendance du marché à son égard. Prochain test dès cette semaine : les minutes de la Fed, puis les résultats d'AMD début décembre. En attendant, la séance du 23 novembre entre dans les livres d'histoire — et Jensen Huang, plus que jamais, dans la légende de la tech.</p>",
       "<p><strong>Sources :</strong> <a href='https://www.reuters.com/business/nvidia-shares-jump-huang-returns-2026-11-23/'>Reuters</a> ; <a href='https://tickergrove.com/news/nvidia-single-day-market-cap-record'>MarketWatch / TickerGrove</a> ; <a href='https://www.fool.com/investing/2026/11/23/nvidia-stock-soars-huang-back/'>The Motley Fool</a>. Photo : Anders Eidesvik, licence CC BY 4.0, via Wikimedia Commons.</p>",
     ],
-  },,
+  },
   {
     id: "fed-choc-or-bitcoin-devissent",
     rubrique: "business",
@@ -320,7 +320,7 @@ export const ARTICLES: Article[] = [
       "<p>Tout dépendra des prochaines statistiques : l'indice des prix PCE, la jauge préférée de la Fed, est attendu le 2 décembre, et le rapport sur l'emploi le 5 décembre. Une surprise désinflationniste pourrait encore faire douter le comité les 9 et 10 décembre. En attendant, les analystes des métaux précieux rappellent que les banques centrales restent acheteuses nettes d'or — un soutien de fond qui pourrait limiter la casse. Pour le bitcoin, en revanche, la rupture du seuil des 60 000 dollars ouvre, techniquement, la voie à des niveaux bien inférieurs. La semaine s'annonce électrique.</p>",
       "<p><strong>Sources :</strong> <a href='https://www.reuters.com/markets/commodities/gold-weekly-decline-fed-hike-bets-2026-11-21/'>Reuters</a> ; <a href='https://www.bloomberg.com/news/articles/2026-11-21/bitcoin-below-60000-fed-shock'>Bloomberg</a> ; <a href='https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html'>CME FedWatch</a> ; <a href='https://www.wsj.com/finance/investing/safe-haven-trades-unwind-fed-2026'>The Wall Street Journal</a>. Photo : Réserve fédérale / Britt Leckman, domaine public.</p>",
     ],
-  },,
+  },
   {
     id: "jensen-huang-retour-nvidia",
     rubrique: "ia",
