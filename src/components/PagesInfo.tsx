@@ -33,7 +33,7 @@ export const PAGES_INFO: Record<string, PageInfoData> = {
       {
         titre: "Notre rédaction",
         paragraphes: [
-          "MaSt est fondé et dirigé par Stanley Mazile. Les articles sont signés « Rédaction MaSt » : ils sont préparés à partir d'une veille quotidienne, puis relus et validés par la rédaction avant publication.",
+          "MaSt est fondé et dirigé par Stanley Mazile, son rédacteur en chef. Les articles sont signés par leur auteur : ils sont préparés à partir d'une veille quotidienne, puis relus et validés avant publication. Sa page auteur présente son parcours et l'ensemble de ses articles.",
           "Chaque fait important — chiffre, date, citation — est vérifié à la source, et les sources sont citées en fin d'article. Les photos sont des images libres de droits, principalement issues de Wikimedia Commons, et créditées sous chaque visuel.",
         ],
       },

@@ -14,6 +14,7 @@ interface ArticleViewProps {
   onRetour: () => void;
   onAccueil: () => void;
   onOuvrir: (id: string) => void;
+  onAuteur: () => void;
 }
 
 export function TitreSection({ children, action }: { children: React.ReactNode; action?: React.ReactNode }) {
@@ -26,7 +27,7 @@ export function TitreSection({ children, action }: { children: React.ReactNode; 
   );
 }
 
-export default function ArticleView({ article, note, onNoter, onRetour, onAccueil, onOuvrir }: ArticleViewProps) {
+export default function ArticleView({ article, note, onNoter, onRetour, onAccueil, onOuvrir, onAuteur }: ArticleViewProps) {
   const { lang, t } = useLang();
   const txt = texteArticle(article, lang);
   const aussi = ARTICLES.filter((x) => x.id !== article.id).slice(0, 3);
@@ -50,11 +51,21 @@ export default function ArticleView({ article, note, onNoter, onRetour, onAccuei
         <h1 className="mb-2.5 mt-2 text-[clamp(27px,4.6vw,40px)] font-black leading-[1.15]">{txt.titre}</h1>
         <p className="m-0 mb-3.5 text-[19px] text-texte-doux">{txt.chapo}</p>
         <div className="mb-5 flex flex-wrap items-center gap-2.5 border-y border-bordure py-2.5 text-sm text-texte-doux">
-          <span className="inline-flex h-[38px] w-[38px] items-center justify-center rounded-full bg-accent font-display text-[15px] font-black text-white">
-            M
+          <span className="inline-flex h-[38px] w-[38px] items-center justify-center rounded-full bg-accent font-display text-[13px] font-black text-white">
+            SM
           </span>
           <span>
-            {t("par")} <strong>{article.auteur}</strong>
+            {t("par")}{" "}
+            <a
+              href="/auteur/stanley-mazile"
+              onClick={(e) => {
+                e.preventDefault();
+                onAuteur();
+              }}
+              className="font-bold text-texte underline-offset-2 hover:text-accent hover:underline"
+            >
+              {article.auteur}
+            </a>
           </span>
           <span aria-hidden="true">·</span>
           <span>{dateLisible(article.dateIso, lang)}</span>

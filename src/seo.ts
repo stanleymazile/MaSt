@@ -129,7 +129,7 @@ export function appliquerDonneesArticle(article: {
     articleSection: article.tag,
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     image: [article.imageUrl ?? IMAGE_PARTAGE],
-    author: { "@type": "Person", name: "Stanley Mazile", jobTitle: "Fondateur et rédacteur en chef", url: SITE_URL + "/a-propos" },
+    author: { "@type": "Person", name: "Stanley Mazile", jobTitle: "Fondateur et rédacteur en chef", url: SITE_URL + "/auteur/stanley-mazile" },
     publisher: {
       "@type": "Organization",
       name: NOM_SITE,

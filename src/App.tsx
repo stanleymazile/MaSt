@@ -27,6 +27,7 @@ import TelephoneView, { TelephonesListe } from "./components/Telephones";
 import ProduitsVitrine from "./components/Produits";
 import Footer from "./components/Footer";
 import PageInfo, { PageIntrouvable, PAGES_INFO } from "./components/PagesInfo";
+import PageAuteur, { AUTEUR_CHEMIN, AUTEUR_DESCRIPTION } from "./components/PageAuteur";
 import Partager from "./components/Partager";
 import { useLang } from "./i18n/lang";
 import { texteArticle, texteTelephone } from "./i18n/contenu";
@@ -52,6 +53,9 @@ function lireRoute(): {
 } {
   const p = window.location.pathname;
   const base = { rubrique: "toutes", sousRubrique: null, articleId: null, telephoneId: null, page: null, introuvable: false };
+  if (/^\/auteur\/stanley-mazile\/?$/.test(p)) {
+    return { ...base, page: "auteur" };
+  }
   const mPage = p.match(/^\/(a-propos|politique-editoriale|mentions-legales|politique-confidentialite|contact)\/?$/);
   if (mPage) {
     return { ...base, page: mPage[1] };
@@ -169,6 +173,16 @@ export default function App() {
     [defilerHaut],
   );
 
+  const allerAuteur = useCallback(() => {
+    setArticleId(null);
+    setTelephoneId(null);
+    setIntrouvable(false);
+    setPage("auteur");
+    setMenuOuvert(false);
+    window.history.pushState(null, "", AUTEUR_CHEMIN);
+    defilerHaut(false);
+  }, [defilerHaut]);
+
   const retourGrille = useCallback(() => {
     setArticleId(null);
     window.history.pushState(null, "", cheminVue(rubrique, sousRubrique));
@@ -209,6 +223,14 @@ export default function App() {
         description: "Cette adresse ne correspond à aucun article ni à aucune page de MaSt.",
         chemin: window.location.pathname,
         noindex: true,
+      });
+    } else if (page === "auteur") {
+      retirerDonneesArticle();
+      retirerDonneesTelephone();
+      appliquerSeo({
+        titre: "Stanley Mazile, fondateur et rédacteur en chef — MaSt",
+        description: AUTEUR_DESCRIPTION,
+        chemin: AUTEUR_CHEMIN,
       });
     } else if (page && PAGES_INFO[page]) {
       retirerDonneesArticle();
@@ -356,7 +378,10 @@ export default function App() {
             onRetour={retourGrille}
             onAccueil={() => allerRubrique("toutes")}
             onOuvrir={ouvrirArticle}
+            onAuteur={allerAuteur}
           />
+        ) : page === "auteur" ? (
+          <PageAuteur key="auteur" onOuvrir={ouvrirArticle} />
         ) : page ? (
           <PageInfo key={page} page={page} />
         ) : introuvable ? (

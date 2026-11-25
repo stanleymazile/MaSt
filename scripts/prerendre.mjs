@@ -172,7 +172,7 @@ function main() {
       articleSection: tag,
       mainEntityOfPage: { "@type": "WebPage", "@id": url },
       image: [imageUrl],
-      author: { "@type": "Person", name: "Stanley Mazile", jobTitle: "Fondateur et rédacteur en chef", url: `${SITE}/a-propos` },
+      author: { "@type": "Person", name: "Stanley Mazile", jobTitle: "Fondateur et rédacteur en chef", url: `${SITE}/auteur/stanley-mazile` },
       publisher: { "@type": "Organization", name: "MaSt", logo: { "@type": "ImageObject", url: IMAGE_PARTAGE } },
     };
     ecrire(
@@ -292,6 +292,34 @@ function main() {
     total++;
   }
 
+  // --- Page auteur dédiée (ProfilePage) ---
+  const ldAuteur = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    mainEntity: {
+      "@type": "Person",
+      "@id": `${SITE}/auteur/stanley-mazile#stanley-mazile`,
+      name: "Stanley Mazile",
+      jobTitle: "Fondateur et rédacteur en chef",
+      description:
+        "Fondateur et rédacteur en chef de MaSt, média d'actualité cinéma, séries, tech, intelligence artificielle, sport, jeux et business.",
+      url: `${SITE}/auteur/stanley-mazile`,
+      worksFor: { "@type": "Organization", name: "MaSt", url: SITE },
+    },
+  };
+  ecrire(
+    "auteur/stanley-mazile.html",
+    construirePage(gabarit, {
+      titre: "Stanley Mazile, fondateur et rédacteur en chef — MaSt",
+      description:
+        "Stanley Mazile est le fondateur et le rédacteur en chef de MaSt, média d'actualité cinéma, séries, tech, intelligence artificielle, sport, jeux et business. Sa présentation et tous ses articles.",
+      chemin: "/auteur/stanley-mazile",
+      ldJson: ldAuteur,
+      ldId: "ld-auteur",
+    }),
+  );
+  total++;
+
   // --- Sitemap, sitemap Actualités et flux RSS (générés depuis les données) ---
   const echapperXml = (v) => String(v ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   const dateMax = (liste) => liste.reduce((acc, d) => (d && d > acc ? d : acc), "");
@@ -326,6 +354,7 @@ function main() {
   for (const cle of ["a-propos", "politique-editoriale", "mentions-legales", "politique-confidentialite", "contact"]) {
     entrees.push(entree(`${SITE}/${cle}`, "", null));
   }
+  entrees.push(entree(`${SITE}/auteur/stanley-mazile`, derniereDate, null));
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${entrees.join("\n")}\n</urlset>\n`;
   writeFileSync(join(RACINE, "dist", "sitemap.xml"), sitemap, "utf-8");
 
@@ -352,7 +381,7 @@ function main() {
   const rss = `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n  <channel>\n    <title>MaSt</title>\n    <link>${SITE}/</link>\n    <description>MaSt — l'actualité cinéma, séries, tech, IA, sport, jeux et business, sélectionnée et décryptée chaque jour.</description>\n    <language>fr-FR</language>\n    <lastBuildDate>${rfc822(derniereDate)}</lastBuildDate>\n    <atom:link href="${SITE}/rss.xml" rel="self" type="application/rss+xml" />\n${items.join("\n")}\n  </channel>\n</rss>\n`;
   writeFileSync(join(RACINE, "dist", "rss.xml"), rss, "utf-8");
 
-  console.log(`prerendre : ${total} pages pré-rendues (${blocsArticles.length} articles, ${blocsTels.length} téléphones, rubriques, sous-rubriques, 5 pages d'info) + sitemap.xml (${entrees.length} URL), news-sitemap.xml (${recents.length} articles), rss.xml (${items.length} articles).`);
+  console.log(`prerendre : ${total} pages pré-rendues (${blocsArticles.length} articles, ${blocsTels.length} téléphones, rubriques, sous-rubriques, 5 pages d'info + page auteur) + sitemap.xml (${entrees.length} URL), news-sitemap.xml (${recents.length} articles), rss.xml (${items.length} articles).`);
 }
 
 main();
