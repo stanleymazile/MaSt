@@ -12,6 +12,7 @@ import {
   DESC_DEFAUT,
   retirerDonneesArticle,
   retirerDonneesTelephone,
+  SITE_URL,
 } from "./seo";
 import Header from "./components/Header";
 import SideMenu from "./components/SideMenu";
@@ -25,6 +26,7 @@ import ArticleView, { TitreSection } from "./components/ArticleView";
 import TelephoneView, { TelephonesListe } from "./components/Telephones";
 import ProduitsVitrine from "./components/Produits";
 import Footer from "./components/Footer";
+import Partager from "./components/Partager";
 
 const RUBRIQUES_CARTES: { id: string; nom: string; desc: string }[] = [
   { id: "cine", nom: "Cinéma", desc: "Sorties, critiques et notes presse & spectateurs" },
@@ -232,6 +234,9 @@ export default function App() {
       ? "Dernières news"
       : RUBRIQUES[rubrique];
   const estVitrineProduits = rubrique === "business" && sousRubrique === "nouveaux-produits";
+  const partageUrl = SITE_URL + (rubrique === "toutes" ? "/" : cheminVue(rubrique, sousRubrique));
+  const partageTitre =
+    rubrique === "toutes" ? "MaSt — Ciné, Tech, IA & Sport" : `${titreGrille} — actualité et décryptages | MaSt`;
   const puceClasse = (actif: boolean) =>
     `inline-flex min-h-9 items-center rounded-full px-3.5 font-display text-[13px] font-bold uppercase tracking-[0.4px] no-underline transition-colors ${
       actif ? "bg-accent text-white" : "bg-fond-alt text-texte hover:text-accent"
@@ -275,6 +280,10 @@ export default function App() {
         ) : (
           <>
             {rubrique === "toutes" && <Hero article={une} onOuvrir={ouvrirArticle} />}
+
+            <div className="flex justify-end pt-4">
+              <Partager titre={partageTitre} url={partageUrl} />
+            </div>
 
             <div className="mt-2 grid grid-cols-1 gap-7 min-[980px]:grid-cols-[1fr_330px]">
               <div>

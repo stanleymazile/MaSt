@@ -1,7 +1,8 @@
 import { ArrowLeft, Check, Minus, Smartphone } from "lucide-react";
 import { TELEPHONES, type Telephone } from "../data/telephones";
-import { cheminTelephone } from "../seo";
+import { cheminTelephone, SITE_URL } from "../seo";
 import { TitreSection } from "./ArticleView";
+import Partager from "./Partager";
 
 function PanneauVisuel({ tel, hauteur }: { tel: Telephone; hauteur: string }) {
   if (tel.image) {
@@ -117,7 +118,13 @@ export default function TelephoneView({ tel, onRetour, onAccueil, onOuvrir }: Te
       <h1 className="mb-2 mt-1 text-[clamp(27px,4.6vw,40px)] font-black leading-[1.15]">
         {tel.marque} {tel.modele}
       </h1>
-      <p className="m-0 mb-5 text-[19px] text-texte-doux">{tel.resume}</p>
+      <p className="m-0 mb-3.5 text-[19px] text-texte-doux">{tel.resume}</p>
+
+      <Partager
+        titre={`${tel.marque} ${tel.modele} — fiche caractéristiques, prix, points forts et points faibles | MaSt`}
+        url={`${SITE_URL}${cheminTelephone(tel.id)}`}
+        className="mb-5"
+      />
 
       <div className="grid grid-cols-1 gap-6 min-[860px]:grid-cols-[340px_1fr]">
         <div>
@@ -159,6 +166,12 @@ export default function TelephoneView({ tel, onRetour, onAccueil, onOuvrir }: Te
         <BlocAvis titre="Points forts" points={tel.pointsForts} positif />
         <BlocAvis titre="Points faibles" points={tel.pointsFaibles} positif={false} />
       </div>
+
+      <Partager
+        titre={`${tel.marque} ${tel.modele} — fiche caractéristiques, prix, points forts et points faibles | MaSt`}
+        url={`${SITE_URL}${cheminTelephone(tel.id)}`}
+        className="mt-7"
+      />
 
       <button
         type="button"

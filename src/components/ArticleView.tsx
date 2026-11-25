@@ -1,7 +1,9 @@
 import { ArrowLeft } from "lucide-react";
 import { ARTICLES, RUBRIQUES, type Article } from "../data/articles";
+import { cheminArticle, SITE_URL } from "../seo";
 import ArticleCard, { Tag } from "./ArticleCard";
 import FicheCard from "./FicheCard";
+import Partager from "./Partager";
 
 interface ArticleViewProps {
   article: Article;
@@ -58,7 +60,9 @@ export default function ArticleView({ article, note, onNoter, onRetour, onAccuei
       </div>
 
       <img src={article.image} alt={article.legende} className="mb-2 aspect-[3/2] w-full rounded-lg object-cover" />
-      <p className="m-0 mb-[22px] text-[13px] text-texte-doux">{article.legende}</p>
+      <p className="m-0 mb-3.5 text-[13px] text-texte-doux">{article.legende}</p>
+
+      <Partager titre={article.titre} url={`${SITE_URL}${cheminArticle(article.id)}`} className="mb-[22px]" />
 
       {article.fiche && (
         <div className="my-[26px] max-w-[720px]">
@@ -73,6 +77,8 @@ export default function ArticleView({ article, note, onNoter, onRetour, onAccuei
         }}
         dangerouslySetInnerHTML={{ __html: article.corps.join("") }}
       />
+
+      <Partager titre={article.titre} url={`${SITE_URL}${cheminArticle(article.id)}`} className="mt-[26px]" />
 
       <div className="my-[26px] max-w-[720px] rounded-lg border border-bordure bg-fond-alt px-5 py-[18px]">
         <h2 className="m-0 mb-1.5 font-display text-[19px] font-black">Votre avis compte</h2>
