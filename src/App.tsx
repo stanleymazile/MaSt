@@ -1,430 +1,175 @@
-import React, { useState, useEffect } from 'react';
-import { Header } from './components/Header';
-import { HomePage } from './components/HomePage';
-import { TravelSearchSection } from './components/TravelSearchSection';
-import { GeminiTranscribeSection } from './components/GeminiTranscribeSection';
-import { AstraMentalHealthSection } from './components/AstraMentalHealthSection';
-import { VibeCodingSection } from './components/VibeCodingSection';
-import { GenericArticleSection } from './components/GenericArticleSection';
-import { AuthorProfilePage } from './components/AuthorProfilePage';
-import { NewsPage } from './components/NewsPage';
-import { NewsletterModal } from './components/NewsletterModal';
-import { RecommendedForYou } from './components/RecommendedForYou';
-import { NewsletterBox } from './components/NewsletterBox';
-import { Footer } from './components/Footer';
-import { AudioPlayer } from './components/AudioPlayer';
-import { ShareModal } from './components/ShareModal';
-import { VideoModal } from './components/VideoModal';
-import { FullScreenMenu } from './components/FullScreenMenu';
-import { ContactModal } from './components/ContactModal';
-import { BookmarksDrawer } from './components/BookmarksDrawer';
-import { ArticleClaps } from './components/ArticleClaps';
-import { ALL_ARTICLES } from './data/articles';
-import { useSEO } from './hooks/useSEO';
-import { useAuth } from './context/AuthContext';
+import { useCallback, useEffect, useState } from "react";
+import { ARTICLES, RUBRIQUES, TOP_IDS } from "./data/articles";
+import Header from "./components/Header";
+import SideMenu from "./components/SideMenu";
+import SearchOverlay from "./components/SearchOverlay";
+import Hero from "./components/Hero";
+import ArticleCard from "./components/ArticleCard";
+import FicheCard from "./components/FicheCard";
+import TopLectures from "./components/TopLectures";
+import Newsletter from "./components/Newsletter";
+import ArticleView, { TitreSection } from "./components/ArticleView";
+import Footer from "./components/Footer";
+
+const RUBRIQUES_CARTES: { id: string; nom: string; desc: string }[] = [
+  { id: "cine", nom: "Cinéma", desc: "Sorties, critiques et notes presse & spectateurs" },
+  { id: "tech", nom: "Tech", desc: "Smartphones, objets connectés et innovations" },
+  { id: "ia", nom: "IA", desc: "Modèles, agents et usages qui changent la donne" },
+  { id: "sport", nom: "Sport", desc: "Foot, F1 et grands rendez-vous décryptés" },
+];
 
 export default function App() {
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('mast_theme');
-      if (saved === 'light' || saved === 'dark') {
-        return saved;
-      }
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        return 'dark';
-      }
-    }
-    return 'light';
-  });
+  const [rubrique, setRubrique] = useState("toutes");
+  const [articleId, setArticleId] = useState<string | null>(null);
+  const [menuOuvert, setMenuOuvert] = useState(false);
+  const [rechercheOuverte, setRechercheOuverte] = useState(false);
+  const [notes, setNotes] = useState<Record<string, number>>({});
 
-  const [currentView, setCurrentView] = useState<'home' | 'article' | 'author' | 'news'>('home');
-  const [newsFilter, setNewsFilter] = useState<string>('all');
-  const [activeArticleId, setActiveArticleId] = useState<string>('travel-in-search');
-  const [currentTopic, setCurrentTopic] = useState<string>('Search & Travel');
+  const articleOuvert = articleId ? (ARTICLES.find((a) => a.id === articleId) ?? null) : null;
 
-  // Dynamic Google Discover & Rich SEO Meta Management
-  useSEO({ currentView, activeArticleId, newsFilter });
+  const defilerHaut = useCallback((fluide: boolean) => {
+    const reduit = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: fluide && !reduit ? "smooth" : "auto" });
+  }, []);
 
-  // Initialize view from URL query param if present (?article=... or ?author=... or ?view=news) and support back/forward buttons
+  const allerRubrique = useCallback(
+    (r: string) => {
+      setRubrique(r);
+      setArticleId(null);
+      setMenuOuvert(false);
+      defilerHaut(true);
+    },
+    [defilerHaut],
+  );
+
+  const ouvrirArticle = useCallback(
+    (id: string) => {
+      setRechercheOuverte(false);
+      setArticleId(id);
+      defilerHaut(false);
+    },
+    [defilerHaut],
+  );
+
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const authorParam = params.get('author');
-    const articleParam = params.get('article');
-    const viewParam = params.get('view');
-    const topicParam = params.get('topic');
-
-    if (authorParam === 'stanley-mazile') {
-      setCurrentView('author');
-    } else if (viewParam === 'newsletter') {
-      // Si l'utilisateur arrive avec ?view=newsletter, on ouvre directement la modale
-      setIsNewsletterModalOpen(true);
-      setCurrentView('home');
-    } else if (viewParam === 'news' || params.get('news') === 'true') {
-      setCurrentView('news');
-      if (topicParam) setNewsFilter(topicParam);
-    } else if (articleParam && ALL_ARTICLES.some((a) => a.id === articleParam)) {
-      setCurrentView('article');
-      setActiveArticleId(articleParam);
-      const matchingArticle = ALL_ARTICLES.find((a) => a.id === articleParam);
-      if (matchingArticle) {
-        setCurrentTopic(matchingArticle.topic);
-      }
-    }
-
-    const handlePopState = () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const authorP = urlParams.get('author');
-      const articleId = urlParams.get('article');
-      const viewP = urlParams.get('view');
-      const topicP = urlParams.get('topic');
-
-      if (authorP === 'stanley-mazile') {
-        setCurrentView('author');
-      } else if (viewP === 'newsletter') {
-        setIsNewsletterModalOpen(true);
-        setCurrentView('home');
-      } else if (viewP === 'news' || urlParams.get('news') === 'true') {
-        setCurrentView('news');
-        if (topicP) setNewsFilter(topicP);
-      } else if (articleId && ALL_ARTICLES.some((a) => a.id === articleId)) {
-        setCurrentView('article');
-        setActiveArticleId(articleId);
-        const matchingArticle = ALL_ARTICLES.find((a) => a.id === articleId);
-        if (matchingArticle) {
-          setCurrentTopic(matchingArticle.topic);
-        }
-      } else {
-        setCurrentView('home');
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMenuOuvert(false);
+        setRechercheOuverte(false);
       }
     };
-
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
   }, []);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState('Global (English)');
-  const [isAudioPlayerActive, setIsAudioPlayerActive] = useState(false);
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const [shareModalData, setShareModalData] = useState<{ isOpen: boolean; title: string }>({
-    isOpen: false,
-    title: '',
-  });
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
-  const [isBookmarksOpen, setIsBookmarksOpen] = useState(false);
-  const [isNewsletterModalOpen, setIsNewsletterModalOpen] = useState(false);
 
-  const { toggleBookmark, isBookmarked } = useAuth();
+  const allerNewsletter = useCallback(() => {
+    setArticleId(null);
+    setTimeout(() => {
+      document.getElementById("champ-email")?.focus({ preventScroll: false });
+      document.getElementById("newsletter")?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 60);
+  }, []);
 
-  // Sync theme with HTML document class and persist
-  useEffect(() => {
-    const root = document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
-    localStorage.setItem('mast_theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
-
-  const handleNavigateHome = () => {
-    setCurrentView('home');
-    if (typeof window !== 'undefined' && window.location.search) {
-      window.history.pushState({}, '', window.location.pathname);
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleNavigateToNews = (filter: string = 'all') => {
-    setCurrentView('news');
-    setNewsFilter(filter);
-    if (typeof window !== 'undefined') {
-      const query = filter && filter !== 'all' ? `?view=news&topic=${encodeURIComponent(filter)}` : '?view=news';
-      window.history.pushState({}, '', query);
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleNavigate = (view: 'home' | 'article' | 'news', filterOrStoryId?: string) => {
-    if (view === 'news') {
-      handleNavigateToNews(filterOrStoryId || 'all');
-      return;
-    }
-
-    setCurrentView(view);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    if (view === 'article') {
-      const targetId = filterOrStoryId || 'astra-sante-mentale';
-      setActiveArticleId(targetId);
-      if (typeof window !== 'undefined') {
-        window.history.pushState({}, '', `?article=${targetId}`);
-      }
-      const matchingArticle = ALL_ARTICLES.find((a) => a.id === targetId);
-      if (matchingArticle) {
-        setCurrentTopic(matchingArticle.topic);
-      }
-    } else {
-      if (typeof window !== 'undefined' && window.location.search) {
-        window.history.pushState({}, '', window.location.pathname);
-      }
-    }
-  };
-
-  const handleNavigateToArticle = (articleId?: string) => {
-    handleNavigate('article', articleId);
-  };
-
-  const handleNavigateToAuthor = () => {
-    setCurrentView('author');
-    if (typeof window !== 'undefined') {
-      window.history.pushState({}, '', '?author=stanley-mazile');
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleOpenNewsletter = () => {
-    setIsNewsletterModalOpen(true);
-  };
-
-  const handleListenArticle = () => {
-    setIsAudioPlayerActive(true);
-    setIsAudioPlaying(true);
-  };
-
-  const handleShare = (title: string) => {
-    setShareModalData({ isOpen: true, title });
-  };
+  const une = ARTICLES[0];
+  const topArticles = TOP_IDS.map((id) => ARTICLES.find((a) => a.id === id)!).filter(Boolean);
+  const grille = ARTICLES.filter((a) => rubrique === "toutes" || a.rubrique === rubrique);
+  const titreGrille = rubrique === "toutes" ? "Dernières news" : RUBRIQUES[rubrique];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#202124] text-[#3c4043] dark:text-[#e8eaed] font-sans selection:bg-[#d2e3fc] selection:text-[#174ea6] flex flex-col justify-between transition-colors duration-200">
-      <div>
-        {/* Top Fixed / Sticky Navigation Header */}
-        <Header
-          onNavigateHome={handleNavigateHome}
-          onOpenNewsletter={handleOpenNewsletter}
-          onOpenContact={() => setIsContactModalOpen(true)}
-          onOpenMenu={() => setIsMenuOpen(true)}
-          onOpenBookmarks={() => setIsBookmarksOpen(true)}
-          selectedLanguage={selectedLanguage}
-          onSelectLanguage={setSelectedLanguage}
-          theme={theme}
-          onToggleTheme={toggleTheme}
-          activeTheme={currentView === 'news' ? newsFilter : undefined}
-          onSelectTheme={(themeId) => handleNavigateToNews(themeId)}
-          isHome={currentView === 'home'}
-        />
+    <div className="flex min-h-screen flex-col">
+      <Header
+        rubrique={rubrique}
+        onRubrique={allerRubrique}
+        onMenu={() => setMenuOuvert(true)}
+        onRecherche={() => setRechercheOuverte(true)}
+        onAccueil={() => allerRubrique("toutes")}
+      />
+      <SideMenu ouvert={menuOuvert} onFermer={() => setMenuOuvert(false)} onRubrique={allerRubrique} />
+      <SearchOverlay
+        ouvert={rechercheOuverte}
+        onFermer={() => setRechercheOuverte(false)}
+        onOuvrirArticle={ouvrirArticle}
+      />
 
-        {currentView === 'home' ? (
-          /* HOME VIEW */
-          <main>
-            <HomePage
-              onNavigateToArticle={handleNavigateToArticle}
-              onNavigateToNews={handleNavigateToNews}
-              onOpenNewsletterModal={handleOpenNewsletter}
-            />
-          </main>
-        ) : currentView === 'author' ? (
-          /* AUTHOR PROFILE VIEW */
-          <main>
-            <AuthorProfilePage
-              onBack={handleNavigateHome}
-              onNavigateToArticle={handleNavigateToArticle}
-            />
-          </main>
-        ) : currentView === 'news' ? (
-          /* NEWS VIEW WITH THEMATIC FILTERS */
-          <main>
-            <NewsPage
-              onBack={handleNavigateHome}
-              onNavigateToArticle={handleNavigateToArticle}
-              onNavigateToAuthor={handleNavigateToAuthor}
-              initialFilter={newsFilter}
-            />
-          </main>
+      <main className="mx-auto w-full max-w-[1180px] flex-1 px-4 pb-14">
+        {articleOuvert ? (
+          <ArticleView
+            key={articleOuvert.id}
+            article={articleOuvert}
+            note={notes[articleOuvert.id] ?? 0}
+            onNoter={(id, n) => setNotes((prev) => ({ ...prev, [id]: n }))}
+            onRetour={() => {
+              setArticleId(null);
+              defilerHaut(true);
+            }}
+            onAccueil={() => allerRubrique("toutes")}
+            onOuvrir={ouvrirArticle}
+          />
         ) : (
-          /* ARTICLE VIEW */
-          <main className="max-w-[680px] mx-auto px-5 py-6 pb-16">
-            {(() => {
-              const currentArticle = ALL_ARTICLES.find((a) => a.id === activeArticleId) || ALL_ARTICLES[0];
-              const isAstra = activeArticleId === 'astra-sante-mentale';
-              const isVibeCoding = activeArticleId === 'vibe-coding-intention';
-              const category = isAstra || isVibeCoding
-                ? 'Actualités'
-                : activeArticleId === 'travel-in-search'
-                ? 'Actualités'
-                : 'Affiliations';
-              const subCategory = isAstra || isVibeCoding
-                ? 'IA / intelligence artificielle'
-                : activeArticleId === 'travel-in-search'
-                ? 'Search & Travel'
-                : activeArticleId === 'gemini-3.5-transcribe'
-                ? 'Produit'
-                : currentArticle.topic;
+          <>
+            <Hero article={une} onOuvrir={ouvrirArticle} />
 
-              return (
-                <>
-                  {/* Breadcrumbs Navigation */}
-                  <div className="flex items-center justify-between mb-6 gap-2 flex-wrap">
-                    <nav
-                      id="breadcrumbs-nav"
-                      className="flex items-center gap-2 text-sm font-google-sans text-[#1a73e8] dark:text-[#8ab4f8] flex-wrap"
-                      aria-label="Breadcrumbs"
+            <div className="mt-2 grid grid-cols-1 gap-7 min-[980px]:grid-cols-[1fr_330px]">
+              <div>
+                <TitreSection
+                  action={
+                    <button
+                      type="button"
+                      onClick={() => allerRubrique("toutes")}
+                      className="inline-flex min-h-9 items-center font-display text-[13.5px] font-bold normal-case tracking-normal underline decoration-accent decoration-[3px]"
                     >
-                      <button
-                        onClick={handleNavigateHome}
-                        className="hover:underline text-[#1a73e8] dark:text-[#8ab4f8] font-medium cursor-pointer"
-                      >
-                        Home
-                      </button>
-                      <span className="text-[#5f6368] dark:text-[#9aa0a6] select-none">&rsaquo;</span>
-                      <button
-                        onClick={() => {
-                          if (category === 'Actualités') {
-                            handleNavigateToNews();
-                          } else {
-                            handleNavigateHome();
-                          }
-                        }}
-                        className="hover:underline text-[#1a73e8] dark:text-[#8ab4f8] cursor-pointer"
-                      >
-                        {category}
-                      </button>
-                      <span className="text-[#5f6368] dark:text-[#9aa0a6] select-none">&rsaquo;</span>
-                      <span className="text-[#5f6368] dark:text-[#9aa0a6]">
-                        {subCategory}
-                      </span>
-                    </nav>
+                      Tout voir
+                    </button>
+                  }
+                >
+                  {titreGrille}
+                </TitreSection>
+                {grille.length > 0 ? (
+                  <div className="grid grid-cols-1 gap-5 min-[640px]:grid-cols-2 min-[980px]:grid-cols-3">
+                    {grille.map((a) => (
+                      <ArticleCard key={a.id} article={a} onOuvrir={ouvrirArticle} />
+                    ))}
                   </div>
-
-                  {/* SINGLE ARTICLE VIEW - Chaque article est affiché seul dans sa propre page */}
-                  <div className="mb-8">
-                    {activeArticleId === 'vibe-coding-intention' ? (
-                      <VibeCodingSection
-                        onShare={handleShare}
-                        onNavigateToAuthor={handleNavigateToAuthor}
-                        isBookmarked={isBookmarked(activeArticleId)}
-                        onToggleBookmark={() => toggleBookmark(activeArticleId, currentArticle.title)}
-                      />
-                    ) : activeArticleId === 'astra-sante-mentale' ? (
-                      <AstraMentalHealthSection
-                        onShare={handleShare}
-                        onNavigateToAuthor={handleNavigateToAuthor}
-                        isBookmarked={isBookmarked(activeArticleId)}
-                        onToggleBookmark={() => toggleBookmark(activeArticleId, currentArticle.title)}
-                      />
-                    ) : activeArticleId === 'travel-in-search' ? (
-                      <TravelSearchSection
-                        onShare={handleShare}
-                        isBookmarked={isBookmarked(activeArticleId)}
-                        onToggleBookmark={() => toggleBookmark(activeArticleId, currentArticle.title)}
-                      />
-                    ) : activeArticleId === 'gemini-3.5-transcribe' ? (
-                      <GeminiTranscribeSection
-                        onListenArticle={handleListenArticle}
-                        onOpenVideoDemo={() => setIsVideoModalOpen(true)}
-                        isBookmarked={isBookmarked(activeArticleId)}
-                        onToggleBookmark={() => toggleBookmark(activeArticleId, currentArticle.title)}
-                      />
-                    ) : (
-                      <GenericArticleSection
-                        article={currentArticle}
-                        onShare={handleShare}
-                        onListenArticle={handleListenArticle}
-                        onNavigateToAuthor={handleNavigateToAuthor}
-                        isBookmarked={isBookmarked(activeArticleId)}
-                        onToggleBookmark={() => toggleBookmark(activeArticleId, currentArticle.title)}
-                      />
-                    )}
-                  </div>
-                </>
-              );
-            })()}
-
-            {/* Real-time Firestore Claps / Recommandations */}
-            <ArticleClaps articleId={activeArticleId} />
-
-            {/* RECOMMENDED FOR YOU (Dynamically suggests other articles based on the current topic) */}
-            <RecommendedForYou
-              currentTopic={currentTopic}
-              currentArticleId={activeArticleId}
-              onSelectArticle={(id) => handleNavigateToArticle(id)}
-              onTopicChange={(newTopic) => setCurrentTopic(newTopic)}
-            />
-
-            {/* NEWSLETTER SUBSCRIPTION BOX */}
-            <div id="newsletter-section">
-              <NewsletterBox />
+                ) : (
+                  <p className="py-[26px] text-texte-doux">Aucun article dans cette rubrique pour le moment.</p>
+                )}
+              </div>
+              <aside className="pt-0 min-[980px]:pt-[92px]">
+                <TopLectures articles={topArticles} onOuvrir={ouvrirArticle} />
+              </aside>
             </div>
-          </main>
+
+            {une.fiche && (
+              <>
+                <TitreSection>La fiche du moment</TitreSection>
+                <FicheCard fiche={une.fiche} />
+              </>
+            )}
+
+            <TitreSection>Explorer MaSt</TitreSection>
+            <div className="grid grid-cols-2 gap-4 min-[860px]:grid-cols-4">
+              {RUBRIQUES_CARTES.map((r) => (
+                <a
+                  key={r.id}
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    allerRubrique(r.id);
+                  }}
+                  className="flex min-h-[118px] flex-col gap-1.5 rounded-lg bg-noir p-[20px_18px] text-white no-underline transition-colors hover:bg-anthracite"
+                >
+                  <span className="font-display text-[23px] font-black uppercase text-accent-clair">{r.nom}</span>
+                  <span className="text-[13.5px] text-[#d8d8d8]">{r.desc}</span>
+                </a>
+              ))}
+            </div>
+
+            <Newsletter />
+          </>
         )}
-      </div>
+      </main>
 
-      {/* FOOTER */}
-      <Footer />
-
-      {/* Fullscreen Google News Menu (matches user request exactly) */}
-      <FullScreenMenu
-        isOpen={isMenuOpen}
-        onClose={() => setIsMenuOpen(false)}
-        onNavigate={handleNavigate}
-        onOpenNewsletter={handleOpenNewsletter}
-        onOpenContact={() => setIsContactModalOpen(true)}
-        onOpenBookmarks={() => setIsBookmarksOpen(true)}
-        selectedLanguage={selectedLanguage}
-        onSelectLanguage={setSelectedLanguage}
-        theme={theme}
-        onToggleTheme={toggleTheme}
-      />
-
-      {/* Bookmarks Drawer (Firebase Firestore) */}
-      <BookmarksDrawer
-        isOpen={isBookmarksOpen}
-        onClose={() => setIsBookmarksOpen(false)}
-        onNavigateToArticle={handleNavigateToArticle}
-      />
-
-      {/* Floating Audio Player */}
-      {isAudioPlayerActive && (
-        <AudioPlayer
-          isPlaying={isAudioPlaying}
-          onTogglePlay={() => setIsAudioPlaying(!isAudioPlaying)}
-          onClose={() => {
-            setIsAudioPlayerActive(false);
-            setIsAudioPlaying(false);
-          }}
-          title="Introducing Gemini 3.5 Transcribe"
-        />
-      )}
-
-      {/* Share Modal Dialog */}
-      <ShareModal
-        isOpen={shareModalData.isOpen}
-        onClose={() => setShareModalData({ isOpen: false, title: '' })}
-        title={shareModalData.title}
-      />
-
-      {/* Interactive Video / Transcribe Live Demo Modal */}
-      <VideoModal
-        isOpen={isVideoModalOpen}
-        onClose={() => setIsVideoModalOpen(false)}
-      />
-
-      {/* Contact Modal */}
-      <ContactModal
-        isOpen={isContactModalOpen}
-        onClose={() => setIsContactModalOpen(false)}
-      />
-
-      {/* Newsletter Modal Popup */}
-      <NewsletterModal
-        isOpen={isNewsletterModalOpen}
-        onClose={() => setIsNewsletterModalOpen(false)}
-      />
+      <Footer onRubrique={allerRubrique} onNewsletter={allerNewsletter} />
     </div>
   );
 }
