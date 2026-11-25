@@ -1,4 +1,4 @@
-import { afficheFilm, articleF1, articleIa, articleSeries, articleSport, articleTech, heroCine } from "./images";
+import { afficheFilm, articleF1, articleIa, articleJensen, articleSeries, articleSport, articleTech, heroCine } from "./images";
 
 export interface Fiche {
   affiche: string;
@@ -74,6 +74,31 @@ export const ARTICLES: Article[] = [
       "<p>Ce mélange d'action et de thriller a été l'une des raisons du succès rencontré par la série. La performance d'Eddie Redmayne n'y est pas non plus étrangère, et l'acteur oscarisé est désormais prêt à rempiler pour une toute nouvelle mission. Après seulement deux ans d'attente (un délai raisonnable pour une production de streaming), The Day of the Jackal est sur le point de revenir sur nos écrans.</p>",
       "<blockquote>Un tueur méthodique, une traque à travers l'Europe : la saison 2 promet de monter encore d'un cran.</blockquote>",
       "<p>En face de lui, l'agente Bianca, incarnée par Lashana Lynch dans la première saison, a fait du Chacal une obsession. Reste à savoir quelle forme prendra leur affrontement dans cette nouvelle salve d'épisodes — et si le tueur solitaire trouvera enfin un adversaire à sa mesure. Réponse à l'écran très bientôt : MaSt suivra le dossier épisode par épisode.</p>",
+    ],
+  },
+  {
+    id: "jensen-huang-retour-nvidia",
+    rubrique: "ia",
+    tag: "IA",
+    titre: "Onze jours après sa chute, Jensen Huang reprend déjà les rênes de Nvidia",
+    chapo: "Démissionnaire le 12 novembre sur fond de scandale, le fondateur de Nvidia a été réinstallé à l'unanimité par son conseil d'administration, lundi 23 novembre, avec l'appui appuyé de la Maison-Blanche. En onze jours d'absence, plus de 1 000 milliards de dollars de capitalisation s'étaient envolés — et Wall Street a salué son retour par une envolée historique.",
+    image: articleJensen,
+    legende: "Jensen Huang, cofondateur de Nvidia, lors d'une discussion à l'université Stanford, le 30 avril 2026. (Photo : Anders Eidesvik, CC BY 4.0, via Wikimedia Commons)",
+    auteur: "Rédaction MaSt",
+    date: "24 novembre 2026",
+    dateIso: "2026-11-24",
+    lecture: "5 min de lecture",
+    corps: [
+      "<p>Le feuilleton n'aura duré que onze jours. Lundi 23 novembre, Nvidia a annoncé la réintégration de Jensen Huang comme président, directeur général et membre du conseil d'administration, avec effet immédiat. Le conseil a voté à l'unanimité, se disant satisfait de la franchise et de la capacité de leadership du fondateur, et assurant — après avoir reçu des éléments de hauts responsables du gouvernement américain — ne voir aucun risque pour la sécurité nationale dans son retour. Le 12 novembre, Jensen Huang avait pourtant démissionné, emporté par des révélations sur ses liaisons extraconjugales, dont l'une avec une femme d'affaires que les autorités américaines soupçonnent d'espionnage au profit de la Chine — ce que Pékin dément.</p>",
+      "<p>Le revirement est d'autant plus spectaculaire que le conseil d'administration avait publiquement exclu tout retour une semaine plus tôt. Le 17 novembre, lors de la présentation des résultats trimestriels, son président affirmait encore que la démission avait été acceptée à l'unanimité et qu'il n'était pas question de réintégrer le PDG déchu. Entre-temps, la pression est venue de partout : une pétition de soutien a rassemblé environ 175 000 signatures en trois jours, les investisseurs ont fait chuter le titre, et la Maison-Blanche s'est directement invitée dans le dossier.</p>",
+      "<h2>Trump et Vance en première ligne</h2>",
+      "<p>Selon la presse américaine et Le Monde, le président Donald Trump et le vice-président J. D. Vance sont intervenus personnellement au cours du week-end des 21 et 22 novembre pour convaincre le conseil d'administration de changer d'avis. Donald Trump a lui-même expliqué sur CNBC avoir plaidé directement la cause de Jensen Huang auprès du conseil, minimisant les risques pour la sécurité nationale. Une implication aussi directe d'un président américain dans la gouvernance d'une entreprise cotée reste exceptionnelle — et elle a suscité des critiques d'élus des deux camps au Congrès, où Jensen Huang doit être auditionné début décembre sur les contrôles américains des exportations de puces vers la Chine.</p>",
+      "<blockquote>« J'ai hâte de me remettre au travail », a déclaré Jensen Huang, cité par Le Figaro, à son retour au siège de Nvidia, où les salariés l'ont accueilli par une ovation.</blockquote>",
+      "<h2>Un marché qui ne jure que par lui</h2>",
+      "<p>La réaction des marchés dit tout de la place qu'occupe Jensen Huang dans l'écosystème de l'IA. Pendant ses onze jours d'absence, Nvidia a perdu plus de 1 000 milliards de dollars de valeur boursière et le Nasdaq a frôlé le marché baissier. L'annonce de son retour a fait bondir l'action Nvidia de plus de 25 % dans les échanges d'avant-séance, tandis que le Nasdaq Composite s'envolait de 6,5 % — sa meilleure journée depuis 19 mois, selon CNN. Les sociétés liées à l'infrastructure IA ont suivi le mouvement, à l'image de CoreWeave, en hausse de 22 % lundi après avoir perdu 35 % pendant l'éviction du PDG. Pour les analystes cités par CNN, ce retour rassure sur le rôle central de Nvidia dans le financement de l'industrie : investissements dans les start-up, garanties d'emprunts et construction de centres de données à coups de centaines de milliards.</p>",
+      "<h2>Des résultats qui plaident pour lui</h2>",
+      "<p>Le paradoxe de cette crise, c'est que la machine Nvidia n'a jamais aussi bien tourné. Publiés le 17 novembre, en pleine tempête, les résultats du troisième trimestre ont dépassé toutes les attentes : un chiffre d'affaires de 115,8 milliards de dollars, en hausse de 103 % sur un an, dont 107,6 milliards pour la seule division centres de données, et un bénéfice ajusté de 2,68 dollars par action. Le groupe a même relevé ses perspectives, visant environ 130 milliards de dollars de ventes au trimestre suivant et une croissance de 75 % pour l'exercice à venir. De quoi alimenter le sentiment, résumé par un universitaire cité par CNN, que « Nvidia est trop gros pour échouer, et Jensen Huang trop gros pour être viré ». Reste une question, que ni les chiffres ni l'euphorie boursière ne règlent : de retour aux commandes, mais sous surveillance renforcée du Congrès et de son propre conseil, le « parrain de l'IA » pourra-t-il diriger avec la même liberté qu'avant ?</p>",
+      "<p><strong>Sources :</strong> <a href='https://www.lemonde.fr/economie/article/2026/11/24/le-come-back-spectaculaire-de-jensen-huang-a-la-tete-de-nvidia-sous-la-pression-de-donald-trump-et-des-marches-financiers_6814669_3234.html'>Le Monde</a> ; <a href='https://www.rappler.com/technology/nvidia-reinstates-jensen-huang-ceo-november-23-2026/'>Reuters via Rappler</a> ; <a href='https://www.cnn.com/2026/11/24/investing/nvidia-jensen-huang-ai-financing-boom'>CNN</a> ; <a href='https://www.businesstimes.com.sg/international/global/nvidia-boosts-forecast-while-quashing-idea-huangs-return'>Bloomberg via The Business Times</a> ; <a href='https://www.lefigaro.fr/secteur/high-tech/j-ai-hate-de-me-remettre-au-travail-les-coulisses-de-l-invraisemblable-retour-de-jensen-huang-chez-nvidia-20261123'>Le Figaro</a>. Photo : Anders Eidesvik, <a href='https://commons.wikimedia.org/wiki/File:Jensen_huang_stanford_2026-04-30_017.jpg'>Wikimedia Commons</a>, licence CC BY 4.0.</p>",
     ],
   },
   {
@@ -248,6 +273,7 @@ export const ARTICLES: Article[] = [
 ];
 
 export const FIL_INFO: string[] = [
+  "Nvidia : onze jours après sa démission, Jensen Huang est réintégré à la tête du groupe",
   "The Day of the Jackal : la saison 2 se précise, Eddie Redmayne prêt à rempiler",
   "IA : les agents autonomes s'installent dans les assistants du quotidien",
   "Tech : les smartphones pliants passent la barre des formats grand public",
