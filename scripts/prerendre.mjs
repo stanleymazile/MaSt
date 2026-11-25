@@ -121,6 +121,14 @@ function ecrire(cheminFichier, contenu) {
   const cible = join(RACINE, "dist", cheminFichier);
   mkdirSync(dirname(cible), { recursive: true });
   writeFileSync(cible, contenu, "utf-8");
+  // Copie « index de répertoire » : Firebase sert /article/<id> depuis
+  // dist/article/<id>/index.html. La forme <id>.html seule n'est pas résolue
+  // sans l'option cleanUrls — écartée car elle redirigerait aussi les fichiers
+  // de vérification Google (google*.html), ce qui peut casser la Search Console.
+  const sansExtension = cheminFichier.replace(/\.html$/, "");
+  const cibleIndex = join(RACINE, "dist", sansExtension, "index.html");
+  mkdirSync(dirname(cibleIndex), { recursive: true });
+  writeFileSync(cibleIndex, contenu, "utf-8");
 }
 
 function main() {
