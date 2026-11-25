@@ -13,3 +13,4 @@ Allow: /
 
 # Sitemap
 Sitemap: https://mazilepost.web.app/sitemap.xml
+Sitemap: https://mazilepost.web.app/news-sitemap.xml

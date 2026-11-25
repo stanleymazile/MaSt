@@ -1,4 +1,5 @@
 import type { Article } from "../data/articles";
+import { cheminArticle } from "../seo";
 import { useLang } from "../i18n/lang";
 import { dateLisible, dureeLecture, texteArticle } from "../i18n/contenu";
 
@@ -13,7 +14,7 @@ export default function Hero({ article, onOuvrir }: HeroProps) {
   return (
     <section className="mt-[22px]">
       <a
-        href="#"
+        href={cheminArticle(article.id)}
         onClick={(e) => {
           e.preventDefault();
           onOuvrir(article.id);

@@ -5,11 +5,20 @@ import { LogoBadge } from "./Logo";
 interface FooterProps {
   onRubrique: (r: string) => void;
   onNewsletter: () => void;
+  onPage: (p: string) => void;
 }
 
 const lienClasse = "inline-flex min-h-9 items-center py-[7px] text-left text-[15px] text-[#e8e8e8] no-underline transition-colors hover:text-accent-clair";
 
-export default function Footer({ onRubrique, onNewsletter }: FooterProps) {
+const PAGES_PIED: { id: string; cle: string }[] = [
+  { id: "a-propos", cle: "pied_page_apropos" },
+  { id: "politique-editoriale", cle: "pied_page_politique" },
+  { id: "mentions-legales", cle: "pied_page_mentions" },
+  { id: "politique-confidentialite", cle: "pied_page_confidentialite" },
+  { id: "contact", cle: "pied_page_contact" },
+];
+
+export default function Footer({ onRubrique, onNewsletter, onPage }: FooterProps) {
   const { t } = useLang();
   const rubriques = ["cine", "series", "tech", "telephones", "ia", "sport", "jeux", "business"];
 
@@ -26,6 +35,27 @@ export default function Footer({ onRubrique, onNewsletter }: FooterProps) {
           <div>
             <h3 className="m-0 mb-2.5 text-sm uppercase tracking-[1px] text-accent-clair">{t("pied_a_propos")}</h3>
             <p className="m-0 max-w-[44ch] text-[15px]">{t("pied_a_propos_texte")}</p>
+            <ul className="m-0 mt-2 list-none p-0">
+              {PAGES_PIED.map((p) => (
+                <li key={p.id}>
+                  <a
+                    href={`/${p.id}`}
+                    className={lienClasse}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onPage(p.id);
+                    }}
+                  >
+                    {t(p.cle)}
+                  </a>
+                </li>
+              ))}
+              <li>
+                <a href="/rss.xml" className={lienClasse}>
+                  {t("pied_rss")}
+                </a>
+              </li>
+            </ul>
           </div>
           <div>
             <h3 className="m-0 mb-2.5 text-sm uppercase tracking-[1px] text-accent-clair">{t("pied_rubriques")}</h3>

@@ -1,381 +1,415 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://mazilepost.web.app/</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-11-25</lastmod>
   </url>
   <url>
     <loc>https://mazilepost.web.app/rubrique/cine</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-11-25</lastmod>
   </url>
   <url>
     <loc>https://mazilepost.web.app/rubrique/series</loc>
     <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mazilepost.web.app/rubrique/tech</loc>
     <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mazilepost.web.app/rubrique/ia</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-11-25</lastmod>
   </url>
   <url>
     <loc>https://mazilepost.web.app/rubrique/sport</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-11-25</lastmod>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/rubrique/streaming</loc>
   </url>
   <url>
     <loc>https://mazilepost.web.app/rubrique/jeux</loc>
     <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mazilepost.web.app/rubrique/telephones</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mazilepost.web.app/rubrique/business</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/rubrique/streaming</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/rubrique/jeux/jeu-video</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/rubrique/jeux/jeu-societe</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/rubrique/business/eco-bourse</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/rubrique/business/nouveaux-produits</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-25</lastmod>
   </url>
   <url>
     <loc>https://mazilepost.web.app/rubrique/cine/box-office</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-25</lastmod>
   </url>
   <url>
     <loc>https://mazilepost.web.app/rubrique/cine/coulisses</loc>
     <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://mazilepost.web.app/rubrique/series/netflix</loc>
     <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://mazilepost.web.app/rubrique/tech/smartphones</loc>
     <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://mazilepost.web.app/rubrique/ia/recherche-ia</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-25</lastmod>
   </url>
   <url>
     <loc>https://mazilepost.web.app/rubrique/ia/entreprises-ia</loc>
     <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://mazilepost.web.app/rubrique/sport/voile</loc>
     <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mazilepost.web.app/telephone/xiaomi-redmi-note-15</loc>
+    <loc>https://mazilepost.web.app/rubrique/jeux/jeu-video</loc>
     <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mazilepost.web.app/telephone/samsung-galaxy-s25-ultra</loc>
+    <loc>https://mazilepost.web.app/rubrique/jeux/jeu-societe</loc>
     <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mazilepost.web.app/telephone/samsung-galaxy-s25</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://mazilepost.web.app/rubrique/business/eco-bourse</loc>
+    <lastmod>2026-11-25</lastmod>
   </url>
   <url>
-    <loc>https://mazilepost.web.app/telephone/apple-iphone-17-pro-max</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/telephone/apple-iphone-17</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/telephone/google-pixel-10-pro</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/telephone/samsung-galaxy-z-fold-7</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/telephone/xiaomi-17</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/telephone/samsung-galaxy-a56</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/telephone/apple-iphone-duo</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://mazilepost.web.app/rubrique/business/nouveaux-produits</loc>
   </url>
   <url>
     <loc>https://mazilepost.web.app/article/hunger-games-sunrise-on-the-reaping-225-millions-box-office</loc>
     <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/article/hypothese-riemann-resolue-ia-claude</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/article/motorola-signature-27-smartphone-exces</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/article/lupin-partie-4-quatre-saisons-top-10-netflix</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/article/route-du-rhum-2026-tom-laperche-record</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/article/echecs-roman-shogdzhiev-11-ans-record-grand-maitre</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/article/nvidia-retour-jensen-huang-record-wall-street</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/article/fed-choc-or-bitcoin-devissent</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/article/jensen-huang-retour-nvidia</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/article/robert-pattinson-nouveau-james-bond</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/article/iphone-duo-crackgate-ecran-fissure</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/article/gta-vi-record-ventes-premier-jour</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/article/villeneuve-film-gilles-box-office-quebec-19-million</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/article/the-body-netflix-serie-double-audience-numero-1</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/article/yann-schrub-retour-allonnes-deuxieme</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/article/sylvie-vartan-danse-ta-vie-gta-vi-ecoutes-explosent</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/article/ia-epilepsie-invisible-meta-medecine</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/article/huawei-osta-o1-pro-nouvelle-marque-starlight</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/telephone/apple-iphone-air</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/telephone/samsung-galaxy-z-flip-7</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/telephone/google-pixel-10</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/telephone/google-pixel-10-pro-xl</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/telephone/oneplus-15</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/telephone/honor-magic8-pro</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/telephone/oppo-find-x9-pro</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/telephone/vivo-x300-pro</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/telephone/nothing-phone-3</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://mazilepost.web.app/telephone/samsung-galaxy-s25-fe</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/b/ba/Elle_Fanning_at_the_2025_Cannes_Film_Festival.jpg</image:loc>
+      <image:title>Hunger Games : le préquel que personne n'attendait explose le box-office avec 225 millions de dollars en trois jours</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mazilepost.web.app/article/wicked-for-good-150-millions-record-comedie-musicale</loc>
     <lastmod>2026-11-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/6/66/Cynthia_Erivo_-_Wicked-FYC-1.jpg</image:loc>
+      <image:title>« Wicked: For Good » explose le box-office : 150 millions de dollars et un record historique pour une comédie musicale</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mazilepost.web.app/article/gpt-6-proteines-dessinees-ia-laboratoire</loc>
     <lastmod>2026-11-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/TriosePhosphateIsomerase_Ribbon_pastel_photo_mat.png/1920px-TriosePhosphateIsomerase_Ribbon_pastel_photo_mat.png</image:loc>
+      <image:title>GPT-6 dessine des protéines… et elles fonctionnent vraiment en laboratoire</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mazilepost.web.app/article/sanofi-rachete-insmed-41-milliards</loc>
     <lastmod>2026-11-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/Si%C3%A8ge_Sanofi_%C3%A0_Gentilly.jpg/1920px-Si%C3%A8ge_Sanofi_%C3%A0_Gentilly.jpg</image:loc>
+      <image:title>Sanofi frappe un grand coup : 41 milliards de dollars pour s'offrir Insmed, le plus gros rachat pharma de l'année</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mazilepost.web.app/article/vaibhav-sooryavanshi-15-ans-204-runs-53-balles</loc>
     <lastmod>2026-11-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/6/68/Vaibhav_Suryavanshi_meets_PM_Modi.jpg</image:loc>
+      <image:title>15 ans, 204 runs en 53 balles : l'adolescent qui a pulvérisé quatre records du monde en une seule manche</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/article/villeneuve-film-gilles-box-office-quebec-19-million</loc>
+    <lastmod>2026-11-24</lastmod>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/9/98/Gilles_Villeneuve_1979_Imola.jpg</image:loc>
+      <image:title>« Villeneuve » fait vibrer tout le Québec : 1,9 M$ au box-office, et Jacques, le fils de Gilles, en larmes</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/article/the-body-netflix-serie-double-audience-numero-1</loc>
+    <lastmod>2026-11-24</lastmod>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/7/7b/Sofia_Wylie%2C_Milana_Vayntrub_%26_Kathreen_Khavari_%2847531922961%29_%28cropped%29.png</image:loc>
+      <image:title>« The Body » : la série que personne n'attendait double son audience et s'empare de la tête de Netflix</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/article/yann-schrub-retour-allonnes-deuxieme</loc>
+    <lastmod>2026-11-24</lastmod>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/2022-08-21_European_Championships_2022_%E2%80%93_Men%27s_10%2C000_Metres_by_Sandro_Halank%E2%80%93124.jpg/1920px-2022-08-21_European_Championships_2022_%E2%80%93_Men%27s_10%2C000_Metres_by_Sandro_Halank%E2%80%93124.jpg</image:loc>
+      <image:title>Six mois de blessures, quatre secondes de l'exploit : le retour bouleversant de Yann Schrub</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/article/sylvie-vartan-danse-ta-vie-gta-vi-ecoutes-explosent</loc>
+    <lastmod>2026-11-24</lastmod>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/0/09/Sylvie_Vartan_Cabourg_2011.jpg</image:loc>
+      <image:title>« Danse ta vie » : à 82 ans, Sylvie Vartan ressuscitée par GTA VI, ses écoutes explosent de 2 500 %</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/article/ia-epilepsie-invisible-meta-medecine</loc>
+    <lastmod>2026-11-24</lastmod>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/7/7f/Left_Hippocampal_Sclerosis_on_MRI.jpg</image:loc>
+      <image:title>L'épilepsie est invisible sur les scanners. Une IA apprend à la traquer</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/article/huawei-osta-o1-pro-nouvelle-marque-starlight</loc>
+    <lastmod>2026-11-24</lastmod>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/Huawei_Store%2C_Guangdong%2C_Dongguan_%28March_21%2C_2025%29_%282%29.jpg/1920px-Huawei_Store%2C_Guangdong%2C_Dongguan_%28March_21%2C_2025%29_%282%29.jpg</image:loc>
+      <image:title>Six ans après avoir dû vendre Honor, Huawei fait naître OSTA, sa marque « lumière d'étoile »</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/article/hypothese-riemann-resolue-ia-claude</loc>
+    <lastmod>2026-11-24</lastmod>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/C.F_Bernhard_Riemann.jpg/1920px-C.F_Bernhard_Riemann.jpg</image:loc>
+      <image:title>L'hypothèse de Riemann, le problème à 1 million de dollars vieux de 167 ans, serait résolue avec l'aide de l'IA Claude</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/article/motorola-signature-27-smartphone-exces</loc>
+    <lastmod>2026-11-24</lastmod>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Motorola_Edge_70_back.jpg/1920px-Motorola_Edge_70_back.jpg</image:loc>
+      <image:title>Motorola Signature 27 : le smartphone de l'excès à 1 899 € qui veut humilier les iPhone et les Galaxy</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/article/lupin-partie-4-quatre-saisons-top-10-netflix</loc>
+    <lastmod>2026-11-24</lastmod>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Omar_Sy-3775.jpg/1920px-Omar_Sy-3775.jpg</image:loc>
+      <image:title>Lupin : les quatre saisons de la série d'Omar Sy occupent en même temps le Top 10 mondial de Netflix</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/article/route-du-rhum-2026-tom-laperche-record</loc>
+    <lastmod>2026-11-24</lastmod>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Tom_Laperche_Ark%C3%A9a_Ultim_Challenge.jpg/1920px-Tom_Laperche_Ark%C3%A9a_Ultim_Challenge.jpg</image:loc>
+      <image:title>Route du Rhum : à 29 ans, Tom Laperche pulvérise le record pour sa toute première traversée</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/article/echecs-roman-shogdzhiev-11-ans-record-grand-maitre</loc>
+    <lastmod>2026-11-24</lastmod>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Roman_Shogdzhiev_WTRBCC2026_R9.jpg/1920px-Roman_Shogdzhiev_WTRBCC2026_R9.jpg</image:loc>
+      <image:title>Échecs : à 11 ans, Roman Shogdzhiev est à une marche du record le plus fou du jeu</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/article/nvidia-retour-jensen-huang-record-wall-street</loc>
+    <lastmod>2026-11-24</lastmod>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/a/a1/Jensen_huang_stanford_2026-04-30_005.jpg</image:loc>
+      <image:title>+952 milliards de dollars en un jour : le retour de Jensen Huang propulse Nvidia et Wall Street vers des records</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/article/fed-choc-or-bitcoin-devissent</loc>
+    <lastmod>2026-11-24</lastmod>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/8/89/Eccles_Building_%2826088200676%29.jpg/1920px-Eccles_Building_%2826088200676%29.jpg</image:loc>
+      <image:title>La Fed prépare un choc de taux : l'or perd 9 % en une semaine et le bitcoin passe sous les 60 000 dollars</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/article/jensen-huang-retour-nvidia</loc>
+    <lastmod>2026-11-24</lastmod>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/a/a1/Jensen_huang_stanford_2026-04-30_005.jpg</image:loc>
+      <image:title>Onze jours après sa chute, Jensen Huang reprend déjà les rênes de Nvidia</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/article/robert-pattinson-nouveau-james-bond</loc>
+    <lastmod>2026-11-24</lastmod>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/a/a4/Robert_Pattinson_Venice_Film_Festival_%283x4_cropped%29.jpg</image:loc>
+      <image:title>Son nom est Pattinson… Robert Pattinson : l'ancien vampire de « Twilight » devient le nouveau James Bond</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/article/iphone-duo-crackgate-ecran-fissure</loc>
+    <lastmod>2026-11-24</lastmod>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/IPhone_Duo_07.jpg/1920px-IPhone_Duo_07.jpg</image:loc>
+      <image:title>« Crackgate » : à 1 999 dollars, l'iPhone pliable d'Apple se fissure dès les premières heures</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/article/gta-vi-record-ventes-premier-jour</loc>
+    <lastmod>2026-11-24</lastmod>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/8/8e/Dan_Houser_at_Rockstar_Games.png</image:loc>
+      <image:title>3,79 milliards de dollars en un jour : GTA VI signe le plus gros lancement de l'histoire du divertissement</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/telephone/xiaomi-redmi-note-15</loc>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/REDMI_Note_15_and_REDMI_Note_15_5G_back.jpg/1920px-REDMI_Note_15_and_REDMI_Note_15_5G_back.jpg</image:loc>
+      <image:title>Xiaomi Redmi Note 15 5G</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/telephone/samsung-galaxy-s25-ultra</loc>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Samsung_Galaxy_S25_Ultra.jpg/1920px-Samsung_Galaxy_S25_Ultra.jpg</image:loc>
+      <image:title>Samsung Galaxy S25 Ultra</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/telephone/samsung-galaxy-s25</loc>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Samsung_Galaxy_S25%2B.jpg/1920px-Samsung_Galaxy_S25%2B.jpg</image:loc>
+      <image:title>Samsung Galaxy S25</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/telephone/apple-iphone-17-pro-max</loc>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/7/72/IPhone_17_Pro_Max_%281%29.jpg</image:loc>
+      <image:title>Apple iPhone 17 Pro Max</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/telephone/apple-iphone-17</loc>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Black_iPhone_17.jpg/1920px-Black_iPhone_17.jpg</image:loc>
+      <image:title>Apple iPhone 17</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/telephone/google-pixel-10-pro</loc>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fd/Avant_du_Google_Pixel_10_Pro_pierre_de_lune_de_256_Go.jpg/1920px-Avant_du_Google_Pixel_10_Pro_pierre_de_lune_de_256_Go.jpg</image:loc>
+      <image:title>Google Pixel 10 Pro</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/telephone/samsung-galaxy-z-fold-7</loc>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/Samsung_Galaxy_Z_Fold_7_Unfolded.jpg/1920px-Samsung_Galaxy_Z_Fold_7_Unfolded.jpg</image:loc>
+      <image:title>Samsung Galaxy Z Fold 7</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/telephone/xiaomi-17</loc>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/5/5a/Xiaomi_17.jpg</image:loc>
+      <image:title>Xiaomi Xiaomi 17</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/telephone/samsung-galaxy-a56</loc>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Samsung_Galaxy_A56_5G_2025.jpg/1920px-Samsung_Galaxy_A56_5G_2025.jpg</image:loc>
+      <image:title>Samsung Galaxy A56 5G</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/telephone/apple-iphone-duo</loc>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/IPhone_Duo_07.jpg/1920px-IPhone_Duo_07.jpg</image:loc>
+      <image:title>Apple iPhone Duo</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/telephone/apple-iphone-air</loc>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/Sky_Blue_iPhone_Air.jpg/1920px-Sky_Blue_iPhone_Air.jpg</image:loc>
+      <image:title>Apple iPhone Air</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/telephone/samsung-galaxy-z-flip-7</loc>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Samsung_Galaxy_Z_Flip_7_Unfolded.jpg/1920px-Samsung_Galaxy_Z_Flip_7_Unfolded.jpg</image:loc>
+      <image:title>Samsung Galaxy Z Flip 7</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/telephone/google-pixel-10</loc>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/Pixel_10_back_%28Indigo%29.svg/1920px-Pixel_10_back_%28Indigo%29.svg.png</image:loc>
+      <image:title>Google Pixel 10</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/telephone/google-pixel-10-pro-xl</loc>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Arri%C3%A8re_du_Google_Pixel_10_Pro_pierre_de_lune_de_256_Go.jpg/1920px-Arri%C3%A8re_du_Google_Pixel_10_Pro_pierre_de_lune_de_256_Go.jpg</image:loc>
+      <image:title>Google Pixel 10 Pro XL</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/telephone/oneplus-15</loc>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/f/f1/OnePlus_15_back.jpg</image:loc>
+      <image:title>OnePlus OnePlus 15</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/telephone/honor-magic8-pro</loc>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/The_back_of_the_Honor_Magic8_Pro.jpg/1920px-The_back_of_the_Honor_Magic8_Pro.jpg</image:loc>
+      <image:title>Honor Honor Magic8 Pro</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/telephone/oppo-find-x9-pro</loc>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Oppo_Find_X9_Titanium_Grey.jpg/1920px-Oppo_Find_X9_Titanium_Grey.jpg</image:loc>
+      <image:title>Oppo Oppo Find X9 Pro</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/telephone/vivo-x300-pro</loc>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/The_back_of_the_vivo_X300_Pro.jpg/1920px-The_back_of_the_vivo_X300_Pro.jpg</image:loc>
+      <image:title>vivo X300 Pro</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/telephone/nothing-phone-3</loc>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/%E5%8D%8A%E5%A4%9C%E9%A6%96%E5%8F%91%EF%BC%81%E7%AC%AC%E4%B8%80%E6%89%8B%E6%8B%BF%E5%88%B0%E4%BA%86Nothing_Phone_%283%29_%EF%BC%81%E7%81%AF%E6%9D%A1%E6%B2%A1%E4%BA%86%E3%80%81%E8%83%8C%E5%90%8E%E5%A4%9A%E4%B8%80%E4%B8%AAscreen%EF%BC%81-00.02.56.231.png/1920px-%E5%8D%8A%E5%A4%9C%E9%A6%96%E5%8F%91%EF%BC%81%E7%AC%AC%E4%B8%80%E6%89%8B%E6%8B%BF%E5%88%B0%E4%BA%86Nothing_Phone_%283%29_%EF%BC%81%E7%81%AF%E6%9D%A1%E6%B2%A1%E4%BA%86%E3%80%81%E8%83%8C%E5%90%8E%E5%A4%9A%E4%B8%80%E4%B8%AAscreen%EF%BC%81-00.02.56.231.png</image:loc>
+      <image:title>Nothing Phone (3)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/telephone/samsung-galaxy-s25-fe</loc>
+    <image:image>
+      <image:loc>https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Samsung_Galaxy_S25%2B.jpg/1920px-Samsung_Galaxy_S25%2B.jpg</image:loc>
+      <image:title>Samsung Galaxy S25 FE</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/a-propos</loc>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/politique-editoriale</loc>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/mentions-legales</loc>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/politique-confidentialite</loc>
+  </url>
+  <url>
+    <loc>https://mazilepost.web.app/contact</loc>
   </url>
 </urlset>

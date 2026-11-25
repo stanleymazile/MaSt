@@ -26,6 +26,7 @@ import ArticleView, { TitreSection } from "./components/ArticleView";
 import TelephoneView, { TelephonesListe } from "./components/Telephones";
 import ProduitsVitrine from "./components/Produits";
 import Footer from "./components/Footer";
+import PageInfo, { PageIntrouvable, PAGES_INFO } from "./components/PagesInfo";
 import Partager from "./components/Partager";
 import { useLang } from "./i18n/lang";
 import { texteArticle, texteTelephone } from "./i18n/contenu";
@@ -40,29 +41,37 @@ const RUBRIQUES_CARTES: { id: string; nom: string; desc: string }[] = [
   { id: "business", nom: "Business", desc: "Économie, bourse et les nouveaux produits qui innovent" },
 ];
 
-/** Lit la route courante (/ , /rubrique/:id , /rubrique/:id/:sous , /article/:id , /telephone/:id) pour ouvrir directement la bonne vue. */
+/** Lit la route courante (/ , /rubrique/:id , /rubrique/:id/:sous , /article/:id , /telephone/:id , pages d'info) pour ouvrir directement la bonne vue. */
 function lireRoute(): {
   rubrique: string;
   sousRubrique: string | null;
   articleId: string | null;
   telephoneId: string | null;
+  page: string | null;
+  introuvable: boolean;
 } {
   const p = window.location.pathname;
+  const base = { rubrique: "toutes", sousRubrique: null, articleId: null, telephoneId: null, page: null, introuvable: false };
+  const mPage = p.match(/^\/(a-propos|politique-editoriale|mentions-legales|politique-confidentialite|contact)\/?$/);
+  if (mPage) {
+    return { ...base, page: mPage[1] };
+  }
   const mTel = p.match(/^\/telephone\/([\w-]+)\/?$/);
   if (mTel && TELEPHONES.some((t) => t.id === mTel[1])) {
-    return { rubrique: "telephones", sousRubrique: null, articleId: null, telephoneId: mTel[1] };
+    return { ...base, rubrique: "telephones", telephoneId: mTel[1] };
   }
   const mArt = p.match(/^\/article\/([\w-]+)\/?$/);
   if (mArt && ARTICLES.some((a) => a.id === mArt[1])) {
     const art = ARTICLES.find((a) => a.id === mArt[1])!;
-    return { rubrique: art.rubrique, sousRubrique: art.branche ?? null, articleId: art.id, telephoneId: null };
+    return { ...base, rubrique: art.rubrique, sousRubrique: art.branche ?? null, articleId: art.id };
   }
   const mRub = p.match(/^\/rubrique\/([\w-]+)(?:\/([\w-]+))?\/?$/);
   if (mRub && mRub[1] in RUBRIQUES) {
     const sous = mRub[2] && mRub[2] in SOUS_RUBRIQUES ? mRub[2] : null;
-    return { rubrique: mRub[1], sousRubrique: sous, articleId: null, telephoneId: null };
+    return { ...base, rubrique: mRub[1], sousRubrique: sous };
   }
-  return { rubrique: "toutes", sousRubrique: null, articleId: null, telephoneId: null };
+  // Toute autre adresse non vide ne correspond à aucun contenu : vraie page 404.
+  return { ...base, introuvable: p !== "/" };
 }
 
 function cheminVue(rubrique: string, sousRubrique: string | null): string {
@@ -75,9 +84,26 @@ export default function App() {
   const [sousRubrique, setSousRubrique] = useState<string | null>(routeInitiale.sousRubrique);
   const [articleId, setArticleId] = useState<string | null>(routeInitiale.articleId);
   const [telephoneId, setTelephoneId] = useState<string | null>(routeInitiale.telephoneId);
+  const [page, setPage] = useState<string | null>(routeInitiale.page);
+  const [introuvable, setIntrouvable] = useState(routeInitiale.introuvable);
   const [menuOuvert, setMenuOuvert] = useState(false);
   const [rechercheOuverte, setRechercheOuverte] = useState(false);
-  const [notes, setNotes] = useState<Record<string, number>>({});
+  // Notes des lecteurs conservées dans le navigateur (elles survivent au rechargement).
+  const [notes, setNotes] = useState<Record<string, number>>(() => {
+    try {
+      return JSON.parse(localStorage.getItem("mast-notes") ?? "{}") as Record<string, number>;
+    } catch {
+      return {};
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("mast-notes", JSON.stringify(notes));
+    } catch {
+      /* stockage indisponible : les notes restent en mémoire pour la session */
+    }
+  }, [notes]);
 
   const articleOuvert = articleId ? (ARTICLES.find((a) => a.id === articleId) ?? null) : null;
   const telephoneOuvert = telephoneId ? (TELEPHONES.find((t) => t.id === telephoneId) ?? null) : null;
@@ -93,6 +119,8 @@ export default function App() {
       setSousRubrique(sous);
       setArticleId(null);
       setTelephoneId(null);
+      setPage(null);
+      setIntrouvable(false);
       setMenuOuvert(false);
       window.history.pushState(null, "", cheminVue(r, sous));
       defilerHaut(true);
@@ -104,6 +132,8 @@ export default function App() {
     (id: string) => {
       setRechercheOuverte(false);
       setTelephoneId(null);
+      setPage(null);
+      setIntrouvable(false);
       setArticleId(id);
       window.history.pushState(null, "", cheminArticle(id));
       defilerHaut(false);
@@ -115,10 +145,25 @@ export default function App() {
     (id: string) => {
       setRechercheOuverte(false);
       setArticleId(null);
+      setPage(null);
+      setIntrouvable(false);
       setRubrique("telephones");
       setSousRubrique(null);
       setTelephoneId(id);
       window.history.pushState(null, "", cheminTelephone(id));
+      defilerHaut(false);
+    },
+    [defilerHaut],
+  );
+
+  const allerPage = useCallback(
+    (p: string) => {
+      setArticleId(null);
+      setTelephoneId(null);
+      setIntrouvable(false);
+      setPage(p);
+      setMenuOuvert(false);
+      window.history.pushState(null, "", `/${p}`);
       defilerHaut(false);
     },
     [defilerHaut],
@@ -144,6 +189,8 @@ export default function App() {
       setSousRubrique(r.sousRubrique);
       setArticleId(r.articleId);
       setTelephoneId(r.telephoneId);
+      setPage(r.page);
+      setIntrouvable(r.introuvable);
       defilerHaut(false);
     };
     window.addEventListener("popstate", onPop);
@@ -154,7 +201,24 @@ export default function App() {
 
   /* Titre, description et URL canonique propres à chaque vue, dans la langue choisie */
   useEffect(() => {
-    if (telephoneOuvert) {
+    if (introuvable) {
+      retirerDonneesArticle();
+      retirerDonneesTelephone();
+      appliquerSeo({
+        titre: "Page introuvable — MaSt",
+        description: "Cette adresse ne correspond à aucun article ni à aucune page de MaSt.",
+        chemin: window.location.pathname,
+        noindex: true,
+      });
+    } else if (page && PAGES_INFO[page]) {
+      retirerDonneesArticle();
+      retirerDonneesTelephone();
+      appliquerSeo({
+        titre: `${PAGES_INFO[page].titre} — MaSt`,
+        description: PAGES_INFO[page].description,
+        chemin: `/${page}`,
+      });
+    } else if (telephoneOuvert) {
       const telT = texteTelephone(telephoneOuvert, lang);
       retirerDonneesArticle();
       appliquerSeo({
@@ -208,7 +272,7 @@ export default function App() {
       retirerDonneesTelephone();
       appliquerSeo({ titre: t("seo_accueil_titre"), description: t("seo_accueil_desc"), chemin: "/" });
     }
-  }, [articleOuvert, telephoneOuvert, rubrique, sousRubrique, lang, t]);
+  }, [articleOuvert, telephoneOuvert, rubrique, sousRubrique, lang, t, page, introuvable]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -224,6 +288,8 @@ export default function App() {
   const allerNewsletter = useCallback(() => {
     setArticleId(null);
     setTelephoneId(null);
+    setPage(null);
+    setIntrouvable(false);
     window.history.pushState(null, "", cheminVue(rubrique, sousRubrique));
     setTimeout(() => {
       document.getElementById("champ-email")?.focus({ preventScroll: false });
@@ -269,6 +335,7 @@ export default function App() {
         ouvert={rechercheOuverte}
         onFermer={() => setRechercheOuverte(false)}
         onOuvrirArticle={ouvrirArticle}
+        onOuvrirTelephone={ouvrirTelephone}
       />
 
       <main className="mx-auto w-full max-w-[1180px] flex-1 px-4 pb-14">
@@ -290,6 +357,10 @@ export default function App() {
             onAccueil={() => allerRubrique("toutes")}
             onOuvrir={ouvrirArticle}
           />
+        ) : page ? (
+          <PageInfo key={page} page={page} />
+        ) : introuvable ? (
+          <PageIntrouvable />
         ) : (
           <>
             {rubrique === "toutes" && <Hero article={une} onOuvrir={ouvrirArticle} />}
@@ -397,7 +468,7 @@ export default function App() {
         )}
       </main>
 
-      <Footer onRubrique={allerRubrique} onNewsletter={allerNewsletter} />
+      <Footer onRubrique={allerRubrique} onNewsletter={allerNewsletter} onPage={allerPage} />
     </div>
   );
 }

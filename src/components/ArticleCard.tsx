@@ -1,4 +1,5 @@
 import type { Article } from "../data/articles";
+import { cheminArticle } from "../seo";
 import { useLang } from "../i18n/lang";
 import { dateLisible, dureeLecture, texteArticle } from "../i18n/contenu";
 
@@ -24,7 +25,7 @@ export default function ArticleCard({ article, onOuvrir }: ArticleCardProps) {
   const txt = texteArticle(article, lang);
   return (
     <a
-      href="#"
+      href={cheminArticle(article.id)}
       onClick={(e) => {
         e.preventDefault();
         onOuvrir(article.id);

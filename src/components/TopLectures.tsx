@@ -1,4 +1,5 @@
 import type { Article } from "../data/articles";
+import { cheminArticle } from "../seo";
 import { useLang } from "../i18n/lang";
 import { texteArticle } from "../i18n/contenu";
 
@@ -16,7 +17,7 @@ export default function TopLectures({ articles, onOuvrir }: TopLecturesProps) {
         {articles.map((a, i) => (
           <li key={a.id} className="border-b border-bordure last:border-b-0">
             <a
-              href="#"
+              href={cheminArticle(a.id)}
               onClick={(e) => {
                 e.preventDefault();
                 onOuvrir(a.id);

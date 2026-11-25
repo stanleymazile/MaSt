@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChevronRight, Minus, Plus, X } from "lucide-react";
 import { NAV_RUBRIQUES, SOUS_PAR_RUBRIQUE } from "../data/articles";
+import { cheminRubrique, cheminSousRubrique } from "../seo";
 import { useLang } from "../i18n/lang";
 import { LogoTexte } from "./Logo";
 
@@ -50,15 +51,18 @@ export default function SideMenu({ ouvert, onFermer, onRubrique }: SideMenuProps
             return (
               <div key={r.id}>
                 <div className="flex items-stretch">
-                  <button
-                    type="button"
-                    onClick={() => onRubrique(r.id)}
-                    className={`flex min-h-[52px] flex-1 items-center px-[22px] py-[15px] text-left font-display text-[19px] font-extrabold uppercase tracking-[0.3px] transition-colors hover:bg-white/[0.06] ${
+                  <a
+                    href={cheminRubrique(r.id)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onRubrique(r.id);
+                    }}
+                    className={`flex min-h-[52px] flex-1 items-center px-[22px] py-[15px] text-left font-display text-[19px] font-extrabold uppercase tracking-[0.3px] no-underline transition-colors hover:bg-white/[0.06] ${
                       r.id === "toutes" ? "text-accent-clair" : "text-white"
                     }`}
                   >
                     {t(`rub_${r.id}`)}
-                  </button>
+                  </a>
                   {subs ? (
                     <button
                       type="button"
@@ -78,14 +82,17 @@ export default function SideMenu({ ouvert, onFermer, onRubrique }: SideMenuProps
                 {subs && deplie && (
                   <div className="mb-1.5 ml-[22px] border-l-2 border-accent/60">
                     {subs.map((s) => (
-                      <button
+                      <a
                         key={s.id}
-                        type="button"
-                        onClick={() => onRubrique(r.id, s.id)}
-                        className="flex min-h-[42px] w-full items-center py-2 pl-4 pr-[22px] text-left text-[15.5px] font-semibold text-[#d8d8d8] transition-colors hover:bg-white/[0.06] hover:text-white"
+                        href={cheminSousRubrique(r.id, s.id)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          onRubrique(r.id, s.id);
+                        }}
+                        className="flex min-h-[42px] w-full items-center py-2 pl-4 pr-[22px] text-left text-[15.5px] font-semibold text-[#d8d8d8] no-underline transition-colors hover:bg-white/[0.06] hover:text-white"
                       >
                         {t(`sous_${s.id}`)}
-                      </button>
+                      </a>
                     ))}
                   </div>
                 )}

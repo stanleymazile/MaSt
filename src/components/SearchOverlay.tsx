@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { ARTICLES } from "../data/articles";
+import { TELEPHONES } from "../data/telephones";
+import { cheminArticle, cheminTelephone } from "../seo";
 import { useLang } from "../i18n/lang";
 import { dateLisible, texteArticle } from "../i18n/contenu";
 
@@ -8,9 +10,10 @@ interface SearchOverlayProps {
   ouvert: boolean;
   onFermer: () => void;
   onOuvrirArticle: (id: string) => void;
+  onOuvrirTelephone: (id: string) => void;
 }
 
-export default function SearchOverlay({ ouvert, onFermer, onOuvrirArticle }: SearchOverlayProps) {
+export default function SearchOverlay({ ouvert, onFermer, onOuvrirArticle, onOuvrirTelephone }: SearchOverlayProps) {
   const { lang, t } = useLang();
   const [q, setQ] = useState("");
   const champRef = useRef<HTMLInputElement>(null);
@@ -33,6 +36,10 @@ export default function SearchOverlay({ ouvert, onFermer, onOuvrirArticle }: Sea
     const autre = `${tr.titre} ${tr.chapo} ${tr.tag}`.toLowerCase();
     return fr.includes(requete) || autre.includes(requete);
   });
+  // Les fiches téléphones sont aussi cherchables (par marque, modèle ou résumé).
+  const listeTels = requete
+    ? TELEPHONES.filter((tel) => `${tel.marque} ${tel.modele} ${tel.resume}`.toLowerCase().includes(requete))
+    : [];
 
   return (
     <div className="fixed inset-0 z-[95] flex flex-col bg-fond" role="dialog" aria-label={t("rech_titre")}>
@@ -57,13 +64,35 @@ export default function SearchOverlay({ ouvert, onFermer, onOuvrirArticle }: Sea
           </button>
         </div>
         <div className="overflow-y-auto pb-10">
+          {listeTels.map((tel) => (
+            <a
+              key={tel.id}
+              href={cheminTelephone(tel.id)}
+              onClick={(e) => {
+                e.preventDefault();
+                onOuvrirTelephone(tel.id);
+              }}
+              className="flex items-center gap-3.5 border-b border-bordure py-3.5 no-underline"
+            >
+              <img src={tel.image} alt="" className="h-[70px] w-[104px] flex-none rounded object-cover" />
+              <span>
+                <span className="inline-block w-fit rounded-[3px] bg-accent px-[9px] py-1 font-display text-xs font-extrabold uppercase tracking-[0.8px] text-white">
+                  {t("rub_telephones")}
+                </span>
+                <h3 className="m-0 mt-1 text-[17px] leading-[1.3]">
+                  {tel.marque} {tel.modele}
+                </h3>
+                <span className="text-[13px] text-texte-doux">{tel.prix}</span>
+              </span>
+            </a>
+          ))}
           {liste.length > 0 ? (
             liste.map((a) => {
               const tr = texteArticle(a, lang);
               return (
                 <a
                   key={a.id}
-                  href="#"
+                  href={cheminArticle(a.id)}
                   onClick={(e) => {
                     e.preventDefault();
                     onOuvrirArticle(a.id);
@@ -81,9 +110,9 @@ export default function SearchOverlay({ ouvert, onFermer, onOuvrirArticle }: Sea
                 </a>
               );
             })
-          ) : (
+          ) : listeTels.length === 0 ? (
             <p className="py-[26px] text-texte-doux">{t("rech_aucun", { q })}</p>
-          )}
+          ) : null}
         </div>
       </div>
     </div>

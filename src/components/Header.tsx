@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Check, Languages, Menu, Search, User } from "lucide-react";
+import { Check, Languages, Menu, Search } from "lucide-react";
 import { NAV_RUBRIQUES } from "../data/articles";
 import { cheminRubrique } from "../seo";
 import { LANGS, useLang } from "../i18n/lang";
@@ -96,9 +96,6 @@ export default function Header({ rubrique, onRubrique, onMenu, onRecherche, onAc
             <BoutonLangue />
             <button type="button" className={btnIcone} onClick={onRecherche} aria-label={t("rechercher")}>
               <Search size={26} strokeWidth={2.4} />
-            </button>
-            <button type="button" className={btnIcone} onClick={onRecherche} aria-label={t("mon_compte")}>
-              <User size={26} strokeWidth={2.2} />
             </button>
           </div>
         </div>

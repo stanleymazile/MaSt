@@ -77,7 +77,18 @@ export default function ArticleView({ article, note, onNoter, onRetour, onAccuei
       <div
         className="article-corps max-w-[720px]"
         onClick={(e) => {
-          if ((e.target as HTMLElement).closest("a")) e.preventDefault();
+          const lien = (e.target as HTMLElement).closest("a");
+          if (!lien) return;
+          const hrefBrut = lien.getAttribute("href") ?? "";
+          const chemin = hrefBrut.startsWith(SITE_URL) ? hrefBrut.slice(SITE_URL.length) : hrefBrut;
+          const interne = chemin.match(/^\/article\/([\w-]+)/);
+          if (interne) {
+            e.preventDefault();
+            onOuvrir(interne[1]);
+          } else if (/^https?:\/\//.test(hrefBrut)) {
+            lien.setAttribute("target", "_blank");
+            lien.setAttribute("rel", "noopener noreferrer");
+          }
         }}
         dangerouslySetInnerHTML={{ __html: txt.corps.join("") }}
       />

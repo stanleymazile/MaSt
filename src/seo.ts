@@ -24,12 +24,23 @@ export function cheminTelephone(id: string): string {
 
 const ID_LD_PRODUIT = "ld-produit";
 
+/** Extrait un prix exploitable (montant + devise) du champ prix libre des fiches téléphones. Préfère l'euro quand les deux devises sont présentes. */
+export function extrairePrix(prix: string): { montant: string; devise: string } | null {
+  const trouvailles = [...prix.matchAll(/(\d[\d\s\u202F]*)\s*(€|\$)/g)].map((m) => ({
+    montant: m[1].replace(/[\s\u202F]/g, ""),
+    devise: m[2] === "€" ? "EUR" : "USD",
+  }));
+  if (trouvailles.length === 0) return null;
+  return trouvailles.find((t) => t.devise === "EUR") ?? trouvailles[0];
+}
+
 /** Injecte les données structurées Product d'une fiche téléphone ouverte. */
 export function appliquerDonneesTelephone(tel: {
   marque: string;
   modele: string;
   resume: string;
   id: string;
+  prix: string;
   imageUrl?: string;
 }) {
   let script = document.getElementById(ID_LD_PRODUIT) as HTMLScriptElement | null;
@@ -39,14 +50,27 @@ export function appliquerDonneesTelephone(tel: {
     script.type = "application/ld+json";
     document.head.appendChild(script);
   }
+  const url = SITE_URL + cheminTelephone(tel.id);
+  const prix = extrairePrix(tel.prix);
   script.textContent = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Product",
     name: `${tel.marque} ${tel.modele}`,
     description: tel.resume,
     brand: { "@type": "Brand", name: tel.marque },
-    url: SITE_URL + cheminTelephone(tel.id),
+    url,
     ...(tel.imageUrl ? { image: tel.imageUrl } : {}),
+    ...(prix
+      ? {
+          offers: {
+            "@type": "Offer",
+            url,
+            price: prix.montant,
+            priceCurrency: prix.devise,
+            availability: "https://schema.org/InStock",
+          },
+        }
+      : {}),
   });
 }
 
@@ -105,7 +129,7 @@ export function appliquerDonneesArticle(article: {
     articleSection: article.tag,
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     image: [article.imageUrl ?? IMAGE_PARTAGE],
-    author: { "@type": "Organization", name: "Rédaction MaSt", url: SITE_URL + "/" },
+    author: { "@type": "Organization", name: "Rédaction MaSt", url: SITE_URL + "/a-propos" },
     publisher: {
       "@type": "Organization",
       name: NOM_SITE,
@@ -120,10 +144,14 @@ export function retirerDonneesArticle() {
 }
 
 /** Met à jour le titre, la description, l'URL canonique et les balises de partage pour la vue courante. */
-export function appliquerSeo(opts: { titre: string; description: string; chemin: string; type?: string; image?: string }) {
+export function appliquerSeo(opts: { titre: string; description: string; chemin: string; type?: string; image?: string; noindex?: boolean }) {
   const url = SITE_URL + opts.chemin;
   const image = opts.image ?? IMAGE_PARTAGE;
   document.title = opts.titre;
+  fixerMetaParNom(
+    "robots",
+    opts.noindex ? "noindex, follow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  );
   fixerMetaParNom("description", opts.description);
   fixerMetaParPropriete("og:title", opts.titre);
   fixerMetaParPropriete("og:description", opts.description);
