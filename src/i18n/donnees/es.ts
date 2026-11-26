@@ -3,6 +3,10 @@ import type { ContenuLang } from "../contenu";
 
 const donnees: ContenuLang = {
  "filInfo": [
+  "Cine: «Zootopia 2» se estrena este jueves de Acción de Gracias con 10,2 millones de dólares en preestrenos y apunta a 125 millones en cinco días",
+  "Series: «Stranger Things» vuelve esta noche con su temporada final — cuatro episodios, tres años de espera, un adiós el 31 de diciembre",
+  "IA: Anthropic, la mayor salida a Bolsa de la historia (81.300 millones de dólares), mantiene su precio una semana después",
+  "Fútbol: el PSG pierde su invencibilidad ante la Roma (2-2) y el Bayern cae en Lille — noche de locura en la Champions League",
   "Cine: «Wicked: For Good» se estrena con 150 millones de dólares, récord histórico para una adaptación de un musical de Broadway",
   "IA: GPT-6 diseña proteínas que funcionan de verdad en el laboratorio — 35 diseños de 322 se adhirieron a su objetivo",
   "Business: Sanofi compra Insmed por 41 000 millones de dólares, la mayor adquisición farmacéutica del año",
@@ -14,11 +18,7 @@ const donnees: ContenuLang = {
   "IA y salud: Meta abre sus modelos a los investigadores para rastrear el foco invisible de las crisis de epilepsia",
   "Tecnología: Huawei lanza OSTA, su primera marca desde Honor — el O1 Pro (200 Mpx, 7 000 mAh) agotado desde el primer día en su versión de 16 GB",
   "Hunger Games: 225 millones de dólares en tres días, la precuela arrasa en la taquilla mundial",
-  "Hipótesis de Riemann: el problema del millón de dólares, de 167 años de antigüedad, habría sido resuelto con la ayuda de la IA Claude",
-  "Nvidia: once días después de su dimisión, Jensen Huang es restituido al frente del grupo",
-  "Bolsa: Nvidia gana 952 mil millones de dólares en un día, Wall Street firma su mejor sesión desde abril de 2025",
-  "James Bond: Robert Pattinson se convierte en el nuevo 007 de Denis Villeneuve",
-  "Lupin: las cuatro temporadas de la serie de Omar Sy en el Top 10 mundial de Netflix al mismo tiempo"
+  "Hipótesis de Riemann: el problema del millón de dólares, de 167 años de antigüedad, habría sido resuelto con la ayuda de la IA Claude"
  ],
  "articles": {
   "hunger-games-sunrise-on-the-reaping-225-millions-box-office": {
@@ -428,6 +428,66 @@ const donnees: ContenuLang = {
    "legende": "Cynthia Erivo, alias Elphaba en «Wicked: For Good», durante un panel en Santa Mónica en febrero de 2025. (Foto: Kevin Paul, CC BY 4.0, vía Wikimedia Commons)",
    "tag": "Récord de taquilla",
    "titre": "«Wicked: For Good» arrasa en taquilla: 150 millones de dólares y un récord histórico para un musical"
+  },
+  "stranger-things-saison-5-volume-1-final": {
+   "chapo": "Cuatro episodios, un estreno en horario de máxima audiencia inédito en Netflix y un final en Nochevieja: la quinta y última temporada de «Stranger Things» se abre este jueves 26 de noviembre a las 20 h, hora del Este. Diez años después del inicio de la serie, ha llegado la hora de matar a Vecna.",
+   "corps": [
+    "<p>Tres años de espera, y la cuenta atrás ha terminado. Este jueves 26 de noviembre, «Stranger Things» regresa a Netflix con su quinta y última temporada, con cuatro primeros episodios estrenados a las 20 h, hora del Este (17 h en la costa Oeste). Una primicia para la plataforma, que suele lanzar sus series a medianoche, hora del Pacífico: esta vez, todo el país podrá verla junta, por la noche, como un gran acontecimiento televisivo.</p>",
+    "<h2>Tres citas para despedirse</h2>",
+    "<p>Netflix ha dividido la despedida en tres tiempos: el volumen 1, cuatro episodios, este jueves; el volumen 2, tres episodios, el día de Navidad, 25 de diciembre; y el final, un episodio de unas dos horas titulado «The Rightside Up», la noche de Nochevieja, 31 de diciembre. Ocho episodios en total para cerrar diez años de historia, desde la desaparición de Will Byers en 2016. Los títulos del volumen 1 ya se conocen: «The Crawl» (1 h 08), «The Vanishing of Holly Wheeler» (54 minutos), «The Turnbow Trap» (1 h 06) y «Sorcerer» (1 h 23).</p>",
+    "<blockquote>« The fall of 1987. Hawkins is scarred by the opening of the Rifts, and our heroes are united by a single goal: find and kill Vecna. » — Netflix Tudum («El otoño de 1987. Hawkins está marcada por la apertura de las Brechas, y nuestros héroes están unidos por un solo objetivo: encontrar y matar a Vecna.»)</blockquote>",
+    "<p>La historia retoma un año y ocho meses después del final de la cuarta temporada: Hawkins, desgarrada por las Brechas, vive bajo cuarentena militar, y Vecna ha desaparecido. Millie Bobby Brown, Finn Wolfhard, Noah Schnapp, Winona Ryder y David Harbour vuelven todos, acompañados por Linda Hamilton —la Sarah Connor de «Terminator»— en el papel de la doctora Kay, la científica militar que dirige la cuarentena. El reparto se había reunido para un gran estreno en el TCL Chinese Theatre de Hollywood el 6 de noviembre, aniversario de la desaparición de Will Byers.</p>",
+    "<p>Fuentes : <a href='https://dciology.com/stranger-things-season-5-volume-1-release-date/'>Dciology</a>, <a href='https://biplob.iam.bd/stranger-things-5-volume-1-release-date-time-episode-titles-everything-to-know-before-november-26/'>Biplob</a>, <a href='https://featurefirst.net/stranger-things-season-5-gets-first-teaser-and-release-dates/'>Feature First</a>, <a href='https://www.heraldtribune.com/story/entertainment/2025/12/26/stranger-things-finale-last-episode-date-time/87918320007/'>Herald-Tribune (según Netflix Tudum)</a>. Foto: Laviru Koruwakankanamge, licencia CC BY-SA 4.0, vía Wikimedia Commons.</p>"
+   ],
+   "legende": "Millie Bobby Brown, alias Eleven, durante una convención de fans en julio de 2022. (Foto: Laviru Koruwakankanamge, CC BY-SA 4.0, vía Wikimedia Commons)",
+   "tag": "Netflix",
+   "titre": "«Stranger Things»: tras tres años de espera, la temporada final llega esta noche — Hawkins no volverá a ser la misma"
+  },
+  "zootopia-2-ouverture-thanksgiving-125-millions": {
+   "chapo": "Diez años después de la primera entrega, la secuela de Disney se estrena este jueves de Acción de Gracias con 10,2 millones de dólares en preestrenos —el segundo mejor arranque de la historia de Walt Disney Animation Studios— y apunta a más de 125 millones de dólares en cinco días. La ciudad de los animales ha vuelto, y tiene hambre.",
+   "corps": [
+    "<p>Diez años han hecho falta para reabrir las puertas de Zootopia. Estrenada este jueves 26 de noviembre, día de Acción de Gracias, «Zootopia 2» ya había dado el tono la víspera por la noche: 10,2 millones de dólares recaudados en preestrenos, el segundo mejor arranque de la historia de Walt Disney Animation Studios, por detrás de «Moana 2» (13,8 millones) y por delante de «Frozen II» (8,5 millones). En 4.000 salas, el dúo conejo-zorro no ha perdido su olfato.</p>",
+    "<h2>¿125 millones de dólares en cinco días?</h2>",
+    "<p>Las proyecciones de los profesionales no dejan lugar a dudas: según el seguimiento de Deadline, la película debería recaudar 125 millones de dólares o más en sus cinco primeros días en Norteamérica, y unos 270 millones en todo el mundo, de los que 135 a 145 millones en el extranjero. Un estreno que igualaría a «Frozen II» (125 millones en 2019) y lo convertiría en la segunda mejor apertura de Acción de Gracias de todos los tiempos, por detrás de «Moana 2». Las entradas vendidas en preventa ya rondaban los 20 millones de dólares antes de la semana del estreno.</p>",
+    "<p>La primera entrega, estrenada en 2016, recaudó más de mil millones de dólares en todo el mundo y ganó el Óscar a la mejor película de animación. La secuela, de nuevo dirigida por Jared Bush y Byron Howard, reencuentra a Judy Hopps y Nick Wilde —Ginnifer Goodwin y Jason Bateman retoman sus papeles— tras la pista de una misteriosa serpiente, Gary De'Snake, doblado por Ke Huy Quan, ganador de un Óscar. Diez años de espera, y una ciudad que no ha perdido nada de su energía.</p>",
+    "<h2>Una semana que puede cambiarlo todo para Disney</h2>",
+    "<p>Detrás de «Zootopia 2», toda la taquilla de Acción de Gracias se anima: «Los Juegos del Hambre» y «Wicked: For Good» siguen llenando las salas, mientras «Hexed», la nueva película de animación de Disney, arranca con más timidez, con unos 2 millones de dólares en preestrenos y una proyección de 40 millones de dólares o menos en cinco días. Si se confirman las proyecciones, Judy y Nick darán a Disney nueve de las diez mejores aperturas de Acción de Gracias de la historia. Diez años después, la ciudad de los animales no ha terminado de rugir.</p>",
+    "<p>Fuentes : <a href='https://filmverse.in/zootopia-2-thanksgiving-opening-tracking-125-million-moana-2-record-preview/'>FilmVerse</a>, <a href='https://theimmortaltimes.com/zootopia-2-release-date-box-office-tracking-cast-reviews-2026/'>The Immortal Times</a>, <a href='https://hirunews.lk/goldfmnews/432910/zootopia-2-goes-wild-with-usd140m-5-day-opening'>Hiru News (según Deadline)</a>, <a href='http://www.businessghana.com/site/news/entertainment/339229/Box-Office-Zootopia-2-Races-to-10-Million-in-Previews-Second-Biggest-Start-for-Disney-Animation'>Business Ghana (según Variety)</a>, <a href='https://en.wikipedia.org/wiki/Zootopia_2'>Wikipedia</a>. Foto: Gage Skidmore, licencia CC BY-SA 3.0, vía Wikimedia Commons.</p>"
+   ],
+   "legende": "Ginnifer Goodwin, que presta su voz a Judy Hopps en «Zootopia 2». (Foto: Gage Skidmore, CC BY-SA 3.0, vía Wikimedia Commons)",
+   "tag": "Taquilla",
+   "titre": "«Zootopia 2»: diez años después, Judy y Nick retoman la ciudad, y los preestrenos ya rompen los contadores"
+  },
+  "anthropic-ipo-record-813-milliards-une-semaine-apres": {
+   "chapo": "980 millones de acciones vendidas a 83 dólares cada una, 81.300 millones recaudados, una valoración de 1,5 billones: el creador de Claude pulverizó el récord de SpaceX y mantiene su precio una semana después de su debut en el Nasdaq. La inteligencia artificial acaba de comprarse un sitio en Wall Street.",
+   "corps": [
+    "<p>Hay semanas que entran en los libros de historia. El miércoles 18 de noviembre, Anthropic, el laboratorio de inteligencia artificial detrás del chatbot Claude, fijó el precio de su salida a Bolsa en 83 dólares por acción —por encima de la horquilla de 70 a 78 dólares anunciada— y vendió 980 millones de títulos. Cantidad recaudada: 81.300 millones de dólares. Ninguna empresa había recaudado jamás tanto al salir a Bolsa: el récord anterior, el de SpaceX, 75.000 millones en junio, quedó pulverizado.</p>",
+    "<h2>1,5 billones de valoración, seis años después de su creación</h2>",
+    "<p>Las acciones empezaron a cotizar al día siguiente, jueves 19 de noviembre, en el Nasdaq, bajo el símbolo «ANT». A 83 dólares, Anthropic vale unos 1,5 billones de dólares, lo que la convierte en la duodécima mayor empresa cotizada del mundo, justo por detrás de Tesla, para una compañía fundada en 2021 por antiguos investigadores de OpenAI. La demanda de los inversores superó seis veces la oferta: el laboratorio había previsto vender 825 millones de acciones, y colocó 980 millones. Y la operación no se detiene ahí: una colocación privada de 26.000 millones de dólares con inversores como Nvidia, Google y AMD eleva el total recaudado a 107.300 millones.</p>",
+    "<p>Detrás de las cifras hay un crecimiento vertiginoso: 33.200 millones de dólares de ingresos en los nueve primeros meses de 2026, de los que 17.000 millones en el tercer trimestre. Pero también una pérdida neta de 104.000 millones de dólares en el mismo periodo, en gran parte ligada a ajustes contables no monetarios, y cerca de 901.000 millones de dólares en compromisos de cálculo e infraestructuras. Los escépticos ven una burbuja; los entusiastas, el Google de la IA.</p>",
+    "<blockquote>« At a time in which investors are very nervous on the overall tech trade [...], Anthropic's IPO is a big near-term win for the tech sector. » — Dan Ives, analista de Yorkville Ives («En un momento en el que los inversores están muy nerviosos con la tecnología [...], la salida a Bolsa de Anthropic es una gran victoria a corto plazo para el sector.»)</blockquote>",
+    "<p>Una semana después, el veredicto del mercado es más bien benévolo: el título cerró el miércoles 25 de noviembre a 82,79 dólares, prácticamente a su precio de salida, cuando el índice Nasdaq ha perdido un 7,6 % en un mes, lastrado por la caída de más del 30 % de Nvidia. Anthropic debe ahora demostrar que puede convertir sus ingresos en beneficios, y justificar una valoración que ya la sitúa entre los gigantes del planeta.</p>",
+    "<p>Fuentes : <a href='https://www.aljazeera.com/economy/2026/11/19/anthropic-raises-81-3bn-in-biggest-ipo-of-all-time'>Al Jazeera</a>, <a href='https://www.aljazeera.com/news/2026/11/19/charting-the-worlds-biggest-ipos-as-anthropic-overtakes-spacex'>Al Jazeera</a>, <a href='https://www.fool.com/investing/2026/11/25/the-largest-ipo-in-stock-market-history-is-here-what-it-means-for-your-portfolio/?source=iedfolrf0000001'>The Motley Fool</a>, <a href='https://www.cnn.com/2026/11/18/investing/anthropic-ipo-wall-street-ai?cid=external-feeds_iluminar_meta'>CNN</a>. Foto: UK Prime Minister, licencia CC BY 2.0, vía Wikimedia Commons.</p>"
+   ],
+   "legende": "Dario Amodei, cofundador y director general de Anthropic, en 2023. (Foto: UK Prime Minister, CC BY 2.0, vía Wikimedia Commons)",
+   "tag": "IPO récord",
+   "titre": "Anthropic: una semana después de la mayor salida a Bolsa de la historia, la apuesta de 81.300 millones de dólares sigue en pie"
+  },
+  "ligue-des-champions-psg-roma-bayern-lille-nuit-geants": {
+   "chapo": "El Paris Saint-Germain, doble defensor del título, vio cómo su racha de doce victorias terminaba ante la Roma (2-2), mientras el Lille remontaba al Bayern de Múnich (2-1). Mientras tanto, el Liverpool y el Barça arrasaban. Crónica de una noche de locura.",
+   "corps": [
+    "<p>Hay noches de Liga de Campeones que parecen un terremoto. El miércoles 25 de noviembre, en la 5.ª jornada de la fase de liga, el Paris Saint-Germain, doble defensor del título y hasta entonces invicto, fue frenado en casa por la Roma (2-2). Y por si fuera poco, el Bayern de Múnich cayó en Lille (2-1). El Real Madrid es ya el único equipo con cinco victorias en cinco partidos.</p>",
+    "<h2>El Parque de los Príncipes no se lo creía</h2>",
+    "<p>En el Parque de los Príncipes, la Roma golpeó ya en el minuto 5 por medio de Mario Hermoso, antes de que el PSG diera la vuelta al marcador con un cabezazo de Illia Zabarnyi y un penalti de Ousmane Dembélé, que había entrado desde el banquillo. Pero Donyell Malen, también suplente, transformó un penalti para empatar: 17.º gol de la temporada en dieciséis partidos para el neerlandés. Dembélé falló la ocasión del triunfo ante el portero Mile Svilar. Fin de la racha: doce victorias consecutivas para el París, que sigue segundo pero ve cómo el Real se escapa. Los parisinos jugaban sin Désiré Doué ni Khvicha Kvaratskhelia, lesionados.</p>",
+    "<h2>El Lille remonta al Bayern en cuatro minutos</h2>",
+    "<p>En Lille, el Bayern mandaba al descanso gracias a un potente cabezazo de Dayot Upamecano (minuto 15). Después, todo cambió en cuatro minutos tras la hora de juego: Ayase Ueda empató con un disparo al rincón, antes de que Aleksandar Pavlović marcara en propia puerta tras un disparo de Ethan Mbappé al poste. El Bayern, sin Harry Kane, lesionado en los ligamentos del tobillo, concede su primera derrota de la temporada y queda 15.º, con ocho puntos. Primera victoria en esta fase de liga para el Lille.</p>",
+    "<h2>Isak, Gordon, Fernandes: los otros héroes de la noche</h2>",
+    "<p>En otros campos, el Liverpool arrasó en Brujas (3-0) gracias a un doblete de Alexander Isak —diez goles esta temporada— y un disparo lejano de Florian Wirtz, sexto gol en cinco partidos para el alemán. El FC Barcelona ganó 4-1 en Bakú contra el Sabah, con un doblete de Anthony Gordon, que ya había marcado cuatro goles en esa misma ciudad la temporada pasada. En Lisboa, Bruno Fernandes marcó dos goles en su regreso, pero Luis Suárez empató en el minuto 80 con una chilena acrobática: el Manchester United (2-2) y Mauricio Pochettino siguen esperando una primera victoria. El Inter ganó al Stuttgart (2-0), con Lautaro Martínez marcando su 28.º gol en la Liga de Campeones, récord del club. Y el Fenerbahçe puso fin a veintidós años de espera ganando fuera de casa (1-0 al Shakhtar), gracias a Vedat Muriqi.</p>",
+    "<p>Fuentes : <a href='https://www.uefa.com/uefachampionsleague/news/02ab-22288f99d39c-d5631dd311d0-1000--champions-league-round-up-liverpool-and-barca-win-well-rom/'>UEFA</a>, <a href='https://www.thehindu.com/sport/football/champions-league-man-united-and-psg-held-to-draws-bayern-loses/article71745459.ece'>The Hindu</a>, <a href='https://www.thedailystar.net/sports/football/news/champions-league-psg-held-roma-bayern-stunned-lille-4333551'>The Daily Star</a>. Foto: Валерий Дед, licencia CC BY 3.0, vía Wikimedia Commons.</p>"
+   ],
+   "legende": "El Parque de los Príncipes, escenario del empate 2-2 entre el PSG y la Roma. (Foto: Валерий Дед, CC BY 3.0, vía Wikimedia Commons)",
+   "tag": "Fútbol",
+   "titre": "Champions League: el PSG pierde su invencibilidad, el Bayern cae en Lille — la noche en que temblaron los gigantes"
   }
  },
  "telephones": {

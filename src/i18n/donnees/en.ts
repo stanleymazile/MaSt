@@ -3,6 +3,10 @@ import type { ContenuLang } from "../contenu";
 
 const donnees: ContenuLang = {
  "filInfo": [
+  "Cinema: « Zootopia 2 » opens this Thanksgiving Thursday with $10.2 million in previews and is tracking toward $125 million in five days",
+  "Series: « Stranger Things » returns tonight for its final season — four episodes, three years of waiting, a farewell on December 31",
+  "AI: Anthropic, the biggest IPO in history ($81.3 billion), is holding its price one week on",
+  "Football: PSG lose their invincibility against Roma (2-2) and Bayern fall at Lille — a wild night in the Champions League",
   "Cinema: “Wicked: For Good” opens with $150 million, a historic record for a Broadway musical adaptation",
   "AI: GPT-6 designs proteins that actually work in the lab — 35 designs out of 322 latched onto their target",
   "Business: Sanofi buys Insmed for $41 billion, the biggest pharma deal of the year",
@@ -14,11 +18,7 @@ const donnees: ContenuLang = {
   "AI & health: Meta opens its models to researchers to track down the invisible source of epileptic seizures",
   "Tech: Huawei launches OSTA, its first brand since Honor — the O1 Pro (200 Mpx, 7,000 mAh) sold out on day one in its 16 GB version",
   "Hunger Games: $225 million in three days, the prequel smashes the global box office",
-  "Riemann hypothesis: the 167-year-old million-dollar problem may have been solved with the help of the AI Claude",
-  "Nvidia: eleven days after his resignation, Jensen Huang is reinstated at the head of the group",
-  "Markets: Nvidia gains $952 billion in one day, Wall Street posts its best session since April 2025",
-  "James Bond: Robert Pattinson becomes Denis Villeneuve's new 007",
-  "Lupin: all four seasons of Omar Sy's series in Netflix's global Top 10 at the same time"
+  "Riemann hypothesis: the 167-year-old million-dollar problem may have been solved with the help of the AI Claude"
  ],
  "articles": {
   "hunger-games-sunrise-on-the-reaping-225-millions-box-office": {
@@ -428,6 +428,66 @@ const donnees: ContenuLang = {
    "legende": "Cynthia Erivo, a.k.a. Elphaba in “Wicked: For Good”, at a panel in Santa Monica in February 2025. (Photo: Kevin Paul, CC BY 4.0, via Wikimedia Commons)",
    "tag": "Record box office",
    "titre": "“Wicked: For Good” smashes the box office: $150 million and a historic record for a musical"
+  },
+  "stranger-things-saison-5-volume-1-final": {
+   "chapo": "Four episodes, a primetime release never tried before by Netflix and a finale on New Year's Eve: the fifth and final season of « Stranger Things » opens this Thursday, November 26, at 8 p.m. Eastern. Ten years after the series began, the time has come to kill Vecna.",
+   "corps": [
+    "<p>Three years of waiting, and the countdown is over. This Thursday, November 26, « Stranger Things » returns to Netflix for its fifth and final season, with four first episodes released at 8 p.m. Eastern (5 p.m. on the West Coast). A first for the platform, which usually drops its series at midnight Pacific time: this time, the whole country can watch together, in the evening, like a big television event.</p>",
+    "<h2>Three dates to say goodbye</h2>",
+    "<p>Netflix has split the farewell into three parts: Volume 1, four episodes, this Thursday; Volume 2, three episodes, on Christmas Day, December 25; and the finale, an episode of around two hours titled « The Rightside Up », on New Year's Eve, December 31. Eight episodes in total to close ten years of history, since the disappearance of Will Byers in 2016. The Volume 1 titles are already known: « The Crawl » (1 hour 8 minutes), « The Vanishing of Holly Wheeler » (54 minutes), « The Turnbow Trap » (1 hour 6 minutes) and « Sorcerer » (1 hour 23 minutes).</p>",
+    "<blockquote>« The fall of 1987. Hawkins is scarred by the opening of the Rifts, and our heroes are united by a single goal: find and kill Vecna. » — Netflix Tudum</blockquote>",
+    "<p>The story picks up a year and eight months after the end of season 4: Hawkins, torn open by the Rifts, is living under military quarantine, and Vecna has vanished. Millie Bobby Brown, Finn Wolfhard, Noah Schnapp, Winona Ryder and David Harbour are all back, joined by Linda Hamilton — the Sarah Connor of « Terminator » — as Dr. Kay, the military scientist running the quarantine. The cast had gathered for a big premiere at the TCL Chinese Theatre in Hollywood on November 6, the anniversary of Will Byers' disappearance.</p>",
+    "<p>Sources : <a href='https://dciology.com/stranger-things-season-5-volume-1-release-date/'>Dciology</a>, <a href='https://biplob.iam.bd/stranger-things-5-volume-1-release-date-time-episode-titles-everything-to-know-before-november-26/'>Biplob</a>, <a href='https://featurefirst.net/stranger-things-season-5-gets-first-teaser-and-release-dates/'>Feature First</a>, <a href='https://www.heraldtribune.com/story/entertainment/2025/12/26/stranger-things-finale-last-episode-date-time/87918320007/'>Herald-Tribune (via Netflix Tudum)</a>. Photo: Laviru Koruwakankanamge, CC BY-SA 4.0 license, via Wikimedia Commons.</p>"
+   ],
+   "legende": "Millie Bobby Brown, aka Eleven, at a fan convention in July 2022. (Photo: Laviru Koruwakankanamge, CC BY-SA 4.0, via Wikimedia Commons)",
+   "tag": "Netflix",
+   "titre": "« Stranger Things »: after three years of waiting, the final season arrives tonight — Hawkins will never be the same again"
+  },
+  "zootopia-2-ouverture-thanksgiving-125-millions": {
+   "chapo": "Ten years after the first film, the Disney sequel opens this Thanksgiving Thursday with $10.2 million in previews — the second-best start in Walt Disney Animation Studios history — and is tracking toward more than $125 million in five days. The animal city is back, and it is hungry.",
+   "corps": [
+    "<p>It took ten years to reopen the doors of Zootopia. Released this Thursday, November 26, Thanksgiving Day, « Zootopia 2 » had already set the tone the night before: $10.2 million from preview screenings, the second-best start in the history of Walt Disney Animation Studios, behind « Moana 2 » ($13.8 million) and ahead of « Frozen II » ($8.5 million). In 4,000 theaters, the rabbit-and-fox duo has lost none of its flair.</p>",
+    "<h2>$125 million in five days?</h2>",
+    "<p>The trade projections leave little doubt: according to Deadline's tracking, the film should take in $125 million or more over its first five days in North America, and around $270 million worldwide, including $135 million to $145 million overseas. A debut that would match « Frozen II » ($125 million in 2019) and make it the second-best Thanksgiving opening of all time, behind « Moana 2 ». Advance ticket sales had already reached around $20 million before release week.</p>",
+    "<p>The first film, released in 2016, grossed more than a billion dollars worldwide and won the Oscar for best animated feature. The sequel, once again directed by Jared Bush and Byron Howard, reunites Judy Hopps and Nick Wilde — Ginnifer Goodwin and Jason Bateman reprise their roles — on the trail of a mysterious snake, Gary De'Snake, voiced by Oscar winner Ke Huy Quan. Ten years of waiting, and a city that has lost none of its energy.</p>",
+    "<h2>A week that could change everything for Disney</h2>",
+    "<p>Behind « Zootopia 2 », the whole Thanksgiving box office is coming alive: « The Hunger Games » and « Wicked: For Good » are still filling theaters, while « Hexed », Disney's new animated film, is starting more timidly, with around $2 million in previews and a five-day projection of $40 million or less. If the projections hold, Judy and Nick will give Disney nine of the ten best Thanksgiving openings in history. Ten years on, the animal city is not done roaring.</p>",
+    "<p>Sources : <a href='https://filmverse.in/zootopia-2-thanksgiving-opening-tracking-125-million-moana-2-record-preview/'>FilmVerse</a>, <a href='https://theimmortaltimes.com/zootopia-2-release-date-box-office-tracking-cast-reviews-2026/'>The Immortal Times</a>, <a href='https://hirunews.lk/goldfmnews/432910/zootopia-2-goes-wild-with-usd140m-5-day-opening'>Hiru News (via Deadline)</a>, <a href='http://www.businessghana.com/site/news/entertainment/339229/Box-Office-Zootopia-2-Races-to-10-Million-in-Previews-Second-Biggest-Start-for-Disney-Animation'>Business Ghana (via Variety)</a>, <a href='https://en.wikipedia.org/wiki/Zootopia_2'>Wikipedia</a>. Photo: Gage Skidmore, CC BY-SA 3.0 license, via Wikimedia Commons.</p>"
+   ],
+   "legende": "Ginnifer Goodwin, who voices Judy Hopps in « Zootopia 2 ». (Photo: Gage Skidmore, CC BY-SA 3.0, via Wikimedia Commons)",
+   "tag": "Box office",
+   "titre": "« Zootopia 2 »: ten years on, Judy and Nick take back the city — and the previews are already breaking records"
+  },
+  "anthropic-ipo-record-813-milliards-une-semaine-apres": {
+   "chapo": "980 million shares sold at $83 each, $81.3 billion raised, a $1.5 trillion valuation: the maker of Claude smashed SpaceX's record and is holding its price one week after its Nasdaq debut. Artificial intelligence has just bought its way onto Wall Street.",
+   "corps": [
+    "<p>Some weeks go down in the history books. On Wednesday, November 18, Anthropic, the artificial intelligence lab behind the Claude chatbot, priced its initial public offering at $83 a share — above the $70 to $78 range it had announced — and sold 980 million shares. Total raised: $81.3 billion. No company had ever raised so much going public: the previous record, SpaceX's $75 billion in June, was smashed.</p>",
+    "<h2>A $1.5 trillion valuation, six years after its founding</h2>",
+    "<p>The shares began trading the next day, Thursday, November 19, on the Nasdaq, under the ticker « ANT ». At $83, Anthropic is worth around $1.5 trillion, making it the twelfth-largest listed company in the world, just behind Tesla — for a company founded in 2021 by former OpenAI researchers. Investor demand ran to more than six times the shares on offer: the lab had planned to sell 825 million shares, and placed 980 million. And the deal does not stop there: a $26 billion private placement with investors including Nvidia, Google and AMD takes the total raised to $107.3 billion.</p>",
+    "<p>Behind the figures lies dizzying growth: $33.2 billion in revenue over the first nine months of 2026, including $17 billion in the third quarter. But also a net loss of $104 billion over the same period, largely tied to non-cash accounting adjustments, and nearly $901 billion in computing and infrastructure commitments. Sceptics see a bubble; enthusiasts see the Google of AI.</p>",
+    "<blockquote>« At a time in which investors are very nervous on the overall tech trade [...], Anthropic's IPO is a big near-term win for the tech sector. » — Dan Ives, analyst at Yorkville Ives</blockquote>",
+    "<p>One week on, the market's verdict is fairly kind: the stock closed on Wednesday, November 25, at $82.79, almost exactly at its IPO price, while the Nasdaq index has lost 7.6% in a month, dragged down by Nvidia's fall of more than 30%. Anthropic must now prove it can turn its revenue into profit — and justify a valuation that already puts it among the giants of the planet.</p>",
+    "<p>Sources : <a href='https://www.aljazeera.com/economy/2026/11/19/anthropic-raises-81-3bn-in-biggest-ipo-of-all-time'>Al Jazeera</a>, <a href='https://www.aljazeera.com/news/2026/11/19/charting-the-worlds-biggest-ipos-as-anthropic-overtakes-spacex'>Al Jazeera</a>, <a href='https://www.fool.com/investing/2026/11/25/the-largest-ipo-in-stock-market-history-is-here-what-it-means-for-your-portfolio/?source=iedfolrf0000001'>The Motley Fool</a>, <a href='https://www.cnn.com/2026/11/18/investing/anthropic-ipo-wall-street-ai?cid=external-feeds_iluminar_meta'>CNN</a>. Photo: UK Prime Minister, CC BY 2.0 license, via Wikimedia Commons.</p>"
+   ],
+   "legende": "Dario Amodei, co-founder and chief executive of Anthropic, in 2023. (Photo: UK Prime Minister, CC BY 2.0, via Wikimedia Commons)",
+   "tag": "Record IPO",
+   "titre": "Anthropic: one week after the biggest IPO in history, the $81.3 billion bet is still holding"
+  },
+  "ligue-des-champions-psg-roma-bayern-lille-nuit-geants": {
+   "chapo": "Paris Saint-Germain, the two-time holders, saw their twelve-game winning run end against Roma (2-2), while Lille overturned Bayern Munich (2-1). Meanwhile, Liverpool and Barça cruised. The story of a wild night.",
+   "corps": [
+    "<p>Some Champions League nights feel like an earthquake. On Wednesday, November 25, on Matchday 5 of the league phase, Paris Saint-Germain, the two-time holders and unbeaten until then, were held at home by Roma (2-2). And as if that were not enough, Bayern Munich lost at Lille (2-1). Real Madrid are now the only team with five wins from five matches.</p>",
+    "<h2>The Parc des Princes could not believe it</h2>",
+    "<p>At the Parc des Princes, Roma struck as early as the 5th minute through Mario Hermoso, before PSG turned things around with a header from Illia Zabarnyi and a penalty from substitute Ousmane Dembélé. But Donyell Malen, another substitute, converted a penalty to level: a 17th goal of the season in sixteen matches for the Dutchman. Dembélé missed the match-winner against goalkeeper Mile Svilar. End of the run: twelve consecutive wins for Paris, who stay second but see Real pull away. The Parisians were playing without Désiré Doué and Khvicha Kvaratskhelia, both injured.</p>",
+    "<h2>Lille overturn Bayern in four minutes</h2>",
+    "<p>At Lille, Bayern led at half-time thanks to a powerful header from Dayot Upamecano (15th minute). Then everything flipped in four minutes after the hour mark: Ayase Ueda levelled with a finish into the corner, before Aleksandar Pavlović scored an own goal after Ethan Mbappé's shot had hit the post. Bayern, without Harry Kane, out with ankle ligament damage, suffer their first defeat of the season and sit 15th, on eight points. A first win in this league phase for Lille.</p>",
+    "<h2>Isak, Gordon, Fernandes: the night's other heroes</h2>",
+    "<p>Elsewhere, Liverpool cruised at Bruges (3-0) thanks to an Alexander Isak brace — ten goals this season — and a long-range strike from Florian Wirtz, a sixth goal in five matches for the German. FC Barcelona won 4-1 in Baku against Sabah, with an Anthony Gordon brace, the Englishman having already scored four goals in that same city last season. In Lisbon, Bruno Fernandes scored twice on his return, but Luis Suárez levelled in the 80th minute with an acrobatic overhead kick: Manchester United (2-2) and Mauricio Pochettino are still waiting for a first win. Inter beat Stuttgart (2-0), Lautaro Martínez scoring his 28th Champions League goal, a club record. And Fenerbahçe ended a twenty-two-year wait for an away win (1-0 at Shakhtar), thanks to Vedat Muriqi.</p>",
+    "<p>Sources : <a href='https://www.uefa.com/uefachampionsleague/news/02ab-22288f99d39c-d5631dd311d0-1000--champions-league-round-up-liverpool-and-barca-win-well-rom/'>UEFA</a>, <a href='https://www.thehindu.com/sport/football/champions-league-man-united-and-psg-held-to-draws-bayern-loses/article71745459.ece'>The Hindu</a>, <a href='https://www.thedailystar.net/sports/football/news/champions-league-psg-held-roma-bayern-stunned-lille-4333551'>The Daily Star</a>. Photo: Валерий Дед, CC BY 3.0 license, via Wikimedia Commons.</p>"
+   ],
+   "legende": "The Parc des Princes, scene of the 2-2 draw between PSG and Roma. (Photo: Валерий Дед, CC BY 3.0, via Wikimedia Commons)",
+   "tag": "Football",
+   "titre": "Champions League: PSG lose their invincibility, Bayern fall at Lille — the night the giants trembled"
   }
  },
  "telephones": {

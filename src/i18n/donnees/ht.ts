@@ -3,6 +3,10 @@ import type { ContenuLang } from "../contenu";
 
 const donnees: ContenuLang = {
  "filInfo": [
+  "Sinema : « Zootopia 2 » soti jedi Thanksgiving sa a ak 10,2 milyon dola nan avan-premyè epi li vize 125 milyon nan senk jou",
+  "Seri : « Stranger Things » tounen aswè a ak dènye sezon li — kat epizòd, twa ane tann, yon adye 31 desanm",
+  "IA : Anthropic, pi gwo antre nan Bous nan istwa (81,3 milya dola), kenbe pri li yon semèn apre",
+  "Foutbòl : PSG pèdi envensibilite li devan Roma (2-2) epi Bayern tonbe nan Lille — nwit foli nan Lig chanpyon",
   "Sinema : « Wicked: For Good » louvri ak 150 milyon dola, rekò istorik pou yon adaptasyon mizikal Broadway",
   "IA : GPT-6 desine pwoteyin ki mache tout bon nan laboratwa — 35 design sou 322 mare sou sib yo",
   "Biznis : Sanofi achte Insmed pou 41 milya dola, pi gwo racha pharma ane a",
@@ -14,11 +18,7 @@ const donnees: ContenuLang = {
   "IA & sante : Meta louvri modèl li yo bay chèchè yo pou yo kouri dèyè fwaye envizib kriz epilepsi yo",
   "Tek : Huawei lanse OSTA, premye mak li depi Honor — O1 Pro a (200 Mpx, 7 000 mAh) fini nan stok depi premye jou a nan vèsyon 16 Go a",
   "Hunger Games : 225 milyon dola nan twa jou, prequel la eksploze box-office mondyal la",
-  "Ipotèz Riemann : pwoblèm yon milyon dola ki gen 167 lane a ta rezoud ak èd IA Claude",
-  "Nvidia : onz jou apre demisyon li, yo remete Jensen Huang nan tèt gwoup la",
-  "Bous : Nvidia genyen 952 milya dola nan yon jou, Wall Street siyen pi bon seyans li depi avril 2025",
-  "James Bond : Robert Pattinson vin nouvo 007 Denis Villeneuve a",
-  "Lupin : kat sezon seri Omar Sy a nan Top 10 mondyal Netflix la an menm tan"
+  "Ipotèz Riemann : pwoblèm yon milyon dola ki gen 167 lane a ta rezoud ak èd IA Claude"
  ],
  "articles": {
   "hunger-games-sunrise-on-the-reaping-225-millions-box-office": {
@@ -428,6 +428,66 @@ const donnees: ContenuLang = {
     "<blockquote>« No words to say for him. I would only say it's like absolute carnage. The way he played, I think first five overs, the match was done. » — Tilak Varma, kapitèn India A (« Pa gen mo pou dekri l. Mwen ta di sèlman se yon masak absoli. Jan li te jwe a, mwen panse nan senk premye overs yo, match la te fini deja. »)</blockquote>",
     "<p>Sous : <a href='https://www.cricinfo.com/series/asia-cup-rising-stars-50-overs-2026-27-1562333/india-a-vs-united-arab-emirates-12th-match-group-b-1562353/match-report'>ESPNcricinfo</a>, <a href='https://www.reuters.com/sports/cricket/sooryavanshi-15-blasts-204-off-53-balls-india-2026-11-24/'>Reuters</a>, <a href='https://www.aljazeera.com/amp/sports/2026/11/24/records-tumble-as-indian-teen-sooryavanshi-smashes-53-ball-204-against-uae'>Al Jazeera</a>, <a href='https://www.wisden.com/series/asia-cup-rising-stars-2026-m/cricket-news/204-runs-28-sixes-vaibhav-sooryavanshi-breathtaking-onslaught'>Wisden</a>, <a href='https://www.cricinfo.com/story/vaibhav-sooryavanshi-on-53-ball-204-chat-with-yuvraj-singh-helped-me-a-lot-1563875'>ESPNcricinfo (entèvyou)</a>, <a href='https://commons.wikimedia.org/wiki/File:Vaibhav_Suryavanshi_meets_PM_Modi.jpg'>Wikimedia Commons</a></p>"
    ]
+  },
+  "stranger-things-saison-5-volume-1-final": {
+   "chapo": "Kat epizòd, yon difizyon nan prime time Netflix poko janm fè epi yon final nan sware Nouvèl An : senkyèm epi dènye sezon « Stranger Things » lan louvri jedi 26 novanm sa a a 8è diswa, lè lès. Dis ane apre seri a te kòmanse, lè a rive pou touye Vecna.",
+   "corps": [
+    "<p>Twa ane tann, epi kont a rebou fini. Jedi 26 novanm sa a, « Stranger Things » tounen sou Netflix pou senkyèm epi dènye sezon li, ak kat premye epizòd ki soti a 8è diswa, lè lès (5è apremidi sou kòt lwès). Yon premye pou platfòm nan, ki konn lage seri li yo a minwi, lè Pasifik : fwa sa a, tout peyi a ka gade ansanm, aswè, tankou yon gwo randevou televizyon.</p>",
+    "<h2>Twa randevou pou di orevwa</h2>",
+    "<p>Netflix te koupe adye a an twa tan : volim 1, kat epizòd, jedi sa a ; volim 2, twa epizòd, jou Nwèl, 25 desanm ; epi final la, yon epizòd anviwon dezèdtan ki rele « The Rightside Up », nan sware Nouvèl An, 31 desanm. Uit epizòd an tou pou fèmen dis ane istwa, depi disparisyon Will Byers an 2016. Tit volim 1 yo deja konnen : « The Crawl » (1 è 08), « The Vanishing of Holly Wheeler » (54 minit), « The Turnbow Trap » (1 è 06) epi « Sorcerer » (1 è 23).</p>",
+    "<blockquote>« The fall of 1987. Hawkins is scarred by the opening of the Rifts, and our heroes are united by a single goal: find and kill Vecna. » — Netflix Tudum («Otòn 1987. Hawkins make pa ouvèti Fay yo, epi ewo nou yo ini pa yon sèl objektif : jwenn epi touye Vecna.»)</blockquote>",
+    "<p>Istwa a repran yon ane ak uit mwa apre fen sezon 4 la : Hawkins, ki Fay yo te dechire, ap viv anba karantèn militè, epi Vecna disparèt. Millie Bobby Brown, Finn Wolfhard, Noah Schnapp, Winona Ryder ak David Harbour tout tounen, Linda Hamilton — Sarah Connor nan « Terminator » — rejwenn yo nan wòl Dr Kay, syantis militè ki dirije karantèn nan. Aktè yo te reyini pou yon gwo premyè nan TCL Chinese Theatre nan Hollywood 6 novanm, jou anivèsè disparisyon Will Byers.</p>",
+    "<p>Sous : <a href='https://dciology.com/stranger-things-season-5-volume-1-release-date/'>Dciology</a>, <a href='https://biplob.iam.bd/stranger-things-5-volume-1-release-date-time-episode-titles-everything-to-know-before-november-26/'>Biplob</a>, <a href='https://featurefirst.net/stranger-things-season-5-gets-first-teaser-and-release-dates/'>Feature First</a>, <a href='https://www.heraldtribune.com/story/entertainment/2025/12/26/stranger-things-finale-last-episode-date-time/87918320007/'>Herald-Tribune (dapre Netflix Tudum)</a>. Foto : Laviru Koruwakankanamge, lisans CC BY-SA 4.0, via Wikimedia Commons.</p>"
+   ],
+   "legende": "Millie Bobby Brown, alyas Eleven, pandan yon konvansyon fanatik nan jiyè 2022. (Foto : Laviru Koruwakankanamge, CC BY-SA 4.0, via Wikimedia Commons)",
+   "tag": "Netflix",
+   "titre": "« Stranger Things » : apre twa ane tann, dènye sezon an rive aswè a — Hawkins pap janm menm jan an ankò"
+  },
+  "zootopia-2-ouverture-thanksgiving-125-millions": {
+   "chapo": "Dis ane apre premye vòlè a, swit Disney a soti jedi Thanksgiving sa a ak 10,2 milyon dola nan avan-premyè — dezyèm pi bon demaraj nan istwa Walt Disney Animation Studios — epi li vize plis pase 125 milyon dola nan senk jou. Vil bèt yo tounen, epi li grangou.",
+   "corps": [
+    "<p>Li te pran dis ane pou relouvri pòt Zootopia yo. Li soti jedi 26 novanm sa a, jou Thanksgiving, « Zootopia 2 » te deja bay ton an swa anvan an : 10,2 milyon dola nan avan-premyè, dezyèm pi bon demaraj nan istwa Walt Disney Animation Studios, dèyè « Moana 2 » (13,8 milyon) epi devan « Frozen II » (8,5 milyon). Nan 4 000 sal, duo lapen-rana a pa pèdi flair li.</p>",
+    "<h2>125 milyon dola nan senk jou ?</h2>",
+    "<p>Previzyon pwofesyonèl yo pa kite okenn dout : dapre swivi Deadline, fim nan ta dwe ranmase 125 milyon dola oswa plis nan senk premye jou li yo nan Amerik dinò, epi anviwon 270 milyon nan lemonn antye, ladan 135 a 145 milyon aletranje. Yon demaraj ki ta egal « Frozen II » (125 milyon an 2019) epi ki ta fè li dezyèm pi bon ouvèti Thanksgiving nan tout tan, dèyè « Moana 2 ». Biyè ki te vann an premye yo te deja rive anviwon 20 milyon dola anvan semèn sòti a.</p>",
+    "<p>Premye vòlè a, ki te soti an 2016, te ranmase plis pase yon milya dola nan lemonn antye epi li te genyen Oscar pi bon fim animasyon. Swit la, Jared Bush ak Byron Howard te reyalize l ankò, li jwenn Judy Hopps ak Nick Wilde — Ginnifer Goodwin ak Jason Bateman repran wòl yo — sou tras yon sèpan misterye, Gary De'Snake, Ke Huy Quan, loreya Oscar, double li. Dis ane tann, epi yon vil ki pa pèdi anyen nan enèji li.</p>",
+    "<h2>Yon semèn ki ka chanje tout bagay pou Disney</h2>",
+    "<p>Dèyè « Zootopia 2 », tout box-office Thanksgiving la ap anime : « Hunger Games » ak « Wicked: For Good » kontinye ap ranpli sal yo, pandan « Hexed », nouvo fim animasyon Disney a, ap kòmanse pi dousman, ak anviwon 2 milyon dola nan avan-premyè epi yon previzyon 40 milyon dola oswa mwens nan senk jou. Si previzyon yo konfime, Judy ak Nick ap bay Disney nèf nan dis pi bon ouvèti Thanksgiving nan istwa. Dis ane apre, vil bèt yo poko fini gwonde.</p>",
+    "<p>Sous : <a href='https://filmverse.in/zootopia-2-thanksgiving-opening-tracking-125-million-moana-2-record-preview/'>FilmVerse</a>, <a href='https://theimmortaltimes.com/zootopia-2-release-date-box-office-tracking-cast-reviews-2026/'>The Immortal Times</a>, <a href='https://hirunews.lk/goldfmnews/432910/zootopia-2-goes-wild-with-usd140m-5-day-opening'>Hiru News (dapre Deadline)</a>, <a href='http://www.businessghana.com/site/news/entertainment/339229/Box-Office-Zootopia-2-Races-to-10-Million-in-Previews-Second-Biggest-Start-for-Disney-Animation'>Business Ghana (dapre Variety)</a>, <a href='https://en.wikipedia.org/wiki/Zootopia_2'>Wikipedia</a>. Foto : Gage Skidmore, lisans CC BY-SA 3.0, via Wikimedia Commons.</p>"
+   ],
+   "legende": "Ginnifer Goodwin, ki prete vwa li bay Judy Hopps nan « Zootopia 2 ». (Foto : Gage Skidmore, CC BY-SA 3.0, via Wikimedia Commons)",
+   "tag": "Box-office",
+   "titre": "« Zootopia 2 » : dis ane apre, Judy ak Nick repran vil la — epi avan-premyè yo deja ap kraze kontè yo"
+  },
+  "anthropic-ipo-record-813-milliards-une-semaine-apres": {
+   "chapo": "980 milyon aksyon vann 83 dola pyès, 81,3 milya leve, yon valè 1 500 milya : kreyatè Claude la kraze rekò SpaceX la epi li kenbe pri li yon semèn apre premye jou li nan Nasdaq. Entèlijans atifisyèl la sot achte plas li nan Wall Street.",
+   "corps": [
+    "<p>Gen semèn ki antre nan liv istwa yo. Mèkredi 18 novanm, Anthropic, laboratwa entèlijans atifisyèl ki dèyè chatbot Claude la, te fikse pri antre li nan Bous la a 83 dola pa aksyon — pi wo pase fourchèt 70 a 78 dola li te anonse a — epi li vann 980 milyon tit. Montan li leve : 81,3 milya dola. Okenn antrepriz pat janm leve tout lajan sa a lè li antre nan Bous : ansyen rekò a, SpaceX, 75 milya an jen, te kraze nèt.</p>",
+    "<h2>1 500 milya dola valè, sis ane apre kreyasyon li</h2>",
+    "<p>Aksyon yo te kòmanse vann jou apre a, jedi 19 novanm, nan Nasdaq, anba senbòl « ANT ». A 83 dola, Anthropic vo anviwon 1 500 milya dola, sa ki fè li douzyèm pi gwo antrepriz nan Bous nan lemonn antye, jis dèyè Tesla — pou yon sosyete ansyen chèchè OpenAI te fonde an 2021. Demann envestisè yo te depase of la plis pase sis fwa : laboratwa a te prevwa vann 825 milyon aksyon, li plase 980 milyon. Epi operasyon an pa kanpe la : yon plasman prive 26 milya dola kay envestisè tankou Nvidia, Google ak AMD pote total lajan yo leve a 107,3 milya.</p>",
+    "<p>Dèyè chif yo, gen yon kwasans vètijine : 33,2 milya dola revni nan nèf premye mwa 2026 yo, ladan 17 milya nan twazyèm trimès la. Men tou yon pèt nèt 104 milya dola nan menm peryòd la, an gwo pati akoz ajisteman kontab ki pa monetè, epi prèske 901 milya dola angajman nan kalkil ak enfrastrikti. Moun ki gen dout yo wè yon ti boul ; moun ki antouzyas yo, Google IA a.</p>",
+    "<blockquote>« At a time in which investors are very nervous on the overall tech trade [...], Anthropic's IPO is a big near-term win for the tech sector. » — Dan Ives, analis nan Yorkville Ives («Nan yon moman kote envestisè yo trè nève sou teknoloji a [...], antre Anthropic nan Bous la se yon bèl viktwa a kout tèm pou sektè a.»)</blockquote>",
+    "<p>Yon semèn apre, jijman mache a sanble dous : tit la te fèmen mèkredi 25 novanm a 82,79 dola, prèt pou pri antre li, pandan endis Nasdaq la te pèdi 7,6 % nan yon mwa, anba chay Nvidia ki tonbe plis pase 30 %. Anthropic dwe kounye a pwouve li ka transfòme revni li yo an benefis — epi jistifye yon valè ki mete li deja pami jeyan planèt la.</p>",
+    "<p>Sous : <a href='https://www.aljazeera.com/economy/2026/11/19/anthropic-raises-81-3bn-in-biggest-ipo-of-all-time'>Al Jazeera</a>, <a href='https://www.aljazeera.com/news/2026/11/19/charting-the-worlds-biggest-ipos-as-anthropic-overtakes-spacex'>Al Jazeera</a>, <a href='https://www.fool.com/investing/2026/11/25/the-largest-ipo-in-stock-market-history-is-here-what-it-means-for-your-portfolio/?source=iedfolrf0000001'>The Motley Fool</a>, <a href='https://www.cnn.com/2026/11/18/investing/anthropic-ipo-wall-street-ai?cid=external-feeds_iluminar_meta'>CNN</a>. Foto : UK Prime Minister, lisans CC BY 2.0, via Wikimedia Commons.</p>"
+   ],
+   "legende": "Dario Amodei, ko-fondatè ak direktè jeneral Anthropic, an 2023. (Foto : UK Prime Minister, CC BY 2.0, via Wikimedia Commons)",
+   "tag": "Rekò IPO",
+   "titre": "Anthropic : yon semèn apre pi gwo antre nan Bous nan istwa, parye 81,3 milya dola a toujou kenbe"
+  },
+  "ligue-des-champions-psg-roma-bayern-lille-nuit-geants": {
+   "chapo": "Paris Saint-Germain, doub detantè tit la, wè seri douz viktwa li yo kanpe devan Roma (2-2), pandan Lille t ap renouvle Bayern Munich (2-1). Pandan tan sa a, Liverpool ak Barça t ap woule. Istwa yon nwit foli.",
+   "corps": [
+    "<p>Gen sware Lig chanpyon ki sanble yon tranbleman tè. Mèkredi 25 novanm, pou 5yèm joune faz lig la, Paris Saint-Germain, doub detantè tit la epi ki pat janm pèdi, te kanpe lakay li devan Roma (2-2). Epi tankou si sa pat ase, Bayern Munich, li menm, te tonbe nan Lille (1-2). Real Madrid se kounye a sèl ekip ki gen senk viktwa nan senk match.</p>",
+    "<h2>Parc des Princes pat kwè l ankò</h2>",
+    "<p>Nan Parc des Princes, Roma te frape depi 5yèm minit la ak Mario Hermoso, anvan PSG te renouvle match la ak yon tèt Illia Zabarnyi epi yon penalite Ousmane Dembélé, ki te antre nan match la. Men Donyell Malen, ki te antre tou, te transfòme yon penalite pou egalize : 17yèm gòl sezon an nan sèz match pou Olandè a. Dembélé te rate bal match la devan gadyen Mile Svilar. Fen seri a : douz viktwa youn apre lòt pou Pari, ki rete dezyèm men ki wè Real ap chape. Parizyen yo t ap jwe san Désiré Doué ni Khvicha Kvaratskhelia, ki blese.</p>",
+    "<h2>Lille renouvle Bayern nan kat minit</h2>",
+    "<p>Nan Lille, Bayern t ap mennen nan mitan apre yon tèt pwisan Dayot Upamecano (15yèm). Apre sa, tout bagay te chanje nan kat minit apre lè jwèt la : Ayase Ueda te egalize ak yon frape nan ti kwen an, anvan Aleksandar Pavlović te make kont kan li apre yon frape Ethan Mbappé sou poto a. Bayern, san Harry Kane, ki blese nan ligaman cheviy li, pran premye defèt sezon li epi li nan 15yèm plas, ak uit pwen. Premye viktwa nan faz lig sa a pou Lille.</p>",
+    "<h2>Isak, Gordon, Fernandes : lòt ewo nwit la</h2>",
+    "<p>Yon lòt kote, Liverpool te woule nan Bruges (3-0) ak yon doublé Alexander Isak — dis gòl sezon sa a — epi yon frape lwen Florian Wirtz, sizyèm gòl nan senk match pou Alman an. FC Barcelone te genyen 4-1 nan Bakou kont Sabah, ak yon doublé Anthony Gordon, ki te deja make kat gòl nan menm vil sa a sezon pase. Nan Lisbonne, Bruno Fernandes te make de gòl pou retou li, men Luis Suárez te egalize nan 80yèm minit ak yon retounen akrobatik : Manchester United (2-2) ak Mauricio Pochettino ap tann toujou yon premye viktwa. Inter te bat Stuttgart (2-0), Lautaro Martínez te make 28yèm gòl li nan Lig chanpyon, rekò klèb la. Epi Fenerbahçe te mete fen nan vent-de-zan tann lè li genyen deyò (1-0 nan Shakhtar), gras a Vedat Muriqi.</p>",
+    "<p>Sous : <a href='https://www.uefa.com/uefachampionsleague/news/02ab-22288f99d39c-d5631dd311d0-1000--champions-league-round-up-liverpool-and-barca-win-well-rom/'>UEFA</a>, <a href='https://www.thehindu.com/sport/football/champions-league-man-united-and-psg-held-to-draws-bayern-loses/article71745459.ece'>The Hindu</a>, <a href='https://www.thedailystar.net/sports/football/news/champions-league-psg-held-roma-bayern-stunned-lille-4333551'>The Daily Star</a>. Foto : Валерий Дед, lisans CC BY 3.0, via Wikimedia Commons.</p>"
+   ],
+   "legende": "Parc des Princes, teyat match nil 2-2 ant PSG ak Roma. (Foto : Валерий Дед, CC BY 3.0, via Wikimedia Commons)",
+   "tag": "Foutbòl",
+   "titre": "Lig chanpyon : PSG pèdi envensibilite li, Bayern tonbe nan Lille — nwit kote jeyan yo te tranble"
   }
  },
  "telephones": {

@@ -87,3 +87,11 @@ export const articleGpt6Proteines = "https://thumb.wikimedia.org/wikipedia/commo
 export const articleSanofiInsmed = "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/Si%C3%A8ge_Sanofi_%C3%A0_Gentilly.jpg/1920px-Si%C3%A8ge_Sanofi_%C3%A0_Gentilly.jpg";
 
 export const articleSooryavanshi = "https://upload.wikimedia.org/wikipedia/commons/6/68/Vaibhav_Suryavanshi_meets_PM_Modi.jpg";
+
+export const articleZootopia2 = "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Ginnifer_Goodwin_by_Gage_Skidmore.jpg/1920px-Ginnifer_Goodwin_by_Gage_Skidmore.jpg";
+
+export const articleStrangerThings5 = "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Millie_Bobby_Brown_-_MBB_-_Portrait_1_-_SFM5_-_July_10%2C_2022_at_Stranger_Fan_Meet_5_People_Convention_%28cropped%29.jpg/1920px-Millie_Bobby_Brown_-_MBB_-_Portrait_1_-_SFM5_-_July_10%2C_2022_at_Stranger_Fan_Meet_5_People_Convention_%28cropped%29.jpg";
+
+export const articleAnthropicIpo = "https://upload.wikimedia.org/wikipedia/commons/9/9e/Dario_Amodei_in_2023.jpg";
+
+export const articleLigueChampions = "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/Paris_Parc_des_Princes_1.jpg/1920px-Paris_Parc_des_Princes_1.jpg";
