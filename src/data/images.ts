@@ -80,7 +80,6 @@ export const telX300Pro = "https://thumb.wikimedia.org/wikipedia/commons/thumb/d
 
 export const telNothing3 = "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/%E5%8D%8A%E5%A4%9C%E9%A6%96%E5%8F%91%EF%BC%81%E7%AC%AC%E4%B8%80%E6%89%8B%E6%8B%BF%E5%88%B0%E4%BA%86Nothing_Phone_%283%29_%EF%BC%81%E7%81%AF%E6%9D%A1%E6%B2%A1%E4%BA%86%E3%80%81%E8%83%8C%E5%90%8E%E5%A4%9A%E4%B8%80%E4%B8%AAscreen%EF%BC%81-00.02.56.231.png/1920px-%E5%8D%8A%E5%A4%9C%E9%A6%96%E5%8F%91%EF%BC%81%E7%AC%AC%E4%B8%80%E6%89%8B%E6%8B%BF%E5%88%B0%E4%BA%86Nothing_Phone_%283%29_%EF%BC%81%E7%81%AF%E6%9D%A1%E6%B2%A1%E4%BA%86%E3%80%81%E8%83%8C%E5%90%8E%E5%A4%9A%E4%B8%80%E4%B8%AAscreen%EF%BC%81-00.02.56.231.png";
 
-export const articleWickedForGood = "https://upload.wikimedia.org/wikipedia/commons/6/66/Cynthia_Erivo_-_Wicked-FYC-1.jpg";
 
 export const articleGpt6Proteines = "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/TriosePhosphateIsomerase_Ribbon_pastel_photo_mat.png/1920px-TriosePhosphateIsomerase_Ribbon_pastel_photo_mat.png";
 
@@ -88,9 +87,7 @@ export const articleSanofiInsmed = "https://thumb.wikimedia.org/wikipedia/common
 
 export const articleSooryavanshi = "https://upload.wikimedia.org/wikipedia/commons/6/68/Vaibhav_Suryavanshi_meets_PM_Modi.jpg";
 
-export const articleZootopia2 = "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Ginnifer_Goodwin_by_Gage_Skidmore.jpg/1920px-Ginnifer_Goodwin_by_Gage_Skidmore.jpg";
 
-export const articleStrangerThings5 = "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Millie_Bobby_Brown_-_MBB_-_Portrait_1_-_SFM5_-_July_10%2C_2022_at_Stranger_Fan_Meet_5_People_Convention_%28cropped%29.jpg/1920px-Millie_Bobby_Brown_-_MBB_-_Portrait_1_-_SFM5_-_July_10%2C_2022_at_Stranger_Fan_Meet_5_People_Convention_%28cropped%29.jpg";
 
 export const articleAnthropicIpo = "https://upload.wikimedia.org/wikipedia/commons/9/9e/Dario_Amodei_in_2023.jpg";
 
